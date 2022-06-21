@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "www.cashfree.com"
+    "url": "git+https://github.com/cashfree/cashfree-pg-sdk-nodejs.git"
   },
   "keywords": [],
   "author": "Bhaskar",
