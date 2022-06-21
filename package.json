@@ -1,6 +1,6 @@
 {
   "name": "cashfree-pg-sdk-nodejs",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "dist/api.js",
   "types": "dist/api.d.ts",
   "scripts": {
