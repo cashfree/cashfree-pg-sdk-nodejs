@@ -98,7 +98,7 @@ export class PaymentLinksApi {
      * @param linkId 
      * @param xApiVersion 
      */
-    public async cancelPaymentLink (xClientId: string, xClientSecret: string, linkId: string, xApiVersion?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfLink: CFLinkCancelledResponse;  }> {
+    public async cancelPaymentLink (xClientId: string, xClientSecret: string, linkId: string, xApiVersion?: string, requestTimeout?: Number, webProxy?: any, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfLink: CFLinkCancelledResponse;  }> {
         const localVarPath = this.basePath + '/links/{link_id}/cancel'
             .replace('{' + 'link_id' + '}', encodeURIComponent(String(linkId)));
         let localVarQueryParameters: any = {};
@@ -141,6 +141,10 @@ export class PaymentLinksApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout:requestTimeout,
+            ...(webProxy && {
+                proxy : webProxy
+            }),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -186,7 +190,7 @@ export class PaymentLinksApi {
      * @param xRequestId 
      * @param cFLinkRequest 
      */
-    public async createPaymentLink (xClientId: string, xClientSecret: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, cFLinkRequest?: CFLinkRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfLink: CFLink;  }> {
+    public async createPaymentLink (xClientId: string, xClientSecret: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, cFLinkRequest?: CFLinkRequest, requestTimeout?: Number, webProxy?: any, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfLink: CFLink;  }> {
         const localVarPath = this.basePath + '/links';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -226,7 +230,11 @@ export class PaymentLinksApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(cFLinkRequest, "CFLinkRequest")
+            body: ObjectSerializer.serialize(cFLinkRequest, "CFLinkRequest"),
+            timeout:requestTimeout,
+            ...(webProxy && {
+                proxy : webProxy
+            }),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -272,7 +280,7 @@ export class PaymentLinksApi {
      * @param xIdempotencyKey 
      * @param xRequestId 
      */
-    public async getPaymentLinkDetails (xClientId: string, xClientSecret: string, linkId: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfLink: CFLink;  }> {
+    public async getPaymentLinkDetails (xClientId: string, xClientSecret: string, linkId: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, requestTimeout?: Number, webProxy?: any, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfLink: CFLink;  }> {
         const localVarPath = this.basePath + '/links/{link_id}'
             .replace('{' + 'link_id' + '}', encodeURIComponent(String(linkId)));
         let localVarQueryParameters: any = {};
@@ -318,6 +326,10 @@ export class PaymentLinksApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout:requestTimeout,
+            ...(webProxy && {
+                proxy : webProxy
+            }),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -363,7 +375,7 @@ export class PaymentLinksApi {
      * @param xIdempotencyKey 
      * @param xRequestId 
      */
-    public async getPaymentLinkOrders (xClientId: string, xClientSecret: string, linkId: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfLinkOrders: Array<CFLinkOrders>;  }> {
+    public async getPaymentLinkOrders (xClientId: string, xClientSecret: string, linkId: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, requestTimeout?: Number, webProxy?: any,options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfLinkOrders: Array<CFLinkOrders>;  }> {
         const localVarPath = this.basePath + '/links/{link_id}/orders'
             .replace('{' + 'link_id' + '}', encodeURIComponent(String(linkId)));
         let localVarQueryParameters: any = {};
@@ -409,6 +421,10 @@ export class PaymentLinksApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout:requestTimeout,
+            ...(webProxy && {
+                proxy : webProxy
+            }),
         };
 
         let authenticationPromise = Promise.resolve();

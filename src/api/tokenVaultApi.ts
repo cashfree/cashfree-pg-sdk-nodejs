@@ -97,7 +97,7 @@ export class TokenVaultApi {
      * @param instrumentId 
      * @param xApiVersion 
      */
-    public async deleteSpecificSavedInstrument (xClientId: string, xClientSecret: string, customerId: string, instrumentId: string, xApiVersion?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfInstrument: CFFetchAllSavedInstruments;  }> {
+    public async deleteSpecificSavedInstrument (xClientId: string, xClientSecret: string, customerId: string, instrumentId: string, xApiVersion?: string, requestTimeout?: Number, webProxy?: any, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfInstrument: CFFetchAllSavedInstruments;  }> {
         const localVarPath = this.basePath + '/customers/{customer_id}/instruments/{instrument_id}'
             .replace('{' + 'customer_id' + '}', encodeURIComponent(String(customerId)))
             .replace('{' + 'instrument_id' + '}', encodeURIComponent(String(instrumentId)));
@@ -146,6 +146,10 @@ export class TokenVaultApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout:requestTimeout,
+            ...(webProxy && {
+                proxy : webProxy
+            }),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -192,7 +196,7 @@ export class TokenVaultApi {
      * @param xIdempotencyKey 
      * @param xRequestId 
      */
-    public async fetchAllSavedInstruments (xClientId: string, xClientSecret: string, customerId: string, instrumentType: 'card', xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfInstruments: Array<CFFetchAllSavedInstruments>;  }> {
+    public async fetchAllSavedInstruments (xClientId: string, xClientSecret: string, customerId: string, instrumentType: 'card', xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, requestTimeout?: Number, webProxy?: any,options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfInstruments: Array<CFFetchAllSavedInstruments>;  }> {
         const localVarPath = this.basePath + '/customers/{customer_id}/instruments'
             .replace('{' + 'customer_id' + '}', encodeURIComponent(String(customerId)));
         let localVarQueryParameters: any = {};
@@ -246,6 +250,10 @@ export class TokenVaultApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout:requestTimeout,
+            ...(webProxy && {
+                proxy : webProxy
+            })
         };
 
         let authenticationPromise = Promise.resolve();
@@ -292,7 +300,7 @@ export class TokenVaultApi {
      * @param xIdempotencyKey 
      * @param xRequestId 
      */
-    public async fetchCryptogram (xClientId: string, xClientSecret: string, customerId: string, instrumentId: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfCryptogram: CFCryptogram;  }> {
+    public async fetchCryptogram (xClientId: string, xClientSecret: string, customerId: string, instrumentId: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, requestTimeout?: Number, webProxy?: any, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfCryptogram: CFCryptogram;  }> {
         const localVarPath = this.basePath + '/customers/{customer_id}/instruments/{instrument_id}/cryptogram'
             .replace('{' + 'customer_id' + '}', encodeURIComponent(String(customerId)))
             .replace('{' + 'instrument_id' + '}', encodeURIComponent(String(instrumentId)));
@@ -344,6 +352,10 @@ export class TokenVaultApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout:requestTimeout,
+            ...(webProxy && {
+                proxy : webProxy
+            }),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -390,7 +402,7 @@ export class TokenVaultApi {
      * @param xIdempotencyKey 
      * @param xRequestId 
      */
-    public async fetchSpecificSavedInstrument (xClientId: string, xClientSecret: string, customerId: string, instrumentId: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfInstrument: CFFetchAllSavedInstruments;  }> {
+    public async fetchSpecificSavedInstrument (xClientId: string, xClientSecret: string, customerId: string, instrumentId: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, requestTimeout?: Number, webProxy?: any, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfInstrument: CFFetchAllSavedInstruments;  }> {
         const localVarPath = this.basePath + '/customers/{customer_id}/instruments/{instrument_id}'
             .replace('{' + 'customer_id' + '}', encodeURIComponent(String(customerId)))
             .replace('{' + 'instrument_id' + '}', encodeURIComponent(String(instrumentId)));
@@ -442,6 +454,10 @@ export class TokenVaultApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout:requestTimeout,
+            ...(webProxy && {
+                proxy : webProxy
+            }),
         };
 
         let authenticationPromise = Promise.resolve();

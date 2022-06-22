@@ -106,7 +106,7 @@ export class OrdersApi {
      * @param xRequestId 
      * @param cFOrderRequest 
      */
-    public async createOrder (xClientId: string, xClientSecret: string, xApiVersion?: string, xIdempotencyReplayed?: boolean | null, xIdempotencyKey?: string, xRequestId?: string, cFOrderRequest?: CFOrderRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: IncomingHttpHeaders; cfOrder: CFOrder;  }> {
+    public async createOrder (xClientId: string, xClientSecret: string, xApiVersion?: string, xIdempotencyReplayed?: boolean | null, xIdempotencyKey?: string, xRequestId?: string, cFOrderRequest?: CFOrderRequest, requestTimeout?: Number, webProxy?: any, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: IncomingHttpHeaders; cfOrder: CFOrder;  }> {
         const localVarPath = this.basePath + '/orders';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -146,7 +146,11 @@ export class OrdersApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(cFOrderRequest, "CFOrderRequest")
+            body: ObjectSerializer.serialize(cFOrderRequest, "CFOrderRequest"),
+            timeout:requestTimeout,
+            ...(webProxy && {
+                proxy : webProxy
+            })
         };
 
         let authenticationPromise = Promise.resolve();
@@ -192,7 +196,7 @@ export class OrdersApi {
      * @param xIdempotencyKey 
      * @param xRequestId 
      */
-    public async getOrder (xClientId: string, xClientSecret: string, orderId: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: IncomingHttpHeaders; cfOrder: CFOrder;  }> {
+    public async getOrder (xClientId: string, xClientSecret: string, orderId: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, requestTimeout?: Number, webProxy?: any,options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: IncomingHttpHeaders; cfOrder: CFOrder;  }> {
         const localVarPath = this.basePath + '/orders/{order_id}'
             .replace('{' + 'order_id' + '}', encodeURIComponent(String(orderId)));
         let localVarQueryParameters: any = {};
@@ -238,6 +242,10 @@ export class OrdersApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout:requestTimeout,
+            ...(webProxy && {
+                proxy : webProxy
+            }),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -279,7 +287,7 @@ export class OrdersApi {
      * @param xRequestId 
      * @param cFOrderPayRequest 
      */
-    public async orderPay (xApiVersion: string, xRequestId?: string, cFOrderPayRequest?: any, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: IncomingHttpHeaders; cfOrderPayResponse: CFOrderPayResponse;  }> {
+    public async orderPay (xApiVersion: string, xRequestId?: string, cFOrderPayRequest?: any,requestTimeout?: Number, webProxy?: any, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: IncomingHttpHeaders; cfOrderPayResponse: CFOrderPayResponse;  }> {
         const localVarPath = this.basePath + '/orders/pay';
         let localVarQueryParameters: any = {};
         let localVarHeaderParams: any = (<any>Object).assign({}, this._defaultHeaders);
@@ -308,7 +316,11 @@ export class OrdersApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(cFOrderPayRequest, "CFOrderPayRequest")
+            body: ObjectSerializer.serialize(cFOrderPayRequest, "CFOrderPayRequest"),
+            timeout:requestTimeout,
+            ...(webProxy && {
+                proxy : webProxy
+            })
         };
 
         let authenticationPromise = Promise.resolve();
@@ -355,7 +367,7 @@ export class OrdersApi {
      * @param xRequestId 
      * @param cFAuthorizationRequest 
      */
-    public async preauthorization (xClientId: string, xClientSecret: string, orderId: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, cFAuthorizationRequest?: CFAuthorizationRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: IncomingHttpHeaders; cfPaymentsEntity: CFPaymentsEntity;  }> {
+    public async preauthorization (xClientId: string, xClientSecret: string, orderId: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, cFAuthorizationRequest?: CFAuthorizationRequest,requestTimeout?: Number, webProxy?: any, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: IncomingHttpHeaders; cfPaymentsEntity: CFPaymentsEntity;  }> {
         const localVarPath = this.basePath + '/orders/{order_id}/authorization'
             .replace('{' + 'order_id' + '}', encodeURIComponent(String(orderId)));
         let localVarQueryParameters: any = {};
@@ -401,7 +413,11 @@ export class OrdersApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(cFAuthorizationRequest, "CFAuthorizationRequest")
+            body: ObjectSerializer.serialize(cFAuthorizationRequest, "CFAuthorizationRequest"),
+            timeout:requestTimeout,
+            ...(webProxy && {
+                proxy : webProxy
+            })
         };
 
         let authenticationPromise = Promise.resolve();

@@ -99,7 +99,7 @@ export class PaymentsApi {
      * @param xIdempotencyKey 
      * @param xRequestId 
      */
-    public async getPaymentbyId (xClientId: string, xClientSecret: string, orderId: string, cfPaymentId: number, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfPaymentsEntity: CFPaymentsEntity;  }> {
+    public async getPaymentbyId (xClientId: string, xClientSecret: string, orderId: string, cfPaymentId: number, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, requestTimeout?: Number, webProxy?: any,options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfPaymentsEntity: CFPaymentsEntity;  }> {
         const localVarPath = this.basePath + '/orders/{order_id}/payments/{cf_payment_id}'
             .replace('{' + 'order_id' + '}', encodeURIComponent(String(orderId)))
             .replace('{' + 'cf_payment_id' + '}', encodeURIComponent(String(cfPaymentId)));
@@ -151,6 +151,10 @@ export class PaymentsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout:requestTimeout,
+            ...(webProxy && {
+                proxy : webProxy
+            })
         };
 
         let authenticationPromise = Promise.resolve();
@@ -196,7 +200,7 @@ export class PaymentsApi {
      * @param xIdempotencyKey 
      * @param xRequestId 
      */
-    public async getPaymentsfororder (xClientId: string, xClientSecret: string, orderId: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfPaymentsEntities: Array<CFPaymentsEntity>;  }> {
+    public async getPaymentsfororder (xClientId: string, xClientSecret: string, orderId: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, requestTimeout?: Number, webProxy?: any,options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfPaymentsEntities: Array<CFPaymentsEntity>;  }> {
         const localVarPath = this.basePath + '/orders/{order_id}/payments'
             .replace('{' + 'order_id' + '}', encodeURIComponent(String(orderId)));
         let localVarQueryParameters: any = {};
@@ -242,6 +246,10 @@ export class PaymentsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout:requestTimeout,
+            ...(webProxy && {
+                proxy : webProxy
+            }),
         };
 
         let authenticationPromise = Promise.resolve();

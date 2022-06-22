@@ -100,7 +100,7 @@ export class RefundsApi {
      * @param xRequestId 
      * @param cFRefundRequest 
      */
-    public async createrefund (xClientId: string, xClientSecret: string, orderId: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, cFRefundRequest?: CFRefundRequest, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfRefund: CFRefund;  }> {
+    public async createrefund (xClientId: string, xClientSecret: string, orderId: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, cFRefundRequest?: CFRefundRequest, requestTimeout?: Number, webProxy?: any,options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfRefund: CFRefund;  }> {
         const localVarPath = this.basePath + '/orders/{order_id}/refunds'
             .replace('{' + 'order_id' + '}', encodeURIComponent(String(orderId)));
         let localVarQueryParameters: any = {};
@@ -146,7 +146,11 @@ export class RefundsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
-            body: ObjectSerializer.serialize(cFRefundRequest, "CFRefundRequest")
+            body: ObjectSerializer.serialize(cFRefundRequest, "CFRefundRequest"),
+            timeout:requestTimeout,
+            ...(webProxy && {
+                proxy : webProxy
+            })
         };
 
         let authenticationPromise = Promise.resolve();
@@ -193,7 +197,7 @@ export class RefundsApi {
      * @param xIdempotencyKey 
      * @param xRequestId 
      */
-    public async getRefund (xClientId: string, xClientSecret: string, orderId: string, refundId: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfRefund: CFRefund;  }> {
+    public async getRefund (xClientId: string, xClientSecret: string, orderId: string, refundId: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, requestTimeout?: Number, webProxy?: any, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfRefund: CFRefund;  }> {
         const localVarPath = this.basePath + '/orders/{order_id}/refunds/{refund_id}'
             .replace('{' + 'order_id' + '}', encodeURIComponent(String(orderId)))
             .replace('{' + 'refund_id' + '}', encodeURIComponent(String(refundId)));
@@ -245,6 +249,10 @@ export class RefundsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout:requestTimeout,
+            ...(webProxy && {
+                proxy : webProxy
+            }),
         };
 
         let authenticationPromise = Promise.resolve();
@@ -287,7 +295,7 @@ export class RefundsApi {
      * @param orderId 
      * @param xApiVersion 
      */
-    public async getallrefundsfororder (xClientId: string, xClientSecret: string, orderId: string, xApiVersion?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfRefunds: Array<CFRefund>;  }> {
+    public async getallrefundsfororder (xClientId: string, xClientSecret: string, orderId: string, xApiVersion?: string, requestTimeout?: Number, webProxy?: any, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfRefunds: Array<CFRefund>;  }> {
         const localVarPath = this.basePath + '/orders/{order_id}/refunds'
             .replace('{' + 'order_id' + '}', encodeURIComponent(String(orderId)));
         let localVarQueryParameters: any = {};
@@ -330,6 +338,10 @@ export class RefundsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout:requestTimeout,
+            ...(webProxy && {
+                proxy : webProxy
+            }),
         };
 
         let authenticationPromise = Promise.resolve();

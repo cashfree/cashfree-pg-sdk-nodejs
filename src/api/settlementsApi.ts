@@ -98,7 +98,7 @@ export class SettlementsApi {
      * @param xIdempotencyKey 
      * @param xRequestId 
      */
-    public async getsettlements (xClientId: string, xClientSecret: string, orderId: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfSettlementsEntity: CFSettlementsEntity;  }> {
+    public async getsettlements (xClientId: string, xClientSecret: string, orderId: string, xApiVersion?: string, xIdempotencyReplayed?: boolean, xIdempotencyKey?: string, xRequestId?: string, requestTimeout?: Number, webProxy?: any, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ cfHeaders: http.IncomingHttpHeaders; cfSettlementsEntity: CFSettlementsEntity;  }> {
         const localVarPath = this.basePath + '/orders/{order_id}/settlements'
             .replace('{' + 'order_id' + '}', encodeURIComponent(String(orderId)));
         let localVarQueryParameters: any = {};
@@ -144,6 +144,10 @@ export class SettlementsApi {
             uri: localVarPath,
             useQuerystring: this._useQuerystring,
             json: true,
+            timeout:requestTimeout,
+            ...(webProxy && {
+                proxy : webProxy
+            }),
         };
 
         let authenticationPromise = Promise.resolve();

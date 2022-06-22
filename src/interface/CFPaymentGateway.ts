@@ -53,7 +53,9 @@ export class CFPaymentGateway {
             false,
             header?.idempotencyKey,
             header?.requestID,
-            cFOrderRequest
+            cFOrderRequest,
+            cfConfig.timeout,
+            cfConfig.webProxy = null,
         );
         return result;
     }
@@ -68,7 +70,9 @@ export class CFPaymentGateway {
         const cfPayResponse: CFPayResponse = await apiInstance.orderPay(
             cfConfig.apiVersion,
             header?.requestID,
-            cFOrderPayRequest
+            cFOrderPayRequest,
+            cfConfig.timeout,
+            cfConfig.webProxy = null,
         );
         return cfPayResponse;
     }
@@ -87,7 +91,9 @@ export class CFPaymentGateway {
             cfConfig.apiVersion,
             undefined,
             undefined,
-            header?.requestID
+            header?.requestID,
+            cfConfig?.timeout,
+            cfConfig.webProxy = null,
         );
         return cfPayResponse;
     }
@@ -108,7 +114,9 @@ export class CFPaymentGateway {
             undefined,
             header?.idempotencyKey,
             header?.requestID,
-            cfAuthorizationRequest
+            cfAuthorizationRequest,
+            cfConfig?.timeout,
+            cfConfig.webProxy = null,
         );
         return result;
     }
@@ -127,7 +135,9 @@ export class CFPaymentGateway {
             cfConfig.apiVersion,
             undefined,
             undefined,
-            header?.requestID
+            header?.requestID,
+            cfConfig?.timeout,
+            cfConfig.webProxy = null,
         );
         return cFPaymentsForOrderResponse;
     }
@@ -148,7 +158,9 @@ export class CFPaymentGateway {
             cfConfig.apiVersion,
             undefined,
             undefined,
-            header?.requestID
+            header?.requestID,
+            cfConfig?.timeout,
+            cfConfig.webProxy = null,
         );
         return cfPaymentsEntity;
     }
@@ -169,7 +181,9 @@ export class CFPaymentGateway {
             undefined,
             header?.idempotencyKey,
             header?.requestID,
-            cfRefundRequest
+            cfRefundRequest,
+            cfConfig?.timeout,
+            cfConfig.webProxy = null,
         );
         return cfRefundResponse;
     }
@@ -189,7 +203,9 @@ export class CFPaymentGateway {
             cfConfig.apiVersion,
             undefined,
             undefined,
-            header?.requestID
+            header?.requestID,
+            cfConfig?.timeout,
+            cfConfig.webProxy = null,
         );
         return cfRefundResponse;
     }
@@ -204,7 +220,9 @@ export class CFPaymentGateway {
             cfConfig.clientId,
             cfConfig.clientSecret,
             orderID,
-            cfConfig.apiVersion
+            cfConfig.apiVersion,
+            cfConfig?.timeout,
+            cfConfig.webProxy = null,
         );
         return cfRefundResponse;
     }
@@ -222,7 +240,9 @@ export class CFPaymentGateway {
             cfConfig.apiVersion,
             undefined,
             header?.idempotencyKey,
-            header?.requestID
+            header?.requestID,
+            cfConfig?.timeout,
+            cfConfig.webProxy = null,
         );
         return cfSettlementResponse;
     }
@@ -243,7 +263,9 @@ export class CFPaymentGateway {
             cfConfig.apiVersion,
             undefined,
             header?.idempotencyKey,
-            header?.requestID
+            header?.requestID,
+            cfConfig?.timeout,
+            cfConfig.webProxy = null,
         );
         return instrumentsResponse;
     }
@@ -263,7 +285,9 @@ export class CFPaymentGateway {
             cfConfig.apiVersion,
             undefined,
             header?.idempotencyKey,
-            header?.requestID
+            header?.requestID,
+            cfConfig?.timeout,
+            cfConfig.webProxy = null,
         );
         return instrumentResponse;
     }
@@ -283,7 +307,9 @@ export class CFPaymentGateway {
             cfConfig.apiVersion,
             undefined,
             header?.idempotencyKey,
-            header?.requestID
+            header?.requestID,
+            cfConfig?.timeout,
+            cfConfig.webProxy = null,
         );
         return cryptogramResponse;
     }
@@ -301,7 +327,9 @@ export class CFPaymentGateway {
                 cfConfig.clientSecret,
                 customerID,
                 instrumentID,
-                cfConfig.apiVersion
+                cfConfig.apiVersion,
+                cfConfig?.timeout,
+                cfConfig.webProxy = null,
             );
         return instrumentsResponse;
     }
@@ -319,7 +347,9 @@ export class CFPaymentGateway {
             undefined,
             header?.idempotencyKey,
             header?.requestID,
-            cfLinkRequest
+            cfLinkRequest,
+            cfConfig?.timeout,
+            cfConfig.webProxy = null,
         );
         return response;
     }
@@ -337,7 +367,9 @@ export class CFPaymentGateway {
             cfConfig.apiVersion,
             undefined,
             header?.idempotencyKey,
-            header?.requestID
+            header?.requestID,
+            cfConfig?.timeout,
+            cfConfig.webProxy = null,
         );
         return response;
     }
@@ -352,7 +384,9 @@ export class CFPaymentGateway {
             cfConfig.clientId,
             cfConfig.clientSecret,
             linkID,
-            cfConfig.apiVersion
+            cfConfig.apiVersion,
+            cfConfig?.timeout,
+            cfConfig.webProxy = null,
         );
         return response;
     }
@@ -370,7 +404,9 @@ export class CFPaymentGateway {
             cfConfig.apiVersion,
             undefined,
             header?.idempotencyKey,
-            header?.requestID
+            header?.requestID,
+            cfConfig?.timeout,
+            cfConfig.webProxy = null,
         );
         return response;
     }
