@@ -18,7 +18,7 @@ export class CFCustomerDetails {
     */
     'customerId': string;
       /**
-    * A unique identifier for the customer. Use alphanumeric values only.
+    * Customer name.
     */
     'customerName': string;
     /**
@@ -50,7 +50,7 @@ export class CFCustomerDetails {
             "baseName": "customer_id",
             "type": "string"
         },
-          {
+        {
             "name": "customerName",
             "baseName": "customer_name",
             "type": "string"
