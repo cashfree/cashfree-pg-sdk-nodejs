@@ -2,8 +2,8 @@
 
 Use our Nodejs SDK to integrate the Cashfree Payment Gateway into your application.
 
-API version: `2022-01-01` \
-Package version: `1.0.6`
+API version: `2022-09-01` \
+Package version: `2.0.0`
 
 # **Installation**
 
@@ -68,9 +68,8 @@ try {
                     cFOrderRequest
                 );
                 if (result != null) {
-                    console.log(result?.cfOrder?.orderToken);
+                    console.log(result?.cfOrder?.paymentSessionId);
                     console.log(result?.cfOrder?.orderId);
-                    console.log(result?.cfOrder?.paymentLink);
                     console.log(result?.cfHeaders);
                 }
 } catch (ApiException e) {
@@ -101,10 +100,10 @@ Below is the code to initiate payment with Card
         const cFCardPayment = new CFCardPayment();
         cFCardPayment.card = cFCard;
         var cFOrderPayRequest = new CFOrderPayRequest();
-        cFOrderPayRequest.orderToken = order_token;
+        cFOrderPayRequest.paymentSessionId = payment_session_id;
         cFOrderPayRequest.paymentMethod = cFCardPayment;
         var apiInstance = new CFPaymentGateway();
-        var cfPayResponse = await apiInstance.orderPay(
+        var cfPayResponse = await apiInstance.orderSessionsPay(
             cfConfig,
             cFOrderPayRequest
         );
@@ -133,10 +132,10 @@ Below is the code to initiate payment with Saved Card
         const cFCardPayment = new CFCardPayment();
         cFCardPayment.card = cFCard;
         var cFOrderPayRequest = new CFOrderPayRequest();
-        cFOrderPayRequest.orderToken = prod_order_token;
+        cFOrderPayRequest.paymentSessionId = payment_session_id;
         cFOrderPayRequest.paymentMethod = cFCardPayment;
         var apiInstance = new CFPaymentGateway();
-        var cfPayResponse = await apiInstance.orderPay(
+        var cfPayResponse = await apiInstance.orderSessionsPay(
             prodCfConfig,
             cFOrderPayRequest
         );
@@ -163,10 +162,10 @@ Below is the code to initiate payment with UPI - `Collect`
         var cFUPIPayment = new CFUPIPayment();
         cFUPIPayment.upi = cfUpi;
         var cFOrderPayRequest = new CFOrderPayRequest();
-        cFOrderPayRequest.orderToken = prod_order_token;
+        cFOrderPayRequest.paymentSessionId = payment_session_id;
         cFOrderPayRequest.paymentMethod = cFUPIPayment;
         var apiInstance = new CFPaymentGateway();
-        var cfPayResponse = await apiInstance.orderPay(
+        var cfPayResponse = await apiInstance.orderSessionsPay(
             prodCfConfig,
             cFOrderPayRequest
         );
@@ -189,10 +188,10 @@ Below is the code to initiate payment with UPI - `Intent`
         var cFUPIPayment = new CFUPIPayment();
         cFUPIPayment.upi = cfUpi;
         var cFOrderPayRequest = new CFOrderPayRequest();
-        cFOrderPayRequest.orderToken = order_token;
+        cFOrderPayRequest.paymentSessionId = payment_session_id;
         cFOrderPayRequest.paymentMethod = cFUPIPayment;
         var apiInstance = new CFPaymentGateway();
-        var cfPayResponse = await apiInstance.orderPay(
+        var cfPayResponse = await apiInstance.orderSessionsPay(
             cfConfig,
             cFOrderPayRequest
         );
@@ -215,10 +214,10 @@ Below is the code to initiate payment with UPI - `QRCode`
         var cFUPIPayment = new CFUPIPayment();
         cFUPIPayment.upi = cfUpi;
         var cFOrderPayRequest = new CFOrderPayRequest();
-        cFOrderPayRequest.orderToken = order_token;
+        cFOrderPayRequest.paymentSessionId = payment_session_id;
         cFOrderPayRequest.paymentMethod = cFUPIPayment;
         var apiInstance = new CFPaymentGateway();
-        var cfPayResponse = await apiInstance.orderPay(
+        var cfPayResponse = await apiInstance.orderSessionsPay(
             cfConfig,
             cFOrderPayRequest
         );
@@ -244,10 +243,10 @@ Below is the code to initiate payment with Netbanking
         var cFPaymentMethod = new CFPaymentMethod();
         cFPaymentMethod.netbanking = cfnetBanking;
         var cFOrderPayRequest = new CFOrderPayRequest();
-        cFOrderPayRequest.orderToken = "NPZRGXObIY17hwhZKH8K";
+        cFOrderPayRequest.paymentSessionId = payment_session_id;
         cFOrderPayRequest.paymentMethod = cFPaymentMethod;
         var apiInstance = new CFPaymentGateway();
-        var cfPayResponse = await apiInstance.orderPay(
+        var cfPayResponse = await apiInstance.orderSessionsPay(
             prodCfConfig,
             cFOrderPayRequest
         );
@@ -276,10 +275,10 @@ Below is the code to initiate payment with App (Wallet)
         var cFAppPayment = new CFAppPayment();
         cFAppPayment.app = cfApp;
         var cFOrderPayRequest = new CFOrderPayRequest();
-        cFOrderPayRequest.orderToken = order_token;
+        cFOrderPayRequest.paymentSessionId = payment_session_id;
         cFOrderPayRequest.paymentMethod = cFAppPayment;
         var apiInstance = new CFPaymentGateway();
-        var cfPayResponse = await apiInstance.orderPay(
+        var cfPayResponse = await apiInstance.orderSessionsPay(
             cfConfig,
             cFOrderPayRequest
         );
@@ -308,10 +307,10 @@ Below is the code to initiate payment with Paylater
         var cFPaylaterPayment = new CFPaylaterPayment();
         cFPaylaterPayment.paylater = cfPaylater;
         var cFOrderPayRequest = new CFOrderPayRequest();
-        cFOrderPayRequest.orderToken = prod_order_token;
+        cFOrderPayRequest.paymentSessionId = payment_session_id;
         cFOrderPayRequest.paymentMethod = cFPaylaterPayment;
         var apiInstance = new CFPaymentGateway();
-        var cfPayResponse = await apiInstance.orderPay(
+        var cfPayResponse = await apiInstance.orderSessionsPay(
             prodCfConfig,
             cFOrderPayRequest
         );
