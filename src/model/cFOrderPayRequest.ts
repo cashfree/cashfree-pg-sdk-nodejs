@@ -15,6 +15,7 @@ import { CFPaymentMethod } from './cFPaymentMethod';
 
 export class CFOrderPayRequest {
     'orderToken': string;
+    'paymentSessionId': string;
     'paymentMethod': CFPaymentMethod;
     'saveInstrument'?: boolean;
 
@@ -24,6 +25,11 @@ export class CFOrderPayRequest {
         {
             "name": "orderToken",
             "baseName": "order_token",
+            "type": "string"
+        },
+        {
+            "name": "paymentSessionId",
+            "baseName": "payment_session_id",
             "type": "string"
         },
         {

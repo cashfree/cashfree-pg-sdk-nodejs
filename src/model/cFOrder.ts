@@ -25,6 +25,7 @@ export class CFOrder {
     'orderAmount'?: number;
     'orderStatus'?: string;
     'orderToken'?: string;
+    'paymentSessionId'?: string;
     'orderExpiryTime'?: string;
     'orderNote'?: string;
     'paymentLink'?: string;
@@ -70,6 +71,11 @@ export class CFOrder {
         {
             "name": "orderToken",
             "baseName": "order_token",
+            "type": "string"
+        },
+        {
+            "name": "paymentSessionId",
+            "baseName": "payment_session_id",
             "type": "string"
         },
         {
