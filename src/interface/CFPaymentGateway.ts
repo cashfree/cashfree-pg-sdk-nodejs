@@ -77,6 +77,24 @@ export class CFPaymentGateway {
         return cfPayResponse;
     }
 
+    async orderSessionsPay(
+        cfConfig: CFConfig,
+        cFOrderPayRequest: CFOrderPayRequest,
+        header: CFHeader = {}
+    ): Promise<CFPayResponse> {
+        const url = this.getURL(cfConfig.environment);
+
+        var apiInstance = new OrdersApi(url);
+        const cfPayResponse: CFPayResponse = await apiInstance.orderSessionPay(
+            cfConfig.apiVersion,
+            header?.requestID,
+            cFOrderPayRequest,
+            cfConfig.timeout,
+            cfConfig.webProxy = null,
+        );
+        return cfPayResponse;
+    }
+
     async getOrder(
         cfConfig: CFConfig,
         orderID: string,
