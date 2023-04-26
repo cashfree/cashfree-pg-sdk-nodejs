@@ -3,7 +3,7 @@
 Use our Nodejs SDK to integrate the Cashfree Payment Gateway into your application.
 
 API version: `2022-09-01` \
-Package version: `2.0.0`
+Package version: `2.0.1`
 
 # **Installation**
 
