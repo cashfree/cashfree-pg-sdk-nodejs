@@ -3,7 +3,7 @@ const Sentry = require("@sentry/node");
 class CFSentryImpl {
   SetupSentry(environment: String) {
     Sentry.init({
-      dsn: "https://83364972b8c74dcb9ad93deaf4d37460@o4504655937536000.ingest.sentry.io/4505079467016192",
+      dsn: "https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696",
 
       // Set tracesSampleRate to 1.0 to capture 100%
       // of transactions for performance monitoring.
