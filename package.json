@@ -1,11 +1,11 @@
 {
   "name": "cashfree-pg",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Cashfree client for cashfree-pg",
   "author": "Cashfree Payments",
   "repository": {
     "type": "git",
-    "url": "https://github.com/suhas-cashfree/cashfree-pg-sdk-nodejs.git"
+    "url": "https://github.com/cashfree/cashfree-pg-sdk-nodejs.git"
   },
   "keywords": [
     "axios",
