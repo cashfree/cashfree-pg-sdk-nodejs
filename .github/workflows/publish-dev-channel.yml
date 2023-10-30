@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: '20.*'
           registry-url: 'https://registry.npmjs.org'
+      - run: ls
       - run: npm install
       - run: npm publish --tag dev --access public
         env:
