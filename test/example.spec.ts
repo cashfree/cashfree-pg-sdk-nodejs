@@ -2,8 +2,8 @@ import * as assert from "assert";
 import { Cashfree } from "./../api";
 import { expect } from 'chai';
 
-Cashfree.XClientId = "TEST41754194f2067b4b76b61f6d7f145714";
-Cashfree.XClientSecret = "TEST3271ca1df72fb0bef2d947f1f91ec3467d90d22e";
+Cashfree.XClientId = process.env.CLIENT_ID;
+Cashfree.XClientSecret = process.env.SECRET_KEY;
 Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
 
 it('Create Order', function (done) {
@@ -24,6 +24,7 @@ it('Create Order', function (done) {
         }
     }
     Cashfree.PGCreateOrder("2022-09-01", request).then((response) => {
+        console.log(response.data.order_id)
         assert.equal(response.data.order_currency, "INR")
         done()
     }).catch((error) => {
