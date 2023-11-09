@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Run Tests
-        run: CLIENT_ID=$PG_CLIENT_ID SECRET_KEY=$PG_CLIENT_SECRET npm test && echo $PG_CLIENT_ID > a.txt && cat a.txt
+        run: CLIENT_ID=$PG_CLIENT_ID SECRET_KEY=$PG_CLIENT_SECRET npm test
         env:
           PG_CLIENT_ID: ${{ secrets.XCLIENTIDSANDBOX }}
           PG_CLIENT_SECRET: ${{ secrets.XCLIENTSECRETSANDBOX }}
