@@ -22,7 +22,7 @@
   "scripts": {
     "build": "tsc && tsc -p tsconfig.esm.json",
     "prepare": "npm run build",
-    "test": "mocha dist/test/**/**.js"
+    "test": "mocha dist/test/**/**.js --reporter mocha-junit-reporter --reporter-options mochaFile=./test-results/results.xml"
   },
   "dependencies": {
     "@sentry/node": "^7.73.0",
@@ -35,6 +35,7 @@
     "@types/sinon": "^17.0.1",
     "chai": "^4.3.10",
     "mocha": "^10.2.0",
+    "mocha-junit-reporter": "^2.2.1",
     "sinon": "^17.0.1",
     "typescript": "^4.9.5"
   }
