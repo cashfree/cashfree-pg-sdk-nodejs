@@ -25,7 +25,7 @@ it('Create Order', function (done) {
     }
     Cashfree.PGCreateOrder("2022-09-01", request).then((response) => {
         console.log(response.data.order_id)
-        assert.equal(response.data.order_currency, "INRs")
+        assert.equal(response.data.order_currency, "INR")
         done()
     }).catch((error) => {
         console.log("Actual: " + error.actual + " Expected: " + error.expected + " Operator: " + error.operator)
