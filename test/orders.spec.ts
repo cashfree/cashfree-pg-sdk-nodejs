@@ -24,7 +24,7 @@ function setOrderDetails(order_id: string, payment_session_id: string) {
     paymentSessionId = payment_session_id
 }
 
-it('Create Order', function (done) {
+it('Create Order Test', function (done) {
     var blah = 'foo';
     var request = {
         "order_amount": 3005,
@@ -42,6 +42,7 @@ it('Create Order', function (done) {
         }
     }
     Cashfree.PGCreateOrder("2022-09-01", request).then((response) => {
+        assert.equal(response.data.order_amount, request.order_amount)
         assert.equal(response.data.order_currency, "INR")
         setOrderDetails(response.data.order_id, response.data.payment_session_id)
         done()
@@ -53,7 +54,7 @@ it('Create Order', function (done) {
 
 });
 
-it('Get Order', function (done) {
+it('Get Order Test', function (done) {
     Cashfree.PGFetchOrder("2022-09-01", orderId).then((response) => {
         assert.equal(response.data.order_currency, "INR")
         done()
@@ -66,9 +67,8 @@ it('Get Order', function (done) {
 });
 
 
-it('Get Payments For an Order', function (done) {
+it('Get Payments For an Order Test', function (done) {
     Cashfree.PGOrderFetchPayments("2022-09-01", orderId).then((response) => {
-        console.log(response.data)
         // console.log(response.data.order_currency)
         // assert.equal(response.data.order_currency, "INR")
         // setOrderDetails(response.data.order_id)
@@ -82,7 +82,7 @@ it('Get Payments For an Order', function (done) {
 
 });
 
-it('Create Payment Link', function (done) {
+it('Create Payment Link Test', function (done) {
     var link_id = "Automated_Test_" + getCurrentTimeStamp()
     var request = {
         "link_amount": 1,
@@ -112,10 +112,6 @@ it('Create Payment Link', function (done) {
         }
     }
     Cashfree.PGCreateLink("2022-09-01", request).then((response) => {
-        // console.log(response.data.order_currency)
-        // assert.equal(response.data.order_currency, "INR")
-        // setOrderDetails(response.data.order_id)
-        // console.log(orderId)
         done()
     }).catch((error) => {
         console.log("Actual: " + error.actual + " Expected: " + error.expected + " Operator: " + error.operator)
