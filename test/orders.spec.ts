@@ -13,8 +13,8 @@ var paymentSessionId = ''
 function getCurrentTimeStamp() {
     var today = new Date();
     var date = today.getFullYear() + (today.getMonth() + 1) + today.getDate();
-    var time = "" + today.getHours() + today.getMinutes() + today.getSeconds() + today.getMilliseconds;
-    var dateTime = date + ' ' + time;
+    var time = "" + today.getHours() + today.getMinutes() + today.getSeconds() + today.getMilliseconds();
+    var dateTime = date + '' + time;
     return dateTime
 }
 
@@ -82,26 +82,11 @@ it('Get Payments For an Order', function (done) {
 
 });
 
-it('Get Payment by PaymentId for an Order', function (done) {
-    Cashfree.PGOrderFetchPayment("2022-09-01", orderId, "9s99sjs").then((response) => {
-        console.log(response.data)
-        // console.log(response.data.order_currency)
-        // assert.equal(response.data.order_currency, "INR")
-        // setOrderDetails(response.data.order_id)
-        // console.log(orderId)
-        done()
-    }).catch((error) => {
-        console.log("Actual: " + error.actual + " Expected: " + error.expected + " Operator: " + error.operator)
-        assert.fail("Fail error message")
-        done()
-    });
-
-});
-
 it('Create Payment Link', function (done) {
+    var link_id = "Automated_Test_" + getCurrentTimeStamp()
     var request = {
         "link_amount": 1,
-        "link_id": "Automated_Test_f",
+        "link_id": link_id,
         "link_currency": "INR",
         "customer_details": {
             "customer_name": "John Doe",
@@ -131,7 +116,6 @@ it('Create Payment Link', function (done) {
         // assert.equal(response.data.order_currency, "INR")
         // setOrderDetails(response.data.order_id)
         // console.log(orderId)
-        console.log(response.data)
         done()
     }).catch((error) => {
         console.log("Actual: " + error.actual + " Expected: " + error.expected + " Operator: " + error.operator)
