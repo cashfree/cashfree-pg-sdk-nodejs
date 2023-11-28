@@ -22,7 +22,7 @@
   "scripts": {
     "build": "tsc && tsc -p tsconfig.esm.json",
     "prepare": "npm run build",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "@sentry/node": "^7.73.0",

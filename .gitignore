@@ -1,5 +1,6 @@
 wwwroot/*.js
 node_modules
+coverage
 typings
 dist
 package-lock.json
