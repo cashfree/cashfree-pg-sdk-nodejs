@@ -3,8 +3,8 @@ import { expect, jest, test } from '@jest/globals';
 import { Cashfree, UpiChannelEnum, AppProviderEnum, CardChannelEnum, OfferTncOfferTncTypeEnum, OfferType, DiscountDetailsDiscountTypeEnum } from "../api";
 const { execSync } = require('child_process');
 
-Cashfree.XClientId = process.env.CLIENT_ID;
-Cashfree.XClientSecret = process.env.SECRET_KEY;
+Cashfree.XClientId = process.env.PG_CLIENT_ID;
+Cashfree.XClientSecret = process.env.PG_CLIENT_SECRET;
 Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
 
 var orderId = ''
