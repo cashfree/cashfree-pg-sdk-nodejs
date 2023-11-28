@@ -1,7 +1,7 @@
 wwwroot/*.js
 node_modules
-coverage
 typings
 dist
+coverage
 package-lock.json
 test-results
