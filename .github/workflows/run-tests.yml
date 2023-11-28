@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: npm install && npm install coveralls --save-dev
       - name: Run Tests
-        run: CLIENT_ID=$PG_CLIENT_ID SECRET_KEY=$PG_CLIENT_SECRET npm test && yarn report && yarn coveralls
+        run: CLIENT_ID=$PG_CLIENT_ID SECRET_KEY=$PG_CLIENT_SECRET npm test
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
