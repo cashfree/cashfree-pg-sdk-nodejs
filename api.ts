@@ -379,7 +379,7 @@ export interface Card {
      * @type {string}
      * @memberof Card
      */
-    'channel'?: CardChannelEnum;
+    'channel': CardChannelEnum;
     /**
      * Customer card number for plain card transactions. Token pan number for tokenized card transactions.
      * @type {string}
@@ -497,13 +497,13 @@ export interface CardEMI {
      * @type {string}
      * @memberof CardEMI
      */
-    'channel'?: string;
+    'channel': string;
     /**
      * Customer card number.
      * @type {string}
      * @memberof CardEMI
      */
-    'card_number'?: string;
+    'card_number': string;
     /**
      * Customer name mentioned on the card.
      * @type {string}
@@ -515,19 +515,19 @@ export interface CardEMI {
      * @type {string}
      * @memberof CardEMI
      */
-    'card_expiry_mm'?: string;
+    'card_expiry_mm': string;
     /**
      * Card expiry year.
      * @type {string}
      * @memberof CardEMI
      */
-    'card_expiry_yy'?: string;
+    'card_expiry_yy': string;
     /**
      * CVV mentioned on the card.
      * @type {string}
      * @memberof CardEMI
      */
-    'card_cvv'?: string;
+    'card_cvv': string;
     /**
      * Card alias as returned by Cashfree Vault API
      * @type {string}
@@ -539,13 +539,13 @@ export interface CardEMI {
      * @type {string}
      * @memberof CardEMI
      */
-    'card_bank_name'?: CardEMICardBankNameEnum;
+    'card_bank_name': CardEMICardBankNameEnum;
     /**
      * EMI tenure selected by the user
      * @type {number}
      * @memberof CardEMI
      */
-    'emi_tenure'?: number;
+    'emi_tenure': number;
 }
 
 export const CardEMICardBankNameEnum = {
@@ -694,7 +694,7 @@ export interface CardlessEMIPaymentMethod {
      * @type {CardlessEMI}
      * @memberof CardlessEMIPaymentMethod
      */
-    'cardless_emi'?: CardlessEMI;
+    'cardless_emi': CardlessEMI;
 }
 /**
  * cardless EMI query object
@@ -2047,7 +2047,7 @@ export interface NetBankingPaymentMethod {
      * @type {Netbanking}
      * @memberof NetBankingPaymentMethod
      */
-    'netbanking': Netbanking | null;
+    'netbanking': Netbanking;
 }
 /**
  * Netbanking payment method request body
@@ -2387,7 +2387,7 @@ export interface OfferValidations {
  * @type OfferValidationsPaymentMethod
  * @export
  */
-export type OfferValidationsPaymentMethod = OfferAll | OfferCard | OfferEMI | OfferNB | OfferPaylater | OfferUPI | OfferWallet;
+export type OfferValidationsPaymentMethod = { type: 'OfferAll' } & OfferAll | { type: 'OfferCard' } & OfferCard | { type: 'OfferEMI' } & OfferEMI | { type: 'OfferNB' } & OfferNB | { type: 'OfferPaylater' } & OfferPaylater | { type: 'OfferUPI' } & OfferUPI | { type: 'OfferWallet' } & OfferWallet;
 
 /**
  * Offer object for wallet payment method
@@ -2400,7 +2400,7 @@ export interface OfferWallet {
      * @type {WalletOffer}
      * @memberof OfferWallet
      */
-    'app'?: WalletOffer;
+    'app': WalletOffer;
 }
 /**
  * This is the response shared when merchant inovkes the OTP submit or resend API
@@ -2591,10 +2591,10 @@ export interface OrderEntity {
     'created_at'?: string;
     /**
      * 
-     * @type {VendorSplit}
+     * @type {Array<VendorSplit>}
      * @memberof OrderEntity
      */
-    'order_splits'?: VendorSplit;
+    'order_splits'?: Array<VendorSplit>;
     /**
      * 
      * @type {CustomerDetails}
@@ -2798,7 +2798,7 @@ export interface PayOrderRequest {
  * @type PayOrderRequestPaymentMethod
  * @export
  */
-export type PayOrderRequestPaymentMethod = AppPaymentMethod | CardEMIPaymentMethod | CardPaymentMethod | CardlessEMIPaymentMethod | NetBankingPaymentMethod | PaylaterPaymentMethod | UPIPaymentMethod;
+export type PayOrderRequestPaymentMethod = { type: 'AppPaymentMethod' } & AppPaymentMethod | { type: 'CardEMIPaymentMethod' } & CardEMIPaymentMethod | { type: 'CardPaymentMethod' } & CardPaymentMethod | { type: 'CardlessEMIPaymentMethod' } & CardlessEMIPaymentMethod | { type: 'NetBankingPaymentMethod' } & NetBankingPaymentMethod | { type: 'PaylaterPaymentMethod' } & PaylaterPaymentMethod | { type: 'UPIPaymentMethod' } & UPIPaymentMethod;
 
 /**
  * Paylater payment method
@@ -2876,7 +2876,7 @@ export interface PaylaterPaymentMethod {
      * @type {Paylater}
      * @memberof PaylaterPaymentMethod
      */
-    'paylater'?: Paylater;
+    'paylater': Paylater;
 }
 /**
  * payment entity full object
@@ -3117,7 +3117,7 @@ export interface PaymentMethodInPaymentsEntity {
  * @type PaymentMethodInPaymentsEntityPaymentMethod
  * @export
  */
-export type PaymentMethodInPaymentsEntityPaymentMethod = PaymentMethodAppInPaymentsEntity | PaymentMethodCardInPaymentsEntity | PaymentMethodCardlessEMIInPaymentsEntity | PaymentMethodNetBankingInPaymentsEntity | PaymentMethodPaylaterInPaymentsEntity | PaymentMethodUPIInPaymentsEntity;
+export type PaymentMethodInPaymentsEntityPaymentMethod = { type: 'PaymentMethodAppInPaymentsEntity' } & PaymentMethodAppInPaymentsEntity | { type: 'PaymentMethodCardInPaymentsEntity' } & PaymentMethodCardInPaymentsEntity | { type: 'PaymentMethodCardlessEMIInPaymentsEntity' } & PaymentMethodCardlessEMIInPaymentsEntity | { type: 'PaymentMethodNetBankingInPaymentsEntity' } & PaymentMethodNetBankingInPaymentsEntity | { type: 'PaymentMethodPaylaterInPaymentsEntity' } & PaymentMethodPaylaterInPaymentsEntity | { type: 'PaymentMethodUPIInPaymentsEntity' } & PaymentMethodUPIInPaymentsEntity;
 
 /**
  * netbanking payment method object for pay
@@ -3189,13 +3189,13 @@ export interface PaymentMethodUPIInPaymentsEntity {
     'upi_id'?: string;
 }
 /**
- * Filter for Payment Methods
+ * Filter for specific Payment Methods
  * @export
  * @interface PaymentMethodsFilters
  */
 export interface PaymentMethodsFilters {
     /**
-     * Array of payment methods to be filtered.
+     * Array of payment methods to be filtered. This is optional, by default all payment methods will be returned. Possible values in [ \'debit_card\', \'credit_card\', \'prepaid_card\', \'corporate_credit_card\', \'upi\', \'wallet\', \'netbanking\', \'banktransfer\', \'paylater\', \'paypal\', \'debit_card_emi\', \'credit_card_emi\', \'upi_credit_card\', \'upi_ppi\', \'cardless_emi\', \'account_based_payment\' ] 
      * @type {Array<string>}
      * @memberof PaymentMethodsFilters
      */
@@ -3213,6 +3213,12 @@ export interface PaymentMethodsQueries {
      * @memberof PaymentMethodsQueries
      */
     'amount'?: number;
+    /**
+     * OrderId of the order. Either of `order_id` or `order_amount` is mandatory.
+     * @type {string}
+     * @memberof PaymentMethodsQueries
+     */
+    'order_id'?: string;
 }
 /**
  * payment mode eligiblity object
@@ -4643,7 +4649,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     return {
         /**
          * Use this API to get eligible Cardless EMI Payment Methods available for a customer on an order basis their phone number.
-         * @summary Get Eligible Cardless EMI Payment Methods for a customer on an order
+         * @summary Get Eligible Cardless EMI
          
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {EligibilityFetchCardlessEMIRequest} EligibilityFetchCardlessEMIRequest Request Body to get eligible cardless emi options for a customer and order
@@ -4693,7 +4699,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -4717,7 +4723,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * Use this API to get eligible offers for an order_id or order amount.
-         * @summary Get Eligible Offers for an Order
+         * @summary Get Eligible Offers
          
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {EligibilityFetchOffersRequest} EligibilityFetchOffersRequest Request Body to get eligible offers for a customer and order
@@ -4767,7 +4773,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -4791,7 +4797,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * Use this API to get eligible Paylater Payment Methods for a customer on an order.
-         * @summary Get Eligible Paylater for a customer on an order
+         * @summary Get Eligible Paylater
          
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {EligibilityFetchPaylaterRequest} EligibilityFetchPaylaterRequest Request Body to get eligible paylater options for a customer and order
@@ -4841,7 +4847,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -4865,7 +4871,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * Use this API to get eligible Payment Methods
-         * @summary Get eligible Payment Methods
+         * @summary Get Eligible Payment Methods
          
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {EligibilityFetchPaymentMethodsRequest} EligibilityFetchPaymentMethodsRequest Request Body to get eligible payment methods for an account and order
@@ -4915,7 +4921,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -4949,7 +4955,7 @@ const EligibilityApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Use this API to get eligible Cardless EMI Payment Methods available for a customer on an order basis their phone number.
-         * @summary Get Eligible Cardless EMI Payment Methods for a customer on an order
+         * @summary Get Eligible Cardless EMI
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {EligibilityFetchCardlessEMIRequest} EligibilityFetchCardlessEMIRequest Request Body to get eligible cardless emi options for a customer and order
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
@@ -4967,7 +4973,7 @@ const EligibilityApiFp = function(configuration?: Configuration) {
         },
         /**
          * Use this API to get eligible offers for an order_id or order amount.
-         * @summary Get Eligible Offers for an Order
+         * @summary Get Eligible Offers
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {EligibilityFetchOffersRequest} EligibilityFetchOffersRequest Request Body to get eligible offers for a customer and order
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
@@ -4985,7 +4991,7 @@ const EligibilityApiFp = function(configuration?: Configuration) {
         },
         /**
          * Use this API to get eligible Paylater Payment Methods for a customer on an order.
-         * @summary Get Eligible Paylater for a customer on an order
+         * @summary Get Eligible Paylater
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {EligibilityFetchPaylaterRequest} EligibilityFetchPaylaterRequest Request Body to get eligible paylater options for a customer and order
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
@@ -5003,7 +5009,7 @@ const EligibilityApiFp = function(configuration?: Configuration) {
         },
         /**
          * Use this API to get eligible Payment Methods
-         * @summary Get eligible Payment Methods
+         * @summary Get Eligible Payment Methods
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {EligibilityFetchPaymentMethodsRequest} EligibilityFetchPaymentMethodsRequest Request Body to get eligible payment methods for an account and order
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
@@ -5089,7 +5095,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5162,7 +5168,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5299,7 +5305,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5372,7 +5378,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5511,7 +5517,7 @@ const PGReconciliationApiAxiosParamCreator = function (configuration?: Configura
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5632,7 +5638,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5705,7 +5711,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5778,7 +5784,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5850,7 +5856,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6027,7 +6033,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6090,7 +6096,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6167,7 +6173,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6239,7 +6245,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6297,7 +6303,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6496,7 +6502,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6573,7 +6579,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6645,7 +6651,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6804,7 +6810,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6880,7 +6886,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7021,7 +7027,7 @@ const SettlementsApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7140,7 +7146,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7214,7 +7220,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7287,7 +7293,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7369,7 +7375,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7546,7 +7552,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7622,7 +7628,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7701,7 +7707,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7777,7 +7783,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7926,7 +7932,7 @@ export class Cashfree {
     
     /**
      * Use this API to get eligible Cardless EMI Payment Methods available for a customer on an order basis their phone number.
-     * @summary Get Eligible Cardless EMI Payment Methods for a customer on an order
+     * @summary Get Eligible Cardless EMI
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {EligibilityFetchCardlessEMIRequest} EligibilityFetchCardlessEMIRequest Request Body to get eligible cardless emi options for a customer and order
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
@@ -7957,7 +7963,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return EligibilityApiFp().pGEligibilityFetchCardlessEMI(x_api_version, EligibilityFetchCardlessEMIRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -7969,7 +7975,7 @@ export class Cashfree {
 
     /**
      * Use this API to get eligible offers for an order_id or order amount.
-     * @summary Get Eligible Offers for an Order
+     * @summary Get Eligible Offers
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {EligibilityFetchOffersRequest} EligibilityFetchOffersRequest Request Body to get eligible offers for a customer and order
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
@@ -8000,7 +8006,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return EligibilityApiFp().pGEligibilityFetchOffers(x_api_version, EligibilityFetchOffersRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8012,7 +8018,7 @@ export class Cashfree {
 
     /**
      * Use this API to get eligible Paylater Payment Methods for a customer on an order.
-     * @summary Get Eligible Paylater for a customer on an order
+     * @summary Get Eligible Paylater
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {EligibilityFetchPaylaterRequest} EligibilityFetchPaylaterRequest Request Body to get eligible paylater options for a customer and order
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
@@ -8043,7 +8049,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return EligibilityApiFp().pGEligibilityFetchPaylater(x_api_version, EligibilityFetchPaylaterRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8055,7 +8061,7 @@ export class Cashfree {
 
     /**
      * Use this API to get eligible Payment Methods
-     * @summary Get eligible Payment Methods
+     * @summary Get Eligible Payment Methods
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {EligibilityFetchPaymentMethodsRequest} EligibilityFetchPaymentMethodsRequest Request Body to get eligible payment methods for an account and order
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
@@ -8086,7 +8092,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return EligibilityApiFp().pGEligibilityFetchPaymentMethods(x_api_version, EligibilityFetchPaymentMethodsRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8129,7 +8135,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return OffersApiFp().pGCreateOffer(x_api_version, CreateOfferRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8172,7 +8178,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return OffersApiFp().pGFetchOffer(x_api_version, offer_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8215,7 +8221,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return OrdersApiFp().pGCreateOrder(x_api_version, CreateOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8258,7 +8264,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return OrdersApiFp().pGFetchOrder(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8303,7 +8309,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return PGReconciliationApiFp().pGFetchRecon(x_api_version, FetchReconRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8346,7 +8352,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return PaymentLinksApiFp().pGCancelLink(x_api_version, link_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8389,7 +8395,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return PaymentLinksApiFp().pGCreateLink(x_api_version, CreateLinkRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8432,7 +8438,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return PaymentLinksApiFp().pGFetchLink(x_api_version, link_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8475,7 +8481,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return PaymentLinksApiFp().pGLinkFetchOrders(x_api_version, link_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8519,7 +8525,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return PaymentsApiFp().pGAuthorizeOrder(x_api_version, order_id, AuthorizeOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8563,7 +8569,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return PaymentsApiFp().pGOrderAuthenticatePayment(x_api_version, cf_payment_id, OrderAuthenticatePaymentRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8607,7 +8613,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return PaymentsApiFp().pGOrderFetchPayment(x_api_version, order_id, cf_payment_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8650,7 +8656,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return PaymentsApiFp().pGOrderFetchPayments(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8693,7 +8699,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return PaymentsApiFp().pGPayOrder(x_api_version, PayOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8737,7 +8743,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return RefundsApiFp().pGOrderCreateRefund(x_api_version, order_id, OrderCreateRefundRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8781,7 +8787,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return RefundsApiFp().pGOrderFetchRefund(x_api_version, order_id, refund_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8824,7 +8830,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return RefundsApiFp().pGOrderFetchRefunds(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8869,7 +8875,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return SettlementReconciliationApiFp().pGFetchSettlements(x_api_version, FetchSettlementsRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8914,7 +8920,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return SettlementReconciliationApiFp().pGSettlementFetchRecon(x_api_version, SettlementFetchReconRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8957,7 +8963,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return SettlementsApiFp().pGOrderFetchSettlement(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -9000,7 +9006,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return SoftPOSApiFp().sposCreateTerminal(x_api_version, CreateTerminalRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -9043,7 +9049,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return SoftPOSApiFp().sposCreateTerminalTransaction(x_api_version, CreateTerminalTransactionRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -9086,7 +9092,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return SoftPOSApiFp().sposFetchTerminal(x_api_version, terminal_phone_no, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -9130,7 +9136,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return SoftPOSApiFp().sposFetchTerminalQRCodes(x_api_version, terminal_phone_no, cf_terminal_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -9174,7 +9180,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return TokenVaultApiFp().pGCustomerDeleteInstrument(x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -9218,7 +9224,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return TokenVaultApiFp().pGCustomerFetchInstrument(x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -9262,7 +9268,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return TokenVaultApiFp().pGCustomerFetchInstruments(x_api_version, customer_id, instrument_type, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -9306,7 +9312,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.1");
+                scope.setExtra('release', "3.0.5");
             });
         try {
             return TokenVaultApiFp().pGCustomerInstrumentsFetchCryptogram(x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
