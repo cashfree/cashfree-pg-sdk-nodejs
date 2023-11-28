@@ -11,6 +11,10 @@ var orderId = ''
 var paymentSessionId = ''
 var orderAmount = 3000;
 
+console.log('X client-id: ' + process.env.CLIENT_ID)
+console.log('X client-secret: ' + process.env.SECRET_KEY)
+
+
 function getCurrentTimeStamp() {
     var today = new Date();
     var date = today.getFullYear() + (today.getMonth() + 1) + today.getDate();
