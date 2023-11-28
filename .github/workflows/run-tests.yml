@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: '21.x'
       - name: Install dependencies
-        run: npm install
+        run: npm install && npm install coveralls --save-dev
       - name: Run Tests
         run: CLIENT_ID=$PG_CLIENT_ID SECRET_KEY=$PG_CLIENT_SECRET npm test && yarn report && yarn coveralls
         env:
