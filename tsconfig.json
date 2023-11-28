@@ -14,7 +14,7 @@
   "ignoreDeprecations": "5.0",
   "exclude": [
     "dist",
-    "tests",
-    "node_modules"
+    "node_modules",
+    "tests"
   ]
 }

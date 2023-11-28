@@ -29,7 +29,7 @@ Cashfree.XClientSecret = "<x-client-secret>";
 Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
 ```
 
-Generate your API keys (x-client-id , x-secret-key) from [Cashfree Merchant Dashboard](https://merchant.cashfree.com/merchants/login)
+Generate your API keys (x-client-id , x-client-secret) from [Cashfree Merchant Dashboard](https://merchant.cashfree.com/merchants/login)
 
 ### Basic Usage
 Create Order

@@ -1,6 +1,6 @@
 {
   "name": "cashfree-pg",
-  "version": "3.0.1",
+  "version": "3.0.5",
   "description": "Cashfree client for cashfree-pg",
   "author": "Cashfree Payments",
   "repository": {
@@ -14,19 +14,18 @@
     "openapi-generator",
     "cashfree-pg"
   ],
-  "license": "MIT",
+  "license": "Apache",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "module": "./dist/esm/index.js",
   "sideEffects": false,
   "scripts": {
     "build": "tsc && tsc -p tsconfig.esm.json",
-    "prepare": "npm run build",
-    "test": "jest --coverage"
+    "prepare": "npm run build"
   },
   "dependencies": {
-    "@sentry/node": "^7.73.0",
-    "axios": "1.5.1"
+    "axios": "1.5.1",
+    "@sentry/node": "^7.73.0"
   },
   "devDependencies": {
     "@types/chai": "^4.3.10",
