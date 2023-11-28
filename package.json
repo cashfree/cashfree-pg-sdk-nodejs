@@ -22,8 +22,12 @@
   "scripts": {
     "build": "tsc && tsc -p tsconfig.esm.json",
     "prepare": "npm run build",
-    "test": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls"
+    "test": "jest --coverage"
   },
+  "jest": {
+   "coverageDirectory": "./coverage/",
+   "collectCoverage": true
+ },
   "dependencies": {
     "axios": "1.5.1",
     "@sentry/node": "^7.73.0"
