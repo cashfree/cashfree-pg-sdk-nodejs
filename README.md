@@ -52,4 +52,4 @@ Cashfree.PGFetchOrder("2022-09-01", "<order_id>").then((response) => {
 
 ## Licence
 
-Apache Licensed. See [LICENSE.md](LICENSE.md) for more details
+Apache Licensed. See [LICENSE.md](LICENSE.md) for More Details
