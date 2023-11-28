@@ -44,7 +44,7 @@ it('Create Order Test', function (done) {
 
     Cashfree.PGCreateOrder("2022-09-01", request).then((response) => {
         assert.equal(response.data.order_amount, request.order_amount, "Amount is not matching")
-        assert.equal(response.data.order_currency, "INRs", "Currency is not matching")
+        assert.equal(response.data.order_currency, "INR", "Currency is not matching")
         assert.equal(response.data.customer_details?.customer_id, response.data.customer_details?.customer_id, "Customer id is not matching")
         assert.equal(response.data.customer_details?.customer_name, response.data.customer_details?.customer_name, "Customer name is not matching")
         assert.equal(response.data.customer_details?.customer_email, response.data.customer_details?.customer_email, "Customer email is not matching")
