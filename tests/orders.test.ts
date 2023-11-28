@@ -24,8 +24,8 @@ it('Create Order Test', function (done) {
     Cashfree.XClientId = process.env.CLIENT_ID;
     Cashfree.XClientSecret = process.env.SECRET_KEY;
     Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
-    console.log("process.env.CLIENT_ID");
-    console.log(process.env.CLIENT_ID);
+    console.log("process.env.PG_CLIENT_ID");
+    console.log(process.env.PG_CLIENT_ID);
     var blah = 'foo';
     var request = {
         "order_amount": orderAmount,
