@@ -20,8 +20,11 @@ jobs:
         run: npm install && npm install coveralls --save-dev
       - name: Run Tests
         run: CLIENT_ID=$PG_CLIENT_ID SECRET_KEY=$PG_CLIENT_SECRET npm test && yarn report && yarn coveralls
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.TOKEN_GITHUB }}
         env:
           PG_CLIENT_ID: ${{ secrets.XCLIENTIDSANDBOX }}
           PG_CLIENT_SECRET: ${{ secrets.XCLIENTSECRETSANDBOX }}
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
