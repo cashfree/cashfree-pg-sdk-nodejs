@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: npm install && npm install coveralls --save-dev
       - name: Run Tests
-        run: CLIENT_ID=$PG_CLIENT_ID SECRET_KEY=$PG_CLIENT_SECRET npm test
+        run: CLIENT_ID=$PG_CLIENT_ID SECRET_KEY=$PG_CLIENT_SECRET npm test && ls && cat coverage/lcov-report/lcov.info | npx coveralls
         env:
           PG_CLIENT_ID: ${{ secrets.XCLIENTIDSANDBOX }}
           PG_CLIENT_SECRET: ${{ secrets.XCLIENTSECRETSANDBOX }}
