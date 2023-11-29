@@ -569,6 +569,23 @@ it('Fetch Eligibility Payment Methods Test', function (done) {
     });
 });
 
+it('Fetch Eligibility Payment Methods using Order Id Test', function (done) {
+    Cashfree.XClientId = process.env.CLIENT_ID;
+    Cashfree.XClientSecret = process.env.SECRET_KEY;
+    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
+    var request = {
+        "queries": {
+            "order_id": "order_4175412YWdHafgWZLFYcyTKkzIqu9QJvI"
+        }
+    }
+    Cashfree.PGEligibilityFetchPaymentMethods("2022-09-01", request).then((response) => {
+        done()
+    }).catch((error) => {
+        assert.fail("Fail error message")
+        done()
+    });
+});
+
 it('Fetch Eligibility Payment Methods With invalid amount Test', function (done) {
     Cashfree.XClientId = process.env.CLIENT_ID;
     Cashfree.XClientSecret = process.env.SECRET_KEY;
