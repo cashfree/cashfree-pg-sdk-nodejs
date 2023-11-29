@@ -3,6 +3,10 @@ import { expect, jest, test } from '@jest/globals';
 import { Cashfree, UpiChannelEnum, AppProviderEnum, CardChannelEnum, OfferTncOfferTncTypeEnum, OfferType, DiscountDetailsDiscountTypeEnum } from "../api";
 const { execSync } = require('child_process');
 
+Cashfree.XClientId = process.env.CLIENT_ID;
+Cashfree.XClientSecret = process.env.SECRET_KEY;
+Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
+
 var orderId = ''
 var paymentSessionId = ''
 var orderAmount = 3000;
@@ -21,9 +25,6 @@ function setOrderDetails(order_id: string, payment_session_id: string) {
 }
 
 it('Create Order Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     console.log("process.env.PG_CLIENT_ID");
     console.log(process.env.PG_CLIENT_ID);
     var blah = 'foo';
@@ -62,9 +63,6 @@ it('Create Order Test', function (done) {
 
 
 it('Create Order with Invalid Currency Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var currency = 'INaR';
     var request = {
         "order_amount": orderAmount,
@@ -95,9 +93,6 @@ it('Create Order with Invalid Currency Test', function (done) {
 });
 
 it('Create Order with Invalid Amount Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var request = {
         "order_amount": -3005,
         "order_currency": "INR",
@@ -127,9 +122,6 @@ it('Create Order with Invalid Amount Test', function (done) {
 });
 
 it('Create Order with Empty Customer Phone Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var request = {
         "order_amount": orderAmount,
         "order_currency": "INR",
@@ -159,9 +151,6 @@ it('Create Order with Empty Customer Phone Test', function (done) {
 });
 
 it('Order Pay Net Banking Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var request = {
         "payment_session_id": paymentSessionId,
         "payment_method": {
@@ -183,9 +172,6 @@ it('Order Pay Net Banking Test', function (done) {
 });
 
 it('Order Pay Card payment Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var request = {
         "payment_session_id": paymentSessionId,
         "payment_method": {
@@ -211,9 +197,6 @@ it('Order Pay Card payment Test', function (done) {
 });
 
 it('Order Pay Card payment with empty cvv Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var request = {
         "payment_session_id": paymentSessionId,
         "payment_method": {
@@ -261,9 +244,6 @@ it('Order Pay Wallet Test', function (done) {
 });
 
 it('Get Order Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     Cashfree.PGFetchOrder("2022-09-01", "order_4175412YWdHafgWZLFYcyTKkzIqu9QJvI").then((response) => {
         assert.equal(response.data.order_currency, "INR")
         done()
@@ -275,9 +255,6 @@ it('Get Order Test', function (done) {
 });
 
 it('Get Payments For an Order Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     Cashfree.PGOrderFetchPayments("2022-09-01", "order_4175412YWdHafgWZLFYcyTKkzIqu9QJvI").then((response) => {
         done()
     }).catch((error) => {
@@ -289,9 +266,6 @@ it('Get Payments For an Order Test', function (done) {
 });
 
 it('Create Refund Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var request = {
         "refund_amount": 1,
         "refund_id": "Refund_id_" + getCurrentTimeStamp(),
@@ -307,9 +281,6 @@ it('Create Refund Test', function (done) {
 });
 
 it('Create Refund with negative refund amount Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var request = {
         "refund_amount": -1,
         "refund_id": "Refund_id_" + getCurrentTimeStamp(),
@@ -328,9 +299,6 @@ it('Create Refund with negative refund amount Test', function (done) {
 });
 
 it('Create Refund with invalid order id Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var request = {
         "refund_amount": 1,
         "refund_id": "Refund_id_" + getCurrentTimeStamp(),
@@ -349,9 +317,6 @@ it('Create Refund with invalid order id Test', function (done) {
 });
 
 it('Fetch All Refunds Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var order_id = "Order_" + getCurrentTimeStamp()
     Cashfree.PGOrderFetchRefunds("2022-09-01", "order_4175412YWdHafgWZLFYcyTKkzIqu9QJvI").then((response) => {
         done()
@@ -363,9 +328,6 @@ it('Fetch All Refunds Test', function (done) {
 });
 
 it('Fetch Refund Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var order_id = "Order_" + getCurrentTimeStamp()
     Cashfree.PGOrderFetchRefund("2022-09-01", "order_4175412YWdHafgWZLFYcyTKkzIqu9QJvI", "Refund_id_2060112241827").then((response) => {
         done()
@@ -376,12 +338,7 @@ it('Fetch Refund Test', function (done) {
     });
 });
 
-
-
 it('Create Payment Link Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var link_id = "Automated_Test_" + getCurrentTimeStamp()
     var request = {
         "link_amount": 1,
@@ -421,9 +378,6 @@ it('Create Payment Link Test', function (done) {
 
 
 it('Fetch Payment Link Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var link_id = "Automated_Test_188181"
     Cashfree.PGFetchLink("2022-09-01", link_id).then((response) => {
         done()
@@ -435,9 +389,6 @@ it('Fetch Payment Link Test', function (done) {
 });
 
 it('Cancel Payment Link Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var link_id = "Automated_Test_188181"
     Cashfree.PGCancelLink("2022-09-01", link_id).then((response) => {
         assert.fail("Fail error message")
@@ -451,9 +402,6 @@ it('Cancel Payment Link Test', function (done) {
 });
 
 it('Fetch Payment Link with Invalid link id Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var link_id = "jahha" + getCurrentTimeStamp()
     Cashfree.PGFetchLink("2022-09-01", link_id).then((response) => {
         assert.fail("Fail error message")
@@ -467,9 +415,6 @@ it('Fetch Payment Link with Invalid link id Test', function (done) {
 });
 
 it('Fetch Link Orders Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var link_id = "Automated_Test_188181"
     Cashfree.PGLinkFetchOrders("2022-09-01", link_id).then((response) => {
         done()
@@ -481,9 +426,6 @@ it('Fetch Link Orders Test', function (done) {
 });
 
 it('Fetch Link Orders with invalid link id Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var link_id = "jajqq"
     Cashfree.PGLinkFetchOrders("2022-09-01", link_id).then((response) => {
         assert.fail("Fail error message")
@@ -498,9 +440,6 @@ it('Fetch Link Orders with invalid link id Test', function (done) {
 
 
 it('Create Offer Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var request = {
         "offer_meta": {
             "offer_title": "bat mann",
@@ -541,9 +480,6 @@ it('Create Offer Test', function (done) {
 });
 
 it('Get Offer Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     Cashfree.PGFetchOffer("2022-09-01", "a189050b-8f7e-4f1c-be5f-ba4bf58bdd6b").then((response) => {
         done()
     }).catch((error) => {
@@ -553,9 +489,6 @@ it('Get Offer Test', function (done) {
 });
 
 it('Fetch Eligibility Payment Methods Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var request = {
         "queries": {
             "amount": 100
@@ -569,10 +502,21 @@ it('Fetch Eligibility Payment Methods Test', function (done) {
     });
 });
 
+it('Fetch Eligibility Payment Methods using Order Id Test', function (done) {
+    var request = {
+        "queries": {
+            "order_id": "order_4175412YWdHafgWZLFYcyTKkzIqu9QJvI"
+        }
+    }
+    Cashfree.PGEligibilityFetchPaymentMethods("2022-09-01", request).then((response) => {
+        done()
+    }).catch((error) => {
+        assert.fail("Fail error message")
+        done()
+    });
+});
+
 it('Fetch Eligibility Payment Methods With invalid amount Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var request = {
         "queries": {
             "amount": -100
@@ -590,9 +534,6 @@ it('Fetch Eligibility Payment Methods With invalid amount Test', function (done)
 });
 
 it('Settlement Reconcilation Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var request = {
         "pagination": {
             "limit": 10
@@ -612,9 +553,6 @@ it('Settlement Reconcilation Test', function (done) {
 
 
 it('PG Reconcilation Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var request = {
         "pagination": {
             "limit": 10
@@ -633,9 +571,6 @@ it('PG Reconcilation Test', function (done) {
 });
 
 it('Get Instrument By Id Test', function (done) {
-    Cashfree.XClientId = process.env.CLIENT_ID;
-    Cashfree.XClientSecret = process.env.SECRET_KEY;
-    Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
     var instrumemtId = "9f9477b7-61ea-4baa-b878-a7e63d978034"
     var customerId = "iij"
     Cashfree.PGCustomerFetchInstrument("2022-09-01", customerId, instrumemtId).then((response) => {
