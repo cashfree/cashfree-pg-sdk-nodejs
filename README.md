@@ -11,6 +11,8 @@ Cashfree's PG API Documentation - https://docs.cashfree.com/reference/pg-new-api
 
 Learn and understand payment gateway workflows at Cashfree Payments [here](https://docs.cashfree.com/docs/payment-gateway)
 
+Try out our interactive guides at [Cashfree Dev Studio](https://www.cashfree.com/devstudio) !
+
 ## Getting Started
 
 ### Installation
@@ -32,6 +34,18 @@ Generate your API keys (x-client-id , x-client-secret) from [Cashfree Merchant D
 ### Basic Usage
 Create Order
 ```javascript
+var request = {
+    "order_amount": 1,
+    "order_currency": "INR",
+    "order_id": "order_34692745",
+    "customer_details": {
+        "customer_id": "walterwNrcMi",
+        "customer_phone": "9999999999"
+    },
+    "order_meta": {
+        "return_url": "https://www.cashfree.com/devstudio/preview/pg/web/checkout?order_id={order_id}"
+    }
+};
 Cashfree.PGCreateOrder("2022-09-01", request).then((response) => {
     console.log('Order fetched successfully:',response.data)
 }).catch((error) => {
