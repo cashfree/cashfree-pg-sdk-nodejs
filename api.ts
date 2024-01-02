@@ -876,7 +876,7 @@ export interface CreateOrderRequest {
      * @type {string}
      * @memberof CreateOrderRequest
      */
-    'order_id'?: string | null;
+    'order_id'?: string;
     /**
      * Bill amount for the order. Provide upto two decimals. 10.15 means Rs 10 and 15 paisa
      * @type {number}
@@ -897,16 +897,16 @@ export interface CreateOrderRequest {
     'customer_details': CustomerDetails;
     /**
      * 
-     * @type {CreateOrderRequestTerminal}
+     * @type {TerminalDetails}
      * @memberof CreateOrderRequest
      */
-    'terminal'?: CreateOrderRequestTerminal | null;
+    'terminal'?: TerminalDetails;
     /**
      * 
-     * @type {CreateOrderRequestOrderMeta}
+     * @type {OrderMeta}
      * @memberof CreateOrderRequest
      */
-    'order_meta'?: CreateOrderRequestOrderMeta | null;
+    'order_meta'?: OrderMeta;
     /**
      * Time after which the order expires. Customers will not be able to make the payment beyond the time specified here. We store timestamps in IST, but you can provide them in a valid ISO 8601 time format. Example 2021-07-02T10:20:12+05:30 for IST, 2021-07-02T10:20:12Z for UTC
      * @type {string}
@@ -918,111 +918,19 @@ export interface CreateOrderRequest {
      * @type {string}
      * @memberof CreateOrderRequest
      */
-    'order_note'?: string | null;
+    'order_note'?: string;
     /**
      * Custom Tags in thr form of {\"key\":\"value\"} which can be passed for an order. A maximum of 10 tags can be added
      * @type {{ [key: string]: string; }}
      * @memberof CreateOrderRequest
      */
-    'order_tags'?: { [key: string]: string; } | null;
+    'order_tags'?: { [key: string]: string; };
     /**
      * If you have Easy split enabled in your Cashfree account then you can use this option to split the order amount.
      * @type {Array<VendorSplit>}
      * @memberof CreateOrderRequest
      */
-    'order_splits'?: Array<VendorSplit> | null;
-}
-/**
- * 
- * @export
- * @interface CreateOrderRequestOrderMeta
- */
-export interface CreateOrderRequestOrderMeta {
-    /**
-     * The URL to which user will be redirected to after the payment on bank OTP page. Maximum length: 250. The return_url must contain placeholder {order_id}. When redirecting the customer back to the return url from the bank’s OTP page, Cashfree will replace this placeholder with the actual value for that order.
-     * @type {string}
-     * @memberof CreateOrderRequestOrderMeta
-     */
-    'return_url'?: string | null;
-    /**
-     * Notification URL for server-server communication. Useful when user\'s connection drops while re-directing. NotifyUrl should be an https URL. Maximum length: 250.
-     * @type {string}
-     * @memberof CreateOrderRequestOrderMeta
-     */
-    'notify_url'?: string | null;
-    /**
-     * Allowed payment modes for this order. Pass comma-separated values among following options - \"cc\", \"dc\", \"ccc\", \"ppc\",\"nb\",\"upi\",\"paypal\",\"app\",\"paylater\",\"cardlessemi\",\"dcemi\",\"ccemi\",\"banktransfer\". Leave it blank to show all available payment methods
-     * @type {any}
-     * @memberof CreateOrderRequestOrderMeta
-     */
-    'payment_methods'?: any | null;
-}
-/**
- * 
- * @export
- * @interface CreateOrderRequestTerminal
- */
-export interface CreateOrderRequestTerminal {
-    /**
-     * date time at which terminal is added
-     * @type {string}
-     * @memberof CreateOrderRequestTerminal
-     */
-    'added_on'?: string;
-    /**
-     * cashfree terminal id
-     * @type {number}
-     * @memberof CreateOrderRequestTerminal
-     */
-    'cf_terminal_id'?: number;
-    /**
-     * last instant when this terminal was updated
-     * @type {string}
-     * @memberof CreateOrderRequestTerminal
-     */
-    'last_updated_on'?: string;
-    /**
-     * location of terminal
-     * @type {string}
-     * @memberof CreateOrderRequestTerminal
-     */
-    'terminal_address'?: string;
-    /**
-     * terminal id for merchant reference
-     * @type {string}
-     * @memberof CreateOrderRequestTerminal
-     */
-    'terminal_id': string;
-    /**
-     * name of terminal/agent/storefront
-     * @type {string}
-     * @memberof CreateOrderRequestTerminal
-     */
-    'terminal_name'?: string;
-    /**
-     * note given by merchant while creating the terminal
-     * @type {string}
-     * @memberof CreateOrderRequestTerminal
-     */
-    'terminal_note'?: string;
-    /**
-     * mobile num of the terminal/agent/storefront
-     * @type {string}
-     * @memberof CreateOrderRequestTerminal
-     */
-    'terminal_phone_no': string;
-    /**
-     * status of terminal active/inactive
-     * @type {string}
-     * @memberof CreateOrderRequestTerminal
-     */
-    'terminal_status'?: string;
-    /**
-     * To identify the type of terminal product in use, in this case it is SPOS.
-     * @type {string}
-     * @memberof CreateOrderRequestTerminal
-     */
-    'terminal_type': string;
+    'order_splits'?: Array<VendorSplit>;
 }
 /**
  * Request body to create a terminal
@@ -1189,7 +1097,7 @@ export interface CustomerDetails {
      * @type {string}
      * @memberof CustomerDetails
      */
-    'customer_email'?: string | null;
+    'customer_email'?: string;
     /**
      * Customer phone number.
      * @type {string}
@@ -1201,25 +1109,25 @@ export interface CustomerDetails {
      * @type {string}
      * @memberof CustomerDetails
      */
-    'customer_name'?: string | null;
+    'customer_name'?: string;
     /**
      * Customer bank account. Required if you want to do a bank account check (TPV)
      * @type {string}
      * @memberof CustomerDetails
      */
-    'customer_bank_account_number'?: string | null;
+    'customer_bank_account_number'?: string;
     /**
      * Customer bank IFSC. Required if you want to do a bank account check (TPV)
      * @type {string}
      * @memberof CustomerDetails
      */
-    'customer_bank_ifsc'?: string | null;
+    'customer_bank_ifsc'?: string;
     /**
      * Customer bank code. Required for net banking payments, if you want to do a bank account check (TPV)
      * @type {number}
      * @memberof CustomerDetails
      */
-    'customer_bank_code'?: number | null;
+    'customer_bank_code'?: number;
 }
 /**
  * Details of the customer for whom eligibility is being checked.
@@ -1641,7 +1549,7 @@ export interface FetchReconRequestPagination {
      * @type {string}
      * @memberof FetchReconRequestPagination
      */
-    'cursor'?: string | null;
+    'cursor'?: string;
 }
 /**
  * Request to fetch settlement
@@ -2582,7 +2490,7 @@ export interface OrderEntity {
      * @type {string}
      * @memberof OrderEntity
      */
-    'order_note'?: string | null;
+    'order_note'?: string;
     /**
      * When the order was created at cashfree\'s server
      * @type {string}
@@ -2630,7 +2538,7 @@ export interface OrderEntity {
      * @type {{ [key: string]: string; }}
      * @memberof OrderEntity
      */
-    'order_tags'?: { [key: string]: string; } | null;
+    'order_tags'?: { [key: string]: string; };
 }
 /**
  * Optional meta details to control how the customer pays and how payment journey completes
@@ -2643,19 +2551,19 @@ export interface OrderMeta {
      * @type {string}
      * @memberof OrderMeta
      */
-    'return_url'?: string | null;
+    'return_url'?: string;
     /**
      * Notification URL for server-server communication. Useful when user\'s connection drops while re-directing. NotifyUrl should be an https URL. Maximum length: 250.
      * @type {string}
      * @memberof OrderMeta
      */
-    'notify_url'?: string | null;
+    'notify_url'?: string;
     /**
      * Allowed payment modes for this order. Pass comma-separated values among following options - \"cc\", \"dc\", \"ccc\", \"ppc\",\"nb\",\"upi\",\"paypal\",\"app\",\"paylater\",\"cardlessemi\",\"dcemi\",\"ccemi\",\"banktransfer\". Leave it blank to show all available payment methods
      * @type {any}
      * @memberof OrderMeta
      */
-    'payment_methods'?: any | null;
+    'payment_methods'?: any;
 }
 /**
  * the data object pay api
@@ -2668,25 +2576,25 @@ export interface OrderPayData {
      * @type {string}
      * @memberof OrderPayData
      */
-    'url'?: string | null;
+    'url'?: string;
     /**
      * 
      * @type {object}
      * @memberof OrderPayData
      */
-    'payload'?: object | null;
+    'payload'?: object;
     /**
      * 
      * @type {string}
      * @memberof OrderPayData
      */
-    'content_type'?: string | null;
+    'content_type'?: string;
     /**
      * 
      * @type {string}
      * @memberof OrderPayData
      */
-    'method'?: string | null;
+    'method'?: string;
 }
 /**
  * Order Pay response once you create a transaction for that order
@@ -2979,7 +2887,7 @@ export interface PaymentEntity {
      * @type {AuthorizationInPaymentsEntity}
      * @memberof PaymentEntity
      */
-    'authorization'?: AuthorizationInPaymentsEntity | null;
+    'authorization'?: AuthorizationInPaymentsEntity;
     /**
      * 
      * @type {PaymentMethodInPaymentsEntity}
@@ -3333,7 +3241,7 @@ export interface ReconEntity {
      * @type {string}
      * @memberof ReconEntity
      */
-    'cursor'?: string | null;
+    'cursor'?: string;
     /**
      * Number of settlements you want to fetch in the next iteration.
      * @type {number}
@@ -3382,13 +3290,13 @@ export interface ReconEntityDataInner {
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'sale_type'?: string | null;
+    'sale_type'?: string;
     /**
      * Status of the event. Example - SUCCESS, FAILED, PENDING, CANCELLED.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'event_status'?: string | null;
+    'event_status'?: string;
     /**
      * Recon
      * @type {string}
@@ -3406,235 +3314,235 @@ export interface ReconEntityDataInner {
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'event_currency'?: string | null;
+    'event_currency'?: string;
     /**
      * Unique order ID. Alphanumeric and only \'-\' and \'_\' allowed.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'order_id'?: string | null;
+    'order_id'?: string;
     /**
      * The amount which was passed at the order creation time.
      * @type {number}
      * @memberof ReconEntityDataInner
      */
-    'order_amount'?: number | null;
+    'order_amount'?: number;
     /**
      * Customer phone number.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'customer_phone'?: string | null;
+    'customer_phone'?: string;
     /**
      * Customer email.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'customer_email'?: string | null;
+    'customer_email'?: string;
     /**
      * Customer name.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'customer_name'?: string | null;
+    'customer_name'?: string;
     /**
      * Payment amount captured.
      * @type {number}
      * @memberof ReconEntityDataInner
      */
-    'payment_amount'?: number | null;
+    'payment_amount'?: number;
     /**
      * Unique transaction reference number of the payment.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'payment_utr'?: string | null;
+    'payment_utr'?: string;
     /**
      * Date and time when the payment was initiated.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'payment_time'?: string | null;
+    'payment_time'?: string;
     /**
      * Service charge applicable for the payment.
      * @type {number}
      * @memberof ReconEntityDataInner
      */
-    'payment_service_charge'?: number | null;
+    'payment_service_charge'?: number;
     /**
      * Service tax applicable on the payment.
      * @type {number}
      * @memberof ReconEntityDataInner
      */
-    'payment_service_tax'?: number | null;
+    'payment_service_tax'?: number;
     /**
      * Cashfree Payments unique ID to identify a payment.
      * @type {number}
      * @memberof ReconEntityDataInner
      */
-    'cf_payment_id'?: number | null;
+    'cf_payment_id'?: number;
     /**
      * Unique ID to identify the settlement.
      * @type {number}
      * @memberof ReconEntityDataInner
      */
-    'cf_settlement_id'?: number | null;
+    'cf_settlement_id'?: number;
     /**
      * Date and time when the settlement was processed.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'settlement_date'?: string | null;
+    'settlement_date'?: string;
     /**
      * Unique transaction reference number of the settlement.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'settlement_utr'?: string | null;
+    'settlement_utr'?: string;
     /**
      * Service charge that is applicable for splitting the payment.
      * @type {number}
      * @memberof ReconEntityDataInner
      */
-    'split_service_charge'?: number | null;
+    'split_service_charge'?: number;
     /**
      * Service tax applicable for splitting the amount to vendors.
      * @type {number}
      * @memberof ReconEntityDataInner
      */
-    'split_service_tax'?: number | null;
+    'split_service_tax'?: number;
     /**
      * Vendor commission applicable for this transaction.
      * @type {number}
      * @memberof ReconEntityDataInner
      */
-    'vendor_commission'?: number | null;
+    'vendor_commission'?: number;
     /**
      * Specifies whether the dispute was closed in favor of the merchant or customer. /n Possible values - Merchant, Customer
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'closed_in_favor_of'?: string | null;
+    'closed_in_favor_of'?: string;
     /**
      * Date and time when the dispute was resolved.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'dispute_resolved_on'?: string | null;
+    'dispute_resolved_on'?: string;
     /**
      * Category of the dispute - Dispute code and the reason for dispute is shown.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'dispute_category'?: string | null;
+    'dispute_category'?: string;
     /**
      * Note regarding the dispute.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'dispute_note'?: string | null;
+    'dispute_note'?: string;
     /**
      * Date and time when the refund was processed.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'refund_processed_at'?: string | null;
+    'refund_processed_at'?: string;
     /**
      * The bank reference number for the refund.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'refund_arn'?: string | null;
+    'refund_arn'?: string;
     /**
      * A refund note for your reference.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'refund_note'?: string | null;
+    'refund_note'?: string;
     /**
      * An unique ID to associate the refund with.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'refund_id'?: string | null;
+    'refund_id'?: string;
     /**
      * Other adjustment remarks.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'adjustment_remarks'?: string | null;
+    'adjustment_remarks'?: string;
     /**
      * Amount that is adjusted from the settlement amount because of any credit/debit event such as refund, refund_reverse etc.
      * @type {number}
      * @memberof ReconEntityDataInner
      */
-    'adjustment'?: number | null;
+    'adjustment'?: number;
     /**
      * Service tax applicable on the settlement amount.
      * @type {number}
      * @memberof ReconEntityDataInner
      */
-    'service_tax'?: number | null;
+    'service_tax'?: number;
     /**
      * Service charge applicable on the settlement amount.
      * @type {number}
      * @memberof ReconEntityDataInner
      */
-    'service_charge'?: number | null;
+    'service_charge'?: number;
     /**
      * Net amount that is settled after considering the adjustments, settlement charge and tax.
      * @type {number}
      * @memberof ReconEntityDataInner
      */
-    'amount_settled'?: number | null;
+    'amount_settled'?: number;
     /**
      * The start time of the time range of the payments considered for the settlement.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'payment_from'?: string | null;
+    'payment_from'?: string;
     /**
      * The end time of time range of the payments considered for the settlement.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'payment_till'?: string | null;
+    'payment_till'?: string;
     /**
      * Reason for settlement failure.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'reason'?: string | null;
+    'reason'?: string;
     /**
      * Date and time when the settlement was initiated.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'settlement_initiated_on'?: string | null;
+    'settlement_initiated_on'?: string;
     /**
      * Type of settlement. Possible values - Standard, Instant, On demand.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'settlement_type'?: string | null;
+    'settlement_type'?: string;
     /**
      * Settlement charges applicable on the settlement.
      * @type {number}
      * @memberof ReconEntityDataInner
      */
-    'settlement_charge'?: number | null;
+    'settlement_charge'?: number;
     /**
      * Settlement tax applicable on the settlement.
      * @type {number}
      * @memberof ReconEntityDataInner
      */
-    'settlement_tax'?: number | null;
+    'settlement_tax'?: number;
     /**
      * Remarks on the settlement.
      * @type {string}
      * @memberof ReconEntityDataInner
      */
-    'remarks'?: string | null;
+    'remarks'?: string;
 }
 /**
  * The refund entity
@@ -3719,7 +3627,7 @@ export interface RefundEntity {
      * @type {object}
      * @memberof RefundEntity
      */
-    'metadata'?: object | null;
+    'metadata'?: object;
     /**
      * 
      * @type {Array<VendorSplit>}
@@ -3868,7 +3776,7 @@ export interface SavedInstrumentMeta {
      * @type {object}
      * @memberof SavedInstrumentMeta
      */
-    'card_token_details'?: object | null;
+    'card_token_details'?: object;
 }
 /**
  * Settlement entity object
@@ -4656,7 +4564,7 @@ export interface WHorder {
      * @type {{ [key: string]: string; }}
      * @memberof WHorder
      */
-    'order_tags'?: { [key: string]: string; } | null;
+    'order_tags'?: { [key: string]: string; };
 }
 /**
  * 
@@ -4685,7 +4593,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {EligibilityFetchCardlessEMIRequest} EligibilityFetchCardlessEMIRequest Request Body to get eligible cardless emi options for a customer and order
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_idempotency_key?: string, 
@@ -4730,7 +4638,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -4759,7 +4667,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {EligibilityFetchOffersRequest} EligibilityFetchOffersRequest Request Body to get eligible offers for a customer and order
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_idempotency_key?: string, 
@@ -4804,7 +4712,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -4833,7 +4741,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {EligibilityFetchPaylaterRequest} EligibilityFetchPaylaterRequest Request Body to get eligible paylater options for a customer and order
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_idempotency_key?: string, 
@@ -4878,7 +4786,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -4907,7 +4815,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {EligibilityFetchPaymentMethodsRequest} EligibilityFetchPaymentMethodsRequest Request Body to get eligible payment methods for an account and order
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_idempotency_key?: string, 
@@ -4952,7 +4860,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -4990,7 +4898,7 @@ const EligibilityApiFp = function(configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {EligibilityFetchCardlessEMIRequest} EligibilityFetchCardlessEMIRequest Request Body to get eligible cardless emi options for a customer and order
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5008,7 +4916,7 @@ const EligibilityApiFp = function(configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {EligibilityFetchOffersRequest} EligibilityFetchOffersRequest Request Body to get eligible offers for a customer and order
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5026,7 +4934,7 @@ const EligibilityApiFp = function(configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {EligibilityFetchPaylaterRequest} EligibilityFetchPaylaterRequest Request Body to get eligible paylater options for a customer and order
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5044,7 +4952,7 @@ const EligibilityApiFp = function(configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {EligibilityFetchPaymentMethodsRequest} EligibilityFetchPaymentMethodsRequest Request Body to get eligible payment methods for an account and order
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5081,7 +4989,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {CreateOfferRequest} CreateOfferRequest Request body to create an offer at Cashfree
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_idempotency_key?: string, 
@@ -5126,7 +5034,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5155,7 +5063,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} offer_id The offer ID for which you want to view the offer details.
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_idempotency_key?: string, 
@@ -5199,7 +5107,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5236,7 +5144,7 @@ const OffersApiFp = function(configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {CreateOfferRequest} CreateOfferRequest Request body to create an offer at Cashfree
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5254,7 +5162,7 @@ const OffersApiFp = function(configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} offer_id The offer ID for which you want to view the offer details.
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5291,7 +5199,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {CreateOrderRequest} CreateOrderRequest Request body to create an order at cashfree
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_idempotency_key?: string, 
@@ -5336,7 +5244,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5365,7 +5273,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} order_id The id which uniquely identifies your order
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_idempotency_key?: string, 
@@ -5409,7 +5317,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5446,7 +5354,7 @@ const OrdersApiFp = function(configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {CreateOrderRequest} CreateOrderRequest Request body to create an order at cashfree
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5464,7 +5372,7 @@ const OrdersApiFp = function(configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} order_id The id which uniquely identifies your order
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5502,7 +5410,7 @@ const PGReconciliationApiAxiosParamCreator = function (configuration?: Configura
          * @param {FetchReconRequest} FetchReconRequest Request Body for the reconciliation
          * @param {string} [Content_Type] application/json
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {string} [Accept] application/json
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5548,7 +5456,7 @@ const PGReconciliationApiAxiosParamCreator = function (configuration?: Configura
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5587,7 +5495,7 @@ const PGReconciliationApiFp = function(configuration?: Configuration) {
          * @param {FetchReconRequest} FetchReconRequest Request Body for the reconciliation
          * @param {string} [Content_Type] application/json
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {string} [Accept] application/json
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5625,7 +5533,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} link_id The payment link ID for which you want to view the details.
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_idempotency_key?: string, 
@@ -5669,7 +5577,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5697,7 +5605,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {CreateLinkRequest} CreateLinkRequest Request Body to Create Payment Links
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_idempotency_key?: string, 
@@ -5742,7 +5650,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5771,7 +5679,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} link_id The payment link ID for which you want to view the details.
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_idempotency_key?: string, 
@@ -5815,7 +5723,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5843,7 +5751,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} link_id The payment link ID for which you want to view the details.
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_idempotency_key?: string, 
@@ -5887,7 +5795,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5924,7 +5832,7 @@ const PaymentLinksApiFp = function(configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} link_id The payment link ID for which you want to view the details.
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5942,7 +5850,7 @@ const PaymentLinksApiFp = function(configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {CreateLinkRequest} CreateLinkRequest Request Body to Create Payment Links
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5960,7 +5868,7 @@ const PaymentLinksApiFp = function(configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} link_id The payment link ID for which you want to view the details.
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -5978,7 +5886,7 @@ const PaymentLinksApiFp = function(configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} link_id The payment link ID for which you want to view the details.
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6016,7 +5924,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
          * @param {string} order_id The id which uniquely identifies your order
          * @param {AuthorizeOrderRequest} AuthorizeOrderRequest Request to Capture or Void Transactions
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_request_id?: string, 
@@ -6064,7 +5972,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6094,7 +6002,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
          * @param {string} cf_payment_id The Cashfree payment or transaction ID.
          * @param {OrderAuthenticatePaymentRequest} OrderAuthenticatePaymentRequest Request body to submit/resend headless OTP. To use this API make sure you have headless OTP enabled for your account
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_request_id?: string, 
@@ -6127,7 +6035,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6157,7 +6065,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
          * @param {string} order_id The id which uniquely identifies your order
          * @param {string} cf_payment_id The Cashfree payment or transaction ID.
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_request_id?: string, 
@@ -6204,7 +6112,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6232,7 +6140,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} order_id The id which uniquely identifies your order
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_idempotency_key?: string, 
@@ -6276,7 +6184,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6304,7 +6212,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {PayOrderRequest} PayOrderRequest Request body to create a transaction at cashfree using &#x60;payment_session_id&#x60;
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_idempotency_key?: string, 
@@ -6334,7 +6242,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6373,7 +6281,7 @@ const PaymentsApiFp = function(configuration?: Configuration) {
          * @param {string} order_id The id which uniquely identifies your order
          * @param {AuthorizeOrderRequest} AuthorizeOrderRequest Request to Capture or Void Transactions
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6392,7 +6300,7 @@ const PaymentsApiFp = function(configuration?: Configuration) {
          * @param {string} cf_payment_id The Cashfree payment or transaction ID.
          * @param {OrderAuthenticatePaymentRequest} OrderAuthenticatePaymentRequest Request body to submit/resend headless OTP. To use this API make sure you have headless OTP enabled for your account
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6411,7 +6319,7 @@ const PaymentsApiFp = function(configuration?: Configuration) {
          * @param {string} order_id The id which uniquely identifies your order
          * @param {string} cf_payment_id The Cashfree payment or transaction ID.
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6429,7 +6337,7 @@ const PaymentsApiFp = function(configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} order_id The id which uniquely identifies your order
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6447,7 +6355,7 @@ const PaymentsApiFp = function(configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {PayOrderRequest} PayOrderRequest Request body to create a transaction at cashfree using &#x60;payment_session_id&#x60;
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6485,7 +6393,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
          * @param {string} order_id The id which uniquely identifies your order
          * @param {OrderCreateRefundRequest} OrderCreateRefundRequest Request Body to Create Refunds
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_request_id?: string, 
@@ -6533,7 +6441,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6563,7 +6471,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
          * @param {string} order_id The id which uniquely identifies your order
          * @param {string} refund_id Refund Id of the refund you want to fetch.
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_request_id?: string, 
@@ -6610,7 +6518,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6638,7 +6546,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} order_id The id which uniquely identifies your order
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_idempotency_key?: string, 
@@ -6682,7 +6590,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6720,7 +6628,7 @@ const RefundsApiFp = function(configuration?: Configuration) {
          * @param {string} order_id The id which uniquely identifies your order
          * @param {OrderCreateRefundRequest} OrderCreateRefundRequest Request Body to Create Refunds
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6739,7 +6647,7 @@ const RefundsApiFp = function(configuration?: Configuration) {
          * @param {string} order_id The id which uniquely identifies your order
          * @param {string} refund_id Refund Id of the refund you want to fetch.
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6757,7 +6665,7 @@ const RefundsApiFp = function(configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} order_id The id which uniquely identifies your order
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -6795,7 +6703,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
          * @param {FetchSettlementsRequest} FetchSettlementsRequest Request Body to get the settlements
          * @param {string} [Content_Type] application/json
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {string} [Accept] application/json
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6841,7 +6749,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6871,7 +6779,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
          * @param {SettlementFetchReconRequest} SettlementFetchReconRequest Request Body for the settlement reconciliation
          * @param {string} [Content_Type] application/json
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {string} [Accept] application/json
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6917,7 +6825,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6956,7 +6864,7 @@ const SettlementReconciliationApiFp = function(configuration?: Configuration) {
          * @param {FetchSettlementsRequest} FetchSettlementsRequest Request Body to get the settlements
          * @param {string} [Content_Type] application/json
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {string} [Accept] application/json
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6976,7 +6884,7 @@ const SettlementReconciliationApiFp = function(configuration?: Configuration) {
          * @param {SettlementFetchReconRequest} SettlementFetchReconRequest Request Body for the settlement reconciliation
          * @param {string} [Content_Type] application/json
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {string} [Accept] application/json
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -7014,7 +6922,7 @@ const SettlementsApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} order_id The id which uniquely identifies your order
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_idempotency_key?: string, 
@@ -7058,7 +6966,7 @@ const SettlementsApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7095,7 +7003,7 @@ const SettlementsApiFp = function(configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} order_id The id which uniquely identifies your order
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7132,7 +7040,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {CreateTerminalRequest} CreateTerminalRequest Request Body to Create Terminal for SPOS
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_idempotency_key?: string, 
@@ -7177,7 +7085,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7206,7 +7114,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {CreateTerminalTransactionRequest} CreateTerminalTransactionRequest Request body to create a terminal transaction
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_idempotency_key?: string, 
@@ -7251,7 +7159,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7280,7 +7188,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} terminal_phone_no The terminal for which you want to view the order details.
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_idempotency_key?: string, 
@@ -7324,7 +7232,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7353,7 +7261,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
          * @param {string} terminal_phone_no Phone number assigned to the terminal. Required if you are not providing the cf_terminal_id in the request.
          * @param {string} cf_terminal_id Cashfree terminal id for which you want to get staticQRs. Required if you are not providing the terminal_phone_number in the request.
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_request_id?: string, 
@@ -7406,7 +7314,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7443,7 +7351,7 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {CreateTerminalRequest} CreateTerminalRequest Request Body to Create Terminal for SPOS
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7461,7 +7369,7 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {CreateTerminalTransactionRequest} CreateTerminalTransactionRequest Request body to create a terminal transaction
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7479,7 +7387,7 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} terminal_phone_no The terminal for which you want to view the order details.
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7498,7 +7406,7 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
          * @param {string} terminal_phone_no Phone number assigned to the terminal. Required if you are not providing the cf_terminal_id in the request.
          * @param {string} cf_terminal_id Cashfree terminal id for which you want to get staticQRs. Required if you are not providing the terminal_phone_number in the request.
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7536,7 +7444,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
          * @param {string} customer_id Your Customer ID that you had sent during create order API &#x60;POST/orders&#x60;
          * @param {string} instrument_id The instrument_id which needs to be deleted
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_request_id?: string, 
@@ -7583,7 +7491,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7612,7 +7520,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
          * @param {string} customer_id Your Customer ID that you had sent during create order API &#x60;POST/orders&#x60;
          * @param {string} instrument_id The instrument_id of the saved instrument which needs to be queried
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_request_id?: string, 
@@ -7659,7 +7567,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7688,7 +7596,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
          * @param {string} customer_id Your Customer ID that you had sent during create order API &#x60;POST/orders&#x60;
          * @param {PGCustomerFetchInstrumentsInstrumentTypeEnum} instrument_type Payment mode or type of saved instrument 
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_request_id?: string, 
@@ -7738,7 +7646,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7767,7 +7675,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
          * @param {string} customer_id Your Customer ID that you had sent during create order API &#x60;POST/orders&#x60;
          * @param {string} instrument_id The instrument_id of the saved card instrument which needs to be queried
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_request_id?: string, 
@@ -7814,7 +7722,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.0.8';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7852,7 +7760,7 @@ const TokenVaultApiFp = function(configuration?: Configuration) {
          * @param {string} customer_id Your Customer ID that you had sent during create order API &#x60;POST/orders&#x60;
          * @param {string} instrument_id The instrument_id which needs to be deleted
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7871,7 +7779,7 @@ const TokenVaultApiFp = function(configuration?: Configuration) {
          * @param {string} customer_id Your Customer ID that you had sent during create order API &#x60;POST/orders&#x60;
          * @param {string} instrument_id The instrument_id of the saved instrument which needs to be queried
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7890,7 +7798,7 @@ const TokenVaultApiFp = function(configuration?: Configuration) {
          * @param {string} customer_id Your Customer ID that you had sent during create order API &#x60;POST/orders&#x60;
          * @param {PGCustomerFetchInstrumentsInstrumentTypeEnum} instrument_type Payment mode or type of saved instrument 
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7909,7 +7817,7 @@ const TokenVaultApiFp = function(configuration?: Configuration) {
          * @param {string} customer_id Your Customer ID that you had sent during create order API &#x60;POST/orders&#x60;
          * @param {string} instrument_id The instrument_id of the saved card instrument which needs to be queried
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-         * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -7967,7 +7875,7 @@ export class Cashfree {
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {EligibilityFetchCardlessEMIRequest} EligibilityFetchCardlessEMIRequest Request Body to get eligible cardless emi options for a customer and order
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof EligibilityApi
@@ -8004,7 +7912,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return EligibilityApiFp().pGEligibilityFetchCardlessEMI(x_api_version, EligibilityFetchCardlessEMIRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8020,7 +7928,7 @@ export class Cashfree {
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {EligibilityFetchOffersRequest} EligibilityFetchOffersRequest Request Body to get eligible offers for a customer and order
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof EligibilityApi
@@ -8057,7 +7965,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return EligibilityApiFp().pGEligibilityFetchOffers(x_api_version, EligibilityFetchOffersRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8073,7 +7981,7 @@ export class Cashfree {
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {EligibilityFetchPaylaterRequest} EligibilityFetchPaylaterRequest Request Body to get eligible paylater options for a customer and order
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof EligibilityApi
@@ -8110,7 +8018,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return EligibilityApiFp().pGEligibilityFetchPaylater(x_api_version, EligibilityFetchPaylaterRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8126,7 +8034,7 @@ export class Cashfree {
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {EligibilityFetchPaymentMethodsRequest} EligibilityFetchPaymentMethodsRequest Request Body to get eligible payment methods for an account and order
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof EligibilityApi
@@ -8163,7 +8071,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return EligibilityApiFp().pGEligibilityFetchPaymentMethods(x_api_version, EligibilityFetchPaymentMethodsRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8179,7 +8087,7 @@ export class Cashfree {
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {CreateOfferRequest} CreateOfferRequest Request body to create an offer at Cashfree
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OffersApi
@@ -8216,7 +8124,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return OffersApiFp().pGCreateOffer(x_api_version, CreateOfferRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8232,7 +8140,7 @@ export class Cashfree {
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {string} offer_id The offer ID for which you want to view the offer details.
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OffersApi
@@ -8269,7 +8177,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return OffersApiFp().pGFetchOffer(x_api_version, offer_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8285,7 +8193,7 @@ export class Cashfree {
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {CreateOrderRequest} CreateOrderRequest Request body to create an order at cashfree
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrdersApi
@@ -8322,7 +8230,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return OrdersApiFp().pGCreateOrder(x_api_version, CreateOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8338,7 +8246,7 @@ export class Cashfree {
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {string} order_id The id which uniquely identifies your order
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrdersApi
@@ -8375,7 +8283,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return OrdersApiFp().pGFetchOrder(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8392,7 +8300,7 @@ export class Cashfree {
      * @param {FetchReconRequest} FetchReconRequest Request Body for the reconciliation
      * @param {string} [Content_Type] application/json
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {string} [Accept] application/json
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -8430,7 +8338,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return PGReconciliationApiFp().pGFetchRecon(x_api_version, FetchReconRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8446,7 +8354,7 @@ export class Cashfree {
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {string} link_id The payment link ID for which you want to view the details.
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentLinksApi
@@ -8483,7 +8391,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return PaymentLinksApiFp().pGCancelLink(x_api_version, link_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8499,7 +8407,7 @@ export class Cashfree {
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {CreateLinkRequest} CreateLinkRequest Request Body to Create Payment Links
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentLinksApi
@@ -8536,7 +8444,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return PaymentLinksApiFp().pGCreateLink(x_api_version, CreateLinkRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8552,7 +8460,7 @@ export class Cashfree {
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {string} link_id The payment link ID for which you want to view the details.
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentLinksApi
@@ -8589,7 +8497,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return PaymentLinksApiFp().pGFetchLink(x_api_version, link_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8605,7 +8513,7 @@ export class Cashfree {
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {string} link_id The payment link ID for which you want to view the details.
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentLinksApi
@@ -8642,7 +8550,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return PaymentLinksApiFp().pGLinkFetchOrders(x_api_version, link_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8659,7 +8567,7 @@ export class Cashfree {
      * @param {string} order_id The id which uniquely identifies your order
      * @param {AuthorizeOrderRequest} AuthorizeOrderRequest Request to Capture or Void Transactions
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentsApi
@@ -8696,7 +8604,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return PaymentsApiFp().pGAuthorizeOrder(x_api_version, order_id, AuthorizeOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8713,7 +8621,7 @@ export class Cashfree {
      * @param {string} cf_payment_id The Cashfree payment or transaction ID.
      * @param {OrderAuthenticatePaymentRequest} OrderAuthenticatePaymentRequest Request body to submit/resend headless OTP. To use this API make sure you have headless OTP enabled for your account
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentsApi
@@ -8750,7 +8658,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return PaymentsApiFp().pGOrderAuthenticatePayment(x_api_version, cf_payment_id, OrderAuthenticatePaymentRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8767,7 +8675,7 @@ export class Cashfree {
      * @param {string} order_id The id which uniquely identifies your order
      * @param {string} cf_payment_id The Cashfree payment or transaction ID.
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentsApi
@@ -8804,7 +8712,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return PaymentsApiFp().pGOrderFetchPayment(x_api_version, order_id, cf_payment_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8820,7 +8728,7 @@ export class Cashfree {
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {string} order_id The id which uniquely identifies your order
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentsApi
@@ -8857,7 +8765,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return PaymentsApiFp().pGOrderFetchPayments(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8873,7 +8781,7 @@ export class Cashfree {
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {PayOrderRequest} PayOrderRequest Request body to create a transaction at cashfree using &#x60;payment_session_id&#x60;
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentsApi
@@ -8910,7 +8818,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return PaymentsApiFp().pGPayOrder(x_api_version, PayOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8927,7 +8835,7 @@ export class Cashfree {
      * @param {string} order_id The id which uniquely identifies your order
      * @param {OrderCreateRefundRequest} OrderCreateRefundRequest Request Body to Create Refunds
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RefundsApi
@@ -8964,7 +8872,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return RefundsApiFp().pGOrderCreateRefund(x_api_version, order_id, OrderCreateRefundRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -8981,7 +8889,7 @@ export class Cashfree {
      * @param {string} order_id The id which uniquely identifies your order
      * @param {string} refund_id Refund Id of the refund you want to fetch.
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RefundsApi
@@ -9018,7 +8926,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return RefundsApiFp().pGOrderFetchRefund(x_api_version, order_id, refund_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -9034,7 +8942,7 @@ export class Cashfree {
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {string} order_id The id which uniquely identifies your order
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RefundsApi
@@ -9071,7 +8979,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return RefundsApiFp().pGOrderFetchRefunds(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -9088,7 +8996,7 @@ export class Cashfree {
      * @param {FetchSettlementsRequest} FetchSettlementsRequest Request Body to get the settlements
      * @param {string} [Content_Type] application/json
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {string} [Accept] application/json
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -9126,7 +9034,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return SettlementReconciliationApiFp().pGFetchSettlements(x_api_version, FetchSettlementsRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -9143,7 +9051,7 @@ export class Cashfree {
      * @param {SettlementFetchReconRequest} SettlementFetchReconRequest Request Body for the settlement reconciliation
      * @param {string} [Content_Type] application/json
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {string} [Accept] application/json
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -9181,7 +9089,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return SettlementReconciliationApiFp().pGSettlementFetchRecon(x_api_version, SettlementFetchReconRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -9197,7 +9105,7 @@ export class Cashfree {
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {string} order_id The id which uniquely identifies your order
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SettlementsApi
@@ -9234,7 +9142,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return SettlementsApiFp().pGOrderFetchSettlement(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -9250,7 +9158,7 @@ export class Cashfree {
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {CreateTerminalRequest} CreateTerminalRequest Request Body to Create Terminal for SPOS
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SoftPOSApi
@@ -9287,7 +9195,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return SoftPOSApiFp().sposCreateTerminal(x_api_version, CreateTerminalRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -9303,7 +9211,7 @@ export class Cashfree {
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {CreateTerminalTransactionRequest} CreateTerminalTransactionRequest Request body to create a terminal transaction
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SoftPOSApi
@@ -9340,7 +9248,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return SoftPOSApiFp().sposCreateTerminalTransaction(x_api_version, CreateTerminalTransactionRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -9356,7 +9264,7 @@ export class Cashfree {
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {string} terminal_phone_no The terminal for which you want to view the order details.
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SoftPOSApi
@@ -9393,7 +9301,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return SoftPOSApiFp().sposFetchTerminal(x_api_version, terminal_phone_no, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -9410,7 +9318,7 @@ export class Cashfree {
      * @param {string} terminal_phone_no Phone number assigned to the terminal. Required if you are not providing the cf_terminal_id in the request.
      * @param {string} cf_terminal_id Cashfree terminal id for which you want to get staticQRs. Required if you are not providing the terminal_phone_number in the request.
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SoftPOSApi
@@ -9447,7 +9355,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return SoftPOSApiFp().sposFetchTerminalQRCodes(x_api_version, terminal_phone_no, cf_terminal_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -9464,7 +9372,7 @@ export class Cashfree {
      * @param {string} customer_id Your Customer ID that you had sent during create order API &#x60;POST/orders&#x60;
      * @param {string} instrument_id The instrument_id which needs to be deleted
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TokenVaultApi
@@ -9501,7 +9409,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return TokenVaultApiFp().pGCustomerDeleteInstrument(x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -9518,7 +9426,7 @@ export class Cashfree {
      * @param {string} customer_id Your Customer ID that you had sent during create order API &#x60;POST/orders&#x60;
      * @param {string} instrument_id The instrument_id of the saved instrument which needs to be queried
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TokenVaultApi
@@ -9555,7 +9463,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return TokenVaultApiFp().pGCustomerFetchInstrument(x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -9572,7 +9480,7 @@ export class Cashfree {
      * @param {string} customer_id Your Customer ID that you had sent during create order API &#x60;POST/orders&#x60;
      * @param {PGCustomerFetchInstrumentsInstrumentTypeEnum} instrument_type Payment mode or type of saved instrument 
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TokenVaultApi
@@ -9609,7 +9517,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return TokenVaultApiFp().pGCustomerFetchInstruments(x_api_version, customer_id, instrument_type, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
@@ -9626,7 +9534,7 @@ export class Cashfree {
      * @param {string} customer_id Your Customer ID that you had sent during create order API &#x60;POST/orders&#x60;
      * @param {string} instrument_id The instrument_id of the saved card instrument which needs to be queried
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
-     * @param {string} [x_idempotency_key] Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id &amp; x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TokenVaultApi
@@ -9663,7 +9571,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.0.8");
+                scope.setExtra('release', "3.1.0");
             });
         try {
             return TokenVaultApiFp().pGCustomerInstrumentsFetchCryptogram(x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
