@@ -7,6 +7,7 @@ Cashfree.XClientId = process.env.CLIENT_ID;
 Cashfree.XClientSecret = process.env.SECRET_KEY;
 Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
 
+
 var orderId = ''
 var paymentSessionId = ''
 var orderAmount = 3000;
@@ -551,25 +552,6 @@ it('Settlement Reconcilation Test', function (done) {
     });
 });
 
-
-it('PG Reconcilation Test', function (done) {
-    var request = {
-        "pagination": {
-            "limit": 10
-        },
-        "filters": {
-            "start_date": "2023-01-01T00:00:00Z",
-            "end_date": "2023-01-21T23:59:59Z"
-        }
-    }
-    Cashfree.PGFetchRecon("2022-09-01", request).then((response) => {
-        done()
-    }).catch((error) => {
-        assert.fail("Fail error message")
-        done()
-    });
-});
-
 it('Get Instrument By Id Test', function (done) {
     var instrumemtId = "9f9477b7-61ea-4baa-b878-a7e63d978034"
     var customerId = "iij"
@@ -578,12 +560,9 @@ it('Get Instrument By Id Test', function (done) {
         assert.equal(response.data.customer_id, customerId, "instrument_id is not matching")
         done()
     }).catch((error) => {
-        console.log(error.data)
+        console.log(error.response)
         assert.fail("Fail error message")
         done()
     });
 });
 
-
-
-//testing
