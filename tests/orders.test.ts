@@ -578,6 +578,7 @@ it('Get Instrument By Id Test', function (done) {
         assert.equal(response.data.customer_id, customerId, "instrument_id is not matching")
         done()
     }).catch((error) => {
+        console.log(error.data)
         assert.fail("Fail error message")
         done()
     });
