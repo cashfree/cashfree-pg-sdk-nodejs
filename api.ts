@@ -24,6 +24,7 @@ import type { RequestArgs } from './base';
 import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError } from './base';
 import { CFEnvironment } from './configuration'
 import * as Sentry from "@sentry/node";
+import * as crypto from "crypto";
 
 /**
  * Error at cashfree\'s server
@@ -1761,6 +1762,57 @@ export const InstrumentEntityInstrumentStatusEnum = {
 export type InstrumentEntityInstrumentStatusEnum = typeof InstrumentEntityInstrumentStatusEnum[keyof typeof InstrumentEntityInstrumentStatusEnum];
 
 /**
+ * Instrument webhook object
+ * @export
+ * @interface InstrumentWebhook
+ */
+export interface InstrumentWebhook {
+    /**
+     * 
+     * @type {InstrumentWebhookData}
+     * @memberof InstrumentWebhook
+     */
+    'data'?: InstrumentWebhookData;
+}
+/**
+ * 
+ * @export
+ * @interface InstrumentWebhookData
+ */
+export interface InstrumentWebhookData {
+    /**
+     * 
+     * @type {InstrumentWebhookDataEntity}
+     * @memberof InstrumentWebhookData
+     */
+    'data'?: InstrumentWebhookDataEntity;
+    /**
+     * 
+     * @type {string}
+     * @memberof InstrumentWebhookData
+     */
+    'event_time'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InstrumentWebhookData
+     */
+    'type'?: string;
+}
+/**
+ * data entity in webhook
+ * @export
+ * @interface InstrumentWebhookDataEntity
+ */
+export interface InstrumentWebhookDataEntity {
+    /**
+     * 
+     * @type {InstrumentEntity}
+     * @memberof InstrumentWebhookDataEntity
+     */
+    'instrument'?: InstrumentEntity;
+}
+/**
  * Payment link customer entity
  * @export
  * @interface LinkCustomerDetailsEntity
@@ -3160,31 +3212,6 @@ export interface PaymentModeDetails {
     'code'?: number;
 }
 /**
- * object for payment success webhook
- * @export
- * @interface PaymentSuccessWebhook
- */
-export interface PaymentSuccessWebhook {
-    /**
-     * 
-     * @type {WHdata}
-     * @memberof PaymentSuccessWebhook
-     */
-    'data'?: WHdata;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentSuccessWebhook
-     */
-    'event_time'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentSuccessWebhook
-     */
-    'type'?: string;
-}
-/**
  * URL for payment retrieval for an order
  * @export
  * @interface PaymentURLObject
@@ -3196,6 +3223,229 @@ export interface PaymentURLObject {
      * @memberof PaymentURLObject
      */
     'url'?: string;
+}
+/**
+ * payment webhook object
+ * @export
+ * @interface PaymentWebhook
+ */
+export interface PaymentWebhook {
+    /**
+     * 
+     * @type {PaymentWebhookDataEntity}
+     * @memberof PaymentWebhook
+     */
+    'data'?: PaymentWebhookDataEntity;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentWebhook
+     */
+    'event_time'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentWebhook
+     */
+    'type'?: string;
+}
+/**
+ * customer details object in webhook
+ * @export
+ * @interface PaymentWebhookCustomerEntity
+ */
+export interface PaymentWebhookCustomerEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentWebhookCustomerEntity
+     */
+    'customer_name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentWebhookCustomerEntity
+     */
+    'customer_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentWebhookCustomerEntity
+     */
+    'customer_email'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentWebhookCustomerEntity
+     */
+    'customer_phone'?: string;
+}
+/**
+ * data entity in webhook
+ * @export
+ * @interface PaymentWebhookDataEntity
+ */
+export interface PaymentWebhookDataEntity {
+    /**
+     * 
+     * @type {PaymentWebhookOrderEntity}
+     * @memberof PaymentWebhookDataEntity
+     */
+    'order'?: PaymentWebhookOrderEntity;
+    /**
+     * 
+     * @type {PaymentEntity}
+     * @memberof PaymentWebhookDataEntity
+     */
+    'payment'?: PaymentEntity;
+    /**
+     * 
+     * @type {PaymentWebhookCustomerEntity}
+     * @memberof PaymentWebhookDataEntity
+     */
+    'customer_details'?: PaymentWebhookCustomerEntity;
+    /**
+     * 
+     * @type {PaymentWebhookErrorEntity}
+     * @memberof PaymentWebhookDataEntity
+     */
+    'error_details'?: PaymentWebhookErrorEntity;
+    /**
+     * 
+     * @type {PaymentWebhookGatewayDetailsEntity}
+     * @memberof PaymentWebhookDataEntity
+     */
+    'payment_gateway_details'?: PaymentWebhookGatewayDetailsEntity;
+    /**
+     * 
+     * @type {Array<OfferEntity>}
+     * @memberof PaymentWebhookDataEntity
+     */
+    'payment_offers'?: Array<OfferEntity>;
+}
+/**
+ * data entity in webhook
+ * @export
+ * @interface PaymentWebhookDataEntity1
+ */
+export interface PaymentWebhookDataEntity1 {
+    /**
+     * 
+     * @type {RefundEntity}
+     * @memberof PaymentWebhookDataEntity1
+     */
+    'refund'?: RefundEntity;
+}
+/**
+ * error details present in the webhook
+ * @export
+ * @interface PaymentWebhookErrorEntity
+ */
+export interface PaymentWebhookErrorEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentWebhookErrorEntity
+     */
+    'error_code'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentWebhookErrorEntity
+     */
+    'error_description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentWebhookErrorEntity
+     */
+    'error_reason'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentWebhookErrorEntity
+     */
+    'error_source'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentWebhookErrorEntity
+     */
+    'error_code_raw'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentWebhookErrorEntity
+     */
+    'error_description_raw'?: string;
+}
+/**
+ * payment gatewat details present in the webhook response
+ * @export
+ * @interface PaymentWebhookGatewayDetailsEntity
+ */
+export interface PaymentWebhookGatewayDetailsEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentWebhookGatewayDetailsEntity
+     */
+    'gateway_name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentWebhookGatewayDetailsEntity
+     */
+    'gateway_order_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentWebhookGatewayDetailsEntity
+     */
+    'gateway_payment_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentWebhookGatewayDetailsEntity
+     */
+    'gateway_status_code'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentWebhookGatewayDetailsEntity
+     */
+    'gateway_settlement'?: string;
+}
+/**
+ * order entity in webhook
+ * @export
+ * @interface PaymentWebhookOrderEntity
+ */
+export interface PaymentWebhookOrderEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentWebhookOrderEntity
+     */
+    'order_id'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaymentWebhookOrderEntity
+     */
+    'order_amount'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentWebhookOrderEntity
+     */
+    'order_currency'?: string;
+    /**
+     * Custom Tags in thr form of {\"key\":\"value\"} which can be passed for an order. A maximum of 10 tags can be added
+     * @type {{ [key: string]: string; }}
+     * @memberof PaymentWebhookOrderEntity
+     */
+    'order_tags'?: { [key: string]: string; };
 }
 /**
  * Error when rate limit is breached for your api
@@ -3742,6 +3992,31 @@ export interface RefundURLObject {
     'url'?: string;
 }
 /**
+ * refund webhook object
+ * @export
+ * @interface RefundWebhook
+ */
+export interface RefundWebhook {
+    /**
+     * 
+     * @type {PaymentWebhookDataEntity1}
+     * @memberof RefundWebhook
+     */
+    'data'?: PaymentWebhookDataEntity1;
+    /**
+     * 
+     * @type {string}
+     * @memberof RefundWebhook
+     */
+    'event_time'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RefundWebhook
+     */
+    'type'?: string;
+}
+/**
  * Card instrument meta information
  * @export
  * @interface SavedInstrumentMeta
@@ -4175,6 +4450,44 @@ export interface SettlementURLObject {
     'url'?: string;
 }
 /**
+ * Settlement webhook object
+ * @export
+ * @interface SettlementWebhook
+ */
+export interface SettlementWebhook {
+    /**
+     * 
+     * @type {SettlementWebhookDataEntity}
+     * @memberof SettlementWebhook
+     */
+    'data'?: SettlementWebhookDataEntity;
+    /**
+     * 
+     * @type {string}
+     * @memberof SettlementWebhook
+     */
+    'event_time'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SettlementWebhook
+     */
+    'type'?: string;
+}
+/**
+ * data entity in webhook
+ * @export
+ * @interface SettlementWebhookDataEntity
+ */
+export interface SettlementWebhookDataEntity {
+    /**
+     * 
+     * @type {SettlementEntity}
+     * @memberof SettlementWebhookDataEntity
+     */
+    'settlement'?: SettlementEntity;
+}
+/**
  * Use this if you are creating an order for cashfree\'s softPOS
  * @export
  * @interface TerminalDetails
@@ -4480,93 +4793,6 @@ export interface VendorSplit {
     'percentage'?: number;
 }
 /**
- * customer details object in webhook
- * @export
- * @interface WHcustomerDetails
- */
-export interface WHcustomerDetails {
-    /**
-     * 
-     * @type {string}
-     * @memberof WHcustomerDetails
-     */
-    'customer_name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof WHcustomerDetails
-     */
-    'customer_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof WHcustomerDetails
-     */
-    'customer_email'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof WHcustomerDetails
-     */
-    'customer_phone'?: string;
-}
-/**
- * webhook object
- * @export
- * @interface WHdata
- */
-export interface WHdata {
-    /**
-     * 
-     * @type {WHorder}
-     * @memberof WHdata
-     */
-    'order'?: WHorder;
-    /**
-     * 
-     * @type {PaymentEntity}
-     * @memberof WHdata
-     */
-    'payment'?: PaymentEntity;
-    /**
-     * 
-     * @type {WHcustomerDetails}
-     * @memberof WHdata
-     */
-    'customer_details'?: WHcustomerDetails;
-}
-/**
- * order entity in webhook
- * @export
- * @interface WHorder
- */
-export interface WHorder {
-    /**
-     * 
-     * @type {string}
-     * @memberof WHorder
-     */
-    'order_id'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof WHorder
-     */
-    'order_amount'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof WHorder
-     */
-    'order_currency'?: string;
-    /**
-     * Custom Tags in thr form of {\"key\":\"value\"} which can be passed for an order. A maximum of 10 tags can be added
-     * @type {{ [key: string]: string; }}
-     * @memberof WHorder
-     */
-    'order_tags'?: { [key: string]: string; };
-}
-/**
  * 
  * @export
  * @interface WalletOffer
@@ -4638,7 +4864,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -4712,7 +4938,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -4786,7 +5012,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -4860,7 +5086,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5034,7 +5260,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5107,7 +5333,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5244,7 +5470,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5317,7 +5543,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5456,7 +5682,7 @@ const PGReconciliationApiAxiosParamCreator = function (configuration?: Configura
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5577,7 +5803,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5650,7 +5876,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5723,7 +5949,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5795,7 +6021,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5972,7 +6198,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6035,7 +6261,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6112,7 +6338,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6184,7 +6410,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6242,7 +6468,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6441,7 +6667,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6518,7 +6744,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6590,7 +6816,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6749,7 +6975,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6825,7 +7051,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6966,7 +7192,7 @@ const SettlementsApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7085,7 +7311,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7159,7 +7385,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7232,7 +7458,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7314,7 +7540,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7491,7 +7717,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7567,7 +7793,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7646,7 +7872,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7722,7 +7948,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.1';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7855,6 +8081,19 @@ class Environment {
     public SANDBOX = CFEnvironment.SANDBOX;
 }
 
+export class PGWebhookEvent {
+
+    type: string;
+    raw: string;
+    object: any;
+
+    constructor(type: string, rawBody: string, object: any) {
+        this.type = type;
+        this.raw = rawBody
+        this.object = object;
+    }
+}
+
 export class Cashfree {
     static axios: AxiosInstance;
     static basePath: string;
@@ -7865,8 +8104,29 @@ export class Cashfree {
     static XClientSignature?: string;
     static XPartnerMerchantId?: string;
     static XEnvironment: CFEnvironment;
+    static XEnableErrorAnalytics: boolean = true;
+    static XApiVersion: string = "2022-09-01";
 
     static Environment = new Environment();
+
+    /**
+     * Use this API to verify your webhook signature once you receive from Cashfree's server.
+     * @summary Verify Webhook Signatures
+     * @param {string} signature that is present in the header of the webhook ("x-webhook-signature")
+     * @param {string} rawBody is the entire body sent to the server in string format
+     * @param {string} timestamp that is present in the header of the webhook ("x-webhook-timestamp")
+     * @throws {Error}
+     */
+    public static PGVerifyWebhookSignature(signature: string, rawBody: string, timestamp: string) {
+        const body = timestamp + rawBody
+        const secretKey = Cashfree.XClientId;
+        let generatedSignature = crypto.createHmac('sha256', secretKey).update(body).digest("base64");
+        if(generatedSignature === signature) {
+            let jsonObject = JSON.parse(rawBody)
+            return new PGWebhookEvent(jsonObject.type, rawBody, jsonObject);
+        }
+        throw new Error("Generated signature and received signature did not match.");
+    }
 
     
     /**
@@ -7881,6 +8141,7 @@ export class Cashfree {
      * @memberof EligibilityApi
      */
     public static PGEligibilityFetchCardlessEMI(x_api_version: string, EligibilityFetchCardlessEMIRequest: EligibilityFetchCardlessEMIRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -7899,7 +8160,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -7912,12 +8176,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return EligibilityApiFp().pGEligibilityFetchCardlessEMI(x_api_version, EligibilityFetchCardlessEMIRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -7934,6 +8201,7 @@ export class Cashfree {
      * @memberof EligibilityApi
      */
     public static PGEligibilityFetchOffers(x_api_version: string, EligibilityFetchOffersRequest: EligibilityFetchOffersRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -7952,7 +8220,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -7965,12 +8236,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return EligibilityApiFp().pGEligibilityFetchOffers(x_api_version, EligibilityFetchOffersRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -7987,6 +8261,7 @@ export class Cashfree {
      * @memberof EligibilityApi
      */
     public static PGEligibilityFetchPaylater(x_api_version: string, EligibilityFetchPaylaterRequest: EligibilityFetchPaylaterRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -8005,7 +8280,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -8018,12 +8296,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return EligibilityApiFp().pGEligibilityFetchPaylater(x_api_version, EligibilityFetchPaylaterRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -8040,6 +8321,7 @@ export class Cashfree {
      * @memberof EligibilityApi
      */
     public static PGEligibilityFetchPaymentMethods(x_api_version: string, EligibilityFetchPaymentMethodsRequest: EligibilityFetchPaymentMethodsRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -8058,7 +8340,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -8071,12 +8356,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return EligibilityApiFp().pGEligibilityFetchPaymentMethods(x_api_version, EligibilityFetchPaymentMethodsRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -8093,6 +8381,7 @@ export class Cashfree {
      * @memberof OffersApi
      */
     public static PGCreateOffer(x_api_version: string, CreateOfferRequest: CreateOfferRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -8111,7 +8400,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -8124,12 +8416,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return OffersApiFp().pGCreateOffer(x_api_version, CreateOfferRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -8146,6 +8441,7 @@ export class Cashfree {
      * @memberof OffersApi
      */
     public static PGFetchOffer(x_api_version: string, offer_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -8164,7 +8460,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -8177,12 +8476,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return OffersApiFp().pGFetchOffer(x_api_version, offer_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -8199,6 +8501,7 @@ export class Cashfree {
      * @memberof OrdersApi
      */
     public static PGCreateOrder(x_api_version: string, CreateOrderRequest: CreateOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -8217,7 +8520,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -8230,12 +8536,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return OrdersApiFp().pGCreateOrder(x_api_version, CreateOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -8252,6 +8561,7 @@ export class Cashfree {
      * @memberof OrdersApi
      */
     public static PGFetchOrder(x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -8270,7 +8580,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -8283,12 +8596,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return OrdersApiFp().pGFetchOrder(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -8307,6 +8623,7 @@ export class Cashfree {
      * @memberof PGReconciliationApi
      */
     public static PGFetchRecon(x_api_version: string, FetchReconRequest: FetchReconRequest, Content_Type?: string, x_request_id?: string, x_idempotency_key?: string, Accept?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -8325,7 +8642,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -8338,12 +8658,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return PGReconciliationApiFp().pGFetchRecon(x_api_version, FetchReconRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -8360,6 +8683,7 @@ export class Cashfree {
      * @memberof PaymentLinksApi
      */
     public static PGCancelLink(x_api_version: string, link_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -8378,7 +8702,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -8391,12 +8718,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return PaymentLinksApiFp().pGCancelLink(x_api_version, link_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -8413,6 +8743,7 @@ export class Cashfree {
      * @memberof PaymentLinksApi
      */
     public static PGCreateLink(x_api_version: string, CreateLinkRequest: CreateLinkRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -8431,7 +8762,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -8444,12 +8778,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return PaymentLinksApiFp().pGCreateLink(x_api_version, CreateLinkRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -8466,6 +8803,7 @@ export class Cashfree {
      * @memberof PaymentLinksApi
      */
     public static PGFetchLink(x_api_version: string, link_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -8484,7 +8822,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -8497,12 +8838,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return PaymentLinksApiFp().pGFetchLink(x_api_version, link_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -8519,6 +8863,7 @@ export class Cashfree {
      * @memberof PaymentLinksApi
      */
     public static PGLinkFetchOrders(x_api_version: string, link_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -8537,7 +8882,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -8550,12 +8898,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return PaymentLinksApiFp().pGLinkFetchOrders(x_api_version, link_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -8573,6 +8924,7 @@ export class Cashfree {
      * @memberof PaymentsApi
      */
     public static PGAuthorizeOrder(x_api_version: string, order_id: string, AuthorizeOrderRequest: AuthorizeOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -8591,7 +8943,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -8604,12 +8959,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return PaymentsApiFp().pGAuthorizeOrder(x_api_version, order_id, AuthorizeOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -8627,6 +8985,7 @@ export class Cashfree {
      * @memberof PaymentsApi
      */
     public static PGOrderAuthenticatePayment(x_api_version: string, cf_payment_id: string, OrderAuthenticatePaymentRequest: OrderAuthenticatePaymentRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -8645,7 +9004,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -8658,12 +9020,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return PaymentsApiFp().pGOrderAuthenticatePayment(x_api_version, cf_payment_id, OrderAuthenticatePaymentRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -8681,6 +9046,7 @@ export class Cashfree {
      * @memberof PaymentsApi
      */
     public static PGOrderFetchPayment(x_api_version: string, order_id: string, cf_payment_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -8699,7 +9065,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -8712,12 +9081,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return PaymentsApiFp().pGOrderFetchPayment(x_api_version, order_id, cf_payment_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -8734,6 +9106,7 @@ export class Cashfree {
      * @memberof PaymentsApi
      */
     public static PGOrderFetchPayments(x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -8752,7 +9125,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -8765,12 +9141,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return PaymentsApiFp().pGOrderFetchPayments(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -8787,6 +9166,7 @@ export class Cashfree {
      * @memberof PaymentsApi
      */
     public static PGPayOrder(x_api_version: string, PayOrderRequest: PayOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -8805,7 +9185,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -8818,12 +9201,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return PaymentsApiFp().pGPayOrder(x_api_version, PayOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -8841,6 +9227,7 @@ export class Cashfree {
      * @memberof RefundsApi
      */
     public static PGOrderCreateRefund(x_api_version: string, order_id: string, OrderCreateRefundRequest: OrderCreateRefundRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -8859,7 +9246,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -8872,12 +9262,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return RefundsApiFp().pGOrderCreateRefund(x_api_version, order_id, OrderCreateRefundRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -8895,6 +9288,7 @@ export class Cashfree {
      * @memberof RefundsApi
      */
     public static PGOrderFetchRefund(x_api_version: string, order_id: string, refund_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -8913,7 +9307,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -8926,12 +9323,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return RefundsApiFp().pGOrderFetchRefund(x_api_version, order_id, refund_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -8948,6 +9348,7 @@ export class Cashfree {
      * @memberof RefundsApi
      */
     public static PGOrderFetchRefunds(x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -8966,7 +9367,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -8979,12 +9383,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return RefundsApiFp().pGOrderFetchRefunds(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -9003,6 +9410,7 @@ export class Cashfree {
      * @memberof SettlementReconciliationApi
      */
     public static PGFetchSettlements(x_api_version: string, FetchSettlementsRequest: FetchSettlementsRequest, Content_Type?: string, x_request_id?: string, x_idempotency_key?: string, Accept?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -9021,7 +9429,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -9034,12 +9445,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return SettlementReconciliationApiFp().pGFetchSettlements(x_api_version, FetchSettlementsRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -9058,6 +9472,7 @@ export class Cashfree {
      * @memberof SettlementReconciliationApi
      */
     public static PGSettlementFetchRecon(x_api_version: string, SettlementFetchReconRequest: SettlementFetchReconRequest, Content_Type?: string, x_request_id?: string, x_idempotency_key?: string, Accept?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -9076,7 +9491,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -9089,12 +9507,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return SettlementReconciliationApiFp().pGSettlementFetchRecon(x_api_version, SettlementFetchReconRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -9111,6 +9532,7 @@ export class Cashfree {
      * @memberof SettlementsApi
      */
     public static PGOrderFetchSettlement(x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -9129,7 +9551,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -9142,12 +9567,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return SettlementsApiFp().pGOrderFetchSettlement(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -9164,6 +9592,7 @@ export class Cashfree {
      * @memberof SoftPOSApi
      */
     public static SposCreateTerminal(x_api_version: string, CreateTerminalRequest: CreateTerminalRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -9182,7 +9611,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -9195,12 +9627,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return SoftPOSApiFp().sposCreateTerminal(x_api_version, CreateTerminalRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -9217,6 +9652,7 @@ export class Cashfree {
      * @memberof SoftPOSApi
      */
     public static SposCreateTerminalTransaction(x_api_version: string, CreateTerminalTransactionRequest: CreateTerminalTransactionRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -9235,7 +9671,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -9248,12 +9687,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return SoftPOSApiFp().sposCreateTerminalTransaction(x_api_version, CreateTerminalTransactionRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -9270,6 +9712,7 @@ export class Cashfree {
      * @memberof SoftPOSApi
      */
     public static SposFetchTerminal(x_api_version: string, terminal_phone_no: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -9288,7 +9731,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -9301,12 +9747,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return SoftPOSApiFp().sposFetchTerminal(x_api_version, terminal_phone_no, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -9324,6 +9773,7 @@ export class Cashfree {
      * @memberof SoftPOSApi
      */
     public static SposFetchTerminalQRCodes(x_api_version: string, terminal_phone_no: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -9342,7 +9792,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -9355,12 +9808,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return SoftPOSApiFp().sposFetchTerminalQRCodes(x_api_version, terminal_phone_no, cf_terminal_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -9378,6 +9834,7 @@ export class Cashfree {
      * @memberof TokenVaultApi
      */
     public static PGCustomerDeleteInstrument(x_api_version: string, customer_id: string, instrument_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -9396,7 +9853,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -9409,12 +9869,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return TokenVaultApiFp().pGCustomerDeleteInstrument(x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -9432,6 +9895,7 @@ export class Cashfree {
      * @memberof TokenVaultApi
      */
     public static PGCustomerFetchInstrument(x_api_version: string, customer_id: string, instrument_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -9450,7 +9914,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -9463,12 +9930,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return TokenVaultApiFp().pGCustomerFetchInstrument(x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -9486,6 +9956,7 @@ export class Cashfree {
      * @memberof TokenVaultApi
      */
     public static PGCustomerFetchInstruments(x_api_version: string, customer_id: string, instrument_type: PGCustomerFetchInstrumentsInstrumentTypeEnum, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -9504,7 +9975,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -9517,12 +9991,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return TokenVaultApiFp().pGCustomerFetchInstruments(x_api_version, customer_id, instrument_type, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }
@@ -9540,6 +10017,7 @@ export class Cashfree {
      * @memberof TokenVaultApi
      */
     public static PGCustomerInstrumentsFetchCryptogram(x_api_version: string, customer_id: string, instrument_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://ad7936cb4d7f4f2b99c6571a8e7a4df7@o330525.ingest.sentry.io/4505085005725696',
             // Performance Monitoring
@@ -9558,7 +10036,10 @@ export class Cashfree {
                                 
 								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
                                 if (filteredDomains[0].includes("cashfree-pg")) {
-                                    return event;
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
                                 } 
                             }
                         }
@@ -9571,12 +10052,15 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.0");
+                scope.setExtra('release', "3.1.1");
             });
+        }
         try {
             return TokenVaultApiFp().pGCustomerInstrumentsFetchCryptogram(x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
-            Sentry.captureException(error);
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
             throw error;
         }
     }

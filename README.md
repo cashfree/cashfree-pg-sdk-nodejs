@@ -47,7 +47,7 @@ var request = {
     }
 };
 Cashfree.PGCreateOrder("2022-09-01", request).then((response) => {
-    console.log('Order fetched successfully:',response.data)
+    console.log('Order Created successfully:',response.data)
 }).catch((error) => {
     console.error('Error:', error.response.data.message);
 });

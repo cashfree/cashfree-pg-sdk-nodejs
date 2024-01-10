@@ -1,6 +1,6 @@
 {
   "name": "cashfree-pg",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Cashfree client for cashfree-pg",
   "author": "Cashfree Payments",
   "repository": {
