@@ -62,6 +62,20 @@ Cashfree.PGFetchOrder("2022-09-01", "<order_id>").then((response) => {
 });
 ```
 
+## Supported Resources
+
+- [Order](docs/Orders.md)
+
+- [Payment](docs/Payments.md)
+
+- [Refund](docs/Refunds.md)
+
+- [Token Vault](docs/TokenVault.md)
+
+- [Eligiblity](docs/Eligibility.md)
+
+- [PaymentLink](docs/PaymentLink.md)
+
 ## Licence
 
 Apache Licensed. See [LICENSE.md](LICENSE.md) for more details
