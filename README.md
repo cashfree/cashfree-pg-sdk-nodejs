@@ -62,6 +62,17 @@ Cashfree.PGFetchOrder("2022-09-01", "<order_id>").then((response) => {
 });
 ```
 
+Validate Webhook
+```javascript
+app.post('/webhook', function (req, res) {
+    try {
+        Cashfree.PGVerifyWebhookSignature(req.headers["x-webhook-signature"], req.rawBody, req.headers["x-webhook-timestamp"]))
+    } catch (err) {
+        console.log(err.message)
+    }
+})
+```
+
 ## Supported Resources
 
 - [Order](docs/Orders.md)
