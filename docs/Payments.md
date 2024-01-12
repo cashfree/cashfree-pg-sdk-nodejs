@@ -2,11 +2,11 @@
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**PGOrderFetchPayment**](PaymentsAPI.md#PGOrderFetchPayment) | **Get** /orders/{order_id}/payments/{cf_payment_id} | Get Payment by ID
-[**PGOrderFetchPayments**](PaymentsAPI.md#PGOrderFetchPayments) | **Get** /orders/{order_id}/payments | Get Payments for an Order
-[**PGPayOrder**](PaymentsAPI.md#PGPayOrder) | **Post** /orders/sessions | Order Pay
-[**PGAuthorizeOrder**](PaymentsAPI.md#PGAuthorizeOrder) | **Post** /orders/{order_id}/authorization | Preauthorization
-[**PGOrderAuthenticatePayment**](PaymentsAPI.md#PGOrderAuthenticatePayment) | **Post** /orders/pay/authenticate/{cf_payment_id} | Submit or Resend OTP
+[**PGOrderFetchPayment**](Payments.md#PGOrderFetchPayment) | **Get** /orders/{order_id}/payments/{cf_payment_id} | Get Payment by ID
+[**PGOrderFetchPayments**](Payments.md#PGOrderFetchPayments) | **Get** /orders/{order_id}/payments | Get Payments for an Order
+[**PGPayOrder**](Payments.md#PGPayOrder) | **Post** /orders/sessions | Order Pay
+[**PGAuthorizeOrder**](Payments.md#PGAuthorizeOrder) | **Post** /orders/{order_id}/authorization | Preauthorization
+[**PGOrderAuthenticatePayment**](Payments.md#PGOrderAuthenticatePayment) | **Post** /orders/pay/authenticate/{cf_payment_id} | Submit or Resend OTP
 
 
 ## PGOrderFetchPayment

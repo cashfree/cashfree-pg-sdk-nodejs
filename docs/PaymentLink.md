@@ -2,10 +2,10 @@
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**PGCancelLink**](PaymentLinks.md#PGCancelLink) | **Post** /links/{link_id}/cancel | Cancel Payment Link
-[**PGCreateLink**](PaymentLinks.md#PGCreateLink) | **Post** /links | Create Payment Link
-[**PGFetchLink**](PaymentLinks.md#PGFetchLink) | **Get** /links/{link_id} | Fetch Payment Link Details
-[**PGLinkFetchOrders**](PaymentLinks.md#PGLinkFetchOrders) | **Get** /links/{link_id}/orders | Get Orders for a Payment Link
+[**PGCancelLink**](PaymentLink.md#PGCancelLink) | **Post** /links/{link_id}/cancel | Cancel Payment Link
+[**PGCreateLink**](PaymentLink.md#PGCreateLink) | **Post** /links | Create Payment Link
+[**PGFetchLink**](PaymentLink.md#PGFetchLink) | **Get** /links/{link_id} | Fetch Payment Link Details
+[**PGLinkFetchOrders**](PaymentLink.md#PGLinkFetchOrders) | **Get** /links/{link_id}/orders | Get Orders for a Payment Link
 
 
 

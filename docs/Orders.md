@@ -48,7 +48,7 @@ Other parameters are passed through a pointer to a apiPGCreateOrderRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **xApiVersion** | **string** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
- **createOrderRequest** | [**CreateOrderRequest**](CreateOrderRequest.md) | Request body to create an order at cashfree | 
+ **createOrderRequest** | [**CreateOrderRequest**](Orders.md#CreateOrderRequest) | Request body to create an order at cashfree | 
  **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
  **xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
  
