@@ -4864,7 +4864,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -4938,7 +4938,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5012,7 +5012,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5086,7 +5086,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5260,7 +5260,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5333,7 +5333,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5470,7 +5470,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5543,7 +5543,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5682,7 +5682,7 @@ const PGReconciliationApiAxiosParamCreator = function (configuration?: Configura
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5803,7 +5803,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5876,7 +5876,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5949,7 +5949,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6021,7 +6021,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6198,7 +6198,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6261,7 +6261,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6338,7 +6338,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6410,7 +6410,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6468,7 +6468,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6667,7 +6667,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6744,7 +6744,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6816,7 +6816,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6975,7 +6975,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7051,7 +7051,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7192,7 +7192,7 @@ const SettlementsApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7311,7 +7311,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7385,7 +7385,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7458,7 +7458,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7540,7 +7540,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7717,7 +7717,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7793,7 +7793,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7872,7 +7872,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7948,7 +7948,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-3.1.4';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8119,7 +8119,7 @@ export class Cashfree {
      */
     public static PGVerifyWebhookSignature(signature: string, rawBody: string, timestamp: string) {
         const body = timestamp + rawBody
-        const secretKey = Cashfree.XClientId;
+        const secretKey = Cashfree.XClientSecret;
         let generatedSignature = crypto.createHmac('sha256', secretKey).update(body).digest("base64");
         if(generatedSignature === signature) {
             let jsonObject = JSON.parse(rawBody)
@@ -8176,7 +8176,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -8236,7 +8236,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -8296,7 +8296,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -8356,7 +8356,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -8416,7 +8416,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -8476,7 +8476,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -8536,7 +8536,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -8596,7 +8596,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -8658,7 +8658,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -8718,7 +8718,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -8778,7 +8778,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -8838,7 +8838,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -8898,7 +8898,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -8959,7 +8959,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -9020,7 +9020,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -9081,7 +9081,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -9141,7 +9141,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -9201,7 +9201,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -9262,7 +9262,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -9323,7 +9323,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -9383,7 +9383,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -9445,7 +9445,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -9507,7 +9507,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -9567,7 +9567,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -9627,7 +9627,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -9687,7 +9687,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -9747,7 +9747,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -9808,7 +9808,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -9869,7 +9869,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -9930,7 +9930,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -9991,7 +9991,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
@@ -10052,7 +10052,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "3.1.3");
+                scope.setExtra('release', "3.1.4");
             });
         }
         try {
