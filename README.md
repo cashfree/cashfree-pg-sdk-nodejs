@@ -87,6 +87,12 @@ app.post('/webhook', function (req, res) {
 
 - [PaymentLink](docs/PaymentLink.md)
 
+- [Settlements](docs/Settlements.md)
+
+- [Offers](docs/Offers.md)
+
+- [Reconciliation](docs/Reconciliation.md)
+
 ## Licence
 
 Apache Licensed. See [LICENSE.md](LICENSE.md) for more details
