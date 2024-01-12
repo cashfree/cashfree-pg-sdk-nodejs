@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 > PGCancelLink(x_api_version: string, link_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<LinkEntity, any>>
 
-Cancel Payment Link
+Cancel Payment Link ([Docs](https://docs.cashfree.com/reference/pgcancellink))
 
 ### Example
 
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 
 > PGCreateLink(x_api_version: string, CreateLinkRequest: CreateLinkRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<LinkEntity, any>>
 
-Create Payment Link
+Create Payment Link ([Docs](https://docs.cashfree.com/reference/pgcreatelink))
 
 ### Example
 
@@ -168,7 +168,7 @@ Name | Type | Description  | Notes
 
 > PGFetchLink(x_api_version: string, link_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<LinkEntity, any>>
 
-Fetch Payment Link Details
+Fetch Payment Link Details ([Docs](https://docs.cashfree.com/reference/pgfetchlink))
 
 ### Example
 
@@ -227,7 +227,7 @@ Name | Type | Description  | Notes
 
 > PGLinkFetchOrders(x_api_version: string, link_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<OrderEntity[], any>>
 
-Get Orders for a Payment Link
+Get Orders for a Payment Link ([Docs](https://docs.cashfree.com/reference/pglinkfetchorders))
 
 
 

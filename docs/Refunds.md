@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 > PGOrderCreateRefund(x_api_version: string, order_id: string, OrderCreateRefundRequest: OrderCreateRefundRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<RefundEntity, any>>
 
-Create Refund
+Create Refund ([Docs](https://docs.cashfree.com/reference/pgordercreaterefund))
 
 ### Example
 
@@ -89,7 +89,7 @@ Name | Type | Description  | Example
 
 > PGOrderFetchRefund(x_api_version: string, order_id: string, refund_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<RefundEntity, any>>
 
-Get Refund
+Get Refund ([Docs](https://docs.cashfree.com/reference/pgorderfetchrefund))
 
 ### Example
 
@@ -145,7 +145,7 @@ Name | Type | Description  | Notes
 
 > PGOrderFetchRefunds(x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<RefundEntity[], any>>
 
-Get All Refunds for an Order
+Get All Refunds for an Order ([Docs](https://docs.cashfree.com/reference/pgorderfetchrefunds))
 
 
 

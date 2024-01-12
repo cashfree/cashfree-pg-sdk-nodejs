@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 > PGEligibilityFetchCardlessEMI(x_api_version: string, EligibilityFetchCardlessEMIRequest: EligibilityFetchCardlessEMIRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<EligibilityCardlessEMIEntity[], any>>
 
-[Get Eligible Cardless EMI](https://docs.cashfree.com/reference/pgeligibilityfetchcardlessemi)
+Get Eligible Cardless EMI ([Docs](https://docs.cashfree.com/reference/pgeligibilityfetchcardlessemi))
 
 ### Example
 
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 > PGEligibilityFetchOffers(x_api_version: string, EligibilityFetchOffersRequest: EligibilityFetchOffersRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<EligibilityOfferEntity[], any>>
 
-Get Eligible Offers
+Get Eligible Offers ([Docs](https://docs.cashfree.com/reference/pgeligibilityfetchoffers))
 
 ### Example
 
@@ -188,7 +188,7 @@ Name | Type | Description  | Notes
 
 > PGEligibilityFetchPaylater(x_api_version: string, EligibilityFetchPaylaterRequest: EligibilityFetchPaylaterRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<EligibilityPaylaterEntity[], any>>
 
-Get Eligible Paylater
+Get Eligible Paylater ([Docs](https://docs.cashfree.com/reference/pgeligibilityfetchpaylater))
 
 
 
@@ -238,7 +238,7 @@ Name | Type | Description  | Notes
 
 > PGEligibilityFetchPaymentMethods(x_api_version: string, EligibilityFetchPaymentMethodsRequest: EligibilityFetchPaymentMethodsRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<EligibilityPaymentMethodsEntity[], any>>
 
-Get Eligible Payment Methods
+Get Eligible Payment Methods ([Docs](https://docs.cashfree.com/reference/pgeligibilityfetchpaymentmethods))
 
 
 

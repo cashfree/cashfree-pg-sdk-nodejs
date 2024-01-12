@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 > PGCustomerDeleteInstrument(x_api_version: string, customer_id: string, instrument_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<InstrumentEntity, any>>
 
-Delete Saved Card Instrument
+Delete Saved Card Instrument ([Docs](https://docs.cashfree.com/reference/pgcustomerdeleteinstrument))
 
 ### Example
 
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 > PGCustomerFetchInstrument(x_api_version: string, customer_id: string, instrument_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<InstrumentEntity, any>>
 
-Fetch Specific Saved Card Instrument
+Fetch Specific Saved Card Instrument ([Docs](https://docs.cashfree.com/reference/pgcustomerfetchinstrument))
 
 
 
@@ -120,7 +120,7 @@ Name | Type | Description  | Notes
 
 > PGCustomerFetchInstruments(x_api_version: string, customer_id: string, instrument_type: PGCustomerFetchInstrumentsInstrumentTypeEnum, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<InstrumentEntity[], any>>
 
-Fetch All Saved Card Instrument
+Fetch All Saved Card Instrument ([Docs](https://docs.cashfree.com/reference/pgcustomerfetchinstruments))
 
 ### Example
 
@@ -172,7 +172,7 @@ Name | Type | Description  | Notes
 
 > PGCustomerInstrumentsFetchCryptogram(x_api_version: string, customer_id: string, instrument_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<CryptogramEntity, any>>
 
-Fetch cryptogram for a saved card instrument
+Fetch cryptogram for a saved card instrument ([Docs](https://docs.cashfree.com/reference/pgcustomerinstrumentsfetchcryptogram))
 
 
 

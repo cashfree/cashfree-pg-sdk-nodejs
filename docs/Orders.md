@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 > PGCreateOrder(x_api_version: string, CreateOrderRequest: CreateOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<OrderEntity, any>>
 
-Create Order
+Create Order ([Docs](https://docs.cashfree.com/reference/pgcreateorder))
 
 ### Example
 
@@ -123,7 +123,7 @@ Name | Type | Description  | Notes
 
 > PGFetchOrder(x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<OrderEntity, any>>
 
-Get Order
+Get Order ([Docs](https://docs.cashfree.com/reference/pgfetchorder))
 
 
 

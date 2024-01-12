@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 > PGOrderFetchPayment(x_api_version: string, order_id: string, cf_payment_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<PaymentEntity, any>>
 
-Get Payment by ID
+Get Payment by ID ([Docs](https://docs.cashfree.com/reference/pgorderfetchpayment))
 
 
 
@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 > PGOrderFetchPayments(x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<PaymentEntity[], any>>
 
-Get Payments for an Order
+Get Payments for an Order ([Docs](https://docs.cashfree.com/reference/pgorderfetchpayments))
 
 
 
@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 
 > PGPayOrder(x_api_version: string, PayOrderRequest: PayOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<PayOrderEntity, any>>
 
-Order Pay
+Order Pay ([Docs](https://docs.cashfree.com/reference/pgpayorder))
 
 ## Example
 #### Card
@@ -321,7 +321,7 @@ const orderPayRequest = {
 
 > PGAuthorizeOrder(x_api_version: string, order_id: string, AuthorizeOrderRequest: AuthorizeOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<PaymentEntity, any>>
 
-Preauthorization
+Preauthorization ([Docs](https://docs.cashfree.com/reference/pgauthorizeorder))
 
 ### Example
 
@@ -390,7 +390,7 @@ Name | Type | Description  | Notes
 
 > PGOrderAuthenticatePayment(x_api_version: string, cf_payment_id: string, OrderAuthenticatePaymentRequest: OrderAuthenticatePaymentRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<OrderAuthenticateEntity, any>>
 
-Submit or Resend OTP
+Submit or Resend OTP ([Docs](https://docs.cashfree.com/reference/pgorderauthenticatepayment))
 
 ### Example
 
