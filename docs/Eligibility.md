@@ -13,9 +13,7 @@ Method | HTTP request | Description
 
 > PGEligibilityFetchCardlessEMI(x_api_version: string, EligibilityFetchCardlessEMIRequest: EligibilityFetchCardlessEMIRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<import("axios").AxiosResponse<EligibilityCardlessEMIEntity[], any>>
 
-Get Eligible Cardless EMI
-
-
+[Get Eligible Cardless EMI](https://docs.cashfree.com/reference/pgeligibilityfetchcardlessemi)
 
 ### Example
 
