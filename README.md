@@ -66,7 +66,8 @@ Validate Webhook
 ```javascript
 app.post('/webhook', function (req, res) {
     try {
-        Cashfree.PGVerifyWebhookSignature(req.headers["x-webhook-signature"], req.rawBody, req.headers["x-webhook-timestamp"]))
+        const response = Cashfree.PGVerifyWebhookSignature(req.headers["x-webhook-signature"], req.rawBody, req.headers["x-webhook-timestamp"]))
+        console.log(response.object)
     } catch (err) {
         console.log(err.message)
     }
@@ -92,6 +93,8 @@ app.post('/webhook', function (req, res) {
 - [Offers](docs/Offers.md)
 
 - [Reconciliation](docs/Reconciliation.md)
+
+- [Webhook](docs/Webhook.md)
 
 ## Licence
 
