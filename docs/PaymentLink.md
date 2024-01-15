@@ -33,41 +33,92 @@ Name | Type | Description  | Notes
 **linkId** | **string** | The payment link ID for which you want to view the details. | 
 **xApiVersion** | **string** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
 **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
-**xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
+
 
 ### Response
 
 ```json
 {
-  cf_link_id: 29317867,
-  link_id: 'my_link_id_test',
-  link_status: 'CANCELLED',
-  link_currency: 'INR',
-  link_amount: 100,
-  link_amount_paid: 0,
-  link_partial_payments: true,
-  link_minimum_partial_amount: 20,
-  link_purpose: 'Payment for PlayStation 11',
-  link_created_at: '2024-01-11T19:07:19+05:30',
-  customer_details: {
-    customer_name: 'John Doe',
-    country_code: '+91',
-    customer_phone: '9999999999',
-    customer_email: 'john@cashfree.com'
+  "cf_link_id": 1996567,
+  "link_id": "my_link_id",
+  "link_status": "ACTIVE",
+  "link_currency": "INR",
+  "link_amount": 100,
+  "link_amount_paid": 0,
+  "link_partial_payments": true,
+  "link_minimum_partial_amount": 20,
+  "link_purpose": "Payment for PlayStation 11",
+  "link_created_at": "2021-09-30T17:05:01+05:30",
+  "customer_details": {
+    "customer_name": "John Doe",
+    "customer_phone": "9999999999",
+    "customer_email": "john@example.com"
   },
-  link_meta: {
-    notify_url: 'https://ee08e626ecd88c61c85f5c69c0418cb5.m.pipedream.net',
-    return_url: 'https://b8af79f41056.eu.ngrok.io',
-    upi_intent: 'false'
+  "link_meta": {
+    "title": "link_meta",
+    "description": "Payment link meta information object",
+    "type": "object",
+    "example": {
+      "notify_url": "https://ee08e626ecd88c61c85f5c69c0418cb5.m.pipedream.net",
+      "upi_intent": false,
+      "return_url": "https://b8af79f41056.eu.ngrok.io"
+    },
+    "properties": {
+      "notify_url": {
+        "type": "string",
+        "description": "Notification URL for server-server communication. It should be an https URL."
+      },
+      "upi_intent": {
+        "type": "boolean",
+        "description": "If \"true\", link will directly open UPI Intent flow on mobile, and normal link flow elsewhere"
+      },
+      "return_url": {
+        "type": "string",
+        "description": "The URL to which user will be redirected to after the payment is done on the link. Maximum length: 250."
+      },
+      "payment_methods": {
+        "type": "string",
+        "description": "Allowed payment modes for this link. Pass comma-separated values among following options - \"cc\", \"dc\", \"ccc\", \"ppc\", \"nb\", \"upi\", \"paypal\", \"app\". Leave it blank to show all available payment methods"
+      }
+    },
+    "x-readme-ref-name": "LinkMetaEntity"
   },
-  link_url: 'https://payments.cashfree.com/links/T63h9t9d77dg',
-  link_expiry_time: '2024-10-14T15:04:05+05:30',
-  link_notes: { key_1: 'value_1', key_2: 'value_2' },
-  link_auto_reminders: false,
-  link_notify: { send_email: true, send_sms: false },
-  thank_you_msg: '',
-  terms_and_conditions: '',
-  enable_invoice: false
+  "link_url": "https://payments-test.cashfree.com/links/o1tf1nvcvjhg",
+  "link_expiry_time": "2021-10-14T15:04:05+05:30",
+  "link_notes": {
+    "title": "link_notes",
+    "type": "object",
+    "description": "Key-value pair that can be used to store additional information about the entity. Maximum 5 key-value pairs",
+    "example": {
+      "key_1": "value_1",
+      "key_2": "value_2"
+    },
+    "additionalProperties": {
+      "type": "string"
+    },
+    "x-readme-ref-name": "LinkNotesEntity"
+  },
+  "link_auto_reminders": true,
+  "link_notify": {
+    "title": "link_notify",
+    "type": "object",
+    "description": "Payment link Notify Object for SMS and Email",
+    "example": {
+      "send_sms": false,
+      "send_email": true
+    },
+    "properties": {
+      "send_sms": {
+        "type": "boolean",
+        "description": "If \"true\", Cashfree will send sms on customer_phone"
+      },
+      "send_email": {
+        "type": "boolean",
+        "description": "If \"true\", Cashfree will send email on customer_email"
+      }
+    },
+    "x-readme-ref-name": "LinkNotifyEntity"
+  }
 }
 ```
 
@@ -124,42 +175,92 @@ Name | Type | Description  | Notes
 **xApiVersion** | **string*** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
 **createLinkRequest** | **CreateLinkRequest*** | Request Body to Create Payment Links | 
 **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
-**xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
+
 
 ### Response
 
 ```json
 {
-  cf_link_id: 29317867,
-  link_id: 'my_link_id_test',
-  link_status: 'ACTIVE',
-  link_currency: 'INR',
-  link_amount: 100,
-  link_amount_paid: 0,
-  link_partial_payments: true,
-  link_minimum_partial_amount: 20,
-  link_purpose: 'Payment for PlayStation 11',
-  link_created_at: '2024-01-11T19:07:19+05:30',
-  customer_details: {
-    customer_name: 'John Doe',
-    country_code: '+91',
-    customer_phone: '9999999999',
-    customer_email: 'john@cashfree.com'
+  "cf_link_id": 1996567,
+  "link_id": "my_link_id",
+  "link_status": "ACTIVE",
+  "link_currency": "INR",
+  "link_amount": 100,
+  "link_amount_paid": 0,
+  "link_partial_payments": true,
+  "link_minimum_partial_amount": 20,
+  "link_purpose": "Payment for PlayStation 11",
+  "link_created_at": "2021-09-30T17:05:01+05:30",
+  "customer_details": {
+    "customer_name": "John Doe",
+    "customer_phone": "9999999999",
+    "customer_email": "john@example.com"
   },
-  link_meta: {
-    notify_url: 'https://ee08e626ecd88c61c85f5c69c0418cb5.m.pipedream.net',
-    payment_methods: '',
-    return_url: 'https://b8af79f41056.eu.ngrok.io',
-    upi_intent: 'false'
+  "link_meta": {
+    "title": "link_meta",
+    "description": "Payment link meta information object",
+    "type": "object",
+    "example": {
+      "notify_url": "https://ee08e626ecd88c61c85f5c69c0418cb5.m.pipedream.net",
+      "upi_intent": false,
+      "return_url": "https://b8af79f41056.eu.ngrok.io"
+    },
+    "properties": {
+      "notify_url": {
+        "type": "string",
+        "description": "Notification URL for server-server communication. It should be an https URL."
+      },
+      "upi_intent": {
+        "type": "boolean",
+        "description": "If \"true\", link will directly open UPI Intent flow on mobile, and normal link flow elsewhere"
+      },
+      "return_url": {
+        "type": "string",
+        "description": "The URL to which user will be redirected to after the payment is done on the link. Maximum length: 250."
+      },
+      "payment_methods": {
+        "type": "string",
+        "description": "Allowed payment modes for this link. Pass comma-separated values among following options - \"cc\", \"dc\", \"ccc\", \"ppc\", \"nb\", \"upi\", \"paypal\", \"app\". Leave it blank to show all available payment methods"
+      }
+    },
+    "x-readme-ref-name": "LinkMetaEntity"
   },
-  link_url: 'https://payments.cashfree.com/links/T63h9t9d77dg',
-  link_expiry_time: '2024-10-14T15:04:05+05:30',
-  link_notes: { key_1: 'value_1', key_2: 'value_2' },
-  link_auto_reminders: false,
-  link_notify: { send_email: true, send_sms: false },
-  thank_you_msg: '',
-  terms_and_conditions: '',
-  enable_invoice: false
+  "link_url": "https://payments-test.cashfree.com/links/o1tf1nvcvjhg",
+  "link_expiry_time": "2021-10-14T15:04:05+05:30",
+  "link_notes": {
+    "title": "link_notes",
+    "type": "object",
+    "description": "Key-value pair that can be used to store additional information about the entity. Maximum 5 key-value pairs",
+    "example": {
+      "key_1": "value_1",
+      "key_2": "value_2"
+    },
+    "additionalProperties": {
+      "type": "string"
+    },
+    "x-readme-ref-name": "LinkNotesEntity"
+  },
+  "link_auto_reminders": true,
+  "link_notify": {
+    "title": "link_notify",
+    "type": "object",
+    "description": "Payment link Notify Object for SMS and Email",
+    "example": {
+      "send_sms": false,
+      "send_email": true
+    },
+    "properties": {
+      "send_sms": {
+        "type": "boolean",
+        "description": "If \"true\", Cashfree will send sms on customer_phone"
+      },
+      "send_email": {
+        "type": "boolean",
+        "description": "If \"true\", Cashfree will send email on customer_email"
+      }
+    },
+    "x-readme-ref-name": "LinkNotifyEntity"
+  }
 }
 ```
 
@@ -187,38 +288,91 @@ Name | Type | Description  | Notes
 **linkId** | **string*** | The payment link ID for which you want to view the details. | 
 **xApiVersion** | **string*** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
 **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
-**xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
+
 
 ### Response
 ```json
 {
-  cf_link_id: 29317867,
-  customer_details: {
-    customer_name: 'John Doe',
-    country_code: '+91',
-    customer_phone: '9999999999',
-    customer_email: 'john@cashfree.com'
+  "cf_link_id": 1996567,
+  "link_id": "my_link_id",
+  "link_status": "ACTIVE",
+  "link_currency": "INR",
+  "link_amount": 100,
+  "link_amount_paid": 0,
+  "link_partial_payments": true,
+  "link_minimum_partial_amount": 20,
+  "link_purpose": "Payment for PlayStation 11",
+  "link_created_at": "2021-09-30T17:05:01+05:30",
+  "customer_details": {
+    "customer_name": "John Doe",
+    "customer_phone": "9999999999",
+    "customer_email": "john@example.com"
   },
-  entity: 'link',
-  link_amount: 100,
-  link_amount_paid: 0,
-  link_auto_reminders: false,
-  link_created_at: '2024-01-11T19:07:19+05:30',
-  link_currency: 'INR',
-  link_expiry_time: '2024-10-14T15:04:05+05:30',
-  link_id: 'my_link_id_test',
-  link_meta: {
-    notify_url: 'https://ee08e626ecd88c61c85f5c69c0418cb5.m.pipedream.net',
-    return_url: 'https://b8af79f41056.eu.ngrok.io',
-    upi_intent: 'false'
+  "link_meta": {
+    "title": "link_meta",
+    "description": "Payment link meta information object",
+    "type": "object",
+    "example": {
+      "notify_url": "https://ee08e626ecd88c61c85f5c69c0418cb5.m.pipedream.net",
+      "upi_intent": false,
+      "return_url": "https://b8af79f41056.eu.ngrok.io"
+    },
+    "properties": {
+      "notify_url": {
+        "type": "string",
+        "description": "Notification URL for server-server communication. It should be an https URL."
+      },
+      "upi_intent": {
+        "type": "boolean",
+        "description": "If \"true\", link will directly open UPI Intent flow on mobile, and normal link flow elsewhere"
+      },
+      "return_url": {
+        "type": "string",
+        "description": "The URL to which user will be redirected to after the payment is done on the link. Maximum length: 250."
+      },
+      "payment_methods": {
+        "type": "string",
+        "description": "Allowed payment modes for this link. Pass comma-separated values among following options - \"cc\", \"dc\", \"ccc\", \"ppc\", \"nb\", \"upi\", \"paypal\", \"app\". Leave it blank to show all available payment methods"
+      }
+    },
+    "x-readme-ref-name": "LinkMetaEntity"
   },
-  link_minimum_partial_amount: 20,
-  link_notes: { key_1: 'value_1', key_2: 'value_2' },
-  link_notify: { send_email: true, send_sms: false },
-  link_partial_payments: true,
-  link_purpose: 'Payment for PlayStation 11',
-  link_status: 'ACTIVE',
-  link_url: 'https://payments.cashfree.com/links/T63h9t9d77dg'
+  "link_url": "https://payments-test.cashfree.com/links/o1tf1nvcvjhg",
+  "link_expiry_time": "2021-10-14T15:04:05+05:30",
+  "link_notes": {
+    "title": "link_notes",
+    "type": "object",
+    "description": "Key-value pair that can be used to store additional information about the entity. Maximum 5 key-value pairs",
+    "example": {
+      "key_1": "value_1",
+      "key_2": "value_2"
+    },
+    "additionalProperties": {
+      "type": "string"
+    },
+    "x-readme-ref-name": "LinkNotesEntity"
+  },
+  "link_auto_reminders": true,
+  "link_notify": {
+    "title": "link_notify",
+    "type": "object",
+    "description": "Payment link Notify Object for SMS and Email",
+    "example": {
+      "send_sms": false,
+      "send_email": true
+    },
+    "properties": {
+      "send_sms": {
+        "type": "boolean",
+        "description": "If \"true\", Cashfree will send sms on customer_phone"
+      },
+      "send_email": {
+        "type": "boolean",
+        "description": "If \"true\", Cashfree will send email on customer_email"
+      }
+    },
+    "x-readme-ref-name": "LinkNotifyEntity"
+  }
 }
 ```
 
@@ -250,46 +404,48 @@ Name | Type | Description  | Notes
 **linkId** | **string*** | The payment link ID for which you want to view the details. | 
 **xApiVersion** | **string*** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
 **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
-**xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
+
 
 ### Response
 ```json
 [
   {
-    cf_order_id: 2586071113,
-    customer_details: {
-      customer_id: null,
-      customer_name: 'John Doe',
-      customer_email: 'john@cashfree.com',
-      customer_phone: '+919999999999',
-      customer_uid: null
+    "cf_order_id": 2149460581,
+    "created_at": "2023-08-11T18:02:46+05:30",
+    "customer_details": {
+      "customer_id": "409128494",
+      "customer_name": "Johmn Doe",
+      "customer_email": "pmlpayme@ntsas.com",
+      "customer_phone": "9876543210"
     },
-    entity: 'order',
-    link_id: 'my_link_id_test_01',
-    order_amount: 1,
-    order_currency: 'INR',
-    order_expiry_time: '2024-01-11T19:26:28+05:30',
-    order_id: 'CFPay_c63hatm02j0g_3eef46m9il',
-    order_note: 'payment_link_29324360',
-    order_splits: [],
-    order_status: 'PAID',
-    order_tags: {
-      cf_link_id: '29324360',
-      key_1: 'value_1',
-      key_2: 'value_2',
-      link_id: 'my_link_id_test_01'
+    "entity": "order",
+    "order_amount": 22,
+    "order_currency": "INR",
+    "order_expiry_time": "2023-09-09T18:02:46+05:30",
+    "order_id": "order_3242Tq4Edj9CC5RDcMeobmJOWOBJij",
+    "order_meta": {
+      "return_url": "https://example.com/return/{order_id}",
+      "notify_url": "https://example.com/notify",
+      "payment_methods": "cc"
     },
-    payment_session_id: 'session_GAyx5_ZSKXQyPfIiya6uJoAs7eDrdDtcFbp--rqK9rrGNAnOCiOjVIoptu7Td5UJQhxTKykQcUS7-6y5Rw_YSTc4y69QLeLs__WvWZnE89Ix',
-    payments: {
-      url: 'https://api.cashfree.com/pg/orders/CFPay_c63hatm02j0g_3eef46m9il/payments'
+    "order_note": "some order note LIST",
+    "order_splits": [],
+    "order_status": "ACTIVE",
+    "order_tags": {
+      "name": "John",
+      "age": "19"
     },
-    refunds: {
-      url: 'https://api.cashfree.com/pg/orders/CFPay_c63hatm02j0g_3eef46m9il/refunds'
+    "payment_session_id": "session_a1VXIPJo8kh7IBigVXX8LgTMupQW_cu25FS8KwLwQLOmiHqbBxq5UhEilrhbDSKKHA6UAuOj9506aaHNlFAHEqYrHSEl9AVtYQN9LIIc4vkH",
+    "payments": {
+      "url": "https://sandbox.cashfree.com/pg/orders/order_3242Tq4Edj9CC5RDcMeobmJOWOBJij/payments"
     },
-    settlements: {
-      url: 'https://api.cashfree.com/pg/orders/CFPay_c63hatm02j0g_3eef46m9il/settlements'
+    "refunds": {
+      "url": "https://sandbox.cashfree.com/pg/orders/order_3242Tq4Edj9CC5RDcMeobmJOWOBJij/refunds"
     },
-    terminal_data: null
+    "settlements": {
+      "url": "https://sandbox.cashfree.com/pg/orders/order_3242Tq4Edj9CC5RDcMeobmJOWOBJij/settlements"
+    },
+    "terminal_data": null
   }
 ]
 ```

@@ -36,41 +36,42 @@ Name | Type | Description  | Notes
 **orderId** | **string*** | The id which uniquely identifies your order | 
 **cfPaymentId** | **string*** | The Cashfree payment or transaction ID. | 
 **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
-**xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
+
 
 ### Response
 ```json
 {
-  auth_id: null,
-  authorization: null,
-  bank_reference: null,
-  cf_payment_id: 2150153399,
-  entity: 'payment',
-  error_details: null,
-  is_captured: false,
-  order_amount: 1,
-  order_id: 'order_342WhBoQTXIsQsc75BGEAVKY5QLWF',
-  payment_amount: 1.03,
-  payment_completion_time: '2023-10-16T10:01:33+05:30',
-  payment_currency: 'INR',
-  payment_gateway_details: null,
-  payment_group: 'credit_card',
-  payment_message: 'User dropped and did not complete the two factor authentication',
-  payment_method: {
-    card: {
-      channel: 'link',
-      card_number: 'XXXXXXXXXXXX1111',
-      card_network: 'visa',
-      card_type: 'credit_card',
-      card_country: 'US',
-      card_bank_name: 'Others',
-      card_network_reference_id: null,
-      card_sub_type: 'R'
+  "cf_payment_id": 12376123,
+  "order_id": "order_8123",
+  "entity": "payment",
+  "payment_currency": "INR",
+  "error_details": null,
+  "order_amount": 10.01,
+  "is_captured": true,
+  "payment_group": "upi",
+  "authorization": {
+    "action": "CAPTURE",
+    "status": "PENDING",
+    "captured_amount": 100,
+    "start_time": "2022-02-09T18:04:34+05:30",
+    "end_time": "2022-02-19T18:04:34+05:30",
+    "approve_by": "2022-02-09T18:04:34+05:30",
+    "action_reference": "6595231908096894505959",
+    "action_time": "2022-08-03T16:09:51"
+  },
+  "payment_method": {
+    "upi": {
+      "channel": "collect",
+      "upi_id": "rohit@xcxcx"
     }
   },
-  payment_offers: [],
-  payment_status: 'USER_DROPPED',
-  payment_time: '2023-10-16T09:50:24+05:30'
+  "payment_amount": 10.01,
+  "payment_time": "2021-07-23T12:15:06+05:30",
+  "payment_completion_time": "2021-07-23T12:18:59+05:30",
+  "payment_status": "SUCCESS",
+  "payment_message": "Transaction successful",
+  "bank_reference": "P78112898712",
+  "auth_id": "A898101"
 }
 ```
 
@@ -102,31 +103,72 @@ Name | Type | Description  | Notes
 **xApiVersion** | **string*** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
 **orderId** | **string*** | The id which uniquely identifies your order | 
 **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
-**xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
+
 
 ### Response
 ```json
 [
   {
-    auth_id: null,
-    authorization: null,
-    bank_reference: null,
-    cf_payment_id: 2150153399,
-    entity: 'payment',
-    error_details: null,
-    is_captured: false,
-    order_amount: 1,
-    order_id: 'order_342WhBoQTXIsQsc75BGEAVKY5QLWF',
-    payment_amount: 1.03,
-    payment_completion_time: '2023-10-16T10:01:33+05:30',
-    payment_currency: 'INR',
-    payment_gateway_details: null,
-    payment_group: 'credit_card',
-    payment_message: 'User dropped and did not complete the two factor authentication',
-    payment_method: { card: [Object] },
-    payment_offers: null,
-    payment_status: 'USER_DROPPED',
-    payment_time: '2023-10-16T09:50:24+05:30'
+    "cf_payment_id": 12376123,
+    "order_id": "order_8123",
+    "entity": "payment",
+    "payment_currency": "INR",
+    "error_details": null,
+    "order_amount": 10.01,
+    "is_captured": true,
+    "payment_group": "upi",
+    "authorization": {
+      "action": "CAPTURE",
+      "status": "PENDING",
+      "captured_amount": 100,
+      "start_time": "2022-02-09T18:04:34+05:30",
+      "end_time": "2022-02-19T18:04:34+05:30",
+      "approve_by": "2022-02-09T18:04:34+05:30",
+      "action_reference": "6595231908096894505959",
+      "action_time": "2022-08-03T16:09:51"
+    },
+    "payment_method": {
+      "upi": {
+        "channel": "collect",
+        "upi_id": "rohit@xcxcx"
+      }
+    },
+    "payment_amount": 10.01,
+    "payment_time": "2021-07-23T12:15:06+05:30",
+    "payment_completion_time": "2021-07-23T12:18:59+05:30",
+    "payment_status": "SUCCESS",
+    "payment_message": "Transaction successful",
+    "bank_reference": "P78112898712",
+    "auth_id": "A898101"
+  },
+  {
+    "cf_payment_id": 12376124,
+    "order_id": "order_8123",
+    "entity": "payment",
+    "payment_currency": "INR",
+    "error_details": {
+      "error_code": "TRANSACTION_DECLINED",
+      "error_description": "issuer bank or payment service provider declined the transaction",
+      "error_reason": "auth_declined",
+      "error_source": "customer"
+    },
+    "order_amount": 10.01,
+    "is_captured": true,
+    "payment_group": "credit_card",
+    "authorization": null,
+    "payment_method": {
+      "card": {
+        "channel": "link",
+        "card_number": "xxxxxx1111"
+      }
+    },
+    "payment_amount": 10.01,
+    "payment_time": "2021-07-23T12:15:06+05:30",
+    "payment_completion_time": "2021-07-23T12:18:59+05:30",
+    "payment_status": "FAILED",
+    "payment_message": "Transaction failed",
+    "bank_reference": "P78112898712",
+    "auth_id": "A898101"
   }
 ]
 ```
@@ -168,7 +210,7 @@ Name | Type | Description  | Notes
  **payOrderRequest** | **PayOrderRequest*** | Request body to create a transaction at cashfree using &#x60;payment_session_id&#x60; | 
  **xApiVersion** | **string** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
  **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
- **xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
+ 
 
 #### Netbanking
 ```javascript
@@ -303,17 +345,19 @@ const orderPayRequest = {
 ### Response
 ```json
 {
-  action: 'link',
-  cf_payment_id: 14910204132,
-  channel: 'link',
-  data: {
-    url: 'https://sandbox.cashfree.com/pg/view/gateway/session_4OuDhN3r5qzG-CuFAVl3PDvqAQ6M5uNPHxk5d8muF3K6lIT7W9NmdQQyF5-znAcouSeTtUly1uhpVrfVWa5Seh9fZQRAKLcRBfoGjkORPpj-64885a78-bf64-439e-be5b-8bc008f04678',
-    payload: null,
-    content_type: null,
-    method: null
-  },
-  payment_amount: 1,
-  payment_method: 'card'
+  "payment_method": "card",
+  "channel": "link",
+  "action": "link",
+  "cf_payment_id": 91235,
+  "payment_amount": 22.42,
+  "data": {
+    "url": "https://sandbox.cashfree.com/pg/view/gateway/FHsuvhayLM5mmhINoqri7ba296e2ebca8b98e6119f6223021a13",
+    "payload": {
+      "name": "card"
+    },
+    "content_type": "application/x-www-form-urlencoded",
+    "method": "post"
+  }
 }
 ```
 
@@ -346,7 +390,7 @@ Name | Type | Description  | Notes
  **authorizeOrderRequest** | **AuthorizeOrderRequest*** | Request to Capture or Void Transactions |
  **xApiVersion** | **string** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
  **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
- **xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
+ 
 
 ### Response
 ```json
@@ -415,15 +459,15 @@ Name | Type | Description  | Notes
 **xApiVersion** | **string** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
 **orderAuthenticatePaymentRequest** | **OrderAuthenticatePaymentRequest*** | Request body to submit/resend headless OTP. To use this API make sure you have headless OTP enabled for your account | 
 **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
-**xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
+
 
 ### Response
 ```json
 {
-  action: 'SUBMIT_OTP',
-  authenticate_status: 'SUCCESS',
-  cf_payment_id: 14910204607,
-  payment_message: 'payment successful'
+  "cf_payment_id": 975654863,
+  "authenticate_status": "FAILED",
+  "action": "SUBMIT_OTP",
+  "payment_message": "otp is invalid"
 }
 ```
 

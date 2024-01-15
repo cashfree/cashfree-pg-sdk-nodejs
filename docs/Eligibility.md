@@ -39,8 +39,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **xApiVersion** | **string*** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
 **eligibilityFetchCardlessEMIRequest** | [**EligibilityFetchCardlessEMIRequest***](Eligibility.md#EligibilityFetchCardlessEMIRequest) | Request Body to get eligible cardless emi options for a customer and order | 
-**xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
-**xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
+**xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
 
 ### Response
 
@@ -96,88 +95,46 @@ Name | Type | Description  | Notes
 **xApiVersion** | **string*** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
 **eligibilityFetchOffersRequest** | [**EligibilityFetchOffersRequest***](EligibilityFetchOffersRequest.md) | Request Body to get eligible offers for a customer and order | 
 **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
-**xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
 
 ### Response
 
 ```json
 [
   {
-    eligibility: true,
-    entity_type: 'CASHBACK',
-    entity_value: '9364f4ba-717f-42b6-884e-bc1fcb03c000',
-    entity_details: {
-      offer_id: '9364f4ba-717f-42b6-884e-bc1fcb03c000',
-      offer_status: 'active',
-      offer_meta: [Object],
-      offer_tnc: [Object],
-      offer_details: [Object],
-      offer_validations: [Object]
-    }
-  },
-  {
-    eligibility: true,
-    entity_type: 'NO_COST_EMI',
-    entity_value: '298924aa-2288-4fbb-9c48-35bd55af1b4b',
-    entity_details: {
-      offer_id: '298924aa-2288-4fbb-9c48-35bd55af1b4b',
-      offer_status: 'active',
-      offer_meta: [Object],
-      offer_tnc: [Object],
-      offer_details: [Object],
-      offer_validations: [Object]
-    }
-  },
-  {
-    eligibility: true,
-    entity_type: 'NO_COST_EMI',
-    entity_value: 'dacd3ef0-0879-4563-9665-cd95c9af1d32',
-    entity_details: {
-      offer_id: 'dacd3ef0-0879-4563-9665-cd95c9af1d32',
-      offer_status: 'active',
-      offer_meta: [Object],
-      offer_tnc: [Object],
-      offer_details: [Object],
-      offer_validations: [Object]
-    }
-  },
-  {
-    eligibility: true,
-    entity_type: 'NO_COST_EMI',
-    entity_value: '58d1a34a-8e77-4b67-973f-44245774ed28',
-    entity_details: {
-      offer_id: '58d1a34a-8e77-4b67-973f-44245774ed28',
-      offer_status: 'active',
-      offer_meta: [Object],
-      offer_tnc: [Object],
-      offer_details: [Object],
-      offer_validations: [Object]
-    }
-  },
-  {
-    eligibility: true,
-    entity_type: 'NO_COST_EMI',
-    entity_value: 'ba209d6e-d699-4a78-b98c-04c18979bf70',
-    entity_details: {
-      offer_id: 'ba209d6e-d699-4a78-b98c-04c18979bf70',
-      offer_status: 'active',
-      offer_meta: [Object],
-      offer_tnc: [Object],
-      offer_details: [Object],
-      offer_validations: [Object]
-    }
-  },
-  {
-    eligibility: true,
-    entity_type: 'NO_COST_EMI',
-    entity_value: '9b4cdb0e-1f31-4c7b-8bee-6feeae254f84',
-    entity_details: {
-      offer_id: '9b4cdb0e-1f31-4c7b-8bee-6feeae254f84',
-      offer_status: 'active',
-      offer_meta: [Object],
-      offer_tnc: [Object],
-      offer_details: [Object],
-      offer_validations: [Object]
+    "offer_id": "d2b430fb-1afe-455a-af31-66d00377b29a",
+    "offer_status": "active",
+    "offer_meta": {
+      "offer_title": "some title",
+      "offer_description": "some offer description",
+      "offer_code": "CFTESTOFFER",
+      "offer_start_time": "2023-03-21T08:09:51Z",
+      "offer_end_time": "2023-03-29T08:09:51Z"
+    },
+    "offer_tnc": {
+      "offer_tnc_type": "text",
+      "offer_tnc_value": "TnC for the Offer."
+    },
+    "offer_details": {
+      "offer_type": "DISCOUNT_AND_CASHBACK",
+      "discount_details": {
+        "discount_type": "flat",
+        "discount_value": "10",
+        "max_discount_amount": "10"
+      },
+      "cashback_details": {
+        "cashback_type": "percentage",
+        "cashback_value": "20",
+        "max_cashback_amount": "150"
+      }
+    },
+    "offer_validations": {
+      "min_amount": 10,
+      "payment_method": {
+        "wallet": {
+          "issuer": "paytm"
+        }
+      },
+      "max_allowed": 2
     }
   }
 ]
@@ -218,17 +175,18 @@ Name | Type | Description  | Notes
 **xApiVersion** | **string*** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
 **eligibilityFetchPaylaterRequest** | [**EligibilityFetchPaylaterRequest***](EligibilityFetchPaylaterRequest.md) | Request Body to get eligible paylater options for a customer and order | 
 **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
-**xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
 
 ### Response
 
 ```json
 [
   {
-    eligibility: true,
-    entity_type: 'paylater',
-    entity_value: 'olapostpaid',
-    entity_details: { payment_method: 'olapostpaid' }
+    "eligibility": true,
+    "entity_type": "paylater",
+    "entity_value": "olapostpaid",
+    "entity_details": {
+      "payment_method": "olapostpaid"
+    }
   }
 ]
 ```
@@ -265,118 +223,30 @@ Name | Type | Description  | Notes
 **xApiVersion** | **string*** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
 **eligibilityFetchPaymentMethodsRequest** | [**EligibilityFetchPaymentMethodsRequest***](EligibilityFetchPaymentMethodsRequest.md) | Request Body to get eligible payment methods for an account and order | 
 **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
-**xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
 
 ### Response
 ```json
 [
   {
-    eligibility: true,
-    entity_type: 'payment_methods',
-    entity_value: 'debit_card',
-    entity_details: { payment_method_details: [Array] }
-  },
-  {
-    eligibility: true,
-    entity_type: 'payment_methods',
-    entity_value: 'credit_card',
-    entity_details: { payment_method_details: [Array] }
-  },
-  {
-    eligibility: true,
-    entity_type: 'payment_methods',
-    entity_value: 'prepaid_card',
-    entity_details: { payment_method_details: [Array] }
-  },
-  {
-    eligibility: true,
-    entity_type: 'payment_methods',
-    entity_value: 'upi',
-    entity_details: { payment_method_details: [Array] }
-  },
-  {
-    eligibility: true,
-    entity_type: 'payment_methods',
-    entity_value: 'wallet',
-    entity_details: { payment_method_details: [Array] }
-  },
-  {
-    eligibility: true,
-    entity_type: 'payment_methods',
-    entity_value: 'netbanking',
-    entity_details: { payment_method_details: [Array] }
-  },
-  {
-    eligibility: true,
-    entity_type: 'payment_methods',
-    entity_value: 'banktransfer',
-    entity_details: { payment_method_details: [Array] }
-  },
-  {
-    eligibility: true,
-    entity_type: 'payment_methods',
-    entity_value: 'paylater',
-    entity_details: { payment_method_details: [Array] }
-  },
-  {
-    eligibility: true,
-    entity_type: 'payment_methods',
-    entity_value: 'paypal',
-    entity_details: { payment_method_details: [Array] }
-  },
-  {
-    eligibility: true,
-    entity_type: 'payment_methods',
-    entity_value: 'debit_card_emi',
-    entity_details: { payment_method_details: [Array] }
-  },
-  {
-    eligibility: true,
-    entity_type: 'payment_methods',
-    entity_value: 'credit_card_emi',
-    entity_details: { payment_method_details: [Array] }
-  },
-  {
-    eligibility: true,
-    entity_type: 'payment_methods',
-    entity_value: 'upi_credit_card',
-    entity_details: { payment_method_details: [Array] }
-  },
-  {
-    eligibility: true,
-    entity_type: 'payment_methods',
-    entity_value: 'upi_ppi',
-    entity_details: { payment_method_details: [Array] }
-  },
-  {
-    eligibility: true,
-    entity_type: 'payment_methods',
-    entity_value: 'cardless_emi',
-    entity_details: { payment_method_details: [Array] }
-  },
-  {
-    eligibility: true,
-    entity_type: 'payment_methods',
-    entity_value: 'sbc_debit_card',
-    entity_details: { payment_method_details: [Array] }
-  },
-  {
-    eligibility: true,
-    entity_type: 'payment_methods',
-    entity_value: 'sbc_emandate',
-    entity_details: { payment_method_details: [Array] }
-  },
-  {
-    eligibility: true,
-    entity_type: 'payment_methods',
-    entity_value: 'sbc_upi',
-    entity_details: { payment_method_details: [Array] }
-  },
-  {
-    eligibility: true,
-    entity_type: 'payment_methods',
-    entity_value: 'sbc_credit_card',
-    entity_details: { payment_method_details: [Array] }
+    "eligibility": true,
+    "entity_type": "payment_methods",
+    "entity_value": "netbanking",
+    "entity_details": {
+      "payment_method_details": [
+        {
+          "nick": "motak_kahindra_bank",
+          "display": "Motak Kahindra Bank",
+          "eligibility": true,
+          "code": 3032
+        },
+        {
+          "nick": "bank_of_india",
+          "display": "Bank Of India",
+          "eligibility": true,
+          "code": 3031
+        }
+      ]
+    }
   }
 ]
 ```

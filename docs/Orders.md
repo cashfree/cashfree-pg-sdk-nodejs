@@ -50,7 +50,7 @@ Name | Type | Description  | Notes
  **xApiVersion** | **string** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
  **createOrderRequest** | [**CreateOrderRequest**](Orders.md#CreateOrderRequest) | Request body to create an order at cashfree | 
  **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
- **xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
+ 
  
  ### CreateOrderRequest
  Name | Type | Description  | Example
@@ -81,40 +81,42 @@ Name | Type | Description  | Notes
 #### Response
 ```json
 {
-  cf_order_id: 2153275723,
-  created_at: '2024-01-11T14:26:19+05:30',
-  customer_details: {
-    customer_id: 'node_sdk_test',
-    customer_name: null,
-    customer_email: 'example@gmail.com',
-    customer_phone: '9999999999',
-    customer_uid: '71672e0e-4b3f-4afc-891f-cdf69f34f1e6'
+  "cf_order_id": 2149460581,
+  "created_at": "2023-08-11T18:02:46+05:30",
+  "customer_details": {
+    "customer_id": "409128494",
+    "customer_name": "Johmn Doe",
+    "customer_email": "pmlpayme@ntsas.com",
+    "customer_phone": "9876543210"
   },
-  entity: 'order',
-  order_amount: 1,
-  order_currency: 'INR',
-  order_expiry_time: '2024-02-10T14:26:19+05:30',
-  order_id: 'order_342annnkYeYMCNAguymxFwp6eV4ck',
-  order_meta: {
-    return_url: 'https://test.cashfree.com/pgappsdemos/return.php?order_id={order_id}',
-    notify_url: null,
-    payment_methods: null
+  "entity": "order",
+  "order_amount": 22,
+  "order_currency": "INR",
+  "order_expiry_time": "2023-09-09T18:02:46+05:30",
+  "order_id": "order_3242Tq4Edj9CC5RDcMeobmJOWOBJij",
+  "order_meta": {
+    "return_url": "https://example.com/return/{order_id}",
+    "notify_url": "https://example.com/notify",
+    "payment_methods": "cc"
   },
-  order_note: null,
-  order_splits: [],
-  order_status: 'ACTIVE',
-  order_tags: null,
-  payment_session_id: 'session_4OuDhN3r5qzG-CuFAVl3PDvqAQ6M5uNPHxk5d8muF3K6lIT7W9NmdQQyF5-znAcouSeTtUly1uhpVrfVWa5Seh9fZQRAKLcRBfoGjkORPpj-',
-  payments: {
-    url: 'https://sandbox.cashfree.com/pg/orders/order_342annnkYeYMCNAguymxFwp6eV4ck/payments'
+  "order_note": "some order note LIST",
+  "order_splits": [],
+  "order_status": "ACTIVE",
+  "order_tags": {
+    "name": "John",
+    "age": "19"
   },
-  refunds: {
-    url: 'https://sandbox.cashfree.com/pg/orders/order_342annnkYeYMCNAguymxFwp6eV4ck/refunds'
+  "payment_session_id": "session_a1VXIPJo8kh7IBigVXX8LgTMupQW_cu25FS8KwLwQLOmiHqbBxq5UhEilrhbDSKKHA6UAuOj9506aaHNlFAHEqYrHSEl9AVtYQN9LIIc4vkH",
+  "payments": {
+    "url": "https://sandbox.cashfree.com/pg/orders/order_3242Tq4Edj9CC5RDcMeobmJOWOBJij/payments"
   },
-  settlements: {
-    url: 'https://sandbox.cashfree.com/pg/orders/order_342annnkYeYMCNAguymxFwp6eV4ck/settlements'
+  "refunds": {
+    "url": "https://sandbox.cashfree.com/pg/orders/order_3242Tq4Edj9CC5RDcMeobmJOWOBJij/refunds"
   },
-  terminal_data: null
+  "settlements": {
+    "url": "https://sandbox.cashfree.com/pg/orders/order_3242Tq4Edj9CC5RDcMeobmJOWOBJij/settlements"
+  },
+  "terminal_data": null
 }
 ```
 
@@ -149,40 +151,42 @@ Name | Type | Description  | Notes
 #### Response
 ```json
 {
-  cf_order_id: 2153275723,
-  created_at: '2024-01-11T14:26:19+05:30',
-  customer_details: {
-    customer_id: 'node_sdk_test',
-    customer_name: null,
-    customer_email: 'example@gmail.com',
-    customer_phone: '9999999999',
-    customer_uid: '71672e0e-4b3f-4afc-891f-cdf69f34f1e6'
+  "cf_order_id": 2149460581,
+  "created_at": "2023-08-11T18:02:46+05:30",
+  "customer_details": {
+    "customer_id": "409128494",
+    "customer_name": "Johmn Doe",
+    "customer_email": "pmlpayme@ntsas.com",
+    "customer_phone": "9876543210"
   },
-  entity: 'order',
-  order_amount: 1,
-  order_currency: 'INR',
-  order_expiry_time: '2024-02-10T14:26:19+05:30',
-  order_id: 'order_342annnkYeYMCNAguymxFwp6eV4ck',
-  order_meta: {
-    return_url: 'https://test.cashfree.com/pgappsdemos/return.php?order_id={order_id}',
-    notify_url: null,
-    payment_methods: null
+  "entity": "order",
+  "order_amount": 22,
+  "order_currency": "INR",
+  "order_expiry_time": "2023-09-09T18:02:46+05:30",
+  "order_id": "order_3242Tq4Edj9CC5RDcMeobmJOWOBJij",
+  "order_meta": {
+    "return_url": "https://example.com/return/{order_id}",
+    "notify_url": "https://example.com/notify",
+    "payment_methods": "cc"
   },
-  order_note: null,
-  order_splits: [],
-  order_status: 'ACTIVE',
-  order_tags: null,
-  payment_session_id: 'session_4OuDhN3r5qzG-CuFAVl3PDvqAQ6M5uNPHxk5d8muF3K6lIT7W9NmdQQyF5-znAcouSeTtUly1uhpVrfVWa5Seh9fZQRAKLcRBfoGjkORPpj-',
-  payments: {
-    url: 'https://sandbox.cashfree.com/pg/orders/order_342annnkYeYMCNAguymxFwp6eV4ck/payments'
+  "order_note": "some order note LIST",
+  "order_splits": [],
+  "order_status": "ACTIVE",
+  "order_tags": {
+    "name": "John",
+    "age": "19"
   },
-  refunds: {
-    url: 'https://sandbox.cashfree.com/pg/orders/order_342annnkYeYMCNAguymxFwp6eV4ck/refunds'
+  "payment_session_id": "session_a1VXIPJo8kh7IBigVXX8LgTMupQW_cu25FS8KwLwQLOmiHqbBxq5UhEilrhbDSKKHA6UAuOj9506aaHNlFAHEqYrHSEl9AVtYQN9LIIc4vkH",
+  "payments": {
+    "url": "https://sandbox.cashfree.com/pg/orders/order_3242Tq4Edj9CC5RDcMeobmJOWOBJij/payments"
   },
-  settlements: {
-    url: 'https://sandbox.cashfree.com/pg/orders/order_342annnkYeYMCNAguymxFwp6eV4ck/settlements'
+  "refunds": {
+    "url": "https://sandbox.cashfree.com/pg/orders/order_3242Tq4Edj9CC5RDcMeobmJOWOBJij/refunds"
   },
-  terminal_data: null
+  "settlements": {
+    "url": "https://sandbox.cashfree.com/pg/orders/order_3242Tq4Edj9CC5RDcMeobmJOWOBJij/settlements"
+  },
+  "terminal_data": null
 }
 ```
 

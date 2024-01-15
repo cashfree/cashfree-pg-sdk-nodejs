@@ -33,31 +33,31 @@ Name | Type | Description  | Notes
 **instrumentId** | **string*** | The instrument_id which needs to be deleted | 
 **xApiVersion** | **string*** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
 **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
-**xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
+
 
 ### Response
 
 ```json
 {
-  instrument_id: '<instrument_id>',
-  instrument_type: 'card',
-  instrument_uid: '<instrument_uid>',
-  instrument_display: '<instrument_display>',
-  instrument_meta: {
-    card_network: 'visa',
-    card_bank_name: 'AXIS BANK',
-    card_country: 'IN',
-    card_type: 'credit_card',
-    card_sub_type: 'P',
-    card_token_details: {
-      par: '<par>',
-      expiry_month: '',
-      expiry_year: ''
+  "customer_id": "siddhesh_desai",
+  "afa_reference": "740324562",
+  "instrument_id": "54deabb4-ba45-4a60-9e6a-9c016fe7ab10",
+  "instrument_type": "card",
+  "instrument_uid": "0d8f70838cc5af8b1cd2bc0fe71278551fd3f1101e40020d89ad22ceba4f933c",
+  "instrument_display": "xxxxxxxxxxxx4375",
+  "instrument_status": "ACTIVE",
+  "created_at": "2021-11-11 16:57:57",
+  "instrument_meta": {
+    "card_network": "VISA",
+    "card_bank_name": "HDFC Bank Limited",
+    "card_country": "IN",
+    "card_type": "DEBIT_CARD",
+    "card_token_details": {
+      "par": "somepar",
+      "expiry_month": "12",
+      "expiry_year": "23"
     }
-  },
-  instrument_status: 'ACTIVE',
-  created_at: '2024-01-03T10:45:36.000+00:00',
-  afa_reference: '2369944214',
+  }
 }
 ```
 
@@ -89,31 +89,31 @@ Name | Type | Description  | Notes
 **instrumentId** | **string** | The instrument_id of the saved instrument which needs to be queried | 
 **xApiVersion** | **string** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
 **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
-**xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
+
 
 ### Response
 ```json
 {
-  instrument_id: '<instrument_id>',
-  instrument_type: 'card',
-  instrument_uid: '<instrument_uid>',
-  instrument_display: '<instrument_display>',
-  instrument_meta: {
-    card_network: 'visa',
-    card_bank_name: 'AXIS BANK',
-    card_country: 'IN',
-    card_type: 'credit_card',
-    card_sub_type: 'P',
-    card_token_details: {
-      par: '<par>',
-      expiry_month: '',
-      expiry_year: ''
+  "customer_id": "siddhesh_desai",
+  "afa_reference": "740324562",
+  "instrument_id": "54deabb4-ba45-4a60-9e6a-9c016fe7ab10",
+  "instrument_type": "card",
+  "instrument_uid": "0d8f70838cc5af8b1cd2bc0fe71278551fd3f1101e40020d89ad22ceba4f933c",
+  "instrument_display": "xxxxxxxxxxxx4375",
+  "instrument_status": "ACTIVE",
+  "created_at": "2021-11-11 16:57:57",
+  "instrument_meta": {
+    "card_network": "VISA",
+    "card_bank_name": "HDFC Bank Limited",
+    "card_country": "IN",
+    "card_type": "DEBIT_CARD",
+    "card_token_details": {
+      "par": "somepar",
+      "expiry_month": "12",
+      "expiry_year": "23"
     }
-  },
-  instrument_status: 'ACTIVE',
-  created_at: '2024-01-03T10:45:36.000+00:00',
-  afa_reference: '2369944214',
-}  
+  }
+}
 ```
 
 ## PGCustomerFetchInstruments
@@ -141,29 +141,32 @@ Name | Type | Description  | Notes
 **xApiVersion** | **string*** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
 **instrumentType** | **string*** | Payment mode or type of saved instrument  | 
 **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
-**xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
+
 
 ### Response
 ```json
 [
   {
-    instrument_id: '<instrument_id>',
-    instrument_type: 'card',
-    instrument_uid: '<instrument_uid>',
-    instrument_display: '<instrument_display>',
-    instrument_meta: {
-      card_network: 'visa',
-      card_bank_name: 'AXIS BANK',
-      card_country: 'IN',
-      card_type: 'credit_card',
-      card_sub_type: 'P',
-      card_token_details: [Object]
-    },
-    instrument_status: 'ACTIVE',
-    created_at: '2024-01-03T10:45:36.000+00:00',
-    afa_reference: '2369944214',
-    customer_id: '<customer_id>'
+  "customer_id": "siddhesh_desai",
+  "afa_reference": "740324562",
+  "instrument_id": "54deabb4-ba45-4a60-9e6a-9c016fe7ab10",
+  "instrument_type": "card",
+  "instrument_uid": "0d8f70838cc5af8b1cd2bc0fe71278551fd3f1101e40020d89ad22ceba4f933c",
+  "instrument_display": "xxxxxxxxxxxx4375",
+  "instrument_status": "ACTIVE",
+  "created_at": "2021-11-11 16:57:57",
+  "instrument_meta": {
+    "card_network": "VISA",
+    "card_bank_name": "HDFC Bank Limited",
+    "card_country": "IN",
+    "card_type": "DEBIT_CARD",
+    "card_token_details": {
+      "par": "somepar",
+      "expiry_month": "12",
+      "expiry_year": "23"
+    }
   }
+}
 ]
 ```
 
@@ -196,19 +199,19 @@ Name | Type | Description  | Notes
 **instrumentId** | **string*** | The instrument_id of the saved card instrument which needs to be queried | 
 **xApiVersion** | **string*** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
 **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
-**xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
+
 
 ### Response
 
 ```json
 {
-  instrument_id: '<instrument_id>',
-  token_requestor_id: '<token_requestor_id>',
-  card_number: '<card_number>',
-  card_expiry_mm: '05',
-  card_expiry_yy: '2025',
-  cryptogram: '<cryptogram>',
-  card_display: '<card_display>'
+  "instrument_id": "54deabb4-ba45-4a60-9e6a-9c016fe7ab10",
+  "token_requestor_id": "22457512314",
+  "card_number": "4491365621601472",
+  "card_expiry_mm": "06",
+  "card_expiry_yy": "2025",
+  "cryptogram": "AQBBBBBBZatIlaIAmWKSghwBBBB=",
+  "card_display": "1234"
 }
 ```
 

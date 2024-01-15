@@ -36,7 +36,7 @@ Name | Type | Description  | Notes
  **xApiVersion** | **string*** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
  **orderCreateRefundRequest** | [**OrderCreateRefundRequest***](Refunds.md#OrderCreateRefundRequest) | Request Body to Create Refunds |
  **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
- **xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
+ 
  
 #### OrderCreateRefundRequest
 Name | Type | Description  | Example
@@ -58,30 +58,30 @@ Name | Type | Description  | Example
 
 ```json
 {
-  cf_payment_id: 2388816360,
-  cf_refund_id: 'refund_40564529',
-  created_at: '2024-01-11T16:58:06+05:30',
-  entity: 'refund',
-  metadata: null,
-  order_id: 'order_145082ao5HaUJOvfXKfdQwZ3A1jy5Pq8',
-  processed_at: null,
-  refund_amount: 1,
-  refund_arn: null,
-  refund_charge: 0,
-  refund_currency: 'INR',
-  refund_id: 'refund_145082ao5HaUJOvfXKfdQwZ3A1jy5Pq8',
-  refund_mode: null,
-  refund_note: null,
-  refund_speed: {
-    requested: 'STANDARD',
-    accepted: 'STANDARD',
-    processed: null,
-    message: null
+  "cf_payment_id": 2388816360,
+  "cf_refund_id": "refund_40564529",
+  "created_at": "2024-01-11T16:58:06+05:30",
+  "entity": "refund",
+  "metadata": null,
+  "order_id": "order_145082ao5HaUJOvfXKfdQwZ3A1jy5Pq8",
+  "processed_at": null,
+  "refund_amount": 1,
+  "refund_arn": null,
+  "refund_charge": 0,
+  "refund_currency": "INR",
+  "refund_id": "refund_145082ao5HaUJOvfXKfdQwZ3A1jy5Pq8",
+  "refund_mode": null,
+  "refund_note": null,
+  "refund_speed": {
+    "requested": "STANDARD",
+    "accepted": "STANDARD",
+    "processed": null,
+    "message": null
   },
-  refund_splits: [],
-  refund_status: 'PENDING',
-  refund_type: 'MERCHANT_INITIATED',
-  status_description: 'In Progress'
+  "refund_splits": [],
+  "refund_status": "PENDING",
+  "refund_type": "MERCHANT_INITIATED",
+  "status_description": "In Progress"
 }
 ```
 
@@ -109,35 +109,35 @@ Name | Type | Description  | Notes
 **refundId** | **string** | Refund Id of the refund you want to fetch. | 
 **xApiVersion** | **string** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
 **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
-**xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
+
 
 ### Response
 ```json
 {
-  cf_payment_id: 2388816360,
-  cf_refund_id: 'refund_40564529',
-  created_at: '2024-01-11T16:58:06+05:30',
-  entity: 'refund',
-  metadata: null,
-  order_id: 'order_145082ao5HaUJOvfXKfdQwZ3A1jy5Pq8',
-  processed_at: null,
-  refund_amount: 1,
-  refund_arn: null,
-  refund_charge: 0,
-  refund_currency: 'INR',
-  refund_id: 'refund_145082ao5HaUJOvfXKfdQwZ3A1jy5Pq8',
-  refund_mode: null,
-  refund_note: null,
-  refund_speed: {
-    requested: 'STANDARD',
-    accepted: 'STANDARD',
-    processed: null,
-    message: null
+  "cf_payment_id": 2388816360,
+  "cf_refund_id": "refund_40564529",
+  "created_at": "2024-01-11T16:58:06+05:30",
+  "entity": "refund",
+  "metadata": null,
+  "order_id": "order_145082ao5HaUJOvfXKfdQwZ3A1jy5Pq8",
+  "processed_at": null,
+  "refund_amount": 1,
+  "refund_arn": null,
+  "refund_charge": 0,
+  "refund_currency": "INR",
+  "refund_id": "refund_145082ao5HaUJOvfXKfdQwZ3A1jy5Pq8",
+  "refund_mode": null,
+  "refund_note": null,
+  "refund_speed": {
+    "requested": "STANDARD",
+    "accepted": "STANDARD",
+    "processed": null,
+    "message": null
   },
-  refund_splits: [],
-  refund_status: 'PENDING',
-  refund_type: 'MERCHANT_INITIATED',
-  status_description: 'In Progress'
+  "refund_splits": [],
+  "refund_status": "PENDING",
+  "refund_type": "MERCHANT_INITIATED",
+  "status_description": "In Progress"
 }
 ```
 
@@ -167,37 +167,37 @@ Name | Type | Description  | Notes
 **orderId** | **string** | The id which uniquely identifies your order | 
 **xApiVersion** | **string** | API version to be used. Format is in YYYY-MM-DD | [default to &quot;2022-09-01&quot;]
 **xRequestId** | **string** | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | 
-**xIdempotencyKey** | **string** | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | 
+
 
 ### Response
 ```json
 [
   {
-    cf_payment_id: 2388816360,
-    cf_refund_id: 'refund_40564529',
-    created_at: '2024-01-11T16:58:06+05:30',
-    entity: 'refund',
-    metadata: null,
-    order_id: 'order_145082ao5HaUJOvfXKfdQwZ3A1jy5Pq8',
-    processed_at: null,
-    refund_amount: 1,
-    refund_arn: null,
-    refund_charge: 0,
-    refund_currency: 'INR',
-    refund_id: 'refund_145082ao5HaUJOvfXKfdQwZ3A1jy5Pq8',
-    refund_mode: null,
-    refund_note: null,
-    refund_speed: {
-      requested: 'STANDARD',
-      accepted: 'STANDARD',
-      processed: null,
-      message: null
-    },
-    refund_splits: [],
-    refund_status: 'PENDING',
-    refund_type: 'MERCHANT_INITIATED',
-    status_description: 'In Progress'
-  }
+  "cf_payment_id": 2388816360,
+  "cf_refund_id": "refund_40564529",
+  "created_at": "2024-01-11T16:58:06+05:30",
+  "entity": "refund",
+  "metadata": null,
+  "order_id": "order_145082ao5HaUJOvfXKfdQwZ3A1jy5Pq8",
+  "processed_at": null,
+  "refund_amount": 1,
+  "refund_arn": null,
+  "refund_charge": 0,
+  "refund_currency": "INR",
+  "refund_id": "refund_145082ao5HaUJOvfXKfdQwZ3A1jy5Pq8",
+  "refund_mode": null,
+  "refund_note": null,
+  "refund_speed": {
+    "requested": "STANDARD",
+    "accepted": "STANDARD",
+    "processed": null,
+    "message": null
+  },
+  "refund_splits": [],
+  "refund_status": "PENDING",
+  "refund_type": "MERCHANT_INITIATED",
+  "status_description": "In Progress"
+}
 ]
 ```
 
