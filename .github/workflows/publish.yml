@@ -23,3 +23,24 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+          
+      - name: Get Latest Tag
+        uses: actions-ecosystem/action-get-latest-tag@v1
+        id: get-latest-tag
+
+      - name: Release
+        run: |
+          curl --location --request POST 'https://api.github.com/repos/cashfree/cashfree-pg-sdk-nodejs/releases' \
+          --header 'Accept: application/vnd.github+json' \
+          --header "Authorization: Bearer ${{ secrets.TOKEN_GITHUB }}" \
+          --header 'X-GitHub-Api-Version: 2022-11-28' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{
+              "tag_name": "${{ steps.get-latest-tag.outputs.tag }}",
+              "target_commitish": "main",
+              "name": "${{ steps.get-latest-tag.outputs.tag }}",
+              "body": "Release version ${{ steps.get-latest-tag.outputs.tag }}",
+              "draft": false,
+              "prerelease": false,
+              "generate_release_notes": false
+          }'
