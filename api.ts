@@ -3400,6 +3400,18 @@ export interface PaymentMethodNetBankingInPaymentsEntityNetbanking {
      * @memberof PaymentMethodNetBankingInPaymentsEntityNetbanking
      */
     'netbanking_bank_name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentMethodNetBankingInPaymentsEntityNetbanking
+     */
+    'netbanking_ifsc'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentMethodNetBankingInPaymentsEntityNetbanking
+     */
+    'netbanking_account_number'?: string;
 }
 /**
  * paylater payment method object for pay api
@@ -4956,6 +4968,142 @@ export interface UPIPaymentMethod {
     'upi': Upi;
 }
 /**
+ * Update terminal response
+ * @export
+ * @interface UpdateTerminalEntity
+ */
+export interface UpdateTerminalEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateTerminalEntity
+     */
+    'added_on'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateTerminalEntity
+     */
+    'cf_terminal_id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateTerminalEntity
+     */
+    'last_updated_on'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateTerminalEntity
+     */
+    'terminal_address'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateTerminalEntity
+     */
+    'terminal_email'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateTerminalEntity
+     */
+    'terminal_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateTerminalEntity
+     */
+    'teminal_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateTerminalEntity
+     */
+    'terminal_name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateTerminalEntity
+     */
+    'terminal_note'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateTerminalEntity
+     */
+    'terminal_phone_no'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateTerminalEntity
+     */
+    'terminal_status'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateTerminalEntity
+     */
+    'terminal_meta'?: string;
+}
+/**
+ * Request body to update terminal details.
+ * @export
+ * @interface UpdateTerminalRequest
+ */
+export interface UpdateTerminalRequest {
+    /**
+     * Mention the updated email ID of the terminal.
+     * @type {string}
+     * @memberof UpdateTerminalRequest
+     */
+    'terminal_email'?: string;
+    /**
+     * Terminal phone number to be updated.
+     * @type {string}
+     * @memberof UpdateTerminalRequest
+     */
+    'terminal_phone_no'?: string;
+    /**
+     * 
+     * @type {UpdateTerminalRequestTerminalMeta}
+     * @memberof UpdateTerminalRequest
+     */
+    'terminal_meta'?: UpdateTerminalRequestTerminalMeta;
+    /**
+     * Mention the terminal type to be updated. Possible values - AGENT, STOREFRONT.
+     * @type {string}
+     * @memberof UpdateTerminalRequest
+     */
+    'terminal_type': string;
+}
+/**
+ * Terminal metadata.
+ * @export
+ * @interface UpdateTerminalRequestTerminalMeta
+ */
+export interface UpdateTerminalRequestTerminalMeta {
+    /**
+     * Name of the operator for the storefront.
+     * @type {string}
+     * @memberof UpdateTerminalRequestTerminalMeta
+     */
+    'terminal_operator'?: string;
+}
+/**
+ * Request body to update terminal status.
+ * @export
+ * @interface UpdateTerminalStatusRequest
+ */
+export interface UpdateTerminalStatusRequest {
+    /**
+     * Status of the terminal to be updated. possible values - ACTIVE, INACTIVE.
+     * @type {string}
+     * @memberof UpdateTerminalStatusRequest
+     */
+    'terminal_status': string;
+}
+/**
  * UPI collect payment method object
  * @export
  * @interface Upi
@@ -5008,6 +5156,62 @@ export const UpiChannelEnum = {
 
 export type UpiChannelEnum = typeof UpiChannelEnum[keyof typeof UpiChannelEnum];
 
+/**
+ * Request body to upload terminal documents.
+ * @export
+ * @interface UploadTerminalDocs
+ */
+export interface UploadTerminalDocs {
+    /**
+     * Mention the document type you are uploading. Possible values - ADDRESSPROOF, PHOTOGRAPH.
+     * @type {string}
+     * @memberof UploadTerminalDocs
+     */
+    'doc_type': string;
+    /**
+     * Enter the display name of the uploaded file.
+     * @type {string}
+     * @memberof UploadTerminalDocs
+     */
+    'doc_value': string;
+    /**
+     * Select the document that should be uploaded or provide the path of that file. You cannot upload a file that is more than 2MB in size.
+     * @type {string}
+     * @memberof UploadTerminalDocs
+     */
+    'file': string;
+}
+/**
+ * Upload the terminal documents.
+ * @export
+ * @interface UploadTerminalDocsEntity
+ */
+export interface UploadTerminalDocsEntity {
+    /**
+     * 
+     * @type {number}
+     * @memberof UploadTerminalDocsEntity
+     */
+    'cf_terminal_id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UploadTerminalDocsEntity
+     */
+    'doc_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UploadTerminalDocsEntity
+     */
+    'doc_value'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UploadTerminalDocsEntity
+     */
+    'status'?: string;
+}
 /**
  * Use to split order when cashfree\'s Easy Split is enabled for your account.
  * @export
@@ -5105,7 +5309,7 @@ const CustomersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5225,7 +5429,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5299,7 +5503,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5373,7 +5577,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5447,7 +5651,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5621,7 +5825,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5694,7 +5898,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5831,7 +6035,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5904,7 +6108,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5981,7 +6185,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6140,7 +6344,7 @@ const PGReconciliationApiAxiosParamCreator = function (configuration?: Configura
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6261,7 +6465,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6334,7 +6538,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6407,7 +6611,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6479,7 +6683,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6656,7 +6860,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6719,7 +6923,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6796,7 +7000,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6868,7 +7072,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6926,7 +7130,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7125,7 +7329,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7202,7 +7406,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7274,7 +7478,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7433,7 +7637,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7509,7 +7713,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7650,7 +7854,7 @@ const SettlementsApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7769,7 +7973,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7843,7 +8047,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7867,7 +8071,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
         },
         /**
          * Use this API to view all details of a terminal.
-         * @summary Get terminal status using phone number
+         * @summary Get Terminal Status using Phone Number
          
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} terminal_phone_no The terminal for which you want to view the order details.
@@ -7916,7 +8120,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7998,7 +8202,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8013,6 +8217,240 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to update the terminal details. Email, Phone Number, and Terminal Meta are updatable for \"Storefront\". Only account status change is possible in case of \"Agent\".
+         * @summary Update Terminal
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} cf_terminal_id Provide the Cashfree terminal ID for which the details have to be updated.
+         * @param {UpdateTerminalRequest} UpdateTerminalRequest Request Body to update terminal for SPOS.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_request_id?: string, 
+         */
+        sposUpdateTerminal: async (x_api_version: string, cf_terminal_id: string, UpdateTerminalRequest: UpdateTerminalRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('sposUpdateTerminal', 'x_api_version', x_api_version)
+            // verify required parameter 'cf_terminal_id' is not null or undefined
+            assertParamExists('sposUpdateTerminal', 'cf_terminal_id', cf_terminal_id)
+            // verify required parameter 'UpdateTerminalRequest' is not null or undefined
+            assertParamExists('sposUpdateTerminal', 'UpdateTerminalRequest', UpdateTerminalRequest)
+            const localVarPath = `/terminal/{cf_terminal_id}`
+                .replace(`{${"cf_terminal_id"}}`, encodeURIComponent(String(cf_terminal_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(UpdateTerminalRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to update the terminal status.
+         * @summary Update Terminal Sttus
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} cf_terminal_id Provide the Cashfree terminal ID for which the details have to be updated.
+         * @param {UpdateTerminalStatusRequest} UpdateTerminalStatusRequest Request Body to update terminal status for SPOS.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_request_id?: string, 
+         */
+        sposUpdateTerminalStatus: async (x_api_version: string, cf_terminal_id: string, UpdateTerminalStatusRequest: UpdateTerminalStatusRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('sposUpdateTerminalStatus', 'x_api_version', x_api_version)
+            // verify required parameter 'cf_terminal_id' is not null or undefined
+            assertParamExists('sposUpdateTerminalStatus', 'cf_terminal_id', cf_terminal_id)
+            // verify required parameter 'UpdateTerminalStatusRequest' is not null or undefined
+            assertParamExists('sposUpdateTerminalStatus', 'UpdateTerminalStatusRequest', UpdateTerminalStatusRequest)
+            const localVarPath = `/terminal/{cf_terminal_id}/status`
+                .replace(`{${"cf_terminal_id"}}`, encodeURIComponent(String(cf_terminal_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(UpdateTerminalStatusRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to upload the terminal documents.
+         * @summary Upload Terminal Docs
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} cf_terminal_id Provide the Cashfree terminal ID for which the details have to be updated.
+         * @param {UploadTerminalDocs} UploadTerminalDocs Request Body to update terminal documents for SPOS.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_request_id?: string, 
+         */
+        sposUploadTerminalDocs: async (x_api_version: string, cf_terminal_id: string, UploadTerminalDocs: UploadTerminalDocs,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('sposUploadTerminalDocs', 'x_api_version', x_api_version)
+            // verify required parameter 'cf_terminal_id' is not null or undefined
+            assertParamExists('sposUploadTerminalDocs', 'cf_terminal_id', cf_terminal_id)
+            // verify required parameter 'UploadTerminalDocs' is not null or undefined
+            assertParamExists('sposUploadTerminalDocs', 'UploadTerminalDocs', UploadTerminalDocs)
+            const localVarPath = `/terminal/{cf_terminal_id}/docs`
+                .replace(`{${"cf_terminal_id"}}`, encodeURIComponent(String(cf_terminal_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(UploadTerminalDocs, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -8067,7 +8505,7 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
         },
         /**
          * Use this API to view all details of a terminal.
-         * @summary Get terminal status using phone number
+         * @summary Get Terminal Status using Phone Number
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} terminal_phone_no The terminal for which you want to view the order details.
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
@@ -8096,6 +8534,63 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
          */
         async sposFetchTerminalQRCodes(x_api_version: string, terminal_phone_no: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FetchTerminalQRCodesEntity>>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.sposFetchTerminalQRCodes(x_api_version, terminal_phone_no, cf_terminal_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to update the terminal details. Email, Phone Number, and Terminal Meta are updatable for \"Storefront\". Only account status change is possible in case of \"Agent\".
+         * @summary Update Terminal
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} cf_terminal_id Provide the Cashfree terminal ID for which the details have to be updated.
+         * @param {UpdateTerminalRequest} UpdateTerminalRequest Request Body to update terminal for SPOS.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async sposUpdateTerminal(x_api_version: string, cf_terminal_id: string, UpdateTerminalRequest: UpdateTerminalRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UpdateTerminalEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.sposUpdateTerminal(x_api_version, cf_terminal_id, UpdateTerminalRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to update the terminal status.
+         * @summary Update Terminal Sttus
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} cf_terminal_id Provide the Cashfree terminal ID for which the details have to be updated.
+         * @param {UpdateTerminalStatusRequest} UpdateTerminalStatusRequest Request Body to update terminal status for SPOS.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async sposUpdateTerminalStatus(x_api_version: string, cf_terminal_id: string, UpdateTerminalStatusRequest: UpdateTerminalStatusRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UpdateTerminalEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.sposUpdateTerminalStatus(x_api_version, cf_terminal_id, UpdateTerminalStatusRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to upload the terminal documents.
+         * @summary Upload Terminal Docs
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} cf_terminal_id Provide the Cashfree terminal ID for which the details have to be updated.
+         * @param {UploadTerminalDocs} UploadTerminalDocs Request Body to update terminal documents for SPOS.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async sposUploadTerminalDocs(x_api_version: string, cf_terminal_id: string, UploadTerminalDocs: UploadTerminalDocs, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UploadTerminalDocsEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.sposUploadTerminalDocs(x_api_version, cf_terminal_id, UploadTerminalDocs, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -8175,7 +8670,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8251,7 +8746,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8330,7 +8825,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8406,7 +8901,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.5';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8634,7 +9129,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -8694,7 +9189,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -8754,7 +9249,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -8814,7 +9309,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -8874,7 +9369,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -8934,7 +9429,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -8994,7 +9489,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -9054,7 +9549,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -9114,7 +9609,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -9175,7 +9670,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -9237,7 +9732,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -9297,7 +9792,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -9357,7 +9852,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -9417,7 +9912,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -9477,7 +9972,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -9538,7 +10033,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -9599,7 +10094,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -9660,7 +10155,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -9720,7 +10215,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -9780,7 +10275,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -9841,7 +10336,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -9902,7 +10397,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -9962,7 +10457,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -10024,7 +10519,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -10086,7 +10581,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -10146,7 +10641,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -10206,7 +10701,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -10266,7 +10761,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -10281,7 +10776,7 @@ export class Cashfree {
 
     /**
      * Use this API to view all details of a terminal.
-     * @summary Get terminal status using phone number
+     * @summary Get Terminal Status using Phone Number
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {string} terminal_phone_no The terminal for which you want to view the order details.
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
@@ -10326,7 +10821,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -10387,11 +10882,194 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
             return SoftPOSApiFp().sposFetchTerminalQRCodes(x_api_version, terminal_phone_no, cf_terminal_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to update the terminal details. Email, Phone Number, and Terminal Meta are updatable for \"Storefront\". Only account status change is possible in case of \"Agent\".
+     * @summary Update Terminal
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} cf_terminal_id Provide the Cashfree terminal ID for which the details have to be updated.
+     * @param {UpdateTerminalRequest} UpdateTerminalRequest Request Body to update terminal for SPOS.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SoftPOSApi
+     */
+    public static SposUpdateTerminal(x_api_version: string, cf_terminal_id: string, UpdateTerminalRequest: UpdateTerminalRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.0.7");
+            });
+        }
+        try {
+            return SoftPOSApiFp().sposUpdateTerminal(x_api_version, cf_terminal_id, UpdateTerminalRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to update the terminal status.
+     * @summary Update Terminal Sttus
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} cf_terminal_id Provide the Cashfree terminal ID for which the details have to be updated.
+     * @param {UpdateTerminalStatusRequest} UpdateTerminalStatusRequest Request Body to update terminal status for SPOS.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SoftPOSApi
+     */
+    public static SposUpdateTerminalStatus(x_api_version: string, cf_terminal_id: string, UpdateTerminalStatusRequest: UpdateTerminalStatusRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.0.7");
+            });
+        }
+        try {
+            return SoftPOSApiFp().sposUpdateTerminalStatus(x_api_version, cf_terminal_id, UpdateTerminalStatusRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to upload the terminal documents.
+     * @summary Upload Terminal Docs
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} cf_terminal_id Provide the Cashfree terminal ID for which the details have to be updated.
+     * @param {UploadTerminalDocs} UploadTerminalDocs Request Body to update terminal documents for SPOS.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SoftPOSApi
+     */
+    public static SposUploadTerminalDocs(x_api_version: string, cf_terminal_id: string, UploadTerminalDocs: UploadTerminalDocs, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.0.7");
+            });
+        }
+        try {
+            return SoftPOSApiFp().sposUploadTerminalDocs(x_api_version, cf_terminal_id, UploadTerminalDocs, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -10448,7 +11126,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -10509,7 +11187,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -10570,7 +11248,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
@@ -10631,7 +11309,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.5");
+                scope.setExtra('release', "4.0.7");
             });
         }
         try {
