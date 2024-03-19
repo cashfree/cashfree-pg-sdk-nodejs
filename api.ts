@@ -5547,30 +5547,11 @@ export interface SplitAfterPaymentRequestSplitInner {
      */
     'percentage'?: number;
     /**
-     * Provide additional data fields using tags. Sample data fields are mentioned below.
-     * @type {Array<SplitAfterPaymentRequestSplitInnerTagsInner>}
+     * Custom Tags in thr form of {\"key\":\"value\"} which can be passed for an order. A maximum of 10 tags can be added
+     * @type {{ [key: string]: string; }}
      * @memberof SplitAfterPaymentRequestSplitInner
      */
-    'tags'?: Array<SplitAfterPaymentRequestSplitInnerTagsInner>;
-}
-/**
- * 
- * @export
- * @interface SplitAfterPaymentRequestSplitInnerTagsInner
- */
-export interface SplitAfterPaymentRequestSplitInnerTagsInner {
-    /**
-     * 
-     * @type {string}
-     * @memberof SplitAfterPaymentRequestSplitInnerTagsInner
-     */
-    'Key Value 1'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SplitAfterPaymentRequestSplitInnerTagsInner
-     */
-    'Key Value 2'?: string;
+    'tags'?: { [key: string]: string; };
 }
 /**
  * Split After Payment Response
@@ -6961,7 +6942,7 @@ const CustomersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7083,7 +7064,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7155,7 +7136,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7232,7 +7213,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7304,7 +7285,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7376,7 +7357,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7455,7 +7436,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7527,7 +7508,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7598,7 +7579,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7674,7 +7655,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7750,7 +7731,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7822,7 +7803,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8127,7 +8108,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8201,7 +8182,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8275,7 +8256,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8349,7 +8330,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8523,7 +8504,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8596,7 +8577,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8733,7 +8714,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8806,7 +8787,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8883,7 +8864,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9042,7 +9023,7 @@ const PGReconciliationApiAxiosParamCreator = function (configuration?: Configura
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9163,7 +9144,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9236,7 +9217,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9309,7 +9290,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9381,7 +9362,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9558,7 +9539,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9621,7 +9602,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9698,7 +9679,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9770,7 +9751,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9828,7 +9809,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10027,7 +10008,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10104,7 +10085,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10176,7 +10157,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10335,7 +10316,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10411,7 +10392,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10552,7 +10533,7 @@ const SettlementsApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10671,7 +10652,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10745,7 +10726,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10818,7 +10799,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10900,7 +10881,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10979,7 +10960,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11056,7 +11037,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11134,7 +11115,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11212,7 +11193,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11466,7 +11447,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11542,7 +11523,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11621,7 +11602,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11697,7 +11678,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.10';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11925,7 +11906,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -11986,7 +11967,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -12046,7 +12027,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -12107,7 +12088,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -12167,7 +12148,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -12227,7 +12208,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -12288,7 +12269,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -12348,7 +12329,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -12408,7 +12389,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -12469,7 +12450,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -12530,7 +12511,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -12590,7 +12571,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -12650,7 +12631,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -12710,7 +12691,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -12770,7 +12751,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -12830,7 +12811,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -12890,7 +12871,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -12950,7 +12931,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -13010,7 +12991,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -13070,7 +13051,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -13131,7 +13112,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -13193,7 +13174,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -13253,7 +13234,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -13313,7 +13294,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -13373,7 +13354,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -13433,7 +13414,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -13494,7 +13475,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -13555,7 +13536,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -13616,7 +13597,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -13676,7 +13657,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -13736,7 +13717,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -13797,7 +13778,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -13858,7 +13839,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -13918,7 +13899,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -13980,7 +13961,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -14042,7 +14023,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -14102,7 +14083,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -14162,7 +14143,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -14222,7 +14203,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -14282,7 +14263,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -14343,7 +14324,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -14404,7 +14385,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -14465,7 +14446,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -14526,7 +14507,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -14587,7 +14568,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -14648,7 +14629,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -14709,7 +14690,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -14770,7 +14751,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
@@ -14831,7 +14812,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.9");
+                scope.setExtra('release', "4.0.10");
             });
         }
         try {
