@@ -27,6 +27,74 @@ import * as Sentry from "@sentry/node";
 import * as crypto from "crypto";
 
 /**
+ * Adjust Vendor Balance Request
+ * @export
+ * @interface AdjustVendorBalanceRequest
+ */
+export interface AdjustVendorBalanceRequest {
+    /**
+     * Mention to whom you want to transfer the on demand balance. Possible values - MERCHANT, VENDOR.
+     * @type {string}
+     * @memberof AdjustVendorBalanceRequest
+     */
+    'transfer_from': string;
+    /**
+     * Mention the type of transfer. Possible values: ON_DEMAND.
+     * @type {string}
+     * @memberof AdjustVendorBalanceRequest
+     */
+    'transfer_type': string;
+    /**
+     * Mention the on demand transfer amount.
+     * @type {number}
+     * @memberof AdjustVendorBalanceRequest
+     */
+    'transfer_amount': number;
+    /**
+     * Mention remarks if any for the on demand transfer.
+     * @type {string}
+     * @memberof AdjustVendorBalanceRequest
+     */
+    'remark'?: string;
+    /**
+     * Provide additional data fields using tags.
+     * @type {object}
+     * @memberof AdjustVendorBalanceRequest
+     */
+    'tags'?: object;
+}
+/**
+ * Adjust Vendor Balance Response
+ * @export
+ * @interface AdjustVendorBalanceResponse
+ */
+export interface AdjustVendorBalanceResponse {
+    /**
+     * 
+     * @type {number}
+     * @memberof AdjustVendorBalanceResponse
+     */
+    'settlement_id'?: number;
+    /**
+     * 
+     * @type {TransferDetails}
+     * @memberof AdjustVendorBalanceResponse
+     */
+    'transfer_details'?: TransferDetails;
+    /**
+     * 
+     * @type {BalanceDetails}
+     * @memberof AdjustVendorBalanceResponse
+     */
+    'balances'?: BalanceDetails;
+    /**
+     * 
+     * @type {ChargesDetails}
+     * @memberof AdjustVendorBalanceResponse
+     */
+    'charges'?: ChargesDetails;
+}
+/**
  * Error at cashfree\'s server
  * @export
  * @interface ApiError
@@ -370,6 +438,88 @@ export const BadRequestErrorTypeEnum = {
 export type BadRequestErrorTypeEnum = typeof BadRequestErrorTypeEnum[keyof typeof BadRequestErrorTypeEnum];
 
 /**
+ * 
+ * @export
+ * @interface BalanceDetails
+ */
+export interface BalanceDetails {
+    /**
+     * 
+     * @type {number}
+     * @memberof BalanceDetails
+     */
+    'merchant_id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof BalanceDetails
+     */
+    'vendor_id'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof BalanceDetails
+     */
+    'merchant_unsettled'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof BalanceDetails
+     */
+    'vendor_unsettled'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface BankDetails
+ */
+export interface BankDetails {
+    /**
+     * 
+     * @type {string}
+     * @memberof BankDetails
+     */
+    'account_number'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankDetails
+     */
+    'account_holder'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BankDetails
+     */
+    'ifsc'?: string;
+}
+/**
+ * Banktransfer payment method
+ * @export
+ * @interface Banktransfer
+ */
+export interface Banktransfer {
+    /**
+     * The channel for cardless EMI is always `link`
+     * @type {string}
+     * @memberof Banktransfer
+     */
+    'channel'?: string;
+}
+/**
+ * banktransfer payment method
+ * @export
+ * @interface BanktransferPaymentMethod
+ */
+export interface BanktransferPaymentMethod {
+    /**
+     * 
+     * @type {Banktransfer}
+     * @memberof BanktransferPaymentMethod
+     */
+    'banktransfer': Banktransfer;
+}
+/**
  * Card Payment method
  * @export
  * @interface Card
@@ -429,6 +579,12 @@ export interface Card {
      * @memberof Card
      */
     'token_requestor_id'?: string;
+    /**
+     * Token Reference Id provided by Diners for Guest Checkout Token.  Required only for Diners cards. 
+     * @type {string}
+     * @memberof Card
+     */
+    'token_reference_id'?: string;
     /**
      * 
      * @type {string}
@@ -757,6 +913,43 @@ export const CashbackDetailsCashbackTypeEnum = {
 export type CashbackDetailsCashbackTypeEnum = typeof CashbackDetailsCashbackTypeEnum[keyof typeof CashbackDetailsCashbackTypeEnum];
 
 /**
+ * 
+ * @export
+ * @interface ChargesDetails
+ */
+export interface ChargesDetails {
+    /**
+     * 
+     * @type {number}
+     * @memberof ChargesDetails
+     */
+    'service_charges'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ChargesDetails
+     */
+    'service_tax'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ChargesDetails
+     */
+    'amount'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ChargesDetails
+     */
+    'billed_to'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ChargesDetails
+     */
+    'is_postpaid'?: boolean;
+}
+/**
  * Request body to create a customer at cashfree
  * @export
  * @interface CreateCustomerRequest
@@ -1058,6 +1251,152 @@ export interface CreateTerminalTransactionRequest {
     'terminal_phone_no'?: string;
 }
 /**
+ * Create Vendor Request
+ * @export
+ * @interface CreateVendorRequest
+ */
+export interface CreateVendorRequest {
+    /**
+     * Specify the unique Vendor ID to identify the beneficiary. Alphanumeric and underscore (_) allowed.
+     * @type {string}
+     * @memberof CreateVendorRequest
+     */
+    'vendor_id': string;
+    /**
+     * Specify the status of vendor that should be updated. Possible values: ACTIVE,BLOCKED, DELETED
+     * @type {string}
+     * @memberof CreateVendorRequest
+     */
+    'status': string;
+    /**
+     * Specify the name of the vendor to be updated. Name should not have any special character except . / - &
+     * @type {string}
+     * @memberof CreateVendorRequest
+     */
+    'name': string;
+    /**
+     * Specify the vendor email ID that should be updated. String in email ID format (Ex:johndoe_1@cashfree.com) should contain @ and dot (.)
+     * @type {string}
+     * @memberof CreateVendorRequest
+     */
+    'email': string;
+    /**
+     * Specify the beneficiaries phone number to be updated. Phone number registered in India (only digits, 8 - 12 characters after excluding +91).
+     * @type {string}
+     * @memberof CreateVendorRequest
+     */
+    'phone': string;
+    /**
+     * Specify if the vendor bank account details should be verified. Possible values: true or false
+     * @type {boolean}
+     * @memberof CreateVendorRequest
+     */
+    'verify_account'?: boolean;
+    /**
+     * Update if the vendor will have dashboard access or not. Possible values are: true or false
+     * @type {boolean}
+     * @memberof CreateVendorRequest
+     */
+    'dashboard_access'?: boolean;
+    /**
+     * Specify the settlement cycle to be updated. View the settlement cycle details from the \"Settlement Cycles Supported\" table. If no schedule option is configured, the settlement cycle ID \"1\" will be in effect. Select \"8\" or \"9\" if you want to schedule instant vendor settlements.
+     * @type {number}
+     * @memberof CreateVendorRequest
+     */
+    'schedule_option'?: number;
+    /**
+     * Specify the vendor bank account details to be updated.
+     * @type {Array<BankDetails>}
+     * @memberof CreateVendorRequest
+     */
+    'bank'?: Array<BankDetails>;
+    /**
+     * Updated beneficiary upi vpa. Alphanumeric, dot (.), hyphen (-), at sign (@), and underscore allowed (100 character limit). Note: underscore and dot (.) gets accepted before and after @, but hyphen (-) is only accepted before @ sign.
+     * @type {Array<UpiDetails>}
+     * @memberof CreateVendorRequest
+     */
+    'upi'?: Array<UpiDetails>;
+    /**
+     * Specify the kyc details that should be updated.
+     * @type {Array<KycDetails>}
+     * @memberof CreateVendorRequest
+     */
+    'kyc_details': Array<KycDetails>;
+}
+/**
+ * Create Vendor Response
+ * @export
+ * @interface CreateVendorResponse
+ */
+export interface CreateVendorResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateVendorResponse
+     */
+    'email'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateVendorResponse
+     */
+    'status'?: string;
+    /**
+     * 
+     * @type {Array<BankDetails>}
+     * @memberof CreateVendorResponse
+     */
+    'bank'?: Array<BankDetails>;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateVendorResponse
+     */
+    'upi'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateVendorResponse
+     */
+    'phone'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateVendorResponse
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateVendorResponse
+     */
+    'vendor_id'?: string;
+    /**
+     * 
+     * @type {Array<ScheduleOption>}
+     * @memberof CreateVendorResponse
+     */
+    'schedule_option'?: Array<ScheduleOption>;
+    /**
+     * 
+     * @type {Array<KycDetails>}
+     * @memberof CreateVendorResponse
+     */
+    'kyc_details'?: Array<KycDetails>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateVendorResponse
+     */
+    'dashboard_access'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateVendorResponse
+     */
+    'bank_details'?: string;
+}
+/**
  * Crytogram Card object
  * @export
  * @interface CryptogramEntity
@@ -1306,6 +1645,301 @@ export interface EMIPlansArray {
      * @memberof EMIPlansArray
      */
     'total_amount'?: number;
+}
+/**
+ * ES Order Recon Request
+ * @export
+ * @interface ESOrderReconRequest
+ */
+export interface ESOrderReconRequest {
+    /**
+     * 
+     * @type {ESOrderReconRequestFilters}
+     * @memberof ESOrderReconRequest
+     */
+    'filters': ESOrderReconRequestFilters;
+    /**
+     * 
+     * @type {ESOrderReconRequestPagination}
+     * @memberof ESOrderReconRequest
+     */
+    'pagination': ESOrderReconRequestPagination;
+}
+/**
+ * Provide the filter object details.
+ * @export
+ * @interface ESOrderReconRequestFilters
+ */
+export interface ESOrderReconRequestFilters {
+    /**
+     * Specify the start data from which you want to get the recon data.
+     * @type {string}
+     * @memberof ESOrderReconRequestFilters
+     */
+    'start_date'?: string;
+    /**
+     * Specify the end data till which you want to get the recon data.
+     * @type {string}
+     * @memberof ESOrderReconRequestFilters
+     */
+    'end_date'?: string;
+    /**
+     * Please provide list of order ids for which you want to get the recon data.
+     * @type {Array<string>}
+     * @memberof ESOrderReconRequestFilters
+     */
+    'order_ids'?: Array<string>;
+}
+/**
+ * Set limit based on your requirement. Pagination limit will fetch a set of orders, next set of orders can be generated using the cursor shared in previous response of the same API.
+ * @export
+ * @interface ESOrderReconRequestPagination
+ */
+export interface ESOrderReconRequestPagination {
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconRequestPagination
+     */
+    'cursor'?: string;
+    /**
+     * Set the minimum/maximum limit for number of filtered data. Min value - 10, Max value - 100.
+     * @type {number}
+     * @memberof ESOrderReconRequestPagination
+     */
+    'limit'?: number;
+}
+/**
+ * ES Order Recon Response
+ * @export
+ * @interface ESOrderReconResponse
+ */
+export interface ESOrderReconResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponse
+     */
+    'cursor'?: string;
+    /**
+     * 
+     * @type {Array<ESOrderReconResponseDataInner>}
+     * @memberof ESOrderReconResponse
+     */
+    'data'?: Array<ESOrderReconResponseDataInner>;
+    /**
+     * 
+     * @type {number}
+     * @memberof ESOrderReconResponse
+     */
+    'limit'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface ESOrderReconResponseDataInner
+ */
+export interface ESOrderReconResponseDataInner {
+    /**
+     * 
+     * @type {number}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'amount'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'settlement_eligibility_time'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'merchant_order_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'tx_time'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'settled'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'entity_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'merchant_settlement_utr'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'currency'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'sale_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'customer_name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'customer_email'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'customer_phone'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'merchant_vendor_commission'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'split_service_charge'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'split_service_tax'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'pg_service_tax'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'pg_service_charge'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'pg_charge_postpaid'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'merchant_settlement_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'added_on'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'tags'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'entity_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'settlement_initiated_on'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'settlement_time'?: string;
+    /**
+     * 
+     * @type {Array<ESOrderReconResponseDataInnerOrderSplitsInner>}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'order_splits'?: Array<ESOrderReconResponseDataInnerOrderSplitsInner>;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInner
+     */
+    'eligible_split_balance'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ESOrderReconResponseDataInnerOrderSplitsInner
+ */
+export interface ESOrderReconResponseDataInnerOrderSplitsInner {
+    /**
+     * 
+     * @type {Array<ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner>}
+     * @memberof ESOrderReconResponseDataInnerOrderSplitsInner
+     */
+    'split'?: Array<ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner>;
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInnerOrderSplitsInner
+     */
+    'created_at'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner
+ */
+export interface ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner
+     */
+    'merchant_vendor_id'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner
+     */
+    'percentage'?: number;
+    /**
+     * 
+     * @type {object}
+     * @memberof ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner
+     */
+    'tags'?: object;
 }
 /**
  * Carless EMI eligible entity
@@ -1875,6 +2509,67 @@ export interface InstrumentWebhookDataEntity {
     'instrument'?: InstrumentEntity;
 }
 /**
+ * 
+ * @export
+ * @interface KycDetails
+ */
+export interface KycDetails {
+    /**
+     * 
+     * @type {string}
+     * @memberof KycDetails
+     */
+    'account_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof KycDetails
+     */
+    'business_type'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof KycDetails
+     */
+    'uidai'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof KycDetails
+     */
+    'gst'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof KycDetails
+     */
+    'cin'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof KycDetails
+     */
+    'pan'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof KycDetails
+     */
+    'passport_number'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof KycDetails
+     */
+    'driving_license'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof KycDetails
+     */
+    'voter_id'?: string;
+}
+/**
  * Payment link customer entity
  * @export
  * @interface LinkCustomerDetailsEntity
@@ -2007,6 +2702,12 @@ export interface LinkEntity {
      * @memberof LinkEntity
      */
     'link_notify'?: LinkNotifyEntity;
+    /**
+     * Base64 encoded string for payment link. You can scan with camera to open a link in the browser to complete the payment.
+     * @type {string}
+     * @memberof LinkEntity
+     */
+    'link_qrcode'?: string;
 }
 /**
  * Payment link meta information object
@@ -2392,6 +3093,12 @@ export interface OfferValidations {
      * @memberof OfferValidations
      */
     'min_amount'?: number;
+    /**
+     * Maximum Amount for Offer to be Applicable
+     * @type {number}
+     * @memberof OfferValidations
+     */
+    'max_allowed': number;
     /**
      * 
      * @type {OfferValidationsPaymentMethod}
@@ -2796,7 +3503,7 @@ export interface PayOrderRequest {
  * @type PayOrderRequestPaymentMethod
  * @export
  */
-export type PayOrderRequestPaymentMethod = AppPaymentMethod | CardEMIPaymentMethod | CardPaymentMethod | CardlessEMIPaymentMethod | NetBankingPaymentMethod | PaylaterPaymentMethod | UPIPaymentMethod;
+export type PayOrderRequestPaymentMethod = AppPaymentMethod | BanktransferPaymentMethod | CardEMIPaymentMethod | CardPaymentMethod | CardlessEMIPaymentMethod | NetBankingPaymentMethod | PaylaterPaymentMethod | UPIPaymentMethod;
 
 /**
  * Paylater payment method
@@ -3003,7 +3710,7 @@ export type PaymentEntityPaymentStatusEnum = typeof PaymentEntityPaymentStatusEn
  * @type PaymentEntityPaymentMethod
  * @export
  */
-export type PaymentEntityPaymentMethod = PaymentMethodAppInPaymentsEntity | PaymentMethodCardEMIInPaymentsEntity | PaymentMethodCardInPaymentsEntity | PaymentMethodCardlessEMIInPaymentsEntity | PaymentMethodNetBankingInPaymentsEntity | PaymentMethodPaylaterInPaymentsEntity | PaymentMethodUPIInPaymentsEntity;
+export type PaymentEntityPaymentMethod = PaymentMethodAppInPaymentsEntity | PaymentMethodBankTransferInPaymentsEntity | PaymentMethodCardEMIInPaymentsEntity | PaymentMethodCardInPaymentsEntity | PaymentMethodCardlessEMIInPaymentsEntity | PaymentMethodNetBankingInPaymentsEntity | PaymentMethodPaylaterInPaymentsEntity | PaymentMethodUPIInPaymentsEntity;
 
 /**
  * The customer details that are necessary. Note that you can pass dummy details if your use case does not require the customer details.
@@ -3188,6 +3895,50 @@ export interface PaymentMethodAppInPaymentsEntityApp {
      * @memberof PaymentMethodAppInPaymentsEntityApp
      */
     'phone'?: string;
+}
+/**
+ * payment method bank transfer object in payment entity
+ * @export
+ * @interface PaymentMethodBankTransferInPaymentsEntity
+ */
+export interface PaymentMethodBankTransferInPaymentsEntity {
+    /**
+     * 
+     * @type {PaymentMethodBankTransferInPaymentsEntityBanktransfer}
+     * @memberof PaymentMethodBankTransferInPaymentsEntity
+     */
+    'banktransfer'?: PaymentMethodBankTransferInPaymentsEntityBanktransfer;
+}
+/**
+ * 
+ * @export
+ * @interface PaymentMethodBankTransferInPaymentsEntityBanktransfer
+ */
+export interface PaymentMethodBankTransferInPaymentsEntityBanktransfer {
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentMethodBankTransferInPaymentsEntityBanktransfer
+     */
+    'channel'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentMethodBankTransferInPaymentsEntityBanktransfer
+     */
+    'banktransfer_bank_name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentMethodBankTransferInPaymentsEntityBanktransfer
+     */
+    'banktransfer_ifsc'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentMethodBankTransferInPaymentsEntityBanktransfer
+     */
+    'banktransfer_account_number'?: string;
 }
 /**
  * payment method card emi object in payment entity
@@ -4338,6 +5089,31 @@ export interface SavedInstrumentMeta {
     'card_token_details'?: object;
 }
 /**
+ * 
+ * @export
+ * @interface ScheduleOption
+ */
+export interface ScheduleOption {
+    /**
+     * 
+     * @type {string}
+     * @memberof ScheduleOption
+     */
+    'settlement_schedule_message'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ScheduleOption
+     */
+    'schedule_id'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ScheduleOption
+     */
+    'merchant_default'?: boolean;
+}
+/**
  * Settlement entity object
  * @export
  * @interface SettlementEntity
@@ -4728,6 +5504,212 @@ export interface SettlementWebhookDataEntity {
     'settlement'?: SettlementEntity;
 }
 /**
+ * Split After Payment Request
+ * @export
+ * @interface SplitAfterPaymentRequest
+ */
+export interface SplitAfterPaymentRequest {
+    /**
+     * Specify the vendors order split details.
+     * @type {Array<SplitAfterPaymentRequestSplitInner>}
+     * @memberof SplitAfterPaymentRequest
+     */
+    'split': Array<SplitAfterPaymentRequestSplitInner>;
+    /**
+     * Specify if you want to end the split or continue creating further splits in future.
+     * @type {boolean}
+     * @memberof SplitAfterPaymentRequest
+     */
+    'disable_split'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface SplitAfterPaymentRequestSplitInner
+ */
+export interface SplitAfterPaymentRequestSplitInner {
+    /**
+     * Specify the merchant vendor ID to split the payment.
+     * @type {string}
+     * @memberof SplitAfterPaymentRequestSplitInner
+     */
+    'vendor_id'?: string;
+    /**
+     * Specify the amount to be split to the vendor.
+     * @type {number}
+     * @memberof SplitAfterPaymentRequestSplitInner
+     */
+    'amount'?: number;
+    /**
+     * Specify the percentage of amount to be split.
+     * @type {number}
+     * @memberof SplitAfterPaymentRequestSplitInner
+     */
+    'percentage'?: number;
+    /**
+     * Provide additional data fields using tags. Sample data fields are mentioned below.
+     * @type {Array<SplitAfterPaymentRequestSplitInnerTagsInner>}
+     * @memberof SplitAfterPaymentRequestSplitInner
+     */
+    'tags'?: Array<SplitAfterPaymentRequestSplitInnerTagsInner>;
+}
+/**
+ * 
+ * @export
+ * @interface SplitAfterPaymentRequestSplitInnerTagsInner
+ */
+export interface SplitAfterPaymentRequestSplitInnerTagsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof SplitAfterPaymentRequestSplitInnerTagsInner
+     */
+    'Key Value 1'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SplitAfterPaymentRequestSplitInnerTagsInner
+     */
+    'Key Value 2'?: string;
+}
+/**
+ * Split After Payment Response
+ * @export
+ * @interface SplitAfterPaymentResponse
+ */
+export interface SplitAfterPaymentResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof SplitAfterPaymentResponse
+     */
+    'status'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SplitAfterPaymentResponse
+     */
+    'message'?: string;
+}
+/**
+ * Static Split Request
+ * @export
+ * @interface StaticSplitRequest
+ */
+export interface StaticSplitRequest {
+    /**
+     * Specify if the split is to be active or not. Possible values: true/false
+     * @type {boolean}
+     * @memberof StaticSplitRequest
+     */
+    'active': boolean;
+    /**
+     * For Subscription payments, the subscription reference ID is to be shared as the terminal ID. Incase for Payment Gateway terminal ID is non-mandatory. Mention as 0 if not applicable.
+     * @type {string}
+     * @memberof StaticSplitRequest
+     */
+    'terminal_id'?: string;
+    /**
+     * You can share additional information using the reference ID.
+     * @type {number}
+     * @memberof StaticSplitRequest
+     */
+    'terminal_reference_id'?: number;
+    /**
+     * Specify the product for which the split should be created. If you want split to be created for Payment Gateway pass value as \"PG\". If you want split to be created for Subscription, pass value as \"SBC\". Accepted values - \"STATIC_QR\", \"SBC\", \"PG\", \"EPOS\".
+     * @type {string}
+     * @memberof StaticSplitRequest
+     */
+    'product_type': string;
+    /**
+     * Provide the split scheme details.
+     * @type {Array<StaticSplitRequestSchemeInner>}
+     * @memberof StaticSplitRequest
+     */
+    'scheme': Array<StaticSplitRequestSchemeInner>;
+}
+/**
+ * 
+ * @export
+ * @interface StaticSplitRequestSchemeInner
+ */
+export interface StaticSplitRequestSchemeInner {
+    /**
+     * Specify the merchant vendor ID to create the split scheme for the payment.
+     * @type {string}
+     * @memberof StaticSplitRequestSchemeInner
+     */
+    'merchantVendorId'?: string;
+    /**
+     * Specify the percentage of amount to be split.
+     * @type {string}
+     * @memberof StaticSplitRequestSchemeInner
+     */
+    'percentage'?: string;
+}
+/**
+ * Static Split Response
+ * @export
+ * @interface StaticSplitResponse
+ */
+export interface StaticSplitResponse {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof StaticSplitResponse
+     */
+    'active'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof StaticSplitResponse
+     */
+    'terminal_id'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof StaticSplitResponse
+     */
+    'terminal_reference_id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof StaticSplitResponse
+     */
+    'product_type'?: string;
+    /**
+     * 
+     * @type {Array<StaticSplitResponseSchemeInner>}
+     * @memberof StaticSplitResponse
+     */
+    'scheme'?: Array<StaticSplitResponseSchemeInner>;
+    /**
+     * 
+     * @type {string}
+     * @memberof StaticSplitResponse
+     */
+    'added_on'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface StaticSplitResponseSchemeInner
+ */
+export interface StaticSplitResponseSchemeInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof StaticSplitResponseSchemeInner
+     */
+    'merchantVendorId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof StaticSplitResponseSchemeInner
+     */
+    'percentage'?: string;
+}
+/**
  * Use this if you are creating an order for cashfree\'s softPOS
  * @export
  * @interface TerminalDetails
@@ -4874,6 +5856,135 @@ export interface TerminalEntity {
     'terminal_meta'?: string;
 }
 /**
+ * terminal payment entity full object
+ * @export
+ * @interface TerminalPaymentEntity
+ */
+export interface TerminalPaymentEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof TerminalPaymentEntity
+     */
+    'cf_payment_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TerminalPaymentEntity
+     */
+    'order_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TerminalPaymentEntity
+     */
+    'entity'?: string;
+    /**
+     * 
+     * @type {ErrorDetailsInPaymentsEntity}
+     * @memberof TerminalPaymentEntity
+     */
+    'error_details'?: ErrorDetailsInPaymentsEntity;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof TerminalPaymentEntity
+     */
+    'is_captured'?: boolean;
+    /**
+     * Order amount can be different from payment amount if you collect service fee from the customer
+     * @type {number}
+     * @memberof TerminalPaymentEntity
+     */
+    'order_amount'?: number;
+    /**
+     * Type of payment group. One of [\'prepaid_card\', \'upi_ppi_offline\', \'cash\', \'upi_credit_card\', \'paypal\', \'net_banking\', \'cardless_emi\', \'credit_card\', \'bank_transfer\', \'pay_later\', \'debit_card_emi\', \'debit_card\', \'wallet\', \'upi_ppi\', \'upi\', \'credit_card_emi\']
+     * @type {string}
+     * @memberof TerminalPaymentEntity
+     */
+    'payment_group'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TerminalPaymentEntity
+     */
+    'payment_currency'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TerminalPaymentEntity
+     */
+    'payment_amount'?: number;
+    /**
+     * This is the time when the payment was initiated
+     * @type {string}
+     * @memberof TerminalPaymentEntity
+     */
+    'payment_time'?: string;
+    /**
+     * This is the time when the payment reaches its terminal state
+     * @type {string}
+     * @memberof TerminalPaymentEntity
+     */
+    'payment_completion_time'?: string;
+    /**
+     * The transaction status can be one of  [\"SUCCESS\", \"NOT_ATTEMPTED\", \"FAILED\", \"USER_DROPPED\", \"VOID\", \"CANCELLED\", \"PENDING\"]
+     * @type {string}
+     * @memberof TerminalPaymentEntity
+     */
+    'payment_status'?: TerminalPaymentEntityPaymentStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof TerminalPaymentEntity
+     */
+    'payment_message'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TerminalPaymentEntity
+     */
+    'bank_reference'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TerminalPaymentEntity
+     */
+    'auth_id'?: string;
+    /**
+     * 
+     * @type {AuthorizationInPaymentsEntity}
+     * @memberof TerminalPaymentEntity
+     */
+    'authorization'?: AuthorizationInPaymentsEntity;
+    /**
+     * 
+     * @type {CustomerDetails}
+     * @memberof TerminalPaymentEntity
+     */
+    'customer_details'?: CustomerDetails;
+    /**
+     * 
+     * @type {PaymentEntityPaymentMethod}
+     * @memberof TerminalPaymentEntity
+     */
+    'payment_method'?: PaymentEntityPaymentMethod;
+}
+
+export const TerminalPaymentEntityPaymentStatusEnum = {
+    SUCCESS: 'SUCCESS',
+    NOT_ATTEMPTED: 'NOT_ATTEMPTED',
+    FAILED: 'FAILED',
+    USER_DROPPED: 'USER_DROPPED',
+    VOID: 'VOID',
+    CANCELLED: 'CANCELLED',
+    PENDING: 'PENDING',
+    UNKNOWN_DEFAULT_OPEN_API: '11184809'
+} as const;
+
+export type TerminalPaymentEntityPaymentStatusEnum = typeof TerminalPaymentEntityPaymentStatusEnum[keyof typeof TerminalPaymentEntityPaymentStatusEnum];
+
+/**
  * Create terminal response object
  * @export
  * @interface TerminalTransactionEntity
@@ -4928,6 +6039,68 @@ export interface TerminateOrderRequest {
      * @memberof TerminateOrderRequest
      */
     'order_status': string;
+}
+/**
+ * 
+ * @export
+ * @interface TransferDetails
+ */
+export interface TransferDetails {
+    /**
+     * 
+     * @type {string}
+     * @memberof TransferDetails
+     */
+    'vendor_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransferDetails
+     */
+    'transfer_from'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransferDetails
+     */
+    'transfer_type'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TransferDetails
+     */
+    'transfer_amount'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof TransferDetails
+     */
+    'remark'?: string;
+    /**
+     * 
+     * @type {Array<TransferDetailsTagsInner>}
+     * @memberof TransferDetails
+     */
+    'tags'?: Array<TransferDetailsTagsInner>;
+}
+/**
+ * 
+ * @export
+ * @interface TransferDetailsTagsInner
+ */
+export interface TransferDetailsTagsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof TransferDetailsTagsInner
+     */
+    'product'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof TransferDetailsTagsInner
+     */
+    'size'?: number;
 }
 /**
  * object when you are using preauth in UPI in order pay
@@ -5104,6 +6277,182 @@ export interface UpdateTerminalStatusRequest {
     'terminal_status': string;
 }
 /**
+ * Update Vendor Request
+ * @export
+ * @interface UpdateVendorRequest
+ */
+export interface UpdateVendorRequest {
+    /**
+     * Specify the status of vendor that should be updated. Possible values: ACTIVE,BLOCKED, DELETED
+     * @type {string}
+     * @memberof UpdateVendorRequest
+     */
+    'status': string;
+    /**
+     * Specify the name of the vendor to be updated. Name should not have any special character except . / - &
+     * @type {string}
+     * @memberof UpdateVendorRequest
+     */
+    'name': string;
+    /**
+     * Specify the vendor email ID that should be updated. String in email ID format (Ex:johndoe_1@cashfree.com) should contain @ and dot (.)
+     * @type {string}
+     * @memberof UpdateVendorRequest
+     */
+    'email': string;
+    /**
+     * Specify the beneficiaries phone number to be updated. Phone number registered in India (only digits, 8 - 12 characters after excluding +91).
+     * @type {string}
+     * @memberof UpdateVendorRequest
+     */
+    'phone': string;
+    /**
+     * Specify if the vendor bank account details should be verified. Possible values: true or false
+     * @type {boolean}
+     * @memberof UpdateVendorRequest
+     */
+    'verify_account'?: boolean;
+    /**
+     * Update if the vendor will have dashboard access or not. Possible values are: true or false
+     * @type {boolean}
+     * @memberof UpdateVendorRequest
+     */
+    'dashboard_access'?: boolean;
+    /**
+     * Specify the settlement cycle to be updated. View the settlement cycle details from the \"Settlement Cycles Supported\" table. If no schedule option is configured, the settlement cycle ID \"1\" will be in effect. Select \"8\" or \"9\" if you want to schedule instant vendor settlements.
+     * @type {number}
+     * @memberof UpdateVendorRequest
+     */
+    'schedule_option': number;
+    /**
+     * Specify the vendor bank account details to be updated.
+     * @type {Array<BankDetails>}
+     * @memberof UpdateVendorRequest
+     */
+    'bank'?: Array<BankDetails>;
+    /**
+     * Updated beneficiary upi vpa. Alphanumeric, dot (.), hyphen (-), at sign (@), and underscore allowed (100 character limit). Note: underscore and dot (.) gets accepted before and after @, but hyphen (-) is only accepted before @ sign.
+     * @type {Array<UpiDetails>}
+     * @memberof UpdateVendorRequest
+     */
+    'upi'?: Array<UpiDetails>;
+    /**
+     * Specify the kyc details that should be updated.
+     * @type {Array<KycDetails>}
+     * @memberof UpdateVendorRequest
+     */
+    'kyc_details': Array<KycDetails>;
+}
+/**
+ * Update Vendor Response
+ * @export
+ * @interface UpdateVendorResponse
+ */
+export interface UpdateVendorResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateVendorResponse
+     */
+    'email'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateVendorResponse
+     */
+    'status'?: string;
+    /**
+     * 
+     * @type {Array<BankDetails>}
+     * @memberof UpdateVendorResponse
+     */
+    'bank'?: Array<BankDetails>;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateVendorResponse
+     */
+    'upi'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateVendorResponse
+     */
+    'added_on'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateVendorResponse
+     */
+    'updated_on'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateVendorResponse
+     */
+    'vendor_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateVendorResponse
+     */
+    'account_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateVendorResponse
+     */
+    'business_type'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateVendorResponse
+     */
+    'phone'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateVendorResponse
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateVendorResponse
+     */
+    'vendor_id'?: string;
+    /**
+     * 
+     * @type {Array<ScheduleOption>}
+     * @memberof UpdateVendorResponse
+     */
+    'schedule_option'?: Array<ScheduleOption>;
+    /**
+     * 
+     * @type {Array<KycDetails>}
+     * @memberof UpdateVendorResponse
+     */
+    'kyc_details'?: Array<KycDetails>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UpdateVendorResponse
+     */
+    'dashboard_access'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateVendorResponse
+     */
+    'bank_details'?: string;
+    /**
+     * 
+     * @type {Array<VendorEntityRelatedDocsInner>}
+     * @memberof UpdateVendorResponse
+     */
+    'related_docs'?: Array<VendorEntityRelatedDocsInner>;
+}
+/**
  * UPI collect payment method object
  * @export
  * @interface Upi
@@ -5156,6 +6505,25 @@ export const UpiChannelEnum = {
 
 export type UpiChannelEnum = typeof UpiChannelEnum[keyof typeof UpiChannelEnum];
 
+/**
+ * 
+ * @export
+ * @interface UpiDetails
+ */
+export interface UpiDetails {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpiDetails
+     */
+    'vpa'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpiDetails
+     */
+    'account_holder'?: string;
+}
 /**
  * Request body to upload terminal documents.
  * @export
@@ -5211,6 +6579,290 @@ export interface UploadTerminalDocsEntity {
      * @memberof UploadTerminalDocsEntity
      */
     'status'?: string;
+}
+/**
+ * Update Vendor Request
+ * @export
+ * @interface UploadVendorDocsRequest
+ */
+export interface UploadVendorDocsRequest {
+    /**
+     * Mention the type of the document you are uploading. Possible values: UIDAI_FRONT, UIDAI_BACK, UIDAI_NUMBER, DL, DL_NUMBER, PASSPORT_FRONT, PASSPORT_BACK, PASSPORT_NUMBER, VOTER_ID, VOTER_ID_NUMBER, PAN, PAN_NUMBER, GST, GSTIN_NUMBER, CIN, CIN_NUMBER, NBFC_CERTIFICATE. If the doc type ends with a number you should add the doc value else upload the doc file.
+     * @type {string}
+     * @memberof UploadVendorDocsRequest
+     */
+    'doc_type'?: string;
+    /**
+     * Enter the display name of the uploaded file.
+     * @type {File}
+     * @memberof UploadVendorDocsRequest
+     */
+    'doc_value'?: File;
+    /**
+     * Select the document that should be uploaded or provide the path of that file. You cannot upload a file that is more than 2MB in size.
+     * @type {string}
+     * @memberof UploadVendorDocsRequest
+     */
+    'file'?: string;
+}
+/**
+ * Upload Vendor Document
+ * @export
+ * @interface UploadVendorDocumentsResponse
+ */
+export interface UploadVendorDocumentsResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof UploadVendorDocumentsResponse
+     */
+    'vendor_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UploadVendorDocumentsResponse
+     */
+    'doc_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UploadVendorDocumentsResponse
+     */
+    'doc_value'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UploadVendorDocumentsResponse
+     */
+    'status'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UploadVendorDocumentsResponse
+     */
+    'remarks'?: string;
+}
+/**
+ * Vendor Balance entity object
+ * @export
+ * @interface VendorBalance
+ */
+export interface VendorBalance {
+    /**
+     * 
+     * @type {number}
+     * @memberof VendorBalance
+     */
+    'merchant_id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorBalance
+     */
+    'vendor_id'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof VendorBalance
+     */
+    'merchant_unsettled'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof VendorBalance
+     */
+    'vendor_unsettled'?: number;
+}
+/**
+ * Vendor Balance Transfer Charges entity object
+ * @export
+ * @interface VendorBalanceTransferCharges
+ */
+export interface VendorBalanceTransferCharges {
+    /**
+     * 
+     * @type {number}
+     * @memberof VendorBalanceTransferCharges
+     */
+    'service_charges'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof VendorBalanceTransferCharges
+     */
+    'service_tax'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof VendorBalanceTransferCharges
+     */
+    'amount'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorBalanceTransferCharges
+     */
+    'billed_to'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof VendorBalanceTransferCharges
+     */
+    'is_postpaid'?: boolean;
+}
+/**
+ * Download Vendor Document
+ * @export
+ * @interface VendorDocumentDownloadResponse
+ */
+export interface VendorDocumentDownloadResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorDocumentDownloadResponse
+     */
+    'download_url'?: string;
+}
+/**
+ * Get Vendor Documents
+ * @export
+ * @interface VendorDocumentsResponse
+ */
+export interface VendorDocumentsResponse {
+    /**
+     * 
+     * @type {Array<VendorEntityRelatedDocsInner>}
+     * @memberof VendorDocumentsResponse
+     */
+    'documents'?: Array<VendorEntityRelatedDocsInner>;
+}
+/**
+ * Vendor entity object
+ * @export
+ * @interface VendorEntity
+ */
+export interface VendorEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntity
+     */
+    'email'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntity
+     */
+    'status'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntity
+     */
+    'phone'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntity
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntity
+     */
+    'vendor_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntity
+     */
+    'added_on'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntity
+     */
+    'updated_on'?: string;
+    /**
+     * 
+     * @type {Array<BankDetails>}
+     * @memberof VendorEntity
+     */
+    'bank'?: Array<BankDetails>;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntity
+     */
+    'upi'?: string;
+    /**
+     * 
+     * @type {Array<ScheduleOption>}
+     * @memberof VendorEntity
+     */
+    'schedule_option'?: Array<ScheduleOption>;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntity
+     */
+    'vendor_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntity
+     */
+    'account_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntity
+     */
+    'business_type'?: string;
+    /**
+     * 
+     * @type {Array<VendorEntityRelatedDocsInner>}
+     * @memberof VendorEntity
+     */
+    'related_docs'?: Array<VendorEntityRelatedDocsInner>;
+}
+/**
+ * 
+ * @export
+ * @interface VendorEntityRelatedDocsInner
+ */
+export interface VendorEntityRelatedDocsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntityRelatedDocsInner
+     */
+    'vendor_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntityRelatedDocsInner
+     */
+    'doc_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntityRelatedDocsInner
+     */
+    'doc_value'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntityRelatedDocsInner
+     */
+    'status'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntityRelatedDocsInner
+     */
+    'remarks'?: string;
 }
 /**
  * Use to split order when cashfree\'s Easy Split is enabled for your account.
@@ -5309,7 +6961,7 @@ const CustomersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5366,6 +7018,1052 @@ const CustomersApiFp = function(configuration?: Configuration) {
  * CustomersApi - object-oriented interface
  * @export
  * @class CustomersApi
+ * @extends {BaseAPI}
+ */
+
+
+
+/**
+ * EasySplitApi - axios parameter creator
+ * @export
+ */
+const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * The Create On Demand Transfer API will create a new on-demand request either from to the merchant or from to the vendor.
+         * @summary Create On Demand Transfer
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} vendor_id The id which uniquely identifies your vendor.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {AdjustVendorBalanceRequest} [AdjustVendorBalanceRequest] Adjust Vendor Balance Request Body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        pGESCreateOnDemandTransfer: async (x_api_version: string, vendor_id: string,  x_request_id?: string, x_idempotency_key?: string, AdjustVendorBalanceRequest?: AdjustVendorBalanceRequest,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESCreateOnDemandTransfer', 'x_api_version', x_api_version)
+            // verify required parameter 'vendor_id' is not null or undefined
+            assertParamExists('pGESCreateOnDemandTransfer', 'vendor_id', vendor_id)
+            const localVarPath = `/easy-split/vendors/{vendor_id}/transfer`
+                .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(AdjustVendorBalanceRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to create a new vendor to your EasySplit account along with the KYC details. Provide KYC details such as account_type, business_type, gst, cin, pan, passport number and so on.
+         * @summary Create vendor
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {CreateVendorRequest} [CreateVendorRequest] Create Vendor Request Body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * CreateVendorRequest?: CreateVendorRequest, 
+         */
+        pGESCreateVendors: async (x_api_version: string,  x_request_id?: string, x_idempotency_key?: string, CreateVendorRequest?: CreateVendorRequest,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESCreateVendors', 'x_api_version', x_api_version)
+            const localVarPath = `/easy-split/vendors`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(CreateVendorRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to download the uploaded KYC documents of that particular vendor. Provide the document type. Click the link from the sample request to download the KYC document.
+         * @summary Download Vendor Documents
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} doc_type Mention the document type that has to be downloaded. Only an uploaded document can be downloaded.
+         * @param {string} vendor_id The id which uniquely identifies your vendor.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_request_id?: string, 
+         */
+        pGESDownloadVendorsDocs: async (x_api_version: string, doc_type: string, vendor_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESDownloadVendorsDocs', 'x_api_version', x_api_version)
+            // verify required parameter 'doc_type' is not null or undefined
+            assertParamExists('pGESDownloadVendorsDocs', 'doc_type', doc_type)
+            // verify required parameter 'vendor_id' is not null or undefined
+            assertParamExists('pGESDownloadVendorsDocs', 'vendor_id', vendor_id)
+            const localVarPath = `/easy-split/vendor-docs/{vendor_id}/download/{doc_type}`
+                .replace(`{${"doc_type"}}`, encodeURIComponent(String(doc_type)))
+                .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to get the details of a specific vendor associated with your Easy Split account.
+         * @summary Get Vendor All Details
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} vendor_id The id which uniquely identifies your vendor.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        pGESFetchVendors: async (x_api_version: string, vendor_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESFetchVendors', 'x_api_version', x_api_version)
+            // verify required parameter 'vendor_id' is not null or undefined
+            assertParamExists('pGESFetchVendors', 'vendor_id', vendor_id)
+            const localVarPath = `/easy-split/vendors/{vendor_id}`
+                .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This API fetches the available amount with the merchant, vendor, and the unsettled amount for the merchant as well as the vendor.
+         * @summary Get On Demand Balance
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} vendor_id The id which uniquely identifies your vendor.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        pGESGetVendorBalance: async (x_api_version: string, vendor_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESGetVendorBalance', 'x_api_version', x_api_version)
+            // verify required parameter 'vendor_id' is not null or undefined
+            assertParamExists('pGESGetVendorBalance', 'vendor_id', vendor_id)
+            const localVarPath = `/easy-split/vendors/{vendor_id}/balances`
+                .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This API returns the applicable service charge and service tax for a vendor balance transfer, based on the provided amount and rate type.
+         * @summary Get Vendor Balance Transfer Charges
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {number} amount Specify the amount for which you want to view the service charges and service taxes in the response.
+         * @param {string} rate_type Mention the type of rate for which you want to check the charges. Possible value: VENDOR_ON_DEMAND
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_request_id?: string, 
+         */
+        pGESGetVendorBalanceTransferCharges: async (x_api_version: string, amount: number, rate_type: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESGetVendorBalanceTransferCharges', 'x_api_version', x_api_version)
+            // verify required parameter 'amount' is not null or undefined
+            assertParamExists('pGESGetVendorBalanceTransferCharges', 'amount', amount)
+            // verify required parameter 'rate_type' is not null or undefined
+            assertParamExists('pGESGetVendorBalanceTransferCharges', 'rate_type', rate_type)
+            const localVarPath = `/easy-split/amount/{amount}/charges`
+                .replace(`{${"amount"}}`, encodeURIComponent(String(amount)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+            if (rate_type !== undefined) {
+                localVarQueryParameter['rate_type'] = rate_type;
+            }
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to fetch the details of all the KYC details of a particular vendor.
+         * @summary Get Vendor All Documents Status
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} vendor_id The id which uniquely identifies your vendor.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        pGESGetVendorsDocs: async (x_api_version: string, vendor_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESGetVendorsDocs', 'x_api_version', x_api_version)
+            // verify required parameter 'vendor_id' is not null or undefined
+            assertParamExists('pGESGetVendorsDocs', 'vendor_id', vendor_id)
+            const localVarPath = `/easy-split/vendor-docs/{vendor_id}`
+                .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to get all the split details, settled and unsettled transactions details of each vendor who were part of a particular order by providing order Id or start date and end date.
+         * @summary Get Split and Settlement Details by OrderID v2.0
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {ESOrderReconRequest} [ESOrderReconRequest] Get Split and Settlement Details by OrderID v2.0
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * ESOrderReconRequest?: ESOrderReconRequest, 
+         */
+        pGESOrderRecon: async (x_api_version: string,  x_request_id?: string, x_idempotency_key?: string, ESOrderReconRequest?: ESOrderReconRequest,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESOrderRecon', 'x_api_version', x_api_version)
+            const localVarPath = `/split/order/vendor/recon`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(ESOrderReconRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to edit the existing vendor details added to your EasySplit account. You can edit vendor details such as name, email, phone number, upi details, and any of the KYC details.
+         * @summary Update vendor Details
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} vendor_id The id which uniquely identifies your vendor.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {UpdateVendorRequest} [UpdateVendorRequest] Create Vendor Request Body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        pGESUpdateVendors: async (x_api_version: string, vendor_id: string,  x_request_id?: string, x_idempotency_key?: string, UpdateVendorRequest?: UpdateVendorRequest,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESUpdateVendors', 'x_api_version', x_api_version)
+            // verify required parameter 'vendor_id' is not null or undefined
+            assertParamExists('pGESUpdateVendors', 'vendor_id', vendor_id)
+            const localVarPath = `/easy-split/vendors/{vendor_id}`
+                .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(UpdateVendorRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Split After Payment API splits the payments to vendors after successful payment from the customers.
+         * @summary Split After Payment
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} order_id The id which uniquely identifies your order
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {SplitAfterPaymentRequest} [SplitAfterPaymentRequest] Request Body to Create Split for an order.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        pGOrderSplitAfterPayment: async (x_api_version: string, order_id: string,  x_request_id?: string, x_idempotency_key?: string, SplitAfterPaymentRequest?: SplitAfterPaymentRequest,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGOrderSplitAfterPayment', 'x_api_version', x_api_version)
+            // verify required parameter 'order_id' is not null or undefined
+            assertParamExists('pGOrderSplitAfterPayment', 'order_id', order_id)
+            const localVarPath = `/easy-split/orders/{order_id}/split`
+                .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(SplitAfterPaymentRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This API will create a static split scheme wherein you can define the split type and the vendor-wise split percentage.
+         * @summary Create Static Split Configuration
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {StaticSplitRequest} [StaticSplitRequest] Static Split
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * StaticSplitRequest?: StaticSplitRequest, 
+         */
+        pGOrderStaticSplit: async (x_api_version: string,  x_request_id?: string, x_idempotency_key?: string, StaticSplitRequest?: StaticSplitRequest,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGOrderStaticSplit', 'x_api_version', x_api_version)
+            const localVarPath = `/easy-split/static-split`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(StaticSplitRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * EasySplitApi - functional programming interface
+ * @export
+ */
+const EasySplitApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = EasySplitApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * The Create On Demand Transfer API will create a new on-demand request either from to the merchant or from to the vendor.
+         * @summary Create On Demand Transfer
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} vendor_id The id which uniquely identifies your vendor.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {AdjustVendorBalanceRequest} [AdjustVendorBalanceRequest] Adjust Vendor Balance Request Body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGESCreateOnDemandTransfer(x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, AdjustVendorBalanceRequest?: AdjustVendorBalanceRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdjustVendorBalanceResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESCreateOnDemandTransfer(x_api_version, vendor_id, x_request_id, x_idempotency_key, AdjustVendorBalanceRequest, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to create a new vendor to your EasySplit account along with the KYC details. Provide KYC details such as account_type, business_type, gst, cin, pan, passport number and so on.
+         * @summary Create vendor
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {CreateVendorRequest} [CreateVendorRequest] Create Vendor Request Body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGESCreateVendors(x_api_version: string, x_request_id?: string, x_idempotency_key?: string, CreateVendorRequest?: CreateVendorRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateVendorResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESCreateVendors(x_api_version, x_request_id, x_idempotency_key, CreateVendorRequest, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to download the uploaded KYC documents of that particular vendor. Provide the document type. Click the link from the sample request to download the KYC document.
+         * @summary Download Vendor Documents
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} doc_type Mention the document type that has to be downloaded. Only an uploaded document can be downloaded.
+         * @param {string} vendor_id The id which uniquely identifies your vendor.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGESDownloadVendorsDocs(x_api_version: string, doc_type: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VendorDocumentDownloadResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESDownloadVendorsDocs(x_api_version, doc_type, vendor_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to get the details of a specific vendor associated with your Easy Split account.
+         * @summary Get Vendor All Details
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} vendor_id The id which uniquely identifies your vendor.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGESFetchVendors(x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VendorEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESFetchVendors(x_api_version, vendor_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * This API fetches the available amount with the merchant, vendor, and the unsettled amount for the merchant as well as the vendor.
+         * @summary Get On Demand Balance
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} vendor_id The id which uniquely identifies your vendor.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGESGetVendorBalance(x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VendorBalance>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESGetVendorBalance(x_api_version, vendor_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * This API returns the applicable service charge and service tax for a vendor balance transfer, based on the provided amount and rate type.
+         * @summary Get Vendor Balance Transfer Charges
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {number} amount Specify the amount for which you want to view the service charges and service taxes in the response.
+         * @param {string} rate_type Mention the type of rate for which you want to check the charges. Possible value: VENDOR_ON_DEMAND
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGESGetVendorBalanceTransferCharges(x_api_version: string, amount: number, rate_type: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VendorBalanceTransferCharges>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESGetVendorBalanceTransferCharges(x_api_version, amount, rate_type, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to fetch the details of all the KYC details of a particular vendor.
+         * @summary Get Vendor All Documents Status
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} vendor_id The id which uniquely identifies your vendor.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGESGetVendorsDocs(x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VendorDocumentsResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESGetVendorsDocs(x_api_version, vendor_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to get all the split details, settled and unsettled transactions details of each vendor who were part of a particular order by providing order Id or start date and end date.
+         * @summary Get Split and Settlement Details by OrderID v2.0
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {ESOrderReconRequest} [ESOrderReconRequest] Get Split and Settlement Details by OrderID v2.0
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGESOrderRecon(x_api_version: string, x_request_id?: string, x_idempotency_key?: string, ESOrderReconRequest?: ESOrderReconRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ESOrderReconResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESOrderRecon(x_api_version, x_request_id, x_idempotency_key, ESOrderReconRequest, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to edit the existing vendor details added to your EasySplit account. You can edit vendor details such as name, email, phone number, upi details, and any of the KYC details.
+         * @summary Update vendor Details
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} vendor_id The id which uniquely identifies your vendor.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {UpdateVendorRequest} [UpdateVendorRequest] Create Vendor Request Body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGESUpdateVendors(x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, UpdateVendorRequest?: UpdateVendorRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateVendorResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESUpdateVendors(x_api_version, vendor_id, x_request_id, x_idempotency_key, UpdateVendorRequest, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Split After Payment API splits the payments to vendors after successful payment from the customers.
+         * @summary Split After Payment
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} order_id The id which uniquely identifies your order
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {SplitAfterPaymentRequest} [SplitAfterPaymentRequest] Request Body to Create Split for an order.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGOrderSplitAfterPayment(x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, SplitAfterPaymentRequest?: SplitAfterPaymentRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SplitAfterPaymentResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGOrderSplitAfterPayment(x_api_version, order_id, x_request_id, x_idempotency_key, SplitAfterPaymentRequest, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * This API will create a static split scheme wherein you can define the split type and the vendor-wise split percentage.
+         * @summary Create Static Split Configuration
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {StaticSplitRequest} [StaticSplitRequest] Static Split
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGOrderStaticSplit(x_api_version: string, x_request_id?: string, x_idempotency_key?: string, StaticSplitRequest?: StaticSplitRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StaticSplitResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGOrderStaticSplit(x_api_version, x_request_id, x_idempotency_key, StaticSplitRequest, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+    }
+};
+
+/**
+ * EasySplitApi - object-oriented interface
+ * @export
+ * @class EasySplitApi
  * @extends {BaseAPI}
  */
 
@@ -5429,7 +8127,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5503,7 +8201,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5577,7 +8275,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5651,7 +8349,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5825,7 +8523,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -5898,7 +8596,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6035,7 +8733,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6108,7 +8806,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6185,7 +8883,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6344,7 +9042,7 @@ const PGReconciliationApiAxiosParamCreator = function (configuration?: Configura
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6465,7 +9163,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6538,7 +9236,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6611,7 +9309,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6683,7 +9381,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6860,7 +9558,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -6923,7 +9621,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7000,7 +9698,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7072,7 +9770,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7130,7 +9828,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7329,7 +10027,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7406,7 +10104,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7478,7 +10176,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7637,7 +10335,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7713,7 +10411,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7854,7 +10552,7 @@ const SettlementsApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7973,7 +10671,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8047,7 +10745,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8120,7 +10818,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8202,7 +10900,86 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to get  terminal transaction.
+         * @summary Get Terminal Transaction
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} utr Utr of the transaction.
+         * @param {string} cf_terminal_id Provide the Cashfree terminal ID for which the details have to be updated.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_request_id?: string, 
+         */
+        sposFetchTerminalTransaction: async (x_api_version: string, utr: string, cf_terminal_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('sposFetchTerminalTransaction', 'x_api_version', x_api_version)
+            // verify required parameter 'utr' is not null or undefined
+            assertParamExists('sposFetchTerminalTransaction', 'utr', utr)
+            // verify required parameter 'cf_terminal_id' is not null or undefined
+            assertParamExists('sposFetchTerminalTransaction', 'cf_terminal_id', cf_terminal_id)
+            const localVarPath = `/terminal/{cf_terminal_id}/payments`
+                .replace(`{${"cf_terminal_id"}}`, encodeURIComponent(String(cf_terminal_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+            if (utr !== undefined) {
+                localVarQueryParameter['utr'] = utr;
+            }
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8279,7 +11056,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8303,7 +11080,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
         },
         /**
          * Use this API to update the terminal status.
-         * @summary Update Terminal Sttus
+         * @summary Update Terminal Status
          
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} cf_terminal_id Provide the Cashfree terminal ID for which the details have to be updated.
@@ -8357,7 +11134,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8435,7 +11212,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8541,6 +11318,25 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
         /**
+         * Use this API to get  terminal transaction.
+         * @summary Get Terminal Transaction
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} utr Utr of the transaction.
+         * @param {string} cf_terminal_id Provide the Cashfree terminal ID for which the details have to be updated.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async sposFetchTerminalTransaction(x_api_version: string, utr: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TerminalPaymentEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.sposFetchTerminalTransaction(x_api_version, utr, cf_terminal_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
          * Use this API to update the terminal details. Email, Phone Number, and Terminal Meta are updatable for \"Storefront\". Only account status change is possible in case of \"Agent\".
          * @summary Update Terminal
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
@@ -8561,7 +11357,7 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
         },
         /**
          * Use this API to update the terminal status.
-         * @summary Update Terminal Sttus
+         * @summary Update Terminal Status
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} cf_terminal_id Provide the Cashfree terminal ID for which the details have to be updated.
          * @param {UpdateTerminalStatusRequest} UpdateTerminalStatusRequest Request Body to update terminal status for SPOS.
@@ -8670,7 +11466,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8746,7 +11542,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8825,7 +11621,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8901,7 +11697,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.7';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.0.9';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9129,11 +11925,676 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
             return CustomersApiFp().pGCreateCustomer(x_api_version, CreateCustomerRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+    
+    /**
+     * The Create On Demand Transfer API will create a new on-demand request either from to the merchant or from to the vendor.
+     * @summary Create On Demand Transfer
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} vendor_id The id which uniquely identifies your vendor.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {AdjustVendorBalanceRequest} [AdjustVendorBalanceRequest] Adjust Vendor Balance Request Body.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EasySplitApi
+     */
+    public static PGESCreateOnDemandTransfer(x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, AdjustVendorBalanceRequest?: AdjustVendorBalanceRequest, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.0.9");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESCreateOnDemandTransfer(x_api_version, vendor_id, x_request_id, x_idempotency_key, AdjustVendorBalanceRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to create a new vendor to your EasySplit account along with the KYC details. Provide KYC details such as account_type, business_type, gst, cin, pan, passport number and so on.
+     * @summary Create vendor
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {CreateVendorRequest} [CreateVendorRequest] Create Vendor Request Body.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EasySplitApi
+     */
+    public static PGESCreateVendors(x_api_version: string, x_request_id?: string, x_idempotency_key?: string, CreateVendorRequest?: CreateVendorRequest, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.0.9");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESCreateVendors(x_api_version, x_request_id, x_idempotency_key, CreateVendorRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to download the uploaded KYC documents of that particular vendor. Provide the document type. Click the link from the sample request to download the KYC document.
+     * @summary Download Vendor Documents
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} doc_type Mention the document type that has to be downloaded. Only an uploaded document can be downloaded.
+     * @param {string} vendor_id The id which uniquely identifies your vendor.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EasySplitApi
+     */
+    public static PGESDownloadVendorsDocs(x_api_version: string, doc_type: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.0.9");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESDownloadVendorsDocs(x_api_version, doc_type, vendor_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to get the details of a specific vendor associated with your Easy Split account.
+     * @summary Get Vendor All Details
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} vendor_id The id which uniquely identifies your vendor.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EasySplitApi
+     */
+    public static PGESFetchVendors(x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.0.9");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESFetchVendors(x_api_version, vendor_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * This API fetches the available amount with the merchant, vendor, and the unsettled amount for the merchant as well as the vendor.
+     * @summary Get On Demand Balance
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} vendor_id The id which uniquely identifies your vendor.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EasySplitApi
+     */
+    public static PGESGetVendorBalance(x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.0.9");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESGetVendorBalance(x_api_version, vendor_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * This API returns the applicable service charge and service tax for a vendor balance transfer, based on the provided amount and rate type.
+     * @summary Get Vendor Balance Transfer Charges
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {number} amount Specify the amount for which you want to view the service charges and service taxes in the response.
+     * @param {string} rate_type Mention the type of rate for which you want to check the charges. Possible value: VENDOR_ON_DEMAND
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EasySplitApi
+     */
+    public static PGESGetVendorBalanceTransferCharges(x_api_version: string, amount: number, rate_type: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.0.9");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESGetVendorBalanceTransferCharges(x_api_version, amount, rate_type, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to fetch the details of all the KYC details of a particular vendor.
+     * @summary Get Vendor All Documents Status
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} vendor_id The id which uniquely identifies your vendor.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EasySplitApi
+     */
+    public static PGESGetVendorsDocs(x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.0.9");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESGetVendorsDocs(x_api_version, vendor_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to get all the split details, settled and unsettled transactions details of each vendor who were part of a particular order by providing order Id or start date and end date.
+     * @summary Get Split and Settlement Details by OrderID v2.0
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {ESOrderReconRequest} [ESOrderReconRequest] Get Split and Settlement Details by OrderID v2.0
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EasySplitApi
+     */
+    public static PGESOrderRecon(x_api_version: string, x_request_id?: string, x_idempotency_key?: string, ESOrderReconRequest?: ESOrderReconRequest, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.0.9");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESOrderRecon(x_api_version, x_request_id, x_idempotency_key, ESOrderReconRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to edit the existing vendor details added to your EasySplit account. You can edit vendor details such as name, email, phone number, upi details, and any of the KYC details.
+     * @summary Update vendor Details
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} vendor_id The id which uniquely identifies your vendor.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {UpdateVendorRequest} [UpdateVendorRequest] Create Vendor Request Body.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EasySplitApi
+     */
+    public static PGESUpdateVendors(x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, UpdateVendorRequest?: UpdateVendorRequest, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.0.9");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESUpdateVendors(x_api_version, vendor_id, x_request_id, x_idempotency_key, UpdateVendorRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Split After Payment API splits the payments to vendors after successful payment from the customers.
+     * @summary Split After Payment
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} order_id The id which uniquely identifies your order
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {SplitAfterPaymentRequest} [SplitAfterPaymentRequest] Request Body to Create Split for an order.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EasySplitApi
+     */
+    public static PGOrderSplitAfterPayment(x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, SplitAfterPaymentRequest?: SplitAfterPaymentRequest, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.0.9");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGOrderSplitAfterPayment(x_api_version, order_id, x_request_id, x_idempotency_key, SplitAfterPaymentRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * This API will create a static split scheme wherein you can define the split type and the vendor-wise split percentage.
+     * @summary Create Static Split Configuration
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {StaticSplitRequest} [StaticSplitRequest] Static Split
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EasySplitApi
+     */
+    public static PGOrderStaticSplit(x_api_version: string, x_request_id?: string, x_idempotency_key?: string, StaticSplitRequest?: StaticSplitRequest, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.0.9");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGOrderStaticSplit(x_api_version, x_request_id, x_idempotency_key, StaticSplitRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -9189,7 +12650,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -9249,7 +12710,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -9309,7 +12770,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -9369,7 +12830,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -9429,7 +12890,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -9489,7 +12950,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -9549,7 +13010,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -9609,7 +13070,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -9670,7 +13131,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -9732,7 +13193,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -9792,7 +13253,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -9852,7 +13313,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -9912,7 +13373,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -9972,7 +13433,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -10033,7 +13494,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -10094,7 +13555,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -10155,7 +13616,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -10215,7 +13676,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -10275,7 +13736,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -10336,7 +13797,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -10397,7 +13858,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -10457,7 +13918,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -10519,7 +13980,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -10581,7 +14042,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -10641,7 +14102,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -10701,7 +14162,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -10761,7 +14222,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -10821,7 +14282,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -10882,11 +14343,72 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
             return SoftPOSApiFp().sposFetchTerminalQRCodes(x_api_version, terminal_phone_no, cf_terminal_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to get  terminal transaction.
+     * @summary Get Terminal Transaction
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} utr Utr of the transaction.
+     * @param {string} cf_terminal_id Provide the Cashfree terminal ID for which the details have to be updated.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SoftPOSApi
+     */
+    public static SposFetchTerminalTransaction(x_api_version: string, utr: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.0.9");
+            });
+        }
+        try {
+            return SoftPOSApiFp().sposFetchTerminalTransaction(x_api_version, utr, cf_terminal_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -10943,7 +14465,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -10958,7 +14480,7 @@ export class Cashfree {
 
     /**
      * Use this API to update the terminal status.
-     * @summary Update Terminal Sttus
+     * @summary Update Terminal Status
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {string} cf_terminal_id Provide the Cashfree terminal ID for which the details have to be updated.
      * @param {UpdateTerminalStatusRequest} UpdateTerminalStatusRequest Request Body to update terminal status for SPOS.
@@ -11004,7 +14526,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -11065,7 +14587,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -11126,7 +14648,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -11187,7 +14709,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -11248,7 +14770,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
@@ -11309,7 +14831,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.0.7");
+                scope.setExtra('release', "4.0.9");
             });
         }
         try {
