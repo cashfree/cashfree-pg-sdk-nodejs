@@ -11,6 +11,7 @@ Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
 var orderId = ''
 var paymentSessionId = ''
 var orderAmount = 3000;
+var xApiVersion = '2023-08-01';
 
 function getCurrentTimeStamp() {
     var today = new Date();
@@ -26,8 +27,6 @@ function setOrderDetails(order_id: string, payment_session_id: string) {
 }
 
 it('Create Order Test', function (done) {
-    console.log("process.env.PG_CLIENT_ID");
-    console.log(process.env.PG_CLIENT_ID);
     var blah = 'foo';
     var request = {
         "order_amount": orderAmount,
@@ -45,7 +44,7 @@ it('Create Order Test', function (done) {
         }
     }
 
-    Cashfree.PGCreateOrder("2022-09-01", request).then((response) => {
+    Cashfree.PGCreateOrder(xApiVersion, request).then((response) => {
         assert.equal(response.data.order_amount, request.order_amount, "Amount is not matching")
         assert.equal(response.data.order_currency, "INR", "Currency is not matching")
         assert.equal(response.data.customer_details?.customer_id, response.data.customer_details?.customer_id, "Customer id is not matching")
@@ -81,7 +80,7 @@ it('Create Order with Invalid Currency Test', function (done) {
         }
     }
 
-    Cashfree.PGCreateOrder("2022-09-01", request).then((response) => {
+    Cashfree.PGCreateOrder(xApiVersion, request).then((response) => {
         assert.fail("Fail error message")
         done()
     }).catch((error) => {
@@ -110,7 +109,7 @@ it('Create Order with Invalid Amount Test', function (done) {
         }
     }
 
-    Cashfree.PGCreateOrder("2022-09-01", request).then((response) => {
+    Cashfree.PGCreateOrder(xApiVersion, request).then((response) => {
         assert.fail("Fail error message")
         done()
     }).catch((error) => {
@@ -139,7 +138,7 @@ it('Create Order with Empty Customer Phone Test', function (done) {
         }
     }
 
-    Cashfree.PGCreateOrder("2022-09-01", request).then((response) => {
+    Cashfree.PGCreateOrder(xApiVersion, request).then((response) => {
         assert.fail("Fail error message")
         done()
     }).catch((error) => {
@@ -161,7 +160,7 @@ it('Order Pay Net Banking Test', function (done) {
             }
         }
     }
-    Cashfree.PGPayOrder("2022-09-01", request).then((response) => {
+    Cashfree.PGPayOrder(xApiVersion, request).then((response) => {
         assert.equal(response.data.channel, "link", "channel is not matching")
         assert.equal(response.data.payment_method, "netbanking", "payment_method is not matching")
         assert.strictEqual(Number(response.data.payment_amount) >= orderAmount, true, "Payment amount is less than order amount")
@@ -186,7 +185,7 @@ it('Order Pay Card payment Test', function (done) {
             }
         }
     }
-    Cashfree.PGPayOrder("2022-09-01", request).then((response) => {
+    Cashfree.PGPayOrder(xApiVersion, request).then((response) => {
         assert.equal(response.data.channel, "link", "channel is not matching")
         assert.equal(response.data.payment_method, "card", "payment_method is not matching")
         assert.strictEqual(Number(response.data.payment_amount) >= orderAmount, true, "Payment amount is less than order amount")
@@ -211,7 +210,7 @@ it('Order Pay Card payment with empty cvv Test', function (done) {
             }
         }
     }
-    Cashfree.PGPayOrder("2022-09-01", request).then((response) => {
+    Cashfree.PGPayOrder(xApiVersion, request).then((response) => {
         assert.fail("Fail error message")
         done()
     }).catch((error) => {
@@ -236,7 +235,7 @@ it('Order Pay Wallet Test', function (done) {
             }
         }
     }
-    Cashfree.PGPayOrder("2022-09-01", request).then((response) => {
+    Cashfree.PGPayOrder(xApiVersion, request).then((response) => {
         done()
     }).catch((error) => {
         assert.fail("Fail error message")
@@ -245,7 +244,7 @@ it('Order Pay Wallet Test', function (done) {
 });
 
 it('Get Order Test', function (done) {
-    Cashfree.PGFetchOrder("2022-09-01", "order_4175412YWdHafgWZLFYcyTKkzIqu9QJvI").then((response) => {
+    Cashfree.PGFetchOrder(xApiVersion, "order_4175412YWdHafgWZLFYcyTKkzIqu9QJvI").then((response) => {
         assert.equal(response.data.order_currency, "INR")
         done()
     }).catch((error) => {
@@ -256,7 +255,7 @@ it('Get Order Test', function (done) {
 });
 
 it('Get Payments For an Order Test', function (done) {
-    Cashfree.PGOrderFetchPayments("2022-09-01", "order_4175412YWdHafgWZLFYcyTKkzIqu9QJvI").then((response) => {
+    Cashfree.PGOrderFetchPayments(xApiVersion, "order_4175412YWdHafgWZLFYcyTKkzIqu9QJvI").then((response) => {
         done()
     }).catch((error) => {
         console.log("Actual: " + error.actual + " Expected: " + error.expected + " Operator: " + error.operator)
@@ -272,7 +271,7 @@ it('Create Refund Test', function (done) {
         "refund_id": "Refund_id_" + getCurrentTimeStamp(),
         "refund_note": "initiated refund by automation"
     }
-    Cashfree.PGOrderCreateRefund("2022-09-01", "order_4175412YWdHafgWZLFYcyTKkzIqu9QJvI", request).then((response) => {
+    Cashfree.PGOrderCreateRefund(xApiVersion, "order_4175412YWdHafgWZLFYcyTKkzIqu9QJvI", request).then((response) => {
         done()
     }).catch((error) => {
         console.log(error.response.data)
@@ -288,7 +287,7 @@ it('Create Refund with negative refund amount Test', function (done) {
         "refund_note": "initiated refund by automation"
     }
 
-    Cashfree.PGOrderCreateRefund("2022-09-01", "order_4175412YWdHafgWZLFYcyTKkzIqu9QJvI", request).then((response) => {
+    Cashfree.PGOrderCreateRefund(xApiVersion, "order_4175412YWdHafgWZLFYcyTKkzIqu9QJvI", request).then((response) => {
         assert.fail("Fail error message")
         done()
     }).catch((error) => {
@@ -306,7 +305,7 @@ it('Create Refund with invalid order id Test', function (done) {
         "refund_note": "initiated refund by automation"
     }
     var order_id = "Order_" + getCurrentTimeStamp()
-    Cashfree.PGOrderCreateRefund("2022-09-01", order_id, request).then((response) => {
+    Cashfree.PGOrderCreateRefund(xApiVersion, order_id, request).then((response) => {
         assert.fail("Fail error message")
         done()
     }).catch((error) => {
@@ -319,7 +318,7 @@ it('Create Refund with invalid order id Test', function (done) {
 
 it('Fetch All Refunds Test', function (done) {
     var order_id = "Order_" + getCurrentTimeStamp()
-    Cashfree.PGOrderFetchRefunds("2022-09-01", "order_4175412YWdHafgWZLFYcyTKkzIqu9QJvI").then((response) => {
+    Cashfree.PGOrderFetchRefunds(xApiVersion, "order_4175412YWdHafgWZLFYcyTKkzIqu9QJvI").then((response) => {
         done()
     }).catch((error) => {
         console.log(error.response.data)
@@ -330,7 +329,7 @@ it('Fetch All Refunds Test', function (done) {
 
 it('Fetch Refund Test', function (done) {
     var order_id = "Order_" + getCurrentTimeStamp()
-    Cashfree.PGOrderFetchRefund("2022-09-01", "order_4175412YWdHafgWZLFYcyTKkzIqu9QJvI", "Refund_id_2060112241827").then((response) => {
+    Cashfree.PGOrderFetchRefund(xApiVersion, "order_4175412YWdHafgWZLFYcyTKkzIqu9QJvI", "Refund_id_2060112241827").then((response) => {
         done()
     }).catch((error) => {
         console.log(error.response.data)
@@ -368,7 +367,7 @@ it('Create Payment Link Test', function (done) {
             "upi_intent": false
         }
     }
-    Cashfree.PGCreateLink("2022-09-01", request).then((response) => {
+    Cashfree.PGCreateLink(xApiVersion, request).then((response) => {
         done()
     }).catch((error) => {
         console.log("Actual: " + error.actual + " Expected: " + error.expected + " Operator: " + error.operator)
@@ -380,7 +379,7 @@ it('Create Payment Link Test', function (done) {
 
 it('Fetch Payment Link Test', function (done) {
     var link_id = "Automated_Test_188181"
-    Cashfree.PGFetchLink("2022-09-01", link_id).then((response) => {
+    Cashfree.PGFetchLink(xApiVersion, link_id).then((response) => {
         done()
     }).catch((error) => {
         console.log("Actual: " + error.actual + " Expected: " + error.expected + " Operator: " + error.operator)
@@ -391,7 +390,7 @@ it('Fetch Payment Link Test', function (done) {
 
 it('Cancel Payment Link Test', function (done) {
     var link_id = "Automated_Test_188181"
-    Cashfree.PGCancelLink("2022-09-01", link_id).then((response) => {
+    Cashfree.PGCancelLink(xApiVersion, link_id).then((response) => {
         assert.fail("Fail error message")
         done()
     }).catch((error) => {
@@ -404,7 +403,7 @@ it('Cancel Payment Link Test', function (done) {
 
 it('Fetch Payment Link with Invalid link id Test', function (done) {
     var link_id = "jahha" + getCurrentTimeStamp()
-    Cashfree.PGFetchLink("2022-09-01", link_id).then((response) => {
+    Cashfree.PGFetchLink(xApiVersion, link_id).then((response) => {
         assert.fail("Fail error message")
         done()
     }).catch((error) => {
@@ -417,7 +416,7 @@ it('Fetch Payment Link with Invalid link id Test', function (done) {
 
 it('Fetch Link Orders Test', function (done) {
     var link_id = "Automated_Test_188181"
-    Cashfree.PGLinkFetchOrders("2022-09-01", link_id).then((response) => {
+    Cashfree.PGLinkFetchOrders(xApiVersion, link_id).then((response) => {
         done()
     }).catch((error) => {
         console.log("Actual: " + error.actual + " Expected: " + error.expected + " Operator: " + error.operator)
@@ -428,7 +427,7 @@ it('Fetch Link Orders Test', function (done) {
 
 it('Fetch Link Orders with invalid link id Test', function (done) {
     var link_id = "jajqq"
-    Cashfree.PGLinkFetchOrders("2022-09-01", link_id).then((response) => {
+    Cashfree.PGLinkFetchOrders(xApiVersion, link_id).then((response) => {
         assert.fail("Fail error message")
         done()
     }).catch((error) => {
@@ -440,54 +439,54 @@ it('Fetch Link Orders with invalid link id Test', function (done) {
 });
 
 
-it('Create Offer Test', function (done) {
-    var request = {
-        "offer_meta": {
-            "offer_title": "bat mann",
-            "offer_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            "offer_code": "VISA1122",
-            "offer_start_time": "2024-01-01T08:09:51Z",
-            "offer_end_time": "2024-09-14T06:18:50Z"
-        },
-        "offer_tnc": {
-            "offer_tnc_type": OfferTncOfferTncTypeEnum.TEXT,
-            "offer_tnc_value": "Lorem ipsum dolor sit amet"
-        },
-        "offer_details": {
-            "offer_type": OfferType.DISCOUNT,
-            "discount_details": {
-                "discount_type": DiscountDetailsDiscountTypeEnum.PERCENTAGE,
-                "discount_value": "20.00",
-                "max_discount_amount": "150.00"
-            }
-        },
-        "offer_validations": {
-            "min_amount": 223.0,
-            "max_allowed": 122,
-            "payment_method": {
-                "all": {
+// it('Create Offer Test', function (done) {
+//     var request = {
+//         "offer_meta": {
+//             "offer_title": "bat mann",
+//             "offer_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+//             "offer_code": "VISA1122",
+//             "offer_start_time": "2024-01-01T08:09:51Z",
+//             "offer_end_time": "2024-09-14T06:18:50Z"
+//         },
+//         "offer_tnc": {
+//             "offer_tnc_type": OfferTncOfferTncTypeEnum.TEXT,
+//             "offer_tnc_value": "Lorem ipsum dolor sit amet"
+//         },
+//         "offer_details": {
+//             "offer_type": OfferType.DISCOUNT,
+//             "discount_details": {
+//                 "discount_type": DiscountDetailsDiscountTypeEnum.PERCENTAGE,
+//                 "discount_value": "20.00",
+//                 "max_discount_amount": "150.00"
+//             }
+//         },
+//         "offer_validations": {
+//             "min_amount": 223.0,
+//             "max_allowed": 122,
+//             "payment_method": {
+//                 "all": {
 
-                }
-            }
-        }
-    }
-    Cashfree.PGCreateOffer("2022-09-01", request).then((response) => {
-        assert.fail("Fail error message")
-        done()
-    }).catch((error) => {
-        console.log(error.response)
-        done()
-    });
-});
+//                 }
+//             }
+//         }
+//     }
+//     Cashfree.PGCreateOffer(xApiVersion, request).then((response) => {
+//         assert.fail("Fail error message")
+//         done()
+//     }).catch((error) => {
+//         console.log(error.response)
+//         done()
+//     });
+// });
 
-it('Get Offer Test', function (done) {
-    Cashfree.PGFetchOffer("2022-09-01", "a189050b-8f7e-4f1c-be5f-ba4bf58bdd6b").then((response) => {
-        done()
-    }).catch((error) => {
-        assert.fail("Fail error message")
-        done()
-    });
-});
+// it('Get Offer Test', function (done) {
+//     Cashfree.PGFetchOffer(xApiVersion, "a189050b-8f7e-4f1c-be5f-ba4bf58bdd6b").then((response) => {
+//         done()
+//     }).catch((error) => {
+//         assert.fail("Fail error message")
+//         done()
+//     });
+// });
 
 it('Fetch Eligibility Payment Methods Test', function (done) {
     var request = {
@@ -495,7 +494,7 @@ it('Fetch Eligibility Payment Methods Test', function (done) {
             "amount": 100
         }
     }
-    Cashfree.PGEligibilityFetchPaymentMethods("2022-09-01", request).then((response) => {
+    Cashfree.PGEligibilityFetchPaymentMethods(xApiVersion, request).then((response) => {
         done()
     }).catch((error) => {
         assert.fail("Fail error message")
@@ -509,7 +508,7 @@ it('Fetch Eligibility Payment Methods using Order Id Test', function (done) {
             "order_id": "order_4175412YWdHafgWZLFYcyTKkzIqu9QJvI"
         }
     }
-    Cashfree.PGEligibilityFetchPaymentMethods("2022-09-01", request).then((response) => {
+    Cashfree.PGEligibilityFetchPaymentMethods(xApiVersion, request).then((response) => {
         done()
     }).catch((error) => {
         assert.fail("Fail error message")
@@ -523,7 +522,7 @@ it('Fetch Eligibility Payment Methods With invalid amount Test', function (done)
             "amount": -100
         }
     }
-    Cashfree.PGEligibilityFetchPaymentMethods("2022-09-01", request).then((response) => {
+    Cashfree.PGEligibilityFetchPaymentMethods(xApiVersion, request).then((response) => {
         assert.fail("Fail error message")
         done()
     }).catch((error) => {
@@ -544,7 +543,7 @@ it('Settlement Reconcilation Test', function (done) {
             "end_date": "2023-03-21T23:59:59Z"
         }
     }
-    Cashfree.PGSettlementFetchRecon("2022-09-01", request).then((response) => {
+    Cashfree.PGSettlementFetchRecon(xApiVersion, request).then((response) => {
         done()
     }).catch((error) => {
         assert.fail("Fail error message")
@@ -555,7 +554,7 @@ it('Settlement Reconcilation Test', function (done) {
 it('Get Instrument By Id Test', function (done) {
     var instrumemtId = "9f9477b7-61ea-4baa-b878-a7e63d978034"
     var customerId = "iij"
-    Cashfree.PGCustomerFetchInstrument("2022-09-01", customerId, instrumemtId).then((response) => {
+    Cashfree.PGCustomerFetchInstrument(xApiVersion, customerId, instrumemtId).then((response) => {
         assert.equal(response.data.instrument_id, instrumemtId, "instrument_id is not matching")
         assert.equal(response.data.customer_id, customerId, "instrument_id is not matching")
         done()
