@@ -306,6 +306,55 @@ export interface AuthenticationError {
     'type'?: string;
 }
 /**
+ * Details of the authorization done for the subscription. Returned in Get subscription and auth payments.
+ * @export
+ * @interface AuthorizationDetails
+ */
+export interface AuthorizationDetails {
+    /**
+     * Authorization amount for the auth payment.
+     * @type {number}
+     * @memberof AuthorizationDetails
+     */
+    'authorization_amount'?: number;
+    /**
+     * Indicates whether the authorization amount should be refunded to the customer automatically. Merchants can use this field to specify if the authorized funds should be returned to the customer after authorization of the subscription.
+     * @type {boolean}
+     * @memberof AuthorizationDetails
+     */
+    'authorization_amount_refund'?: boolean;
+    /**
+     * Authorization reference. UMN for UPI, UMRN for EMandate/Physical Mandate and Enrollment ID for cards.
+     * @type {string}
+     * @memberof AuthorizationDetails
+     */
+    'authorization_reference'?: string;
+    /**
+     * Authorization time.
+     * @type {string}
+     * @memberof AuthorizationDetails
+     */
+    'authorization_time'?: string;
+    /**
+     * Status of the authorization.
+     * @type {string}
+     * @memberof AuthorizationDetails
+     */
+    'authorization_status'?: string;
+    /**
+     * A unique ID passed by merchant for identifying the transaction.
+     * @type {string}
+     * @memberof AuthorizationDetails
+     */
+    'payment_id'?: string;
+    /**
+     * Payment method used for the authorization.
+     * @type {string}
+     * @memberof AuthorizationDetails
+     */
+    'payment_method'?: string;
+}
+/**
  * If preauth enabled for account you will get this body
  * @export
  * @interface AuthorizationInPaymentsEntity
@@ -580,7 +629,7 @@ export interface Card {
      */
     'token_requestor_id'?: string;
     /**
-     * Token Reference Id provided by Diners for Guest Checkout Token.  Required only for Diners cards. 
+     * Token Reference Id provided by Diners for Guest Checkout Token.  Required only for Diners cards.
      * @type {string}
      * @memberof Card
      */
@@ -1158,6 +1207,534 @@ export interface CreateOrderRequest {
     'order_splits'?: Array<VendorSplit>;
 }
 /**
+ * Create Order Settlement Object
+ * @export
+ * @interface CreateOrderSettlementRequestBody
+ */
+export interface CreateOrderSettlementRequestBody {
+    /**
+     * OrderId of the order.
+     * @type {string}
+     * @memberof CreateOrderSettlementRequestBody
+     */
+    'order_id': string;
+    /**
+     * 
+     * @type {CreateOrderSettlementRequestBodyMetaData}
+     * @memberof CreateOrderSettlementRequestBody
+     */
+    'meta_data': CreateOrderSettlementRequestBodyMetaData;
+}
+/**
+ * 
+ * @export
+ * @interface CreateOrderSettlementRequestBodyMetaData
+ */
+export interface CreateOrderSettlementRequestBodyMetaData {
+    /**
+     * Meta data cbricks ID to be used for reporting purpose.
+     * @type {string}
+     * @memberof CreateOrderSettlementRequestBodyMetaData
+     */
+    'cbriks_id'?: string;
+    /**
+     * Requested Settlement Date.
+     * @type {string}
+     * @memberof CreateOrderSettlementRequestBodyMetaData
+     */
+    'settlement_date'?: string;
+}
+/**
+ * Request body to create a plan.
+ * @export
+ * @interface CreatePlanRequest
+ */
+export interface CreatePlanRequest {
+    /**
+     * Unique ID to identify the plan. Only alpha-numerics, dot, hyphen and underscore allowed.
+     * @type {string}
+     * @memberof CreatePlanRequest
+     */
+    'plan_id': string;
+    /**
+     * Name of the plan.
+     * @type {string}
+     * @memberof CreatePlanRequest
+     */
+    'plan_name': string;
+    /**
+     * Type of the plan. Possible values - PERIODIC, ON_DEMAND.
+     * @type {string}
+     * @memberof CreatePlanRequest
+     */
+    'plan_type': string;
+    /**
+     * Currency of the plan.
+     * @type {string}
+     * @memberof CreatePlanRequest
+     */
+    'plan_currency'?: string;
+    /**
+     * Recurring amount for the plan. Required for PERIODIC plan_type.
+     * @type {number}
+     * @memberof CreatePlanRequest
+     */
+    'plan_recurring_amount'?: number;
+    /**
+     * Maximum amount for the plan.
+     * @type {number}
+     * @memberof CreatePlanRequest
+     */
+    'plan_max_amount': number;
+    /**
+     * Maximum number of payment cycles for the plan.
+     * @type {number}
+     * @memberof CreatePlanRequest
+     */
+    'plan_max_cycles'?: number;
+    /**
+     * Number of billing cycles between charges. For instance, if set to 2 and the interval type is \'week\', the service will be billed every 2 weeks. Similarly, if set to 3 and the interval type is \'month\', the service will be billed every 3 months. Required for PERIODIC plan_type.
+     * @type {number}
+     * @memberof CreatePlanRequest
+     */
+    'plan_intervals'?: number;
+    /**
+     * Interval type for the plan. Possible values - DAY, WEEK, MONTH, YEAR.
+     * @type {string}
+     * @memberof CreatePlanRequest
+     */
+    'plan_interval_type'?: string;
+    /**
+     * Note for the plan.
+     * @type {string}
+     * @memberof CreatePlanRequest
+     */
+    'plan_note'?: string;
+}
+/**
+ * The response returned in Get, Create or Manage Subscription Payment APIs.
+ * @export
+ * @interface CreateSubscriptionPaymentAuthResponse
+ */
+export interface CreateSubscriptionPaymentAuthResponse {
+    /**
+     * Cashfree subscription payment reference number
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentAuthResponse
+     */
+    'cf_payment_id'?: string;
+    /**
+     * Cashfree subscription reference number
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentAuthResponse
+     */
+    'cf_subscription_id'?: string;
+    /**
+     * 
+     * @type {CreateSubscriptionPaymentAuthResponseFailureDetails}
+     * @memberof CreateSubscriptionPaymentAuthResponse
+     */
+    'failure_details'?: CreateSubscriptionPaymentAuthResponseFailureDetails;
+    /**
+     * The charge amount of the payment.
+     * @type {number}
+     * @memberof CreateSubscriptionPaymentAuthResponse
+     */
+    'payment_amount'?: number;
+    /**
+     * A unique ID passed by merchant for identifying the transaction.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentAuthResponse
+     */
+    'payment_id'?: string;
+    /**
+     * The date on which the payment was initiated.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentAuthResponse
+     */
+    'payment_initiated_date'?: string;
+    /**
+     * Status of the payment.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentAuthResponse
+     */
+    'payment_status'?: string;
+    /**
+     * Payment type. Can be AUTH or CHARGE.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentAuthResponse
+     */
+    'payment_type'?: string;
+    /**
+     * A unique ID passed by merchant for identifying the subscription.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentAuthResponse
+     */
+    'subscription_id'?: string;
+    /**
+     * Payment method used for the authorization.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentAuthResponse
+     */
+    'payment_method'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateSubscriptionPaymentAuthResponseFailureDetails
+ */
+export interface CreateSubscriptionPaymentAuthResponseFailureDetails {
+    /**
+     * Failure reason of the payment if the payment_status is failed.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentAuthResponseFailureDetails
+     */
+    'failure_reason'?: string;
+}
+/**
+ * The response returned in Get, Create or Manage Subscription Payment APIs.
+ * @export
+ * @interface CreateSubscriptionPaymentChargeResponse
+ */
+export interface CreateSubscriptionPaymentChargeResponse {
+    /**
+     * Cashfree subscription payment reference number
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentChargeResponse
+     */
+    'cf_payment_id'?: string;
+    /**
+     * Cashfree subscription reference number
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentChargeResponse
+     */
+    'cf_subscription_id'?: string;
+    /**
+     * 
+     * @type {CreateSubscriptionPaymentAuthResponseFailureDetails}
+     * @memberof CreateSubscriptionPaymentChargeResponse
+     */
+    'failure_details'?: CreateSubscriptionPaymentAuthResponseFailureDetails;
+    /**
+     * The charge amount of the payment.
+     * @type {number}
+     * @memberof CreateSubscriptionPaymentChargeResponse
+     */
+    'payment_amount'?: number;
+    /**
+     * A unique ID passed by merchant for identifying the transaction.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentChargeResponse
+     */
+    'payment_id'?: string;
+    /**
+     * The date on which the payment was initiated.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentChargeResponse
+     */
+    'payment_initiated_date'?: string;
+    /**
+     * Status of the payment.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentChargeResponse
+     */
+    'payment_status'?: string;
+    /**
+     * Payment type. Can be AUTH or CHARGE.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentChargeResponse
+     */
+    'payment_type'?: string;
+    /**
+     * A unique ID passed by merchant for identifying the subscription.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentChargeResponse
+     */
+    'subscription_id'?: string;
+    /**
+     * Payment method used for the authorization.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentChargeResponse
+     */
+    'payment_method'?: string;
+}
+/**
+ * The request to be passed for the create subscription payment API.
+ * @export
+ * @interface CreateSubscriptionPaymentRequest
+ */
+export interface CreateSubscriptionPaymentRequest {
+    /**
+     * A unique ID passed by merchant for identifying the subscription.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentRequest
+     */
+    'subscription_id': string;
+    /**
+     * Session ID for the subscription. Required only for Auth.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentRequest
+     */
+    'subscription_session_id'?: string;
+    /**
+     * A unique ID passed by merchant for identifying the subscription payment.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentRequest
+     */
+    'payment_id': string;
+    /**
+     * The charge amount of the payment. Required in case of charge.
+     * @type {number}
+     * @memberof CreateSubscriptionPaymentRequest
+     */
+    'payment_amount'?: number;
+    /**
+     * The date on which the payment is scheduled to be processed. Required for UPI and CARD payment modes.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentRequest
+     */
+    'payment_schedule_date'?: string;
+    /**
+     * Payment remarks.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentRequest
+     */
+    'payment_remarks'?: string;
+    /**
+     * Payment type. Can be AUTH or CHARGE.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentRequest
+     */
+    'payment_type': string;
+    /**
+     * Payment method. Can be upi or card or enach or pnach.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentRequest
+     */
+    'payment_method'?: string;
+}
+/**
+ * Request body to create a subscription refund.
+ * @export
+ * @interface CreateSubscriptionRefundRequest
+ */
+export interface CreateSubscriptionRefundRequest {
+    /**
+     * A unique ID passed by merchant for identifying the subscription.
+     * @type {string}
+     * @memberof CreateSubscriptionRefundRequest
+     */
+    'subscription_id': string;
+    /**
+     * A unique ID passed by merchant for identifying the transaction.
+     * @type {string}
+     * @memberof CreateSubscriptionRefundRequest
+     */
+    'payment_id'?: string;
+    /**
+     * Cashfree subscription payment reference number.
+     * @type {string}
+     * @memberof CreateSubscriptionRefundRequest
+     */
+    'cf_payment_id'?: string;
+    /**
+     * A unique ID passed by merchant for identifying the refund.
+     * @type {string}
+     * @memberof CreateSubscriptionRefundRequest
+     */
+    'refund_id': string;
+    /**
+     * The amount to be refunded. Can be partial or full amount of the payment.
+     * @type {number}
+     * @memberof CreateSubscriptionRefundRequest
+     */
+    'refund_amount': number;
+    /**
+     * Refund note.
+     * @type {string}
+     * @memberof CreateSubscriptionRefundRequest
+     */
+    'refund_note'?: string;
+    /**
+     * Refund speed. Can be INSTANT or STANDARD. UPI supports only STANDARD refunds, Enach and Pnach supports only INSTANT refunds.
+     * @type {string}
+     * @memberof CreateSubscriptionRefundRequest
+     */
+    'refund_speed'?: string;
+}
+/**
+ * Request body to create a new subscription.
+ * @export
+ * @interface CreateSubscriptionRequest
+ */
+export interface CreateSubscriptionRequest {
+    /**
+     * A unique ID for the subscription. It can include alphanumeric characters, underscore, dot, hyphen, and space. Maximum characters allowed is 250.
+     * @type {string}
+     * @memberof CreateSubscriptionRequest
+     */
+    'subscription_id': string;
+    /**
+     * 
+     * @type {SubscriptionCustomerDetails}
+     * @memberof CreateSubscriptionRequest
+     */
+    'customer_details': SubscriptionCustomerDetails;
+    /**
+     * 
+     * @type {CreateSubscriptionRequestPlanDetails}
+     * @memberof CreateSubscriptionRequest
+     */
+    'plan_details': CreateSubscriptionRequestPlanDetails;
+    /**
+     * 
+     * @type {CreateSubscriptionRequestAuthorizationDetails}
+     * @memberof CreateSubscriptionRequest
+     */
+    'authorization_details'?: CreateSubscriptionRequestAuthorizationDetails;
+    /**
+     * 
+     * @type {CreateSubscriptionRequestSubscriptionMeta}
+     * @memberof CreateSubscriptionRequest
+     */
+    'subscription_meta'?: CreateSubscriptionRequestSubscriptionMeta;
+    /**
+     * Expiry date for the subscription.
+     * @type {string}
+     * @memberof CreateSubscriptionRequest
+     */
+    'subscription_expiry_time'?: string;
+    /**
+     * Time at which the first charge will be made for the subscription after authorization. Applicable only for PERIODIC plans.
+     * @type {string}
+     * @memberof CreateSubscriptionRequest
+     */
+    'subscription_first_charge_time'?: string;
+    /**
+     * Note for the subscription.
+     * @type {string}
+     * @memberof CreateSubscriptionRequest
+     */
+    'subscription_note'?: string;
+    /**
+     * Tags for the subscription.
+     * @type {object}
+     * @memberof CreateSubscriptionRequest
+     */
+    'subscription_tags'?: object;
+    /**
+     * Payment splits for the subscription.
+     * @type {Array<SubscriptionPaymentSplitItem>}
+     * @memberof CreateSubscriptionRequest
+     */
+    'subscription_payment_splits'?: Array<SubscriptionPaymentSplitItem>;
+}
+/**
+ * 
+ * @export
+ * @interface CreateSubscriptionRequestAuthorizationDetails
+ */
+export interface CreateSubscriptionRequestAuthorizationDetails {
+    /**
+     * Authorization amount for the auth payment.
+     * @type {number}
+     * @memberof CreateSubscriptionRequestAuthorizationDetails
+     */
+    'authorization_amount'?: number;
+    /**
+     * Indicates whether the authorization amount should be refunded to the customer automatically. Merchants can use this field to specify if the authorized funds should be returned to the customer after authorization of the subscription.
+     * @type {boolean}
+     * @memberof CreateSubscriptionRequestAuthorizationDetails
+     */
+    'authorization_amount_refund'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface CreateSubscriptionRequestPlanDetails
+ */
+export interface CreateSubscriptionRequestPlanDetails {
+    /**
+     * The unique identifier used to create plan. You only need to pass this field if you had already created plan. Otherwise use the other fields here to define the plan.
+     * @type {string}
+     * @memberof CreateSubscriptionRequestPlanDetails
+     */
+    'plan_id'?: string;
+    /**
+     * Specify plan name for easy reference.
+     * @type {string}
+     * @memberof CreateSubscriptionRequestPlanDetails
+     */
+    'plan_name'?: string;
+    /**
+     * Possible values ON_DEMAND or PERIODIC. PERIODIC - Payments are triggered automatically at fixed intervals defined by the merchant. ON_DEMAND - Merchant needs to trigger/charge the customer explicitly with the required amount.
+     * @type {string}
+     * @memberof CreateSubscriptionRequestPlanDetails
+     */
+    'plan_type'?: string;
+    /**
+     * INR by default.
+     * @type {string}
+     * @memberof CreateSubscriptionRequestPlanDetails
+     */
+    'plan_currency'?: string;
+    /**
+     * The amount to be charged for PERIODIC plan. This is a conditional parameter, only required for PERIODIC plans.
+     * @type {number}
+     * @memberof CreateSubscriptionRequestPlanDetails
+     */
+    'plan_amount'?: number;
+    /**
+     * This is the maximum amount that can be charged on a subscription.
+     * @type {number}
+     * @memberof CreateSubscriptionRequestPlanDetails
+     */
+    'plan_max_amount'?: number;
+    /**
+     * Maximum number of debits set for the plan. The subscription will automatically change to COMPLETED status once this limit is reached.
+     * @type {number}
+     * @memberof CreateSubscriptionRequestPlanDetails
+     */
+    'plan_max_cycles'?: number;
+    /**
+     * Number of intervals of intervalType between every subscription payment. For example, to charge a customer bi-weekly use intervalType as “week” and intervals as 2. Required for PERIODIC plan. The default value is 1.
+     * @type {number}
+     * @memberof CreateSubscriptionRequestPlanDetails
+     */
+    'plan_intervals'?: number;
+    /**
+     * The type of interval for a PERIODIC plan like DAY, WEEK, MONTH, or YEAR. This is a conditional parameter only applicable for PERIODIC plans.
+     * @type {string}
+     * @memberof CreateSubscriptionRequestPlanDetails
+     */
+    'plan_interval_type'?: string;
+    /**
+     * Note for the plan.
+     * @type {string}
+     * @memberof CreateSubscriptionRequestPlanDetails
+     */
+    'plan_note'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateSubscriptionRequestSubscriptionMeta
+ */
+export interface CreateSubscriptionRequestSubscriptionMeta {
+    /**
+     * The url to redirect after checkout.
+     * @type {string}
+     * @memberof CreateSubscriptionRequestSubscriptionMeta
+     */
+    'return_url'?: string;
+    /**
+     * Notification channel for the subscription. SMS, EMAIL are possible values.
+     * @type {Array<string>}
+     * @memberof CreateSubscriptionRequestSubscriptionMeta
+     */
+    'notification_channel'?: Array<string>;
+}
+/**
  * Request body to create a terminal
  * @export
  * @interface CreateTerminalRequest
@@ -1255,6 +1832,12 @@ export interface CreateTerminalTransactionRequest {
      * @memberof CreateTerminalTransactionRequest
      */
     'terminal_phone_no'?: string;
+    /**
+     * make it true to have request be sent to create a Dynamic GST QR Code.
+     * @type {boolean}
+     * @memberof CreateTerminalTransactionRequest
+     */
+    'add_invoice'?: boolean;
 }
 /**
  * Create Vendor Request
@@ -1305,7 +1888,7 @@ export interface CreateVendorRequest {
      */
     'dashboard_access'?: boolean;
     /**
-     * Specify the settlement cycle to be updated. View the settlement cycle details from the \"Settlement Cycles Supported\" table. If no schedule option is configured, the settlement cycle ID \"1\" will be in effect. Select \"8\" or \"9\" if you want to schedule instant vendor settlements.
+     * Specify the settlement cycle to be updated. View the settlement cycle details from the \"Settlement Cycles Supported\" table.  If no schedule option is configured, the settlement cycle ID \"1\" will be in effect. Select \"8\" or \"9\" if you want to schedule instant vendor settlements.
      * @type {number}
      * @memberof CreateVendorRequest
      */
@@ -1452,7 +2035,7 @@ export interface CryptogramEntity {
     'card_display'?: string;
 }
 /**
- * The customer details that are necessary. Note that you can pass dummy details if your use case does not require the customer details.
+ * The customer details that are necessary.
  * @export
  * @interface CustomerDetails
  */
@@ -1518,6 +2101,61 @@ export interface CustomerDetailsCardlessEMI {
      * @memberof CustomerDetailsCardlessEMI
      */
     'customer_phone': string;
+}
+/**
+ * The customer details that are necessary. Note that you can pass dummy details if your use case does not require the customer details.
+ * @export
+ * @interface CustomerDetailsResponse
+ */
+export interface CustomerDetailsResponse {
+    /**
+     * A unique identifier for the customer. Use alphanumeric values only.
+     * @type {string}
+     * @memberof CustomerDetailsResponse
+     */
+    'customer_id'?: string;
+    /**
+     * Customer email address.
+     * @type {string}
+     * @memberof CustomerDetailsResponse
+     */
+    'customer_email'?: string;
+    /**
+     * Customer phone number.
+     * @type {string}
+     * @memberof CustomerDetailsResponse
+     */
+    'customer_phone'?: string;
+    /**
+     * Name of the customer.
+     * @type {string}
+     * @memberof CustomerDetailsResponse
+     */
+    'customer_name'?: string;
+    /**
+     * Customer bank account. Required if you want to do a bank account check (TPV)
+     * @type {string}
+     * @memberof CustomerDetailsResponse
+     */
+    'customer_bank_account_number'?: string;
+    /**
+     * Customer bank IFSC. Required if you want to do a bank account check (TPV)
+     * @type {string}
+     * @memberof CustomerDetailsResponse
+     */
+    'customer_bank_ifsc'?: string;
+    /**
+     * Customer bank code. Required for net banking payments, if you want to do a bank account check (TPV)
+     * @type {number}
+     * @memberof CustomerDetailsResponse
+     */
+    'customer_bank_code'?: number;
+    /**
+     * Customer identifier at Cashfree. You will get this when you create/get customer        
+     * @type {string}
+     * @memberof CustomerDetailsResponse
+     */
+    'customer_uid'?: string;
 }
 /**
  * The complete customer entity
@@ -2043,6 +2681,93 @@ export interface EligibilityFetchPaymentMethodsRequest {
     'filters'?: PaymentMethodsFilters;
 }
 /**
+ * Eligibile payment method object
+ * @export
+ * @interface EligibilityMethodItem
+ */
+export interface EligibilityMethodItem {
+    /**
+     * Indicates whether the payment method is eligible.
+     * @type {boolean}
+     * @memberof EligibilityMethodItem
+     */
+    'eligibility'?: boolean;
+    /**
+     * Type of entity (e.g., \"payment_methods\").
+     * @type {string}
+     * @memberof EligibilityMethodItem
+     */
+    'entity_type'?: string;
+    /**
+     * Payment method (e.g., enach, pnach, upi, card).
+     * @type {string}
+     * @memberof EligibilityMethodItem
+     */
+    'entity_value'?: string;
+    /**
+     * 
+     * @type {EligibilityMethodItemEntityDetails}
+     * @memberof EligibilityMethodItem
+     */
+    'entity_details'?: EligibilityMethodItemEntityDetails;
+}
+/**
+ * 
+ * @export
+ * @interface EligibilityMethodItemEntityDetails
+ */
+export interface EligibilityMethodItemEntityDetails {
+    /**
+     * List of account types associated with the payment method. (e.g. SAVINGS or CURRENT)
+     * @type {Array<string>}
+     * @memberof EligibilityMethodItemEntityDetails
+     */
+    'account_types'?: Array<string>;
+    /**
+     * List of the most frequently used banks.
+     * @type {Array<SubscriptionBankDetails>}
+     * @memberof EligibilityMethodItemEntityDetails
+     */
+    'frequent_bank_details'?: Array<SubscriptionBankDetails>;
+    /**
+     * Details about all banks associated with the payment method.
+     * @type {Array<SubscriptionBankDetails>}
+     * @memberof EligibilityMethodItemEntityDetails
+     */
+    'all_bank_details'?: Array<SubscriptionBankDetails>;
+    /**
+     * List of supported VPA handles.
+     * @type {Array<EligibilityMethodItemEntityDetailsAvailableHandlesInner>}
+     * @memberof EligibilityMethodItemEntityDetails
+     */
+    'available_handles'?: Array<EligibilityMethodItemEntityDetailsAvailableHandlesInner>;
+    /**
+     * List of allowed card types. (e.g. DEBIT_CARD, CREDIT_CARD)
+     * @type {Array<string>}
+     * @memberof EligibilityMethodItemEntityDetails
+     */
+    'allowed_card_types'?: Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface EligibilityMethodItemEntityDetailsAvailableHandlesInner
+ */
+export interface EligibilityMethodItemEntityDetailsAvailableHandlesInner {
+    /**
+     * VPA handle
+     * @type {string}
+     * @memberof EligibilityMethodItemEntityDetailsAvailableHandlesInner
+     */
+    'handle'?: string;
+    /**
+     * Application or service related to the VPA handle.
+     * @type {string}
+     * @memberof EligibilityMethodItemEntityDetailsAvailableHandlesInner
+     */
+    'application'?: string;
+}
+/**
  * Eligible offer object
  * @export
  * @interface EligibilityOfferEntity
@@ -2147,6 +2872,55 @@ export interface EligibilityPaymentMethodsEntityEntityDetails {
      * @memberof EligibilityPaymentMethodsEntityEntityDetails
      */
     'payment_method_details'?: Array<PaymentModeDetails>;
+}
+/**
+ * Entity Simulation it contains payment_status and payment_error_code
+ * @export
+ * @interface EntitySimulationRequest
+ */
+export interface EntitySimulationRequest {
+    /**
+     * Payment Status
+     * @type {string}
+     * @memberof EntitySimulationRequest
+     */
+    'payment_status': EntitySimulationRequestPaymentStatusEnum;
+    /**
+     * Payment Error Code
+     * @type {string}
+     * @memberof EntitySimulationRequest
+     */
+    'payment_error_code'?: string;
+}
+
+export const EntitySimulationRequestPaymentStatusEnum = {
+    SUCCESS: 'SUCCESS',
+    FAILED: 'FAILED',
+    PENDING: 'PENDING',
+    USER_DROPPED: 'USER_DROPPED',
+    UNKNOWN_DEFAULT_OPEN_API: '11184809'
+} as const;
+
+export type EntitySimulationRequestPaymentStatusEnum = typeof EntitySimulationRequestPaymentStatusEnum[keyof typeof EntitySimulationRequestPaymentStatusEnum];
+
+/**
+ * Entity Simulation it contains payment_status and payment_error_code
+ * @export
+ * @interface EntitySimulationResponse
+ */
+export interface EntitySimulationResponse {
+    /**
+     * Payment Status
+     * @type {string}
+     * @memberof EntitySimulationResponse
+     */
+    'payment_status': string;
+    /**
+     * Payment Error Code
+     * @type {string}
+     * @memberof EntitySimulationResponse
+     */
+    'payment_error_code'?: string;
 }
 /**
  * The error details are present only for failed payments
@@ -2599,7 +3373,71 @@ export interface LinkCustomerDetailsEntity {
      * @memberof LinkCustomerDetailsEntity
      */
     'customer_name'?: string;
+    /**
+     * Customer Bank Account Number
+     * @type {string}
+     * @memberof LinkCustomerDetailsEntity
+     */
+    'customer_bank_account_number'?: string;
+    /**
+     * Customer Bank Ifsc
+     * @type {string}
+     * @memberof LinkCustomerDetailsEntity
+     */
+    'customer_bank_ifsc'?: string;
+    /**
+     * Customer Bank Code
+     * @type {number}
+     * @memberof LinkCustomerDetailsEntity
+     */
+    'customer_bank_code'?: LinkCustomerDetailsEntityCustomerBankCodeEnum;
 }
+
+export const LinkCustomerDetailsEntityCustomerBankCodeEnum = {
+    NUMBER_3003: 3003,
+    NUMBER_3005: 3005,
+    NUMBER_3006: 3006,
+    NUMBER_3010: 3010,
+    NUMBER_3012: 3012,
+    NUMBER_3016: 3016,
+    NUMBER_3019: 3019,
+    NUMBER_3020: 3020,
+    NUMBER_3021: 3021,
+    NUMBER_3022: 3022,
+    NUMBER_3023: 3023,
+    NUMBER_3024: 3024,
+    NUMBER_3026: 3026,
+    NUMBER_3027: 3027,
+    NUMBER_3028: 3028,
+    NUMBER_3029: 3029,
+    NUMBER_3030: 3030,
+    NUMBER_3031: 3031,
+    NUMBER_3032: 3032,
+    NUMBER_3033: 3033,
+    NUMBER_3038: 3038,
+    NUMBER_3039: 3039,
+    NUMBER_3040: 3040,
+    NUMBER_3042: 3042,
+    NUMBER_3044: 3044,
+    NUMBER_3054: 3054,
+    NUMBER_3055: 3055,
+    NUMBER_3058: 3058,
+    NUMBER_3086: 3086,
+    NUMBER_3087: 3087,
+    NUMBER_3088: 3088,
+    NUMBER_3089: 3089,
+    NUMBER_3090: 3090,
+    NUMBER_3091: 3091,
+    NUMBER_3092: 3092,
+    NUMBER_3098: 3098,
+    NUMBER_3115: 3115,
+    NUMBER_3117: 3117,
+    NUMBER_7001: 7001,
+    NUMBER_unknown_default_open_api: 11184809
+} as const;
+
+export type LinkCustomerDetailsEntityCustomerBankCodeEnum = typeof LinkCustomerDetailsEntityCustomerBankCodeEnum[keyof typeof LinkCustomerDetailsEntityCustomerBankCodeEnum];
+
 /**
  * Payment link success creation response object
  * @export
@@ -2770,6 +3608,94 @@ export interface LinkNotifyEntity {
      * @memberof LinkNotifyEntity
      */
     'send_email'?: boolean;
+}
+/**
+ * Request body to manage a subscription payment.
+ * @export
+ * @interface ManageSubscriptionPaymentRequest
+ */
+export interface ManageSubscriptionPaymentRequest {
+    /**
+     * The unique ID which was used to create subscription.
+     * @type {string}
+     * @memberof ManageSubscriptionPaymentRequest
+     */
+    'subscription_id': string;
+    /**
+     * The unique ID which was used to create payment.
+     * @type {string}
+     * @memberof ManageSubscriptionPaymentRequest
+     */
+    'payment_id': string;
+    /**
+     * Action to be performed on the payment. Possible values - CANCEL, RETRY.
+     * @type {string}
+     * @memberof ManageSubscriptionPaymentRequest
+     */
+    'action': string;
+    /**
+     * 
+     * @type {ManageSubscriptionPaymentRequestActionDetails}
+     * @memberof ManageSubscriptionPaymentRequest
+     */
+    'action_details'?: ManageSubscriptionPaymentRequestActionDetails;
+}
+/**
+ * Details of the action to be performed. Needed for retry action.
+ * @export
+ * @interface ManageSubscriptionPaymentRequestActionDetails
+ */
+export interface ManageSubscriptionPaymentRequestActionDetails {
+    /**
+     * Next scheduled time for the retry of the FAILED payment. Required for retry action.
+     * @type {string}
+     * @memberof ManageSubscriptionPaymentRequestActionDetails
+     */
+    'next_scheduled_time'?: string;
+}
+/**
+ * Request body to manage a subscription.
+ * @export
+ * @interface ManageSubscriptionRequest
+ */
+export interface ManageSubscriptionRequest {
+    /**
+     * The unique ID which was used to create subscription.
+     * @type {string}
+     * @memberof ManageSubscriptionRequest
+     */
+    'subscription_id': string;
+    /**
+     * Action to be performed on the subscription. Possible values - CANCEL, PAUSE, ACTIVATE, CHANGE_PLAN.
+     * @type {string}
+     * @memberof ManageSubscriptionRequest
+     */
+    'action': string;
+    /**
+     * 
+     * @type {ManageSubscriptionRequestActionDetails}
+     * @memberof ManageSubscriptionRequest
+     */
+    'action_details'?: ManageSubscriptionRequestActionDetails;
+}
+/**
+ * Details of the action to be performed.
+ * @export
+ * @interface ManageSubscriptionRequestActionDetails
+ */
+export interface ManageSubscriptionRequestActionDetails {
+    /**
+     * Next scheduled time for the action. Required for ACTIVATE action.
+     * @type {string}
+     * @memberof ManageSubscriptionRequestActionDetails
+     */
+    'next_scheduled_time'?: string;
+    /**
+     * Plan ID to update. Required for CHANGE_PLAN action.
+     * @type {string}
+     * @memberof ManageSubscriptionRequestActionDetails
+     */
+    'plan_id'?: string;
 }
 /**
  * Payment method for netbanking object
@@ -3332,10 +4258,10 @@ export interface OrderEntity {
     'order_splits'?: Array<VendorSplit>;
     /**
      * 
-     * @type {CustomerDetails}
+     * @type {CustomerDetailsResponse}
      * @memberof OrderEntity
      */
-    'customer_details'?: CustomerDetails;
+    'customer_details'?: CustomerDetailsResponse;
     /**
      * 
      * @type {OrderMeta}
@@ -3356,7 +4282,7 @@ export interface OrderEntity {
  */
 export interface OrderMeta {
     /**
-     * The URL to which user will be redirected to after the payment on bank OTP page. Maximum length: 250. We suggest to keep context of order_id in your return_url so that you can identify the order when customer lands on your page. Example of return_url format could be https://example.com/return?order_id=myOrderId
+     * The URL to which user will be redirected to after the payment on bank OTP page. Maximum length: 250. We suggest to keep context of order_id in your return_url so that you can identify the order when customer lands on your page. Example of return_url format could be https://www.cashfree.com/devstudio/thankyou
      * @type {string}
      * @memberof OrderMeta
      */
@@ -4495,6 +5421,79 @@ export interface PaymentWebhookOrderEntity {
     'order_tags'?: { [key: string]: string; };
 }
 /**
+ * The response returned for Get, Create and Manage Plan APIs
+ * @export
+ * @interface PlanEntity
+ */
+export interface PlanEntity {
+    /**
+     * Currency for the plan.
+     * @type {string}
+     * @memberof PlanEntity
+     */
+    'plan_currency'?: string;
+    /**
+     * Plan ID provided by merchant.
+     * @type {string}
+     * @memberof PlanEntity
+     */
+    'plan_id'?: string;
+    /**
+     * Interval type for the plan.
+     * @type {string}
+     * @memberof PlanEntity
+     */
+    'plan_interval_type'?: string;
+    /**
+     * Number of intervals for the plan.
+     * @type {number}
+     * @memberof PlanEntity
+     */
+    'plan_intervals'?: number;
+    /**
+     * Maximum amount for the plan.
+     * @type {number}
+     * @memberof PlanEntity
+     */
+    'plan_max_amount'?: number;
+    /**
+     * Maximum number of payment cycles for the plan.
+     * @type {number}
+     * @memberof PlanEntity
+     */
+    'plan_max_cycles'?: number;
+    /**
+     * Name of the plan.
+     * @type {string}
+     * @memberof PlanEntity
+     */
+    'plan_name'?: string;
+    /**
+     * Note for the plan.
+     * @type {string}
+     * @memberof PlanEntity
+     */
+    'plan_note'?: string;
+    /**
+     * Recurring amount for the plan.
+     * @type {number}
+     * @memberof PlanEntity
+     */
+    'plan_recurring_amount'?: number;
+    /**
+     * Status of the plan.
+     * @type {string}
+     * @memberof PlanEntity
+     */
+    'plan_status'?: string;
+    /**
+     * Type of the plan.
+     * @type {string}
+     * @memberof PlanEntity
+     */
+    'plan_type'?: string;
+}
+/**
  * Error when rate limit is breached for your api
  * @export
  * @interface RateLimitError
@@ -5516,6 +6515,70 @@ export interface SettlementWebhookDataEntity {
     'settlement'?: SettlementEntity;
 }
 /**
+ * simulate payment request object
+ * @export
+ * @interface SimulateRequest
+ */
+export interface SimulateRequest {
+    /**
+     * Entity type should be PAYMENTS only.
+     * @type {string}
+     * @memberof SimulateRequest
+     */
+    'entity': SimulateRequestEntityEnum;
+    /**
+     * In case of Entity type is PAYMENTS, entity_id will be transactionId
+     * @type {string}
+     * @memberof SimulateRequest
+     */
+    'entity_id': string;
+    /**
+     * 
+     * @type {EntitySimulationRequest}
+     * @memberof SimulateRequest
+     */
+    'entity_simulation': EntitySimulationRequest;
+}
+
+export const SimulateRequestEntityEnum = {
+    PAYMENTS: 'PAYMENTS',
+    UNKNOWN_DEFAULT_OPEN_API: '11184809'
+} as const;
+
+export type SimulateRequestEntityEnum = typeof SimulateRequestEntityEnum[keyof typeof SimulateRequestEntityEnum];
+
+/**
+ * Simulation response object
+ * @export
+ * @interface SimulationResponse
+ */
+export interface SimulationResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof SimulationResponse
+     */
+    'simulation_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SimulationResponse
+     */
+    'entity'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SimulationResponse
+     */
+    'entity_id'?: string;
+    /**
+     * 
+     * @type {EntitySimulationResponse}
+     * @memberof SimulationResponse
+     */
+    'entity_simulation'?: EntitySimulationResponse;
+}
+/**
  * Split After Payment Request
  * @export
  * @interface SplitAfterPaymentRequest
@@ -5703,6 +6766,413 @@ export interface StaticSplitResponseSchemeInner {
     'percentage'?: string;
 }
 /**
+ * @type SubsCreatePayment200Response
+ * @export
+ */
+export type SubsCreatePayment200Response = CreateSubscriptionPaymentAuthResponse | CreateSubscriptionPaymentChargeResponse;
+
+/**
+ * Bank details object
+ * @export
+ * @interface SubscriptionBankDetails
+ */
+export interface SubscriptionBankDetails {
+    /**
+     * ID of the bank.
+     * @type {string}
+     * @memberof SubscriptionBankDetails
+     */
+    'bank_id'?: string;
+    /**
+     * Name of the bank.
+     * @type {string}
+     * @memberof SubscriptionBankDetails
+     */
+    'bank_name'?: string;
+    /**
+     * List of account authentication modes supported by the bank. (e.g. DEBIT_CARD, NET_BANKING, AADHAAR)
+     * @type {Array<string>}
+     * @memberof SubscriptionBankDetails
+     */
+    'account_auth_modes'?: Array<string>;
+}
+/**
+ * Subscription customer details.
+ * @export
+ * @interface SubscriptionCustomerDetails
+ */
+export interface SubscriptionCustomerDetails {
+    /**
+     * Name of the customer.
+     * @type {string}
+     * @memberof SubscriptionCustomerDetails
+     */
+    'customer_name'?: string;
+    /**
+     * Email of the customer.
+     * @type {string}
+     * @memberof SubscriptionCustomerDetails
+     */
+    'customer_email': string;
+    /**
+     * Phone number of the customer.
+     * @type {string}
+     * @memberof SubscriptionCustomerDetails
+     */
+    'customer_phone': string;
+    /**
+     * Bank holder name of the customer.
+     * @type {string}
+     * @memberof SubscriptionCustomerDetails
+     */
+    'customer_bank_holder_name'?: string;
+    /**
+     * Bank account number of the customer.
+     * @type {string}
+     * @memberof SubscriptionCustomerDetails
+     */
+    'customer_bank_account_number'?: string;
+    /**
+     * IFSC code of the customer.
+     * @type {string}
+     * @memberof SubscriptionCustomerDetails
+     */
+    'customer_bank_ifsc'?: string;
+    /**
+     * Bank code of the customer.
+     * @type {string}
+     * @memberof SubscriptionCustomerDetails
+     */
+    'customer_bank_code'?: string;
+    /**
+     * Bank account type of the customer.
+     * @type {string}
+     * @memberof SubscriptionCustomerDetails
+     */
+    'customer_bank_account_type'?: string;
+}
+/**
+ * Request body to fetch subscription eligibile payment method details.
+ * @export
+ * @interface SubscriptionEligibilityRequest
+ */
+export interface SubscriptionEligibilityRequest {
+    /**
+     * 
+     * @type {SubscriptionEligibilityRequestQueries}
+     * @memberof SubscriptionEligibilityRequest
+     */
+    'queries': SubscriptionEligibilityRequestQueries;
+    /**
+     * 
+     * @type {SubscriptionEligibilityRequestFilters}
+     * @memberof SubscriptionEligibilityRequest
+     */
+    'filters'?: SubscriptionEligibilityRequestFilters;
+}
+/**
+ * Filters to refine eligible payment method selection.
+ * @export
+ * @interface SubscriptionEligibilityRequestFilters
+ */
+export interface SubscriptionEligibilityRequestFilters {
+    /**
+     * Possbile values in array - enach, pnach, upi, card.
+     * @type {Array<string>}
+     * @memberof SubscriptionEligibilityRequestFilters
+     */
+    'payment_methods'?: Array<string>;
+}
+/**
+ * Necessary parameters to fetch eligible payment methods.
+ * @export
+ * @interface SubscriptionEligibilityRequestQueries
+ */
+export interface SubscriptionEligibilityRequestQueries {
+    /**
+     * A unique ID passed by merchant for identifying the subscription
+     * @type {string}
+     * @memberof SubscriptionEligibilityRequestQueries
+     */
+    'subscription_id': string;
+}
+/**
+ * Subscrition eligibility API response
+ * @export
+ * @interface SubscriptionEligibilityResponse
+ */
+export interface SubscriptionEligibilityResponse {
+    /**
+     * List of eligibile payment methods for the subscription.
+     * @type {Array<EligibilityMethodItem>}
+     * @memberof SubscriptionEligibilityResponse
+     */
+    'type'?: Array<EligibilityMethodItem>;
+}
+/**
+ * The response returned for Get, Create or Manage Subscription APIs.
+ * @export
+ * @interface SubscriptionEntity
+ */
+export interface SubscriptionEntity {
+    /**
+     * 
+     * @type {AuthorizationDetails}
+     * @memberof SubscriptionEntity
+     */
+    'authorisation_details'?: AuthorizationDetails;
+    /**
+     * Cashfree subscription reference number
+     * @type {string}
+     * @memberof SubscriptionEntity
+     */
+    'cf_subscription_id'?: string;
+    /**
+     * 
+     * @type {SubscriptionCustomerDetails}
+     * @memberof SubscriptionEntity
+     */
+    'customer_details'?: SubscriptionCustomerDetails;
+    /**
+     * 
+     * @type {PlanEntity}
+     * @memberof SubscriptionEntity
+     */
+    'plan_details'?: PlanEntity;
+    /**
+     * Time at which the subscription will expire.
+     * @type {string}
+     * @memberof SubscriptionEntity
+     */
+    'subscription_expiry_time'?: string;
+    /**
+     * Time at which the first charge will be made for the subscription. Applicable only for PERIODIC plans.
+     * @type {string}
+     * @memberof SubscriptionEntity
+     */
+    'subscription_first_charge_time'?: string;
+    /**
+     * A unique ID passed by merchant for identifying the subscription.
+     * @type {string}
+     * @memberof SubscriptionEntity
+     */
+    'subscription_id'?: string;
+    /**
+     * 
+     * @type {SubscriptionEntitySubscriptionMeta}
+     * @memberof SubscriptionEntity
+     */
+    'subscription_meta'?: SubscriptionEntitySubscriptionMeta;
+    /**
+     * Note for the subscription.
+     * @type {string}
+     * @memberof SubscriptionEntity
+     */
+    'subscription_note'?: string;
+    /**
+     * Payment splits for the subscription.
+     * @type {Array<SubscriptionPaymentSplitItem>}
+     * @memberof SubscriptionEntity
+     */
+    'subscription_payment_splits'?: Array<SubscriptionPaymentSplitItem>;
+    /**
+     * Status of the subscription.
+     * @type {string}
+     * @memberof SubscriptionEntity
+     */
+    'subscription_status'?: string;
+    /**
+     * Tags for the subscription.
+     * @type {object}
+     * @memberof SubscriptionEntity
+     */
+    'subscription_tags'?: object;
+}
+/**
+ * Subscription metadata.
+ * @export
+ * @interface SubscriptionEntitySubscriptionMeta
+ */
+export interface SubscriptionEntitySubscriptionMeta {
+    /**
+     * Return URL for the subscription.
+     * @type {string}
+     * @memberof SubscriptionEntitySubscriptionMeta
+     */
+    'return_url'?: string;
+}
+/**
+ * The response returned in Get, Create or Manage Subscription Payment APIs.
+ * @export
+ * @interface SubscriptionPaymentEntity
+ */
+export interface SubscriptionPaymentEntity {
+    /**
+     * 
+     * @type {AuthorizationDetails}
+     * @memberof SubscriptionPaymentEntity
+     */
+    'authorization_details'?: AuthorizationDetails;
+    /**
+     * Cashfree subscription payment reference number
+     * @type {string}
+     * @memberof SubscriptionPaymentEntity
+     */
+    'cf_payment_id'?: string;
+    /**
+     * Cashfree subscription reference number
+     * @type {string}
+     * @memberof SubscriptionPaymentEntity
+     */
+    'cf_subscription_id'?: string;
+    /**
+     * Cashfree subscription payment transaction ID
+     * @type {string}
+     * @memberof SubscriptionPaymentEntity
+     */
+    'cf_txn_id'?: string;
+    /**
+     * Cashfree subscription payment order ID
+     * @type {string}
+     * @memberof SubscriptionPaymentEntity
+     */
+    'cf_order_id'?: string;
+    /**
+     * 
+     * @type {CreateSubscriptionPaymentAuthResponseFailureDetails}
+     * @memberof SubscriptionPaymentEntity
+     */
+    'failure_details'?: CreateSubscriptionPaymentAuthResponseFailureDetails;
+    /**
+     * The charge amount of the payment.
+     * @type {number}
+     * @memberof SubscriptionPaymentEntity
+     */
+    'payment_amount'?: number;
+    /**
+     * A unique ID passed by merchant for identifying the transaction.
+     * @type {string}
+     * @memberof SubscriptionPaymentEntity
+     */
+    'payment_id'?: string;
+    /**
+     * The date on which the payment was initiated.
+     * @type {string}
+     * @memberof SubscriptionPaymentEntity
+     */
+    'payment_initiated_date'?: string;
+    /**
+     * Payment remarks.
+     * @type {string}
+     * @memberof SubscriptionPaymentEntity
+     */
+    'payment_remarks'?: string;
+    /**
+     * The date on which the payment is scheduled to be processed.
+     * @type {string}
+     * @memberof SubscriptionPaymentEntity
+     */
+    'payment_schedule_date'?: string;
+    /**
+     * Status of the payment.
+     * @type {string}
+     * @memberof SubscriptionPaymentEntity
+     */
+    'payment_status'?: string;
+    /**
+     * Payment type. Can be AUTH or CHARGE.
+     * @type {string}
+     * @memberof SubscriptionPaymentEntity
+     */
+    'payment_type'?: string;
+    /**
+     * Retry attempts.
+     * @type {number}
+     * @memberof SubscriptionPaymentEntity
+     */
+    'retry_attempts'?: number;
+    /**
+     * A unique ID passed by merchant for identifying the subscription.
+     * @type {string}
+     * @memberof SubscriptionPaymentEntity
+     */
+    'subscription_id'?: string;
+}
+/**
+ * Get/Create Subscription Payment Refund Response
+ * @export
+ * @interface SubscriptionPaymentRefundEntity
+ */
+export interface SubscriptionPaymentRefundEntity {
+    /**
+     * A unique ID passed by merchant for identifying the transaction.
+     * @type {string}
+     * @memberof SubscriptionPaymentRefundEntity
+     */
+    'payment_id'?: string;
+    /**
+     * Cashfree subscription payment reference number.
+     * @type {string}
+     * @memberof SubscriptionPaymentRefundEntity
+     */
+    'cf_payment_id'?: string;
+    /**
+     * A unique ID passed by merchant for identifying the refund.
+     * @type {string}
+     * @memberof SubscriptionPaymentRefundEntity
+     */
+    'refund_id'?: string;
+    /**
+     * Cashfree subscription payment refund reference number.
+     * @type {string}
+     * @memberof SubscriptionPaymentRefundEntity
+     */
+    'cf_refund_id'?: string;
+    /**
+     * The refund amount.
+     * @type {number}
+     * @memberof SubscriptionPaymentRefundEntity
+     */
+    'refund_amount'?: number;
+    /**
+     * Refund note.
+     * @type {string}
+     * @memberof SubscriptionPaymentRefundEntity
+     */
+    'refund_note'?: string;
+    /**
+     * Refund speed. Can be INSTANT or NORMAL.
+     * @type {string}
+     * @memberof SubscriptionPaymentRefundEntity
+     */
+    'refund_speed'?: string;
+    /**
+     * Status of the refund.
+     * @type {string}
+     * @memberof SubscriptionPaymentRefundEntity
+     */
+    'refund_status'?: string;
+}
+/**
+ * Subscription Payment Split Item
+ * @export
+ * @interface SubscriptionPaymentSplitItem
+ */
+export interface SubscriptionPaymentSplitItem {
+    /**
+     * Vendor ID
+     * @type {string}
+     * @memberof SubscriptionPaymentSplitItem
+     */
+    'vendor_id'?: string;
+    /**
+     * Percentage of the payment to be split to vendor
+     * @type {number}
+     * @memberof SubscriptionPaymentSplitItem
+     */
+    'percentage'?: number;
+}
+/**
  * Use this if you are creating an order for cashfree\'s softPOS
  * @export
  * @interface TerminalDetails
@@ -5737,7 +7207,7 @@ export interface TerminalDetails {
      * @type {string}
      * @memberof TerminalDetails
      */
-    'terminal_id': string;
+    'terminal_id'?: string;
     /**
      * name of terminal/agent/storefront
      * @type {string}
@@ -6027,7 +7497,7 @@ export interface TerminalTransactionEntity {
  */
 export interface TerminateOrderRequest {
     /**
-     * To terminate an order, pass order_status as \"TERMINATE\". Please note, order might not be terminated - confirm with the order_status in response. \"TERMINATION_REQUESTED\" states that the request is recieved and we are working on it. If the order terminates successfully, status will change to \"TERMINATED\". Incase there\'s any active transaction which moved to success - order might not get terminated.
+     * To terminate an order, pass order_status as \"TERMINATED\". Please note, order might not be terminated - confirm with the order_status in response. \"TERMINATION_REQUESTED\" states that the request is recieved and we are working on it. If the order terminates successfully, status will change to \"TERMINATED\". Incase there\'s any active transaction which moved to success - order might not get terminated.
      * @type {string}
      * @memberof TerminateOrderRequest
      */
@@ -6312,7 +7782,7 @@ export interface UpdateVendorRequest {
      */
     'dashboard_access'?: boolean;
     /**
-     * Specify the settlement cycle to be updated. View the settlement cycle details from the \"Settlement Cycles Supported\" table. If no schedule option is configured, the settlement cycle ID \"1\" will be in effect. Select \"8\" or \"9\" if you want to schedule instant vendor settlements.
+     * Specify the settlement cycle to be updated. View the settlement cycle details from the \"Settlement Cycles Supported\" table.  If no schedule option is configured, the settlement cycle ID \"1\" will be in effect. Select \"8\" or \"9\" if you want to schedule instant vendor settlements.
      * @type {number}
      * @memberof UpdateVendorRequest
      */
@@ -6440,10 +7910,47 @@ export interface UpdateVendorResponse {
     'bank_details'?: string;
     /**
      * 
-     * @type {Array<VendorEntityRelatedDocsInner>}
+     * @type {Array<UpdateVendorResponseRelatedDocsInner>}
      * @memberof UpdateVendorResponse
      */
-    'related_docs'?: Array<VendorEntityRelatedDocsInner>;
+    'related_docs'?: Array<UpdateVendorResponseRelatedDocsInner>;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateVendorResponseRelatedDocsInner
+ */
+export interface UpdateVendorResponseRelatedDocsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateVendorResponseRelatedDocsInner
+     */
+    'vendor_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateVendorResponseRelatedDocsInner
+     */
+    'doc_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateVendorResponseRelatedDocsInner
+     */
+    'doc_value'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateVendorResponseRelatedDocsInner
+     */
+    'status'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateVendorResponseRelatedDocsInner
+     */
+    'remarks'?: string;
 }
 /**
  * UPI collect payment method object
@@ -6516,6 +8023,37 @@ export interface UpiDetails {
      * @memberof UpiDetails
      */
     'account_holder'?: string;
+}
+/**
+ * Response of pnach image upload API.
+ * @export
+ * @interface UploadPnachImageResponse
+ */
+export interface UploadPnachImageResponse {
+    /**
+     * The payment_id against which the pnach image is uploaded.
+     * @type {string}
+     * @memberof UploadPnachImageResponse
+     */
+    'payment_id'?: string;
+    /**
+     * Authorization status of the subscription.
+     * @type {string}
+     * @memberof UploadPnachImageResponse
+     */
+    'authorization_status'?: string;
+    /**
+     * Action performed on the file.
+     * @type {string}
+     * @memberof UploadPnachImageResponse
+     */
+    'action'?: string;
+    /**
+     * Message of the API.
+     * @type {string}
+     * @memberof UploadPnachImageResponse
+     */
+    'payment_message'?: string;
 }
 /**
  * Request body to upload terminal documents.
@@ -6699,10 +8237,10 @@ export interface VendorDocumentDownloadResponse {
 export interface VendorDocumentsResponse {
     /**
      * 
-     * @type {Array<VendorEntityRelatedDocsInner>}
+     * @type {Array<UpdateVendorResponseRelatedDocsInner>}
      * @memberof VendorDocumentsResponse
      */
-    'documents'?: Array<VendorEntityRelatedDocsInner>;
+    'documents'?: Array<UpdateVendorResponseRelatedDocsInner>;
 }
 /**
  * Vendor entity object
@@ -6790,47 +8328,16 @@ export interface VendorEntity {
     'business_type'?: string;
     /**
      * 
-     * @type {Array<VendorEntityRelatedDocsInner>}
+     * @type {string}
      * @memberof VendorEntity
      */
-    'related_docs'?: Array<VendorEntityRelatedDocsInner>;
-}
-/**
- * 
- * @export
- * @interface VendorEntityRelatedDocsInner
- */
-export interface VendorEntityRelatedDocsInner {
-    /**
-     * 
-     * @type {string}
-     * @memberof VendorEntityRelatedDocsInner
-     */
-    'vendor_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof VendorEntityRelatedDocsInner
-     */
-    'doc_type'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof VendorEntityRelatedDocsInner
-     */
-    'doc_value'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof VendorEntityRelatedDocsInner
-     */
-    'status'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof VendorEntityRelatedDocsInner
-     */
     'remarks'?: string;
+    /**
+     * 
+     * @type {Array<UpdateVendorResponseRelatedDocsInner>}
+     * @memberof VendorEntity
+     */
+    'related_docs'?: Array<UpdateVendorResponseRelatedDocsInner>;
 }
 /**
  * Use to split order when cashfree\'s Easy Split is enabled for your account.
@@ -6935,7 +8442,7 @@ const CustomersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7057,7 +8564,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7129,7 +8636,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7206,7 +8713,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7278,7 +8785,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7350,7 +8857,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7429,7 +8936,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7501,7 +9008,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7572,7 +9079,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7648,7 +9155,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7739,7 +9246,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7815,7 +9322,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -7887,7 +9394,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8213,7 +9720,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8287,7 +9794,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8361,7 +9868,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8435,7 +9942,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8609,7 +10116,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8682,7 +10189,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8819,7 +10326,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8892,7 +10399,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8969,7 +10476,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9128,7 +10635,7 @@ const PGReconciliationApiAxiosParamCreator = function (configuration?: Configura
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9249,7 +10756,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9322,7 +10829,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9395,7 +10902,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9467,7 +10974,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9644,7 +11151,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9707,7 +11214,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9784,7 +11291,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9856,7 +11363,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9914,7 +11421,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10113,7 +11620,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10190,7 +11697,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10262,7 +11769,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10421,7 +11928,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10497,7 +12004,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10588,6 +12095,78 @@ const SettlementReconciliationApiFp = function(configuration?: Configuration) {
 const SettlementsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * Use this API to pass the CBRICS ID to Cashfree and mark an order for settlement.
+         * @summary Mark Order For Settlement
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {CreateOrderSettlementRequestBody} [CreateOrderSettlementRequestBody] Create Order Settlement Request Body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * CreateOrderSettlementRequestBody?: CreateOrderSettlementRequestBody, 
+         */
+        markForSettlement: async (x_api_version: string,  x_request_id?: string, x_idempotency_key?: string, CreateOrderSettlementRequestBody?: CreateOrderSettlementRequestBody,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('markForSettlement', 'x_api_version', x_api_version)
+            const localVarPath = `/orders/settlements`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(CreateOrderSettlementRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Use this API to view all the settlements of a particular order.
          * @summary Get Settlements by Order ID
          
@@ -10638,7 +12217,7 @@ const SettlementsApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10670,6 +12249,24 @@ const SettlementsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = SettlementsApiAxiosParamCreator(configuration)
     return {
         /**
+         * Use this API to pass the CBRICS ID to Cashfree and mark an order for settlement.
+         * @summary Mark Order For Settlement
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {CreateOrderSettlementRequestBody} [CreateOrderSettlementRequestBody] Create Order Settlement Request Body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async markForSettlement(x_api_version: string, x_request_id?: string, x_idempotency_key?: string, CreateOrderSettlementRequestBody?: CreateOrderSettlementRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.markForSettlement(x_api_version, x_request_id, x_idempotency_key, CreateOrderSettlementRequestBody, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
          * Use this API to view all the settlements of a particular order.
          * @summary Get Settlements by Order ID
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
@@ -10694,6 +12291,216 @@ const SettlementsApiFp = function(configuration?: Configuration) {
  * SettlementsApi - object-oriented interface
  * @export
  * @class SettlementsApi
+ * @extends {BaseAPI}
+ */
+
+
+
+/**
+ * SimulationApi - axios parameter creator
+ * @export
+ */
+const SimulationApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Use this API to fetch simulated payment details.
+         * @summary Fetch Simulation
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} simulation_id Provide the SimulationId for which the details have to be fetched.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        pGFetchSimulation: async (x_api_version: string, simulation_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGFetchSimulation', 'x_api_version', x_api_version)
+            // verify required parameter 'simulation_id' is not null or undefined
+            assertParamExists('pGFetchSimulation', 'simulation_id', simulation_id)
+            const localVarPath = `/simulate/{simulation_id}`
+                .replace(`{${"simulation_id"}}`, encodeURIComponent(String(simulation_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to simulate payment. To use this API you should first create an order using the Create Order API. Also, you need to create a payment with the same order.
+         * @summary Simulate Payment
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {SimulateRequest} SimulateRequest Request Body to Make Simulation
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        pGSimulatePayment: async (x_api_version: string, SimulateRequest: SimulateRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGSimulatePayment', 'x_api_version', x_api_version)
+            // verify required parameter 'SimulateRequest' is not null or undefined
+            assertParamExists('pGSimulatePayment', 'SimulateRequest', SimulateRequest)
+            const localVarPath = `/simulate`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(SimulateRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * SimulationApi - functional programming interface
+ * @export
+ */
+const SimulationApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = SimulationApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Use this API to fetch simulated payment details.
+         * @summary Fetch Simulation
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} simulation_id Provide the SimulationId for which the details have to be fetched.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGFetchSimulation(x_api_version: string, simulation_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SimulationResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGFetchSimulation(x_api_version, simulation_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to simulate payment. To use this API you should first create an order using the Create Order API. Also, you need to create a payment with the same order.
+         * @summary Simulate Payment
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {SimulateRequest} SimulateRequest Request Body to Make Simulation
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGSimulatePayment(x_api_version: string, SimulateRequest: SimulateRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SimulationResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGSimulatePayment(x_api_version, SimulateRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+    }
+};
+
+/**
+ * SimulationApi - object-oriented interface
+ * @export
+ * @class SimulationApi
  * @extends {BaseAPI}
  */
 
@@ -10757,7 +12564,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10831,7 +12638,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10904,7 +12711,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10986,7 +12793,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11065,7 +12872,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11142,7 +12949,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11220,7 +13027,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11298,7 +13105,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11492,6 +13299,1276 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
 
 
 /**
+ * SubscriptionApi - axios parameter creator
+ * @export
+ */
+const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Use this API to create an auth or to raise a charge .
+         * @summary Raise a charge or create an auth.
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {CreateSubscriptionPaymentRequest} CreateSubscriptionPaymentRequest Request body to create a subscription payment.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        subsCreatePayment: async (x_api_version: string, CreateSubscriptionPaymentRequest: CreateSubscriptionPaymentRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsCreatePayment', 'x_api_version', x_api_version)
+            // verify required parameter 'CreateSubscriptionPaymentRequest' is not null or undefined
+            assertParamExists('subsCreatePayment', 'CreateSubscriptionPaymentRequest', CreateSubscriptionPaymentRequest)
+            const localVarPath = `/subscriptions/pay`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(CreateSubscriptionPaymentRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * A plan allows your customer to identify the features you offer along with your pricing. You can create plans as per the pricing you support for your services. For each plan, you can set a pre-decided frequency and amount with which they’ll be charged. Example: Netflix Plans - Premium, Basic, Standard, Mobile. Each plan differs and caters for a particular set of audiences.
+         * @summary Create a plan.
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {CreatePlanRequest} CreatePlanRequest Request body to create a plan.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        subsCreatePlan: async (x_api_version: string, CreatePlanRequest: CreatePlanRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsCreatePlan', 'x_api_version', x_api_version)
+            // verify required parameter 'CreatePlanRequest' is not null or undefined
+            assertParamExists('subsCreatePlan', 'CreatePlanRequest', CreatePlanRequest)
+            const localVarPath = `/pg/plans`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(CreatePlanRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This API allows you to create refund on a successful payment. Refund amount can be partial or the full amount of the payment.
+         * @summary Create a refund.
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+         * @param {CreateSubscriptionRefundRequest} CreateSubscriptionRefundRequest Request body to create a subscription refund.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_request_id?: string, 
+         */
+        subsCreateRefund: async (x_api_version: string, subscription_id: string, CreateSubscriptionRefundRequest: CreateSubscriptionRefundRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsCreateRefund', 'x_api_version', x_api_version)
+            // verify required parameter 'subscription_id' is not null or undefined
+            assertParamExists('subsCreateRefund', 'subscription_id', subscription_id)
+            // verify required parameter 'CreateSubscriptionRefundRequest' is not null or undefined
+            assertParamExists('subsCreateRefund', 'CreateSubscriptionRefundRequest', CreateSubscriptionRefundRequest)
+            const localVarPath = `/subscriptions/{subscription_id}/refunds`
+                .replace(`{${"subscription_id"}}`, encodeURIComponent(String(subscription_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(CreateSubscriptionRefundRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to create a new subscription.
+         * @summary Create Subscription
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {CreateSubscriptionRequest} CreateSubscriptionRequest Request body to create a subscription.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        subsCreateSubscription: async (x_api_version: string, CreateSubscriptionRequest: CreateSubscriptionRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsCreateSubscription', 'x_api_version', x_api_version)
+            // verify required parameter 'CreateSubscriptionRequest' is not null or undefined
+            assertParamExists('subsCreateSubscription', 'CreateSubscriptionRequest', CreateSubscriptionRequest)
+            const localVarPath = `/subscriptions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(CreateSubscriptionRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to fetch plan details.
+         * @summary Fetch Plan
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} plan_id Provide the PlanId for which the details have to be fetched.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        subsFetchPlan: async (x_api_version: string, plan_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsFetchPlan', 'x_api_version', x_api_version)
+            // verify required parameter 'plan_id' is not null or undefined
+            assertParamExists('subsFetchPlan', 'plan_id', plan_id)
+            const localVarPath = `/pg/plans/{plan_id}`
+                .replace(`{${"plan_id"}}`, encodeURIComponent(String(plan_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to fetch subscription details.
+         * @summary Fetch Subscription
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        subsFetchSubscription: async (x_api_version: string, subscription_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsFetchSubscription', 'x_api_version', x_api_version)
+            // verify required parameter 'subscription_id' is not null or undefined
+            assertParamExists('subsFetchSubscription', 'subscription_id', subscription_id)
+            const localVarPath = `/subscriptions/{subscription_id}`
+                .replace(`{${"subscription_id"}}`, encodeURIComponent(String(subscription_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to fetch details of a single payment of a subscription.
+         * @summary Fetch details of a single payment.
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+         * @param {string} payment_id Provide the PaymentId using which the payment was created.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_request_id?: string, 
+         */
+        subsFetchSubscriptionPayment: async (x_api_version: string, subscription_id: string, payment_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsFetchSubscriptionPayment', 'x_api_version', x_api_version)
+            // verify required parameter 'subscription_id' is not null or undefined
+            assertParamExists('subsFetchSubscriptionPayment', 'subscription_id', subscription_id)
+            // verify required parameter 'payment_id' is not null or undefined
+            assertParamExists('subsFetchSubscriptionPayment', 'payment_id', payment_id)
+            const localVarPath = `/subscriptions/{subscription_id}/payments/{payment_id}`
+                .replace(`{${"subscription_id"}}`, encodeURIComponent(String(subscription_id)))
+                .replace(`{${"payment_id"}}`, encodeURIComponent(String(payment_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to fetch all payments of a subscription.
+         * @summary Fetch details of all payments of a subscription.
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        subsFetchSubscriptionPayments: async (x_api_version: string, subscription_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsFetchSubscriptionPayments', 'x_api_version', x_api_version)
+            // verify required parameter 'subscription_id' is not null or undefined
+            assertParamExists('subsFetchSubscriptionPayments', 'subscription_id', subscription_id)
+            const localVarPath = `/subscriptions/{subscription_id}/payments`
+                .replace(`{${"subscription_id"}}`, encodeURIComponent(String(subscription_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to fetch details of a refund of a subscription payment.
+         * @summary Fetch details of a refund.
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+         * @param {string} refund_id Provide the PaymentId for which the details have to be fetched.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_request_id?: string, 
+         */
+        subsFetchSubscriptionRefund: async (x_api_version: string, subscription_id: string, refund_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsFetchSubscriptionRefund', 'x_api_version', x_api_version)
+            // verify required parameter 'subscription_id' is not null or undefined
+            assertParamExists('subsFetchSubscriptionRefund', 'subscription_id', subscription_id)
+            // verify required parameter 'refund_id' is not null or undefined
+            assertParamExists('subsFetchSubscriptionRefund', 'refund_id', refund_id)
+            const localVarPath = `/subscriptions/{subscription_id}/refunds/{refund_id}`
+                .replace(`{${"subscription_id"}}`, encodeURIComponent(String(subscription_id)))
+                .replace(`{${"refund_id"}}`, encodeURIComponent(String(refund_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to manage a subscription. You can cancel, pause, activate or change the plan of a subscription.
+         * @summary Manage a subscription.
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+         * @param {ManageSubscriptionRequest} ManageSubscriptionRequest Request body to manage a subscription.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_request_id?: string, 
+         */
+        subsManageSubscription: async (x_api_version: string, subscription_id: string, ManageSubscriptionRequest: ManageSubscriptionRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsManageSubscription', 'x_api_version', x_api_version)
+            // verify required parameter 'subscription_id' is not null or undefined
+            assertParamExists('subsManageSubscription', 'subscription_id', subscription_id)
+            // verify required parameter 'ManageSubscriptionRequest' is not null or undefined
+            assertParamExists('subsManageSubscription', 'ManageSubscriptionRequest', ManageSubscriptionRequest)
+            const localVarPath = `/subscriptions/{subscription_id}/manage`
+                .replace(`{${"subscription_id"}}`, encodeURIComponent(String(subscription_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(ManageSubscriptionRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to manage a payment of a subscription. A payment can be cancelled or retried with this API.
+         * @summary Manage a single payment.
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+         * @param {string} payment_id Provide the PaymentId using which the payment was created.
+         * @param {ManageSubscriptionPaymentRequest} ManageSubscriptionPaymentRequest Request body to manage a subscription payment.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * ManageSubscriptionPaymentRequest: ManageSubscriptionPaymentRequest, 
+         */
+        subsManageSubscriptionPayment: async (x_api_version: string, subscription_id: string, payment_id: string, ManageSubscriptionPaymentRequest: ManageSubscriptionPaymentRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsManageSubscriptionPayment', 'x_api_version', x_api_version)
+            // verify required parameter 'subscription_id' is not null or undefined
+            assertParamExists('subsManageSubscriptionPayment', 'subscription_id', subscription_id)
+            // verify required parameter 'payment_id' is not null or undefined
+            assertParamExists('subsManageSubscriptionPayment', 'payment_id', payment_id)
+            // verify required parameter 'ManageSubscriptionPaymentRequest' is not null or undefined
+            assertParamExists('subsManageSubscriptionPayment', 'ManageSubscriptionPaymentRequest', ManageSubscriptionPaymentRequest)
+            const localVarPath = `/subscriptions/{subscription_id}/payments/{payment_id}/manage`
+                .replace(`{${"subscription_id"}}`, encodeURIComponent(String(subscription_id)))
+                .replace(`{${"payment_id"}}`, encodeURIComponent(String(payment_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(ManageSubscriptionPaymentRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to upload Physical Nach for Physical Nach Authorization.
+         * @summary Upload Physical Nach for Physical Nach Authorization.
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} payment_id Provide the PaymentId using which the payment was created.
+         * @param {File} file Select the .jpg file that should be uploaded or provide the path of that file. You cannot upload a file that is more than 1MB in size.
+         * @param {string} payment_id2 Authorization Payment Id for physical nach authorization
+         * @param {string} action Action to be performed on the file. Can be SUBMIT_DOCUMENT
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * payment_id2: string, 
+         */
+        subscriptionDocumentUpload: async (x_api_version: string, payment_id: string, file: File, payment_id2: string, action: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subscriptionDocumentUpload', 'x_api_version', x_api_version)
+            // verify required parameter 'payment_id' is not null or undefined
+            assertParamExists('subscriptionDocumentUpload', 'payment_id', payment_id)
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('subscriptionDocumentUpload', 'file', file)
+            // verify required parameter 'payment_id2' is not null or undefined
+            assertParamExists('subscriptionDocumentUpload', 'payment_id2', payment_id2)
+            // verify required parameter 'action' is not null or undefined
+            assertParamExists('subscriptionDocumentUpload', 'action', action)
+            const localVarPath = `/subscriptions/pay/documents/{payment_id}`
+                .replace(`{${"payment_id"}}`, encodeURIComponent(String(payment_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+            if (payment_id2 !== undefined) { 
+                localVarFormParams.append('payment_id', payment_id2 as any);
+            }
+    
+            if (action !== undefined) { 
+                localVarFormParams.append('action', action as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Use this API to check if a payment method is enabled for your account.
+         * @summary Get Eligible payment methods available for a subscription
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {SubscriptionEligibilityRequest} SubscriptionEligibilityRequest Request body to fetch subscription eligibile payment method details.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        subscriptionEligibility: async (x_api_version: string, SubscriptionEligibilityRequest: SubscriptionEligibilityRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subscriptionEligibility', 'x_api_version', x_api_version)
+            // verify required parameter 'SubscriptionEligibilityRequest' is not null or undefined
+            assertParamExists('subscriptionEligibility', 'SubscriptionEligibilityRequest', SubscriptionEligibilityRequest)
+            const localVarPath = `/subscriptions/eligibility/payment_methods`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(SubscriptionEligibilityRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * SubscriptionApi - functional programming interface
+ * @export
+ */
+const SubscriptionApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = SubscriptionApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Use this API to create an auth or to raise a charge .
+         * @summary Raise a charge or create an auth.
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {CreateSubscriptionPaymentRequest} CreateSubscriptionPaymentRequest Request body to create a subscription payment.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async subsCreatePayment(x_api_version: string, CreateSubscriptionPaymentRequest: CreateSubscriptionPaymentRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubsCreatePayment200Response>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsCreatePayment(x_api_version, CreateSubscriptionPaymentRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * A plan allows your customer to identify the features you offer along with your pricing. You can create plans as per the pricing you support for your services. For each plan, you can set a pre-decided frequency and amount with which they’ll be charged. Example: Netflix Plans - Premium, Basic, Standard, Mobile. Each plan differs and caters for a particular set of audiences.
+         * @summary Create a plan.
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {CreatePlanRequest} CreatePlanRequest Request body to create a plan.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async subsCreatePlan(x_api_version: string, CreatePlanRequest: CreatePlanRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlanEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsCreatePlan(x_api_version, CreatePlanRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * This API allows you to create refund on a successful payment. Refund amount can be partial or the full amount of the payment.
+         * @summary Create a refund.
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+         * @param {CreateSubscriptionRefundRequest} CreateSubscriptionRefundRequest Request body to create a subscription refund.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async subsCreateRefund(x_api_version: string, subscription_id: string, CreateSubscriptionRefundRequest: CreateSubscriptionRefundRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionPaymentRefundEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsCreateRefund(x_api_version, subscription_id, CreateSubscriptionRefundRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to create a new subscription.
+         * @summary Create Subscription
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {CreateSubscriptionRequest} CreateSubscriptionRequest Request body to create a subscription.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async subsCreateSubscription(x_api_version: string, CreateSubscriptionRequest: CreateSubscriptionRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsCreateSubscription(x_api_version, CreateSubscriptionRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to fetch plan details.
+         * @summary Fetch Plan
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} plan_id Provide the PlanId for which the details have to be fetched.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async subsFetchPlan(x_api_version: string, plan_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlanEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsFetchPlan(x_api_version, plan_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to fetch subscription details.
+         * @summary Fetch Subscription
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async subsFetchSubscription(x_api_version: string, subscription_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsFetchSubscription(x_api_version, subscription_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to fetch details of a single payment of a subscription.
+         * @summary Fetch details of a single payment.
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+         * @param {string} payment_id Provide the PaymentId using which the payment was created.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async subsFetchSubscriptionPayment(x_api_version: string, subscription_id: string, payment_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionPaymentEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsFetchSubscriptionPayment(x_api_version, subscription_id, payment_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to fetch all payments of a subscription.
+         * @summary Fetch details of all payments of a subscription.
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async subsFetchSubscriptionPayments(x_api_version: string, subscription_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SubscriptionPaymentEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsFetchSubscriptionPayments(x_api_version, subscription_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to fetch details of a refund of a subscription payment.
+         * @summary Fetch details of a refund.
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+         * @param {string} refund_id Provide the PaymentId for which the details have to be fetched.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async subsFetchSubscriptionRefund(x_api_version: string, subscription_id: string, refund_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionPaymentRefundEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsFetchSubscriptionRefund(x_api_version, subscription_id, refund_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to manage a subscription. You can cancel, pause, activate or change the plan of a subscription.
+         * @summary Manage a subscription.
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+         * @param {ManageSubscriptionRequest} ManageSubscriptionRequest Request body to manage a subscription.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async subsManageSubscription(x_api_version: string, subscription_id: string, ManageSubscriptionRequest: ManageSubscriptionRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsManageSubscription(x_api_version, subscription_id, ManageSubscriptionRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to manage a payment of a subscription. A payment can be cancelled or retried with this API.
+         * @summary Manage a single payment.
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+         * @param {string} payment_id Provide the PaymentId using which the payment was created.
+         * @param {ManageSubscriptionPaymentRequest} ManageSubscriptionPaymentRequest Request body to manage a subscription payment.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async subsManageSubscriptionPayment(x_api_version: string, subscription_id: string, payment_id: string, ManageSubscriptionPaymentRequest: ManageSubscriptionPaymentRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionPaymentEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsManageSubscriptionPayment(x_api_version, subscription_id, payment_id, ManageSubscriptionPaymentRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to upload Physical Nach for Physical Nach Authorization.
+         * @summary Upload Physical Nach for Physical Nach Authorization.
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} payment_id Provide the PaymentId using which the payment was created.
+         * @param {File} file Select the .jpg file that should be uploaded or provide the path of that file. You cannot upload a file that is more than 1MB in size.
+         * @param {string} payment_id2 Authorization Payment Id for physical nach authorization
+         * @param {string} action Action to be performed on the file. Can be SUBMIT_DOCUMENT
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async subscriptionDocumentUpload(x_api_version: string, payment_id: string, file: File, payment_id2: string, action: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadPnachImageResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subscriptionDocumentUpload(x_api_version, payment_id, file, payment_id2, action, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to check if a payment method is enabled for your account.
+         * @summary Get Eligible payment methods available for a subscription
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {SubscriptionEligibilityRequest} SubscriptionEligibilityRequest Request body to fetch subscription eligibile payment method details.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async subscriptionEligibility(x_api_version: string, SubscriptionEligibilityRequest: SubscriptionEligibilityRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionEligibilityResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subscriptionEligibility(x_api_version, SubscriptionEligibilityRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+    }
+};
+
+/**
+ * SubscriptionApi - object-oriented interface
+ * @export
+ * @class SubscriptionApi
+ * @extends {BaseAPI}
+ */
+
+
+
+/**
  * TokenVaultApi - axios parameter creator
  * @export
  */
@@ -11552,7 +14629,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11628,7 +14705,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11707,7 +14784,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11783,7 +14860,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.1.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12011,7 +15088,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -12072,7 +15149,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -12132,7 +15209,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -12193,7 +15270,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -12253,7 +15330,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -12313,7 +15390,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -12374,7 +15451,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -12434,7 +15511,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -12494,7 +15571,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -12555,7 +15632,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -12618,7 +15695,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -12679,7 +15756,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -12739,7 +15816,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -12799,7 +15876,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -12859,7 +15936,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -12919,7 +15996,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -12979,7 +16056,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -13039,7 +16116,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -13099,7 +16176,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -13159,7 +16236,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -13219,7 +16296,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -13280,7 +16357,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -13342,7 +16419,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -13402,7 +16479,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -13462,7 +16539,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -13522,7 +16599,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -13582,7 +16659,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -13643,7 +16720,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -13704,7 +16781,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -13765,7 +16842,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -13825,7 +16902,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -13885,7 +16962,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -13946,7 +17023,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -14007,7 +17084,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -14067,7 +17144,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -14129,7 +17206,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -14191,7 +17268,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -14204,6 +17281,66 @@ export class Cashfree {
         }
     }
     
+    /**
+     * Use this API to pass the CBRICS ID to Cashfree and mark an order for settlement.
+     * @summary Mark Order For Settlement
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {CreateOrderSettlementRequestBody} [CreateOrderSettlementRequestBody] Create Order Settlement Request Body.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettlementsApi
+     */
+    public static MarkForSettlement(x_api_version: string, x_request_id?: string, x_idempotency_key?: string, CreateOrderSettlementRequestBody?: CreateOrderSettlementRequestBody, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.2.0");
+            });
+        }
+        try {
+            return SettlementsApiFp().markForSettlement(x_api_version, x_request_id, x_idempotency_key, CreateOrderSettlementRequestBody, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
     /**
      * Use this API to view all the settlements of a particular order.
      * @summary Get Settlements by Order ID
@@ -14251,11 +17388,131 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
             return SettlementsApiFp().pGOrderFetchSettlement(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+    
+    /**
+     * Use this API to fetch simulated payment details.
+     * @summary Fetch Simulation
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} simulation_id Provide the SimulationId for which the details have to be fetched.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SimulationApi
+     */
+    public static PGFetchSimulation(x_api_version: string, simulation_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.2.0");
+            });
+        }
+        try {
+            return SimulationApiFp().pGFetchSimulation(x_api_version, simulation_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to simulate payment. To use this API you should first create an order using the Create Order API. Also, you need to create a payment with the same order.
+     * @summary Simulate Payment
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {SimulateRequest} SimulateRequest Request Body to Make Simulation
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SimulationApi
+     */
+    public static PGSimulatePayment(x_api_version: string, SimulateRequest: SimulateRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.2.0");
+            });
+        }
+        try {
+            return SimulationApiFp().pGSimulatePayment(x_api_version, SimulateRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -14311,7 +17568,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -14371,7 +17628,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -14431,7 +17688,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -14492,7 +17749,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -14553,7 +17810,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -14614,7 +17871,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -14675,7 +17932,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -14736,11 +17993,800 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
             return SoftPOSApiFp().sposUploadTerminalDocs(x_api_version, cf_terminal_id, UploadTerminalDocs, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+    
+    /**
+     * Use this API to create an auth or to raise a charge .
+     * @summary Raise a charge or create an auth.
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {CreateSubscriptionPaymentRequest} CreateSubscriptionPaymentRequest Request body to create a subscription payment.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SubscriptionApi
+     */
+    public static SubsCreatePayment(x_api_version: string, CreateSubscriptionPaymentRequest: CreateSubscriptionPaymentRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.2.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsCreatePayment(x_api_version, CreateSubscriptionPaymentRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * A plan allows your customer to identify the features you offer along with your pricing. You can create plans as per the pricing you support for your services. For each plan, you can set a pre-decided frequency and amount with which they’ll be charged. Example: Netflix Plans - Premium, Basic, Standard, Mobile. Each plan differs and caters for a particular set of audiences.
+     * @summary Create a plan.
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {CreatePlanRequest} CreatePlanRequest Request body to create a plan.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SubscriptionApi
+     */
+    public static SubsCreatePlan(x_api_version: string, CreatePlanRequest: CreatePlanRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.2.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsCreatePlan(x_api_version, CreatePlanRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * This API allows you to create refund on a successful payment. Refund amount can be partial or the full amount of the payment.
+     * @summary Create a refund.
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+     * @param {CreateSubscriptionRefundRequest} CreateSubscriptionRefundRequest Request body to create a subscription refund.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SubscriptionApi
+     */
+    public static SubsCreateRefund(x_api_version: string, subscription_id: string, CreateSubscriptionRefundRequest: CreateSubscriptionRefundRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.2.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsCreateRefund(x_api_version, subscription_id, CreateSubscriptionRefundRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to create a new subscription.
+     * @summary Create Subscription
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {CreateSubscriptionRequest} CreateSubscriptionRequest Request body to create a subscription.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SubscriptionApi
+     */
+    public static SubsCreateSubscription(x_api_version: string, CreateSubscriptionRequest: CreateSubscriptionRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.2.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsCreateSubscription(x_api_version, CreateSubscriptionRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to fetch plan details.
+     * @summary Fetch Plan
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} plan_id Provide the PlanId for which the details have to be fetched.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SubscriptionApi
+     */
+    public static SubsFetchPlan(x_api_version: string, plan_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.2.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsFetchPlan(x_api_version, plan_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to fetch subscription details.
+     * @summary Fetch Subscription
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SubscriptionApi
+     */
+    public static SubsFetchSubscription(x_api_version: string, subscription_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.2.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsFetchSubscription(x_api_version, subscription_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to fetch details of a single payment of a subscription.
+     * @summary Fetch details of a single payment.
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+     * @param {string} payment_id Provide the PaymentId using which the payment was created.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SubscriptionApi
+     */
+    public static SubsFetchSubscriptionPayment(x_api_version: string, subscription_id: string, payment_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.2.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsFetchSubscriptionPayment(x_api_version, subscription_id, payment_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to fetch all payments of a subscription.
+     * @summary Fetch details of all payments of a subscription.
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SubscriptionApi
+     */
+    public static SubsFetchSubscriptionPayments(x_api_version: string, subscription_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.2.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsFetchSubscriptionPayments(x_api_version, subscription_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to fetch details of a refund of a subscription payment.
+     * @summary Fetch details of a refund.
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+     * @param {string} refund_id Provide the PaymentId for which the details have to be fetched.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SubscriptionApi
+     */
+    public static SubsFetchSubscriptionRefund(x_api_version: string, subscription_id: string, refund_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.2.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsFetchSubscriptionRefund(x_api_version, subscription_id, refund_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to manage a subscription. You can cancel, pause, activate or change the plan of a subscription.
+     * @summary Manage a subscription.
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+     * @param {ManageSubscriptionRequest} ManageSubscriptionRequest Request body to manage a subscription.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SubscriptionApi
+     */
+    public static SubsManageSubscription(x_api_version: string, subscription_id: string, ManageSubscriptionRequest: ManageSubscriptionRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.2.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsManageSubscription(x_api_version, subscription_id, ManageSubscriptionRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to manage a payment of a subscription. A payment can be cancelled or retried with this API.
+     * @summary Manage a single payment.
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} subscription_id Provide the SubscriptionId using which the subscription was created.
+     * @param {string} payment_id Provide the PaymentId using which the payment was created.
+     * @param {ManageSubscriptionPaymentRequest} ManageSubscriptionPaymentRequest Request body to manage a subscription payment.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SubscriptionApi
+     */
+    public static SubsManageSubscriptionPayment(x_api_version: string, subscription_id: string, payment_id: string, ManageSubscriptionPaymentRequest: ManageSubscriptionPaymentRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.2.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsManageSubscriptionPayment(x_api_version, subscription_id, payment_id, ManageSubscriptionPaymentRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to upload Physical Nach for Physical Nach Authorization.
+     * @summary Upload Physical Nach for Physical Nach Authorization.
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} payment_id Provide the PaymentId using which the payment was created.
+     * @param {File} file Select the .jpg file that should be uploaded or provide the path of that file. You cannot upload a file that is more than 1MB in size.
+     * @param {string} payment_id2 Authorization Payment Id for physical nach authorization
+     * @param {string} action Action to be performed on the file. Can be SUBMIT_DOCUMENT
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SubscriptionApi
+     */
+    public static SubscriptionDocumentUpload(x_api_version: string, payment_id: string, file: File, payment_id2: string, action: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.2.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subscriptionDocumentUpload(x_api_version, payment_id, file, payment_id2, action, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to check if a payment method is enabled for your account.
+     * @summary Get Eligible payment methods available for a subscription
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {SubscriptionEligibilityRequest} SubscriptionEligibilityRequest Request body to fetch subscription eligibile payment method details.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SubscriptionApi
+     */
+    public static SubscriptionEligibility(x_api_version: string, SubscriptionEligibilityRequest: SubscriptionEligibilityRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.2.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subscriptionEligibility(x_api_version, SubscriptionEligibilityRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -14797,7 +18843,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -14858,7 +18904,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -14919,7 +18965,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
@@ -14980,7 +19026,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.1.2");
+                scope.setExtra('release', "4.2.0");
             });
         }
         try {
