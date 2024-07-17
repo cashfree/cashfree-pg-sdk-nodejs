@@ -569,6 +569,61 @@ export interface BanktransferPaymentMethod {
     'banktransfer': Banktransfer;
 }
 /**
+ * payment method card.
+ * @export
+ * @interface CARD
+ */
+export interface CARD {
+    /**
+     * Channel. can be link
+     * @type {string}
+     * @memberof CARD
+     */
+    'channel'?: string;
+    /**
+     * Card number
+     * @type {string}
+     * @memberof CARD
+     */
+    'card_number'?: string;
+    /**
+     * Card holder name
+     * @type {string}
+     * @memberof CARD
+     */
+    'card_holder_name'?: string;
+    /**
+     * Card expiry month
+     * @type {string}
+     * @memberof CARD
+     */
+    'card_expiry_mm'?: string;
+    /**
+     * Card expiry year
+     * @type {string}
+     * @memberof CARD
+     */
+    'card_expiry_yy'?: string;
+    /**
+     * Card CVV
+     * @type {string}
+     * @memberof CARD
+     */
+    'card_cvv'?: string;
+    /**
+     * Card network
+     * @type {string}
+     * @memberof CARD
+     */
+    'card_network'?: string;
+    /**
+     * Card type
+     * @type {string}
+     * @memberof CARD
+     */
+    'card_type'?: string;
+}
+/**
  * Card Payment method
  * @export
  * @interface Card
@@ -1314,153 +1369,6 @@ export interface CreatePlanRequest {
     'plan_note'?: string;
 }
 /**
- * The response returned in Get, Create or Manage Subscription Payment APIs.
- * @export
- * @interface CreateSubscriptionPaymentAuthResponse
- */
-export interface CreateSubscriptionPaymentAuthResponse {
-    /**
-     * Cashfree subscription payment reference number
-     * @type {string}
-     * @memberof CreateSubscriptionPaymentAuthResponse
-     */
-    'cf_payment_id'?: string;
-    /**
-     * Cashfree subscription reference number
-     * @type {string}
-     * @memberof CreateSubscriptionPaymentAuthResponse
-     */
-    'cf_subscription_id'?: string;
-    /**
-     * 
-     * @type {CreateSubscriptionPaymentAuthResponseFailureDetails}
-     * @memberof CreateSubscriptionPaymentAuthResponse
-     */
-    'failure_details'?: CreateSubscriptionPaymentAuthResponseFailureDetails;
-    /**
-     * The charge amount of the payment.
-     * @type {number}
-     * @memberof CreateSubscriptionPaymentAuthResponse
-     */
-    'payment_amount'?: number;
-    /**
-     * A unique ID passed by merchant for identifying the transaction.
-     * @type {string}
-     * @memberof CreateSubscriptionPaymentAuthResponse
-     */
-    'payment_id'?: string;
-    /**
-     * The date on which the payment was initiated.
-     * @type {string}
-     * @memberof CreateSubscriptionPaymentAuthResponse
-     */
-    'payment_initiated_date'?: string;
-    /**
-     * Status of the payment.
-     * @type {string}
-     * @memberof CreateSubscriptionPaymentAuthResponse
-     */
-    'payment_status'?: string;
-    /**
-     * Payment type. Can be AUTH or CHARGE.
-     * @type {string}
-     * @memberof CreateSubscriptionPaymentAuthResponse
-     */
-    'payment_type'?: string;
-    /**
-     * A unique ID passed by merchant for identifying the subscription.
-     * @type {string}
-     * @memberof CreateSubscriptionPaymentAuthResponse
-     */
-    'subscription_id'?: string;
-    /**
-     * Payment method used for the authorization.
-     * @type {string}
-     * @memberof CreateSubscriptionPaymentAuthResponse
-     */
-    'payment_method'?: string;
-}
-/**
- * 
- * @export
- * @interface CreateSubscriptionPaymentAuthResponseFailureDetails
- */
-export interface CreateSubscriptionPaymentAuthResponseFailureDetails {
-    /**
-     * Failure reason of the payment if the payment_status is failed.
-     * @type {string}
-     * @memberof CreateSubscriptionPaymentAuthResponseFailureDetails
-     */
-    'failure_reason'?: string;
-}
-/**
- * The response returned in Get, Create or Manage Subscription Payment APIs.
- * @export
- * @interface CreateSubscriptionPaymentChargeResponse
- */
-export interface CreateSubscriptionPaymentChargeResponse {
-    /**
-     * Cashfree subscription payment reference number
-     * @type {string}
-     * @memberof CreateSubscriptionPaymentChargeResponse
-     */
-    'cf_payment_id'?: string;
-    /**
-     * Cashfree subscription reference number
-     * @type {string}
-     * @memberof CreateSubscriptionPaymentChargeResponse
-     */
-    'cf_subscription_id'?: string;
-    /**
-     * 
-     * @type {CreateSubscriptionPaymentAuthResponseFailureDetails}
-     * @memberof CreateSubscriptionPaymentChargeResponse
-     */
-    'failure_details'?: CreateSubscriptionPaymentAuthResponseFailureDetails;
-    /**
-     * The charge amount of the payment.
-     * @type {number}
-     * @memberof CreateSubscriptionPaymentChargeResponse
-     */
-    'payment_amount'?: number;
-    /**
-     * A unique ID passed by merchant for identifying the transaction.
-     * @type {string}
-     * @memberof CreateSubscriptionPaymentChargeResponse
-     */
-    'payment_id'?: string;
-    /**
-     * The date on which the payment was initiated.
-     * @type {string}
-     * @memberof CreateSubscriptionPaymentChargeResponse
-     */
-    'payment_initiated_date'?: string;
-    /**
-     * Status of the payment.
-     * @type {string}
-     * @memberof CreateSubscriptionPaymentChargeResponse
-     */
-    'payment_status'?: string;
-    /**
-     * Payment type. Can be AUTH or CHARGE.
-     * @type {string}
-     * @memberof CreateSubscriptionPaymentChargeResponse
-     */
-    'payment_type'?: string;
-    /**
-     * A unique ID passed by merchant for identifying the subscription.
-     * @type {string}
-     * @memberof CreateSubscriptionPaymentChargeResponse
-     */
-    'subscription_id'?: string;
-    /**
-     * Payment method used for the authorization.
-     * @type {string}
-     * @memberof CreateSubscriptionPaymentChargeResponse
-     */
-    'payment_method'?: string;
-}
-/**
  * The request to be passed for the create subscription payment API.
  * @export
  * @interface CreateSubscriptionPaymentRequest
@@ -1509,11 +1417,85 @@ export interface CreateSubscriptionPaymentRequest {
      */
     'payment_type': string;
     /**
-     * Payment method. Can be one of [\"upi\", \"enach\", \"pnach\", \"card\"]
-     * @type {object}
+     * 
+     * @type {CreateSubscriptionPaymentRequestPaymentMethod}
      * @memberof CreateSubscriptionPaymentRequest
      */
-    'payment_method'?: object;
+    'payment_method'?: CreateSubscriptionPaymentRequestPaymentMethod;
+}
+/**
+ * @type CreateSubscriptionPaymentRequestPaymentMethod
+ * Payment method. Can be one of [\"upi\", \"enach\", \"pnach\", \"card\"]
+ * @export
+ */
+export type CreateSubscriptionPaymentRequestPaymentMethod = CARD | ENACH | PNACH | UPI;
+
+/**
+ * The response returned is Create Subscription Auth or Charge APIs.
+ * @export
+ * @interface CreateSubscriptionPaymentResponse
+ */
+export interface CreateSubscriptionPaymentResponse {
+    /**
+     * Cashfree subscription payment reference number
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentResponse
+     */
+    'cf_payment_id'?: string;
+    /**
+     * 
+     * @type {SubscriptionPaymentEntityFailureDetails}
+     * @memberof CreateSubscriptionPaymentResponse
+     */
+    'failure_details'?: SubscriptionPaymentEntityFailureDetails;
+    /**
+     * The charge amount of the payment.
+     * @type {number}
+     * @memberof CreateSubscriptionPaymentResponse
+     */
+    'payment_amount'?: number;
+    /**
+     * A unique ID passed by merchant for identifying the transaction.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentResponse
+     */
+    'payment_id'?: string;
+    /**
+     * The date on which the payment was initiated.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentResponse
+     */
+    'payment_initiated_date'?: string;
+    /**
+     * Status of the payment.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentResponse
+     */
+    'payment_status'?: string;
+    /**
+     * Payment type. Can be AUTH or CHARGE.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentResponse
+     */
+    'payment_type'?: string;
+    /**
+     * A unique ID passed by merchant for identifying the subscription.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentResponse
+     */
+    'subscription_id'?: string;
+    /**
+     * Contains a payload for auth app links in case of AUTH. For charge, the payload is empty.
+     * @type {object}
+     * @memberof CreateSubscriptionPaymentResponse
+     */
+    'data'?: object;
+    /**
+     * Payment method used for the authorization.
+     * @type {string}
+     * @memberof CreateSubscriptionPaymentResponse
+     */
+    'payment_method'?: string;
 }
 /**
  * Request body to create a subscription refund.
@@ -1890,7 +1872,7 @@ export interface CreateVendorRequest {
      */
     'dashboard_access'?: boolean;
     /**
-     * Specify the settlement cycle to be updated. View the settlement cycle details from the \"Settlement Cycles Supported\" table.  If no schedule option is configured, the settlement cycle ID \"1\" will be in effect. Select \"8\" or \"9\" if you want to schedule instant vendor settlements.
+     * Specify the settlement cycle to be updated. View the settlement cycle details from the \"Settlement Cycles Supported\" table. If no schedule option is configured, the settlement cycle ID \"1\" will be in effect. Select \"8\" or \"9\" if you want to schedule instant vendor settlements.
      * @type {number}
      * @memberof CreateVendorRequest
      */
@@ -2037,7 +2019,7 @@ export interface CryptogramEntity {
     'card_display'?: string;
 }
 /**
- * The customer details that are necessary.
+ * The customer details that are necessary. Note that you can pass dummy details if your use case does not require the customer details.
  * @export
  * @interface CustomerDetails
  */
@@ -2153,7 +2135,7 @@ export interface CustomerDetailsResponse {
      */
     'customer_bank_code'?: number;
     /**
-     * Customer identifier at Cashfree. You will get this when you create/get customer        
+     * Customer identifier at Cashfree. You will get this when you create/get customer
      * @type {string}
      * @memberof CustomerDetailsResponse
      */
@@ -2291,6 +2273,55 @@ export interface EMIPlansArray {
      * @memberof EMIPlansArray
      */
     'total_amount'?: number;
+}
+/**
+ * payment method enach.
+ * @export
+ * @interface ENACH
+ */
+export interface ENACH {
+    /**
+     * Channel. can be link
+     * @type {string}
+     * @memberof ENACH
+     */
+    'channel'?: string;
+    /**
+     * Authentication mode. can be debit_card, aadhaar, or net_banking
+     * @type {string}
+     * @memberof ENACH
+     */
+    'auth_mode'?: string;
+    /**
+     * Account holder name
+     * @type {string}
+     * @memberof ENACH
+     */
+    'account_holder_name'?: string;
+    /**
+     * Account number
+     * @type {string}
+     * @memberof ENACH
+     */
+    'account_number'?: string;
+    /**
+     * Account bank code (required without AccountIFSC)
+     * @type {string}
+     * @memberof ENACH
+     */
+    'account_bank_code'?: string;
+    /**
+     * Account type
+     * @type {string}
+     * @memberof ENACH
+     */
+    'account_type'?: string;
+    /**
+     * Account IFSC
+     * @type {string}
+     * @memberof ENACH
+     */
+    'account_ifsc'?: string;
 }
 /**
  * ES Order Recon Request
@@ -4332,6 +4363,61 @@ export interface OrderPayData {
      * @memberof OrderPayData
      */
     'method'?: string;
+}
+/**
+ * payment method pnach.
+ * @export
+ * @interface PNACH
+ */
+export interface PNACH {
+    /**
+     * Channel. can be post
+     * @type {string}
+     * @memberof PNACH
+     */
+    'channel'?: string;
+    /**
+     * Account holder name
+     * @type {string}
+     * @memberof PNACH
+     */
+    'account_holder_name'?: string;
+    /**
+     * Account number
+     * @type {string}
+     * @memberof PNACH
+     */
+    'account_number'?: string;
+    /**
+     * Account bank code
+     * @type {string}
+     * @memberof PNACH
+     */
+    'account_bank_code'?: string;
+    /**
+     * Account type
+     * @type {string}
+     * @memberof PNACH
+     */
+    'account_type'?: string;
+    /**
+     * Account IFSC
+     * @type {string}
+     * @memberof PNACH
+     */
+    'account_ifsc'?: string;
+    /**
+     * Mandate creation date
+     * @type {string}
+     * @memberof PNACH
+     */
+    'mandate_creation_date'?: string;
+    /**
+     * Mandate start date
+     * @type {string}
+     * @memberof PNACH
+     */
+    'mandate_start_date'?: string;
 }
 /**
  * Order Pay response once you create a transaction for that order
@@ -6768,12 +6854,6 @@ export interface StaticSplitResponseSchemeInner {
     'percentage'?: string;
 }
 /**
- * @type SubsCreatePayment200Response
- * @export
- */
-export type SubsCreatePayment200Response = CreateSubscriptionPaymentAuthResponse | CreateSubscriptionPaymentChargeResponse;
-
-/**
  * Bank details object
  * @export
  * @interface SubscriptionBankDetails
@@ -7041,10 +7121,10 @@ export interface SubscriptionPaymentEntity {
     'cf_order_id'?: string;
     /**
      * 
-     * @type {CreateSubscriptionPaymentAuthResponseFailureDetails}
+     * @type {SubscriptionPaymentEntityFailureDetails}
      * @memberof SubscriptionPaymentEntity
      */
-    'failure_details'?: CreateSubscriptionPaymentAuthResponseFailureDetails;
+    'failure_details'?: SubscriptionPaymentEntityFailureDetails;
     /**
      * The charge amount of the payment.
      * @type {number}
@@ -7099,6 +7179,19 @@ export interface SubscriptionPaymentEntity {
      * @memberof SubscriptionPaymentEntity
      */
     'subscription_id'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface SubscriptionPaymentEntityFailureDetails
+ */
+export interface SubscriptionPaymentEntityFailureDetails {
+    /**
+     * Failure reason of the payment if the payment_status is failed.
+     * @type {string}
+     * @memberof SubscriptionPaymentEntityFailureDetails
+     */
+    'failure_reason'?: string;
 }
 /**
  * Get/Create Subscription Payment Refund Response
@@ -7568,6 +7661,25 @@ export interface TransferDetailsTagsInner {
     'size'?: number;
 }
 /**
+ * payment method upi.
+ * @export
+ * @interface UPI
+ */
+export interface UPI {
+    /**
+     * 
+     * @type {string}
+     * @memberof UPI
+     */
+    'upi_id'?: string;
+    /**
+     * Channel. can be link, qrcode, or collect
+     * @type {string}
+     * @memberof UPI
+     */
+    'channel'?: string;
+}
+/**
  * object when you are using preauth in UPI in order pay
  * @export
  * @interface UPIAuthorizeDetails
@@ -7784,7 +7896,7 @@ export interface UpdateVendorRequest {
      */
     'dashboard_access'?: boolean;
     /**
-     * Specify the settlement cycle to be updated. View the settlement cycle details from the \"Settlement Cycles Supported\" table.  If no schedule option is configured, the settlement cycle ID \"1\" will be in effect. Select \"8\" or \"9\" if you want to schedule instant vendor settlements.
+     * Specify the settlement cycle to be updated. View the settlement cycle details from the \"Settlement Cycles Supported\" table. If no schedule option is configured, the settlement cycle ID \"1\" will be in effect. Select \"8\" or \"9\" if you want to schedule instant vendor settlements.
      * @type {number}
      * @memberof UpdateVendorRequest
      */
@@ -7912,47 +8024,10 @@ export interface UpdateVendorResponse {
     'bank_details'?: string;
     /**
      * 
-     * @type {Array<UpdateVendorResponseRelatedDocsInner>}
+     * @type {Array<VendorEntityRelatedDocsInner>}
      * @memberof UpdateVendorResponse
      */
-    'related_docs'?: Array<UpdateVendorResponseRelatedDocsInner>;
-}
-/**
- * 
- * @export
- * @interface UpdateVendorResponseRelatedDocsInner
- */
-export interface UpdateVendorResponseRelatedDocsInner {
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateVendorResponseRelatedDocsInner
-     */
-    'vendor_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateVendorResponseRelatedDocsInner
-     */
-    'doc_type'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateVendorResponseRelatedDocsInner
-     */
-    'doc_value'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateVendorResponseRelatedDocsInner
-     */
-    'status'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateVendorResponseRelatedDocsInner
-     */
-    'remarks'?: string;
+    'related_docs'?: Array<VendorEntityRelatedDocsInner>;
 }
 /**
  * UPI collect payment method object
@@ -8239,10 +8314,10 @@ export interface VendorDocumentDownloadResponse {
 export interface VendorDocumentsResponse {
     /**
      * 
-     * @type {Array<UpdateVendorResponseRelatedDocsInner>}
+     * @type {Array<VendorEntityRelatedDocsInner>}
      * @memberof VendorDocumentsResponse
      */
-    'documents'?: Array<UpdateVendorResponseRelatedDocsInner>;
+    'documents'?: Array<VendorEntityRelatedDocsInner>;
 }
 /**
  * Vendor entity object
@@ -8336,10 +8411,47 @@ export interface VendorEntity {
     'remarks'?: string;
     /**
      * 
-     * @type {Array<UpdateVendorResponseRelatedDocsInner>}
+     * @type {Array<VendorEntityRelatedDocsInner>}
      * @memberof VendorEntity
      */
-    'related_docs'?: Array<UpdateVendorResponseRelatedDocsInner>;
+    'related_docs'?: Array<VendorEntityRelatedDocsInner>;
+}
+/**
+ * 
+ * @export
+ * @interface VendorEntityRelatedDocsInner
+ */
+export interface VendorEntityRelatedDocsInner {
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntityRelatedDocsInner
+     */
+    'vendor_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntityRelatedDocsInner
+     */
+    'doc_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntityRelatedDocsInner
+     */
+    'doc_value'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntityRelatedDocsInner
+     */
+    'status'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorEntityRelatedDocsInner
+     */
+    'remarks'?: string;
 }
 /**
  * Use to split order when cashfree\'s Easy Split is enabled for your account.
@@ -8444,7 +8556,7 @@ const CustomersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8566,7 +8678,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8638,7 +8750,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8715,7 +8827,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8787,7 +8899,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8859,7 +8971,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8938,7 +9050,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9010,7 +9122,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9081,7 +9193,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9157,7 +9269,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9248,7 +9360,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9324,7 +9436,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9396,7 +9508,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9722,7 +9834,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9796,7 +9908,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9870,7 +9982,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9944,7 +10056,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10118,7 +10230,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10191,7 +10303,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10328,7 +10440,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10401,7 +10513,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10478,7 +10590,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10637,7 +10749,7 @@ const PGReconciliationApiAxiosParamCreator = function (configuration?: Configura
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10758,7 +10870,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10831,7 +10943,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10904,7 +11016,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10933,11 +11045,12 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} link_id The payment link ID for which you want to view the details.
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
          * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {string} [status] Mention What is status of orders you want to fetch, default is PAID. Possible value: ALL, PAID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * x_idempotency_key?: string, 
          */
-        pGLinkFetchOrders: async (x_api_version: string, link_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        pGLinkFetchOrders: async (x_api_version: string, link_id: string,  x_request_id?: string, x_idempotency_key?: string, status?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'x_api_version' is not null or undefined
             assertParamExists('pGLinkFetchOrders', 'x_api_version', x_api_version)
             // verify required parameter 'link_id' is not null or undefined
@@ -10974,9 +11087,13 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
             // authentication XClientSignatureHeader required
             await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
 
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11068,11 +11185,12 @@ const PaymentLinksApiFp = function(configuration?: Configuration) {
          * @param {string} link_id The payment link ID for which you want to view the details.
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
          * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {string} [status] Mention What is status of orders you want to fetch, default is PAID. Possible value: ALL, PAID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async pGLinkFetchOrders(x_api_version: string, link_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentLinkOrderEntity>>> {
-                const localVarAxiosArgs = await localVarAxiosParamCreator.pGLinkFetchOrders(x_api_version, link_id, x_request_id, x_idempotency_key, options);
+        async pGLinkFetchOrders(x_api_version: string, link_id: string, x_request_id?: string, x_idempotency_key?: string, status?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentLinkOrderEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGLinkFetchOrders(x_api_version, link_id, x_request_id, x_idempotency_key, status, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -11153,7 +11271,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11216,7 +11334,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11293,7 +11411,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11365,7 +11483,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11423,7 +11541,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11622,7 +11740,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11699,7 +11817,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11771,7 +11889,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11930,7 +12048,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12006,7 +12124,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12146,7 +12264,7 @@ const SettlementsApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12219,7 +12337,7 @@ const SettlementsApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12355,7 +12473,7 @@ const SimulationApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12428,7 +12546,7 @@ const SimulationApiAxiosParamCreator = function (configuration?: Configuration) 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12566,7 +12684,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12640,7 +12758,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12713,7 +12831,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12795,7 +12913,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12874,7 +12992,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12951,7 +13069,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13029,7 +13147,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13107,7 +13225,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13358,7 +13476,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13432,7 +13550,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13510,7 +13628,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13584,7 +13702,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13623,7 +13741,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
             assertParamExists('subsFetchPlan', 'x_api_version', x_api_version)
             // verify required parameter 'plan_id' is not null or undefined
             assertParamExists('subsFetchPlan', 'plan_id', plan_id)
-            const localVarPath = `/pg/plans/{plan_id}`
+            const localVarPath = `/plans/{plan_id}`
                 .replace(`{${"plan_id"}}`, encodeURIComponent(String(plan_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
@@ -13657,7 +13775,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13729,7 +13847,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13805,7 +13923,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13877,7 +13995,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13953,7 +14071,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14030,7 +14148,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14112,7 +14230,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14136,7 +14254,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * Use this API to upload Physical Nach for Physical Nach Authorization.
-         * @summary Upload Physical Nach for Physical Nach Authorization.
+         * @summary API to upload Physical Nach for Physical Nach Authorization.
          
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} payment_id Provide the PaymentId using which the payment was created.
@@ -14209,7 +14327,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14233,7 +14351,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * Use this API to check if a payment method is enabled for your account.
-         * @summary Get Eligible payment methods available for a subscription
+         * @summary API to get all the payment method details available for subscription payments.
          
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {SubscriptionEligibilityRequest} SubscriptionEligibilityRequest Request body to fetch subscription eligibile payment method details.
@@ -14283,7 +14401,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14325,7 +14443,7 @@ const SubscriptionApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async subsCreatePayment(x_api_version: string, CreateSubscriptionPaymentRequest: CreateSubscriptionPaymentRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubsCreatePayment200Response>> {
+        async subsCreatePayment(x_api_version: string, CreateSubscriptionPaymentRequest: CreateSubscriptionPaymentRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateSubscriptionPaymentResponse>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.subsCreatePayment(x_api_version, CreateSubscriptionPaymentRequest, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
@@ -14521,7 +14639,7 @@ const SubscriptionApiFp = function(configuration?: Configuration) {
         },
         /**
          * Use this API to upload Physical Nach for Physical Nach Authorization.
-         * @summary Upload Physical Nach for Physical Nach Authorization.
+         * @summary API to upload Physical Nach for Physical Nach Authorization.
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} payment_id Provide the PaymentId using which the payment was created.
          * @param {File} file Select the .jpg file that should be uploaded or provide the path of that file. You cannot upload a file that is more than 1MB in size.
@@ -14542,7 +14660,7 @@ const SubscriptionApiFp = function(configuration?: Configuration) {
         },
         /**
          * Use this API to check if a payment method is enabled for your account.
-         * @summary Get Eligible payment methods available for a subscription
+         * @summary API to get all the payment method details available for subscription payments.
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {SubscriptionEligibilityRequest} SubscriptionEligibilityRequest Request body to fetch subscription eligibile payment method details.
          * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
@@ -14631,7 +14749,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14707,7 +14825,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14786,7 +14904,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14862,7 +14980,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.0';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15090,7 +15208,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -15151,7 +15269,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -15211,7 +15329,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -15272,7 +15390,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -15332,7 +15450,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -15392,7 +15510,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -15453,7 +15571,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -15513,7 +15631,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -15573,7 +15691,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -15634,7 +15752,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -15697,7 +15815,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -15758,7 +15876,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -15818,7 +15936,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -15878,7 +15996,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -15938,7 +16056,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -15998,7 +16116,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -16058,7 +16176,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -16118,7 +16236,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -16178,7 +16296,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -16238,7 +16356,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -16298,7 +16416,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -16359,7 +16477,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -16421,7 +16539,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -16481,7 +16599,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -16541,7 +16659,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -16601,7 +16719,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -16621,11 +16739,12 @@ export class Cashfree {
      * @param {string} link_id The payment link ID for which you want to view the details.
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
      * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {string} [status] Mention What is status of orders you want to fetch, default is PAID. Possible value: ALL, PAID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaymentLinksApi
      */
-    public static PGLinkFetchOrders(x_api_version: string, link_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+    public static PGLinkFetchOrders(x_api_version: string, link_id: string, x_request_id?: string, x_idempotency_key?: string, status?: string, options?: AxiosRequestConfig) {
         if(Cashfree.XEnableErrorAnalytics) {
         Sentry.init({
             dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
@@ -16661,11 +16780,11 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
-            return PaymentLinksApiFp().pGLinkFetchOrders(x_api_version, link_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+            return PaymentLinksApiFp().pGLinkFetchOrders(x_api_version, link_id, x_request_id, x_idempotency_key, status, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -16722,7 +16841,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -16783,7 +16902,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -16844,7 +16963,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -16904,7 +17023,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -16964,7 +17083,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -17025,7 +17144,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -17086,7 +17205,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -17146,7 +17265,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -17208,7 +17327,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -17270,7 +17389,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -17330,7 +17449,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -17390,7 +17509,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -17450,7 +17569,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -17510,7 +17629,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -17570,7 +17689,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -17630,7 +17749,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -17690,7 +17809,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -17751,7 +17870,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -17812,7 +17931,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -17873,7 +17992,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -17934,7 +18053,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -17995,7 +18114,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -18055,7 +18174,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -18115,7 +18234,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -18176,7 +18295,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -18236,7 +18355,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -18296,7 +18415,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -18356,7 +18475,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -18417,7 +18536,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -18477,7 +18596,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -18538,7 +18657,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -18599,7 +18718,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -18661,7 +18780,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -18676,7 +18795,7 @@ export class Cashfree {
 
     /**
      * Use this API to upload Physical Nach for Physical Nach Authorization.
-     * @summary Upload Physical Nach for Physical Nach Authorization.
+     * @summary API to upload Physical Nach for Physical Nach Authorization.
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {string} payment_id Provide the PaymentId using which the payment was created.
      * @param {File} file Select the .jpg file that should be uploaded or provide the path of that file. You cannot upload a file that is more than 1MB in size.
@@ -18724,7 +18843,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -18739,7 +18858,7 @@ export class Cashfree {
 
     /**
      * Use this API to check if a payment method is enabled for your account.
-     * @summary Get Eligible payment methods available for a subscription
+     * @summary API to get all the payment method details available for subscription payments.
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {SubscriptionEligibilityRequest} SubscriptionEligibilityRequest Request body to fetch subscription eligibile payment method details.
      * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
@@ -18784,7 +18903,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -18845,7 +18964,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -18906,7 +19025,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -18967,7 +19086,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
@@ -19028,7 +19147,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.0");
+                scope.setExtra('release', "4.2.2");
             });
         }
         try {
