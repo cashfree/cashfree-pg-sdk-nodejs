@@ -18,7 +18,7 @@ import type { RequestArgs } from "./base";
 import { CFEnvironment } from './configuration';
 import type { AxiosInstance, AxiosResponse } from 'axios';
 import { RequiredError } from "./base";
-import { Cashfree } from "./api";
+import { Cashfree, CashfreeConfiguration } from "./api";
 
 /**
  *
@@ -64,6 +64,38 @@ export const setApiKeyToObject = async function (object: any, keyParamName: stri
     if(keyParamName == "x-client-signature") {
         if(Cashfree.XClientSignature != null && Cashfree.XClientSignature != undefined) {
             object[keyParamName] = Cashfree.XClientSignature;
+        }
+    }
+}
+
+/**
+ *
+ * @export
+ */
+export const setApiKeyToObjectWithConfiguration = async function (object: any, keyParamName: string, cashfreeConfiguration: CashfreeConfiguration) {
+    if(keyParamName == "x-client-id") {
+        if(cashfreeConfiguration.XClientId != null && cashfreeConfiguration.XClientId != undefined) {
+            object[keyParamName] = cashfreeConfiguration.XClientId;
+        }
+    }
+    if(keyParamName == "x-client-secret") {
+        if(cashfreeConfiguration.XClientSecret != null && cashfreeConfiguration.XClientSecret != undefined) {
+            object[keyParamName] = cashfreeConfiguration.XClientSecret;
+        }
+    }
+    if(keyParamName == "x-partner-apikey") {
+        if(cashfreeConfiguration.XPartnerKey != null && cashfreeConfiguration.XPartnerKey != undefined) {
+            object[keyParamName] = cashfreeConfiguration.XPartnerKey;
+        }
+    }
+    if(keyParamName == "x-partner-merchantid") {
+        if(cashfreeConfiguration.XPartnerMerchantId != null && cashfreeConfiguration.XPartnerMerchantId != undefined) {
+            object[keyParamName] = cashfreeConfiguration.XPartnerMerchantId;
+        }
+    }
+    if(keyParamName == "x-client-signature") {
+        if(cashfreeConfiguration.XClientSignature != null && cashfreeConfiguration.XClientSignature != undefined) {
+            object[keyParamName] = cashfreeConfiguration.XClientSignature;
         }
     }
 }
