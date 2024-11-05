@@ -18,7 +18,7 @@ import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from './common';
+import { assertParamExists, setApiKeyToObject, setApiKeyToObjectWithConfiguration, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from './common';
 import type { RequestArgs } from './base';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError } from './base';
@@ -7427,10 +7427,10 @@ export interface TerminalEntity {
     'terminal_status'?: string;
     /**
      * 
-     * @type {string}
+     * @type {CreateTerminalRequestTerminalMeta}
      * @memberof TerminalEntity
      */
-    'terminal_meta'?: string;
+    'terminal_meta'?: CreateTerminalRequestTerminalMeta;
 }
 /**
  * terminal payment entity full object
@@ -7791,10 +7791,10 @@ export interface UpdateTerminalEntity {
     'terminal_status'?: string;
     /**
      * 
-     * @type {string}
+     * @type {CreateTerminalRequestTerminalMeta}
      * @memberof UpdateTerminalEntity
      */
-    'terminal_meta'?: string;
+    'terminal_meta'?: CreateTerminalRequestTerminalMeta;
 }
 /**
  * Request body to update terminal details.
@@ -8556,7 +8556,7 @@ const CustomersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8578,6 +8578,71 @@ const CustomersApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGCreateCustomerWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateCustomerRequest: CreateCustomerRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGCreateCustomer', 'x_api_version', x_api_version)
+            // verify required parameter 'CreateCustomerRequest' is not null or undefined
+            assertParamExists('pGCreateCustomer', 'CreateCustomerRequest', CreateCustomerRequest)
+            const localVarPath = `/customers`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(CreateCustomerRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
     }
 };
 
@@ -8600,6 +8665,15 @@ const CustomersApiFp = function(configuration?: Configuration) {
          */
         async pGCreateCustomer(x_api_version: string, CreateCustomerRequest: CreateCustomerRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomerEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGCreateCustomer(x_api_version, CreateCustomerRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGCreateCustomerWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateCustomerRequest: CreateCustomerRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomerEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGCreateCustomerWithConfiguration(cashfreeConfiguration, x_api_version, CreateCustomerRequest, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -8678,7 +8752,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8700,6 +8774,72 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGESCreateOnDemandTransferWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string,  x_request_id?: string, x_idempotency_key?: string, AdjustVendorBalanceRequest?: AdjustVendorBalanceRequest,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESCreateOnDemandTransfer', 'x_api_version', x_api_version)
+            // verify required parameter 'vendor_id' is not null or undefined
+            assertParamExists('pGESCreateOnDemandTransfer', 'vendor_id', vendor_id)
+            const localVarPath = `/easy-split/vendors/{vendor_id}/transfer`
+                .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(AdjustVendorBalanceRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to create a new vendor to your EasySplit account along with the KYC details. Provide KYC details such as account_type, business_type, gst, cin, pan, passport number and so on.
          * @summary Create vendor
@@ -8750,7 +8890,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8772,6 +8912,69 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGESCreateVendorsWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string,  x_request_id?: string, x_idempotency_key?: string, CreateVendorRequest?: CreateVendorRequest,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESCreateVendors', 'x_api_version', x_api_version)
+            const localVarPath = `/easy-split/vendors`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(CreateVendorRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to download the uploaded KYC documents of that particular vendor. Provide the document type. Click the link from the sample request to download the KYC document.
          * @summary Download Vendor Documents
@@ -8827,7 +9030,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8848,6 +9051,72 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGESDownloadVendorsDocsWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, doc_type: string, vendor_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESDownloadVendorsDocs', 'x_api_version', x_api_version)
+            // verify required parameter 'doc_type' is not null or undefined
+            assertParamExists('pGESDownloadVendorsDocs', 'doc_type', doc_type)
+            // verify required parameter 'vendor_id' is not null or undefined
+            assertParamExists('pGESDownloadVendorsDocs', 'vendor_id', vendor_id)
+            const localVarPath = `/easy-split/vendor-docs/{vendor_id}/download/{doc_type}`
+                .replace(`{${"doc_type"}}`, encodeURIComponent(String(doc_type)))
+                .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to get the details of a specific vendor associated with your Easy Split account.
          * @summary Get Vendor All Details
@@ -8899,7 +9168,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8920,6 +9189,69 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGESFetchVendorsWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESFetchVendors', 'x_api_version', x_api_version)
+            // verify required parameter 'vendor_id' is not null or undefined
+            assertParamExists('pGESFetchVendors', 'vendor_id', vendor_id)
+            const localVarPath = `/easy-split/vendors/{vendor_id}`
+                .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * This API fetches the available amount with the merchant, vendor, and the unsettled amount for the merchant as well as the vendor.
          * @summary Get On Demand Balance
@@ -8971,7 +9303,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8992,6 +9324,69 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGESGetVendorBalanceWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESGetVendorBalance', 'x_api_version', x_api_version)
+            // verify required parameter 'vendor_id' is not null or undefined
+            assertParamExists('pGESGetVendorBalance', 'vendor_id', vendor_id)
+            const localVarPath = `/easy-split/vendors/{vendor_id}/balances`
+                .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * This API returns the applicable service charge and service tax for a vendor balance transfer, based on the provided amount and rate type.
          * @summary Get Vendor Balance Transfer Charges
@@ -9050,7 +9445,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9071,6 +9466,75 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGESGetVendorBalanceTransferChargesWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, amount: number, rate_type: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESGetVendorBalanceTransferCharges', 'x_api_version', x_api_version)
+            // verify required parameter 'amount' is not null or undefined
+            assertParamExists('pGESGetVendorBalanceTransferCharges', 'amount', amount)
+            // verify required parameter 'rate_type' is not null or undefined
+            assertParamExists('pGESGetVendorBalanceTransferCharges', 'rate_type', rate_type)
+            const localVarPath = `/easy-split/amount/{amount}/charges`
+                .replace(`{${"amount"}}`, encodeURIComponent(String(amount)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+            if (rate_type !== undefined) {
+                localVarQueryParameter['rate_type'] = rate_type;
+            }
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to fetch the details of all the KYC details of a particular vendor.
          * @summary Get Vendor All Documents Status
@@ -9122,7 +9586,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9143,6 +9607,69 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGESGetVendorsDocsWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESGetVendorsDocs', 'x_api_version', x_api_version)
+            // verify required parameter 'vendor_id' is not null or undefined
+            assertParamExists('pGESGetVendorsDocs', 'vendor_id', vendor_id)
+            const localVarPath = `/easy-split/vendor-docs/{vendor_id}`
+                .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to get all the split details, settled and unsettled transactions details of each vendor who were part of a particular order by providing order Id or start date and end date.
          * @summary Get Split and Settlement Details by OrderID v2.0
@@ -9193,7 +9720,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9215,6 +9742,69 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGESOrderReconWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string,  x_request_id?: string, x_idempotency_key?: string, ESOrderReconRequest?: ESOrderReconRequest,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESOrderRecon', 'x_api_version', x_api_version)
+            const localVarPath = `/split/order/vendor/recon`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(ESOrderReconRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to edit the existing vendor details added to your EasySplit account. You can edit vendor details such as name, email, phone number, upi details, and any of the KYC details.
          * @summary Update vendor Details
@@ -9269,7 +9859,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9291,6 +9881,72 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGESUpdateVendorsWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string,  x_request_id?: string, x_idempotency_key?: string, UpdateVendorRequest?: UpdateVendorRequest,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESUpdateVendors', 'x_api_version', x_api_version)
+            // verify required parameter 'vendor_id' is not null or undefined
+            assertParamExists('pGESUpdateVendors', 'vendor_id', vendor_id)
+            const localVarPath = `/easy-split/vendors/{vendor_id}`
+                .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(UpdateVendorRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to upload KYC documents of a specific vendor.
          * @summary Upload Vendor Docs
@@ -9360,7 +10016,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9382,6 +10038,85 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGESUploadVendorsDocsWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string,  x_request_id?: string, x_idempotency_key?: string, doc_type?: string, doc_value?: string, file?: File,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESUploadVendorsDocs', 'x_api_version', x_api_version)
+            // verify required parameter 'vendor_id' is not null or undefined
+            assertParamExists('pGESUploadVendorsDocs', 'vendor_id', vendor_id)
+            const localVarPath = `/easy-split/vendor-docs/{vendor_id}`
+                .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+            if (doc_type !== undefined) { 
+                localVarFormParams.append('doc_type', doc_type as any);
+            }
+    
+            if (doc_value !== undefined) { 
+                localVarFormParams.append('doc_value', doc_value as any);
+            }
+    
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Split After Payment API splits the payments to vendors after successful payment from the customers.
          * @summary Split After Payment
@@ -9436,7 +10171,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9458,6 +10193,72 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGOrderSplitAfterPaymentWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string,  x_request_id?: string, x_idempotency_key?: string, SplitAfterPaymentRequest?: SplitAfterPaymentRequest,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGOrderSplitAfterPayment', 'x_api_version', x_api_version)
+            // verify required parameter 'order_id' is not null or undefined
+            assertParamExists('pGOrderSplitAfterPayment', 'order_id', order_id)
+            const localVarPath = `/easy-split/orders/{order_id}/split`
+                .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(SplitAfterPaymentRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * This API will create a static split scheme wherein you can define the split type and the vendor-wise split percentage.
          * @summary Create Static Split Configuration
@@ -9508,7 +10309,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9530,6 +10331,69 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGOrderStaticSplitWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string,  x_request_id?: string, x_idempotency_key?: string, StaticSplitRequest?: StaticSplitRequest,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGOrderStaticSplit', 'x_api_version', x_api_version)
+            const localVarPath = `/easy-split/static-split`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(StaticSplitRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
     }
 };
 
@@ -9559,6 +10423,15 @@ const EasySplitApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGESCreateOnDemandTransferWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, AdjustVendorBalanceRequest?: AdjustVendorBalanceRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdjustVendorBalanceResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESCreateOnDemandTransferWithConfiguration(cashfreeConfiguration, x_api_version, vendor_id, x_request_id, x_idempotency_key, AdjustVendorBalanceRequest, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to create a new vendor to your EasySplit account along with the KYC details. Provide KYC details such as account_type, business_type, gst, cin, pan, passport number and so on.
          * @summary Create vendor
@@ -9571,6 +10444,15 @@ const EasySplitApiFp = function(configuration?: Configuration) {
          */
         async pGESCreateVendors(x_api_version: string, x_request_id?: string, x_idempotency_key?: string, CreateVendorRequest?: CreateVendorRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateVendorResponse>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGESCreateVendors(x_api_version, x_request_id, x_idempotency_key, CreateVendorRequest, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGESCreateVendorsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, x_request_id?: string, x_idempotency_key?: string, CreateVendorRequest?: CreateVendorRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateVendorResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESCreateVendorsWithConfiguration(cashfreeConfiguration, x_api_version, x_request_id, x_idempotency_key, CreateVendorRequest, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -9596,6 +10478,15 @@ const EasySplitApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGESDownloadVendorsDocsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, doc_type: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VendorDocumentDownloadResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESDownloadVendorsDocsWithConfiguration(cashfreeConfiguration, x_api_version, doc_type, vendor_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to get the details of a specific vendor associated with your Easy Split account.
          * @summary Get Vendor All Details
@@ -9614,6 +10505,15 @@ const EasySplitApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGESFetchVendorsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VendorEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESFetchVendorsWithConfiguration(cashfreeConfiguration, x_api_version, vendor_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * This API fetches the available amount with the merchant, vendor, and the unsettled amount for the merchant as well as the vendor.
          * @summary Get On Demand Balance
@@ -9626,6 +10526,15 @@ const EasySplitApiFp = function(configuration?: Configuration) {
          */
         async pGESGetVendorBalance(x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VendorBalance>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGESGetVendorBalance(x_api_version, vendor_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGESGetVendorBalanceWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VendorBalance>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESGetVendorBalanceWithConfiguration(cashfreeConfiguration, x_api_version, vendor_id, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -9651,6 +10560,15 @@ const EasySplitApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGESGetVendorBalanceTransferChargesWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, amount: number, rate_type: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VendorBalanceTransferCharges>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESGetVendorBalanceTransferChargesWithConfiguration(cashfreeConfiguration, x_api_version, amount, rate_type, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to fetch the details of all the KYC details of a particular vendor.
          * @summary Get Vendor All Documents Status
@@ -9663,6 +10581,15 @@ const EasySplitApiFp = function(configuration?: Configuration) {
          */
         async pGESGetVendorsDocs(x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VendorDocumentsResponse>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGESGetVendorsDocs(x_api_version, vendor_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGESGetVendorsDocsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VendorDocumentsResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESGetVendorsDocsWithConfiguration(cashfreeConfiguration, x_api_version, vendor_id, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -9687,6 +10614,15 @@ const EasySplitApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGESOrderReconWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, x_request_id?: string, x_idempotency_key?: string, ESOrderReconRequest?: ESOrderReconRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ESOrderReconResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESOrderReconWithConfiguration(cashfreeConfiguration, x_api_version, x_request_id, x_idempotency_key, ESOrderReconRequest, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to edit the existing vendor details added to your EasySplit account. You can edit vendor details such as name, email, phone number, upi details, and any of the KYC details.
          * @summary Update vendor Details
@@ -9700,6 +10636,15 @@ const EasySplitApiFp = function(configuration?: Configuration) {
          */
         async pGESUpdateVendors(x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, UpdateVendorRequest?: UpdateVendorRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateVendorResponse>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGESUpdateVendors(x_api_version, vendor_id, x_request_id, x_idempotency_key, UpdateVendorRequest, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGESUpdateVendorsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, UpdateVendorRequest?: UpdateVendorRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateVendorResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESUpdateVendorsWithConfiguration(cashfreeConfiguration, x_api_version, vendor_id, x_request_id, x_idempotency_key, UpdateVendorRequest, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -9727,6 +10672,15 @@ const EasySplitApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGESUploadVendorsDocsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, doc_type?: string, doc_value?: string, file?: File, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadVendorDocumentsResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESUploadVendorsDocsWithConfiguration(cashfreeConfiguration, x_api_version, vendor_id, x_request_id, x_idempotency_key, doc_type, doc_value, file, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Split After Payment API splits the payments to vendors after successful payment from the customers.
          * @summary Split After Payment
@@ -9746,6 +10700,15 @@ const EasySplitApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGOrderSplitAfterPaymentWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, SplitAfterPaymentRequest?: SplitAfterPaymentRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SplitAfterPaymentResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGOrderSplitAfterPaymentWithConfiguration(cashfreeConfiguration, x_api_version, order_id, x_request_id, x_idempotency_key, SplitAfterPaymentRequest, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * This API will create a static split scheme wherein you can define the split type and the vendor-wise split percentage.
          * @summary Create Static Split Configuration
@@ -9758,6 +10721,15 @@ const EasySplitApiFp = function(configuration?: Configuration) {
          */
         async pGOrderStaticSplit(x_api_version: string, x_request_id?: string, x_idempotency_key?: string, StaticSplitRequest?: StaticSplitRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StaticSplitResponse>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGOrderStaticSplit(x_api_version, x_request_id, x_idempotency_key, StaticSplitRequest, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGOrderStaticSplitWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, x_request_id?: string, x_idempotency_key?: string, StaticSplitRequest?: StaticSplitRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StaticSplitResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGOrderStaticSplitWithConfiguration(cashfreeConfiguration, x_api_version, x_request_id, x_idempotency_key, StaticSplitRequest, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -9834,7 +10806,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9856,6 +10828,71 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGEligibilityFetchCardlessEMIWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, EligibilityFetchCardlessEMIRequest: EligibilityFetchCardlessEMIRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGEligibilityFetchCardlessEMI', 'x_api_version', x_api_version)
+            // verify required parameter 'EligibilityFetchCardlessEMIRequest' is not null or undefined
+            assertParamExists('pGEligibilityFetchCardlessEMI', 'EligibilityFetchCardlessEMIRequest', EligibilityFetchCardlessEMIRequest)
+            const localVarPath = `/eligibility/cardlessemi`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(EligibilityFetchCardlessEMIRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to get eligible offers for an order_id or order amount.
          * @summary Get Eligible Offers for an Order
@@ -9908,7 +10945,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9930,6 +10967,71 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGEligibilityFetchOffersWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, EligibilityFetchOffersRequest: EligibilityFetchOffersRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGEligibilityFetchOffers', 'x_api_version', x_api_version)
+            // verify required parameter 'EligibilityFetchOffersRequest' is not null or undefined
+            assertParamExists('pGEligibilityFetchOffers', 'EligibilityFetchOffersRequest', EligibilityFetchOffersRequest)
+            const localVarPath = `/eligibility/offers`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(EligibilityFetchOffersRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to get eligible Paylater Payment Methods for a customer on an order.
          * @summary Get Eligible Paylater for a customer on an order
@@ -9982,7 +11084,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10004,6 +11106,71 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGEligibilityFetchPaylaterWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, EligibilityFetchPaylaterRequest: EligibilityFetchPaylaterRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGEligibilityFetchPaylater', 'x_api_version', x_api_version)
+            // verify required parameter 'EligibilityFetchPaylaterRequest' is not null or undefined
+            assertParamExists('pGEligibilityFetchPaylater', 'EligibilityFetchPaylaterRequest', EligibilityFetchPaylaterRequest)
+            const localVarPath = `/eligibility/paylater`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(EligibilityFetchPaylaterRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to get eligible Payment Methods
          * @summary Get eligible Payment Methods
@@ -10056,7 +11223,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10078,6 +11245,71 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGEligibilityFetchPaymentMethodsWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, EligibilityFetchPaymentMethodsRequest: EligibilityFetchPaymentMethodsRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGEligibilityFetchPaymentMethods', 'x_api_version', x_api_version)
+            // verify required parameter 'EligibilityFetchPaymentMethodsRequest' is not null or undefined
+            assertParamExists('pGEligibilityFetchPaymentMethods', 'EligibilityFetchPaymentMethodsRequest', EligibilityFetchPaymentMethodsRequest)
+            const localVarPath = `/eligibility/payment_methods`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(EligibilityFetchPaymentMethodsRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
     }
 };
 
@@ -10106,6 +11338,15 @@ const EligibilityApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGEligibilityFetchCardlessEMIWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, EligibilityFetchCardlessEMIRequest: EligibilityFetchCardlessEMIRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EligibilityCardlessEMIEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGEligibilityFetchCardlessEMIWithConfiguration(cashfreeConfiguration, x_api_version, EligibilityFetchCardlessEMIRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to get eligible offers for an order_id or order amount.
          * @summary Get Eligible Offers for an Order
@@ -10118,6 +11359,15 @@ const EligibilityApiFp = function(configuration?: Configuration) {
          */
         async pGEligibilityFetchOffers(x_api_version: string, EligibilityFetchOffersRequest: EligibilityFetchOffersRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EligibilityOfferEntity>>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGEligibilityFetchOffers(x_api_version, EligibilityFetchOffersRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGEligibilityFetchOffersWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, EligibilityFetchOffersRequest: EligibilityFetchOffersRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EligibilityOfferEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGEligibilityFetchOffersWithConfiguration(cashfreeConfiguration, x_api_version, EligibilityFetchOffersRequest, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -10142,6 +11392,15 @@ const EligibilityApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGEligibilityFetchPaylaterWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, EligibilityFetchPaylaterRequest: EligibilityFetchPaylaterRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EligibilityPaylaterEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGEligibilityFetchPaylaterWithConfiguration(cashfreeConfiguration, x_api_version, EligibilityFetchPaylaterRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to get eligible Payment Methods
          * @summary Get eligible Payment Methods
@@ -10154,6 +11413,15 @@ const EligibilityApiFp = function(configuration?: Configuration) {
          */
         async pGEligibilityFetchPaymentMethods(x_api_version: string, EligibilityFetchPaymentMethodsRequest: EligibilityFetchPaymentMethodsRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EligibilityPaymentMethodsEntity>>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGEligibilityFetchPaymentMethods(x_api_version, EligibilityFetchPaymentMethodsRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGEligibilityFetchPaymentMethodsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, EligibilityFetchPaymentMethodsRequest: EligibilityFetchPaymentMethodsRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<EligibilityPaymentMethodsEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGEligibilityFetchPaymentMethodsWithConfiguration(cashfreeConfiguration, x_api_version, EligibilityFetchPaymentMethodsRequest, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -10230,7 +11498,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10252,6 +11520,71 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGCreateOfferWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateOfferRequest: CreateOfferRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGCreateOffer', 'x_api_version', x_api_version)
+            // verify required parameter 'CreateOfferRequest' is not null or undefined
+            assertParamExists('pGCreateOffer', 'CreateOfferRequest', CreateOfferRequest)
+            const localVarPath = `/offers`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(CreateOfferRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to get offer by offer_id
          * @summary Get Offer by ID
@@ -10303,7 +11636,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10324,6 +11657,69 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGFetchOfferWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, offer_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGFetchOffer', 'x_api_version', x_api_version)
+            // verify required parameter 'offer_id' is not null or undefined
+            assertParamExists('pGFetchOffer', 'offer_id', offer_id)
+            const localVarPath = `/offers/{offer_id}`
+                .replace(`{${"offer_id"}}`, encodeURIComponent(String(offer_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
     }
 };
 
@@ -10352,6 +11748,15 @@ const OffersApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGCreateOfferWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateOfferRequest: CreateOfferRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OfferEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGCreateOfferWithConfiguration(cashfreeConfiguration, x_api_version, CreateOfferRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to get offer by offer_id
          * @summary Get Offer by ID
@@ -10364,6 +11769,15 @@ const OffersApiFp = function(configuration?: Configuration) {
          */
         async pGFetchOffer(x_api_version: string, offer_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OfferEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGFetchOffer(x_api_version, offer_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGFetchOfferWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, offer_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OfferEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGFetchOfferWithConfiguration(cashfreeConfiguration, x_api_version, offer_id, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -10440,7 +11854,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10462,6 +11876,71 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGCreateOrderWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateOrderRequest: CreateOrderRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGCreateOrder', 'x_api_version', x_api_version)
+            // verify required parameter 'CreateOrderRequest' is not null or undefined
+            assertParamExists('pGCreateOrder', 'CreateOrderRequest', CreateOrderRequest)
+            const localVarPath = `/orders`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(CreateOrderRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to fetch the order that was created at Cashfree\'s using the `order_id`.  ## When to use this API - To check the status of your order - Once the order is PAID - Once your customer returns to `return_url` 
          * @summary Get Order
@@ -10513,7 +11992,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10534,6 +12013,69 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGFetchOrderWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGFetchOrder', 'x_api_version', x_api_version)
+            // verify required parameter 'order_id' is not null or undefined
+            assertParamExists('pGFetchOrder', 'order_id', order_id)
+            const localVarPath = `/orders/{order_id}`
+                .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to terminate the order that was created at Cashfree\'s using the `order_id`.
          * @summary Terminate Order
@@ -10590,7 +12132,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10612,6 +12154,74 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGTerminateOrderWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, TerminateOrderRequest: TerminateOrderRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGTerminateOrder', 'x_api_version', x_api_version)
+            // verify required parameter 'order_id' is not null or undefined
+            assertParamExists('pGTerminateOrder', 'order_id', order_id)
+            // verify required parameter 'TerminateOrderRequest' is not null or undefined
+            assertParamExists('pGTerminateOrder', 'TerminateOrderRequest', TerminateOrderRequest)
+            const localVarPath = `/orders/{order_id}`
+                .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(TerminateOrderRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
     }
 };
 
@@ -10640,6 +12250,15 @@ const OrdersApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGCreateOrderWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateOrderRequest: CreateOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGCreateOrderWithConfiguration(cashfreeConfiguration, x_api_version, CreateOrderRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to fetch the order that was created at Cashfree\'s using the `order_id`.  ## When to use this API - To check the status of your order - Once the order is PAID - Once your customer returns to `return_url` 
          * @summary Get Order
@@ -10652,6 +12271,15 @@ const OrdersApiFp = function(configuration?: Configuration) {
          */
         async pGFetchOrder(x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGFetchOrder(x_api_version, order_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGFetchOrderWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGFetchOrderWithConfiguration(cashfreeConfiguration, x_api_version, order_id, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -10671,6 +12299,15 @@ const OrdersApiFp = function(configuration?: Configuration) {
          */
         async pGTerminateOrder(x_api_version: string, order_id: string, TerminateOrderRequest: TerminateOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGTerminateOrder(x_api_version, order_id, TerminateOrderRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGTerminateOrderWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, TerminateOrderRequest: TerminateOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGTerminateOrderWithConfiguration(cashfreeConfiguration, x_api_version, order_id, TerminateOrderRequest, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -10749,7 +12386,7 @@ const PGReconciliationApiAxiosParamCreator = function (configuration?: Configura
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10771,6 +12408,71 @@ const PGReconciliationApiAxiosParamCreator = function (configuration?: Configura
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGFetchReconWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, FetchReconRequest: FetchReconRequest,  Content_Type?: string, x_request_id?: string, x_idempotency_key?: string, Accept?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGFetchRecon', 'x_api_version', x_api_version)
+            // verify required parameter 'FetchReconRequest' is not null or undefined
+            assertParamExists('pGFetchRecon', 'FetchReconRequest', FetchReconRequest)
+            const localVarPath = `/recon`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(FetchReconRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
     }
 };
 
@@ -10795,6 +12497,15 @@ const PGReconciliationApiFp = function(configuration?: Configuration) {
          */
         async pGFetchRecon(x_api_version: string, FetchReconRequest: FetchReconRequest, Content_Type?: string, x_request_id?: string, x_idempotency_key?: string, Accept?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ReconEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGFetchRecon(x_api_version, FetchReconRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGFetchReconWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, FetchReconRequest: FetchReconRequest, Content_Type?: string, x_request_id?: string, x_idempotency_key?: string, Accept?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ReconEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGFetchReconWithConfiguration(cashfreeConfiguration, x_api_version, FetchReconRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -10870,7 +12581,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10891,6 +12602,69 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGCancelLinkWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, link_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGCancelLink', 'x_api_version', x_api_version)
+            // verify required parameter 'link_id' is not null or undefined
+            assertParamExists('pGCancelLink', 'link_id', link_id)
+            const localVarPath = `/links/{link_id}/cancel`
+                .replace(`{${"link_id"}}`, encodeURIComponent(String(link_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to create a new payment link. The created payment link url will be available in the API response parameter link_url.
          * @summary Create Payment Link
@@ -10943,7 +12717,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10965,6 +12739,71 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGCreateLinkWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateLinkRequest: CreateLinkRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGCreateLink', 'x_api_version', x_api_version)
+            // verify required parameter 'CreateLinkRequest' is not null or undefined
+            assertParamExists('pGCreateLink', 'CreateLinkRequest', CreateLinkRequest)
+            const localVarPath = `/links`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(CreateLinkRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to view all details and status of a payment link.
          * @summary Fetch Payment Link Details
@@ -11016,7 +12855,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11037,6 +12876,69 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGFetchLinkWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, link_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGFetchLink', 'x_api_version', x_api_version)
+            // verify required parameter 'link_id' is not null or undefined
+            assertParamExists('pGFetchLink', 'link_id', link_id)
+            const localVarPath = `/links/{link_id}`
+                .replace(`{${"link_id"}}`, encodeURIComponent(String(link_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to view all order details for a payment link.
          * @summary Get Orders for a Payment Link
@@ -11093,7 +12995,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11114,6 +13016,73 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGLinkFetchOrdersWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, link_id: string,  x_request_id?: string, x_idempotency_key?: string, status?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGLinkFetchOrders', 'x_api_version', x_api_version)
+            // verify required parameter 'link_id' is not null or undefined
+            assertParamExists('pGLinkFetchOrders', 'link_id', link_id)
+            const localVarPath = `/links/{link_id}/orders`
+                .replace(`{${"link_id"}}`, encodeURIComponent(String(link_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
     }
 };
 
@@ -11142,6 +13111,15 @@ const PaymentLinksApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGCancelLinkWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, link_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LinkEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGCancelLinkWithConfiguration(cashfreeConfiguration, x_api_version, link_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to create a new payment link. The created payment link url will be available in the API response parameter link_url.
          * @summary Create Payment Link
@@ -11154,6 +13132,15 @@ const PaymentLinksApiFp = function(configuration?: Configuration) {
          */
         async pGCreateLink(x_api_version: string, CreateLinkRequest: CreateLinkRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LinkEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGCreateLink(x_api_version, CreateLinkRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGCreateLinkWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateLinkRequest: CreateLinkRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LinkEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGCreateLinkWithConfiguration(cashfreeConfiguration, x_api_version, CreateLinkRequest, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -11178,6 +13165,15 @@ const PaymentLinksApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGFetchLinkWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, link_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LinkEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGFetchLinkWithConfiguration(cashfreeConfiguration, x_api_version, link_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to view all order details for a payment link.
          * @summary Get Orders for a Payment Link
@@ -11191,6 +13187,15 @@ const PaymentLinksApiFp = function(configuration?: Configuration) {
          */
         async pGLinkFetchOrders(x_api_version: string, link_id: string, x_request_id?: string, x_idempotency_key?: string, status?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentLinkOrderEntity>>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGLinkFetchOrders(x_api_version, link_id, x_request_id, x_idempotency_key, status, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGLinkFetchOrdersWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, link_id: string, x_request_id?: string, x_idempotency_key?: string, status?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentLinkOrderEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGLinkFetchOrdersWithConfiguration(cashfreeConfiguration, x_api_version, link_id, x_request_id, x_idempotency_key, status, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -11271,7 +13276,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11293,6 +13298,74 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGAuthorizeOrderWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, AuthorizeOrderRequest: AuthorizeOrderRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGAuthorizeOrder', 'x_api_version', x_api_version)
+            // verify required parameter 'order_id' is not null or undefined
+            assertParamExists('pGAuthorizeOrder', 'order_id', order_id)
+            // verify required parameter 'AuthorizeOrderRequest' is not null or undefined
+            assertParamExists('pGAuthorizeOrder', 'AuthorizeOrderRequest', AuthorizeOrderRequest)
+            const localVarPath = `/orders/{order_id}/authorization`
+                .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(AuthorizeOrderRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * If you accept OTP on your own page, you can use the below API to send OTP to Cashfree.
          * @summary Submit or Resend OTP
@@ -11334,7 +13407,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11356,6 +13429,59 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGOrderAuthenticatePaymentWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, cf_payment_id: string, OrderAuthenticatePaymentRequest: OrderAuthenticatePaymentRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGOrderAuthenticatePayment', 'x_api_version', x_api_version)
+            // verify required parameter 'cf_payment_id' is not null or undefined
+            assertParamExists('pGOrderAuthenticatePayment', 'cf_payment_id', cf_payment_id)
+            // verify required parameter 'OrderAuthenticatePaymentRequest' is not null or undefined
+            assertParamExists('pGOrderAuthenticatePayment', 'OrderAuthenticatePaymentRequest', OrderAuthenticatePaymentRequest)
+            const localVarPath = `/orders/pay/authenticate/{cf_payment_id}`
+                .replace(`{${"cf_payment_id"}}`, encodeURIComponent(String(cf_payment_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(OrderAuthenticatePaymentRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to view payment details of an order for a payment ID.
          * @summary Get Payment by ID
@@ -11411,7 +13537,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11432,6 +13558,72 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGOrderFetchPaymentWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, cf_payment_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGOrderFetchPayment', 'x_api_version', x_api_version)
+            // verify required parameter 'order_id' is not null or undefined
+            assertParamExists('pGOrderFetchPayment', 'order_id', order_id)
+            // verify required parameter 'cf_payment_id' is not null or undefined
+            assertParamExists('pGOrderFetchPayment', 'cf_payment_id', cf_payment_id)
+            const localVarPath = `/orders/{order_id}/payments/{cf_payment_id}`
+                .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)))
+                .replace(`{${"cf_payment_id"}}`, encodeURIComponent(String(cf_payment_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to view all payment details for an order.
          * @summary Get Payments for an Order
@@ -11483,7 +13675,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11504,6 +13696,69 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGOrderFetchPaymentsWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGOrderFetchPayments', 'x_api_version', x_api_version)
+            // verify required parameter 'order_id' is not null or undefined
+            assertParamExists('pGOrderFetchPayments', 'order_id', order_id)
+            const localVarPath = `/orders/{order_id}/payments`
+                .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API when you have already created the orders and want Cashfree to process the payment. To use this API S2S flag needs to be enabled from the backend. In case you want to use the cards payment option the PCI DSS flag is required, for more information send an email to \"care@cashfree.com\". 
          * @summary Order Pay
@@ -11541,7 +13796,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11563,6 +13818,56 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGPayOrderWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, PayOrderRequest: PayOrderRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGPayOrder', 'x_api_version', x_api_version)
+            // verify required parameter 'PayOrderRequest' is not null or undefined
+            assertParamExists('pGPayOrder', 'PayOrderRequest', PayOrderRequest)
+            const localVarPath = `/orders/sessions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(PayOrderRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
     }
 };
 
@@ -11592,6 +13897,15 @@ const PaymentsApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGAuthorizeOrderWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, AuthorizeOrderRequest: AuthorizeOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGAuthorizeOrderWithConfiguration(cashfreeConfiguration, x_api_version, order_id, AuthorizeOrderRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * If you accept OTP on your own page, you can use the below API to send OTP to Cashfree.
          * @summary Submit or Resend OTP
@@ -11605,6 +13919,15 @@ const PaymentsApiFp = function(configuration?: Configuration) {
          */
         async pGOrderAuthenticatePayment(x_api_version: string, cf_payment_id: string, OrderAuthenticatePaymentRequest: OrderAuthenticatePaymentRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderAuthenticateEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGOrderAuthenticatePayment(x_api_version, cf_payment_id, OrderAuthenticatePaymentRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGOrderAuthenticatePaymentWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, cf_payment_id: string, OrderAuthenticatePaymentRequest: OrderAuthenticatePaymentRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderAuthenticateEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGOrderAuthenticatePaymentWithConfiguration(cashfreeConfiguration, x_api_version, cf_payment_id, OrderAuthenticatePaymentRequest, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -11630,6 +13953,15 @@ const PaymentsApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGOrderFetchPaymentWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, cf_payment_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGOrderFetchPaymentWithConfiguration(cashfreeConfiguration, x_api_version, order_id, cf_payment_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to view all payment details for an order.
          * @summary Get Payments for an Order
@@ -11648,6 +13980,15 @@ const PaymentsApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGOrderFetchPaymentsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaymentEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGOrderFetchPaymentsWithConfiguration(cashfreeConfiguration, x_api_version, order_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API when you have already created the orders and want Cashfree to process the payment. To use this API S2S flag needs to be enabled from the backend. In case you want to use the cards payment option the PCI DSS flag is required, for more information send an email to \"care@cashfree.com\". 
          * @summary Order Pay
@@ -11660,6 +14001,15 @@ const PaymentsApiFp = function(configuration?: Configuration) {
          */
         async pGPayOrder(x_api_version: string, PayOrderRequest: PayOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PayOrderEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGPayOrder(x_api_version, PayOrderRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGPayOrderWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, PayOrderRequest: PayOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PayOrderEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGPayOrderWithConfiguration(cashfreeConfiguration, x_api_version, PayOrderRequest, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -11740,7 +14090,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11762,6 +14112,74 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGOrderCreateRefundWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, OrderCreateRefundRequest: OrderCreateRefundRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGOrderCreateRefund', 'x_api_version', x_api_version)
+            // verify required parameter 'order_id' is not null or undefined
+            assertParamExists('pGOrderCreateRefund', 'order_id', order_id)
+            // verify required parameter 'OrderCreateRefundRequest' is not null or undefined
+            assertParamExists('pGOrderCreateRefund', 'OrderCreateRefundRequest', OrderCreateRefundRequest)
+            const localVarPath = `/orders/{order_id}/refunds`
+                .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(OrderCreateRefundRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to fetch a specific refund processed on your Cashfree Account.
          * @summary Get Refund
@@ -11817,7 +14235,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11838,6 +14256,72 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGOrderFetchRefundWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, refund_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGOrderFetchRefund', 'x_api_version', x_api_version)
+            // verify required parameter 'order_id' is not null or undefined
+            assertParamExists('pGOrderFetchRefund', 'order_id', order_id)
+            // verify required parameter 'refund_id' is not null or undefined
+            assertParamExists('pGOrderFetchRefund', 'refund_id', refund_id)
+            const localVarPath = `/orders/{order_id}/refunds/{refund_id}`
+                .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)))
+                .replace(`{${"refund_id"}}`, encodeURIComponent(String(refund_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to fetch all refunds processed against an order.
          * @summary Get All Refunds for an Order
@@ -11889,7 +14373,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11910,6 +14394,69 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGOrderFetchRefundsWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGOrderFetchRefunds', 'x_api_version', x_api_version)
+            // verify required parameter 'order_id' is not null or undefined
+            assertParamExists('pGOrderFetchRefunds', 'order_id', order_id)
+            const localVarPath = `/orders/{order_id}/refunds`
+                .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
     }
 };
 
@@ -11939,6 +14486,15 @@ const RefundsApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGOrderCreateRefundWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, OrderCreateRefundRequest: OrderCreateRefundRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RefundEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGOrderCreateRefundWithConfiguration(cashfreeConfiguration, x_api_version, order_id, OrderCreateRefundRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to fetch a specific refund processed on your Cashfree Account.
          * @summary Get Refund
@@ -11958,6 +14514,15 @@ const RefundsApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGOrderFetchRefundWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, refund_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RefundEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGOrderFetchRefundWithConfiguration(cashfreeConfiguration, x_api_version, order_id, refund_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to fetch all refunds processed against an order.
          * @summary Get All Refunds for an Order
@@ -11970,6 +14535,15 @@ const RefundsApiFp = function(configuration?: Configuration) {
          */
         async pGOrderFetchRefunds(x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RefundEntity>>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGOrderFetchRefunds(x_api_version, order_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGOrderFetchRefundsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RefundEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGOrderFetchRefundsWithConfiguration(cashfreeConfiguration, x_api_version, order_id, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -12048,7 +14622,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12070,6 +14644,71 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGFetchSettlementsWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, FetchSettlementsRequest: FetchSettlementsRequest,  Content_Type?: string, x_request_id?: string, x_idempotency_key?: string, Accept?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGFetchSettlements', 'x_api_version', x_api_version)
+            // verify required parameter 'FetchSettlementsRequest' is not null or undefined
+            assertParamExists('pGFetchSettlements', 'FetchSettlementsRequest', FetchSettlementsRequest)
+            const localVarPath = `/settlements`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(FetchSettlementsRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * - Use this API to get settlement reconciliation details using Settlement ID, settlement UTR or date range. - This API will return events for the settlement IDs you want 
          * @summary Settlement Reconciliation
@@ -12124,7 +14763,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12146,6 +14785,71 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGSettlementFetchReconWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, SettlementFetchReconRequest: SettlementFetchReconRequest,  Content_Type?: string, x_request_id?: string, x_idempotency_key?: string, Accept?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGSettlementFetchRecon', 'x_api_version', x_api_version)
+            // verify required parameter 'SettlementFetchReconRequest' is not null or undefined
+            assertParamExists('pGSettlementFetchRecon', 'SettlementFetchReconRequest', SettlementFetchReconRequest)
+            const localVarPath = `/settlement/recon`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(SettlementFetchReconRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
     }
 };
 
@@ -12176,6 +14880,15 @@ const SettlementReconciliationApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGFetchSettlementsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, FetchSettlementsRequest: FetchSettlementsRequest, Content_Type?: string, x_request_id?: string, x_idempotency_key?: string, Accept?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SettlementEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGFetchSettlementsWithConfiguration(cashfreeConfiguration, x_api_version, FetchSettlementsRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * - Use this API to get settlement reconciliation details using Settlement ID, settlement UTR or date range. - This API will return events for the settlement IDs you want 
          * @summary Settlement Reconciliation
@@ -12190,6 +14903,15 @@ const SettlementReconciliationApiFp = function(configuration?: Configuration) {
          */
         async pGSettlementFetchRecon(x_api_version: string, SettlementFetchReconRequest: SettlementFetchReconRequest, Content_Type?: string, x_request_id?: string, x_idempotency_key?: string, Accept?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SettlementReconEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGSettlementFetchRecon(x_api_version, SettlementFetchReconRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGSettlementFetchReconWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, SettlementFetchReconRequest: SettlementFetchReconRequest, Content_Type?: string, x_request_id?: string, x_idempotency_key?: string, Accept?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SettlementReconEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGSettlementFetchReconWithConfiguration(cashfreeConfiguration, x_api_version, SettlementFetchReconRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -12264,7 +14986,7 @@ const SettlementsApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12286,6 +15008,69 @@ const SettlementsApiAxiosParamCreator = function (configuration?: Configuration)
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        markForSettlementWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string,  x_request_id?: string, x_idempotency_key?: string, CreateOrderSettlementRequestBody?: CreateOrderSettlementRequestBody,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('markForSettlement', 'x_api_version', x_api_version)
+            const localVarPath = `/orders/settlements`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(CreateOrderSettlementRequestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to view all the settlements of a particular order.
          * @summary Get Settlements by Order ID
@@ -12337,7 +15122,7 @@ const SettlementsApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12358,6 +15143,69 @@ const SettlementsApiAxiosParamCreator = function (configuration?: Configuration)
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGOrderFetchSettlementWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGOrderFetchSettlement', 'x_api_version', x_api_version)
+            // verify required parameter 'order_id' is not null or undefined
+            assertParamExists('pGOrderFetchSettlement', 'order_id', order_id)
+            const localVarPath = `/orders/{order_id}/settlements`
+                .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
     }
 };
 
@@ -12386,6 +15234,15 @@ const SettlementsApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async markForSettlementWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, x_request_id?: string, x_idempotency_key?: string, CreateOrderSettlementRequestBody?: CreateOrderSettlementRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.markForSettlementWithConfiguration(cashfreeConfiguration, x_api_version, x_request_id, x_idempotency_key, CreateOrderSettlementRequestBody, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to view all the settlements of a particular order.
          * @summary Get Settlements by Order ID
@@ -12398,6 +15255,15 @@ const SettlementsApiFp = function(configuration?: Configuration) {
          */
         async pGOrderFetchSettlement(x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SettlementEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGOrderFetchSettlement(x_api_version, order_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGOrderFetchSettlementWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SettlementEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGOrderFetchSettlementWithConfiguration(cashfreeConfiguration, x_api_version, order_id, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -12473,7 +15339,7 @@ const SimulationApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12494,6 +15360,69 @@ const SimulationApiAxiosParamCreator = function (configuration?: Configuration) 
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGFetchSimulationWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, simulation_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGFetchSimulation', 'x_api_version', x_api_version)
+            // verify required parameter 'simulation_id' is not null or undefined
+            assertParamExists('pGFetchSimulation', 'simulation_id', simulation_id)
+            const localVarPath = `/simulate/{simulation_id}`
+                .replace(`{${"simulation_id"}}`, encodeURIComponent(String(simulation_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to simulate payment. To use this API you should first create an order using the Create Order API. Also, you need to create a payment with the same order.
          * @summary Simulate Payment
@@ -12546,7 +15475,7 @@ const SimulationApiAxiosParamCreator = function (configuration?: Configuration) 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12568,6 +15497,71 @@ const SimulationApiAxiosParamCreator = function (configuration?: Configuration) 
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGSimulatePaymentWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, SimulateRequest: SimulateRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGSimulatePayment', 'x_api_version', x_api_version)
+            // verify required parameter 'SimulateRequest' is not null or undefined
+            assertParamExists('pGSimulatePayment', 'SimulateRequest', SimulateRequest)
+            const localVarPath = `/simulate`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(SimulateRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
     }
 };
 
@@ -12596,6 +15590,15 @@ const SimulationApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGFetchSimulationWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, simulation_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SimulationResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGFetchSimulationWithConfiguration(cashfreeConfiguration, x_api_version, simulation_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to simulate payment. To use this API you should first create an order using the Create Order API. Also, you need to create a payment with the same order.
          * @summary Simulate Payment
@@ -12608,6 +15611,15 @@ const SimulationApiFp = function(configuration?: Configuration) {
          */
         async pGSimulatePayment(x_api_version: string, SimulateRequest: SimulateRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SimulationResponse>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGSimulatePayment(x_api_version, SimulateRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGSimulatePaymentWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, SimulateRequest: SimulateRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SimulationResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGSimulatePaymentWithConfiguration(cashfreeConfiguration, x_api_version, SimulateRequest, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -12684,7 +15696,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12706,6 +15718,71 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        sposCreateTerminalWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateTerminalRequest: CreateTerminalRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('sposCreateTerminal', 'x_api_version', x_api_version)
+            // verify required parameter 'CreateTerminalRequest' is not null or undefined
+            assertParamExists('sposCreateTerminal', 'CreateTerminalRequest', CreateTerminalRequest)
+            const localVarPath = `/terminal`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(CreateTerminalRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to create a new terminal transaction. To use this API you should first create an order using the Create Order API. Also, you need to enter the terminal details while creating the order and pass the same terminal information while creating a transaction using the below mentioned API.
          * @summary Create Terminal Transaction
@@ -12758,7 +15835,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12780,6 +15857,71 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        sposCreateTerminalTransactionWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateTerminalTransactionRequest: CreateTerminalTransactionRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('sposCreateTerminalTransaction', 'x_api_version', x_api_version)
+            // verify required parameter 'CreateTerminalTransactionRequest' is not null or undefined
+            assertParamExists('sposCreateTerminalTransaction', 'CreateTerminalTransactionRequest', CreateTerminalTransactionRequest)
+            const localVarPath = `/terminal/transactions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(CreateTerminalTransactionRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to view all details of a terminal.
          * @summary Get Terminal Status using Phone Number
@@ -12831,7 +15973,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12852,6 +15994,69 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        sposFetchTerminalWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, terminal_phone_no: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('sposFetchTerminal', 'x_api_version', x_api_version)
+            // verify required parameter 'terminal_phone_no' is not null or undefined
+            assertParamExists('sposFetchTerminal', 'terminal_phone_no', terminal_phone_no)
+            const localVarPath = `/terminal/{terminal_phone_no}`
+                .replace(`{${"terminal_phone_no"}}`, encodeURIComponent(String(terminal_phone_no)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * You can fetch all the StaticQRs corresponding to given terminal id or phone number. Provide either the terminal_phone_no or terminal_id in the request.
          * @summary Fetch Terminal QR Codes
@@ -12913,7 +16118,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12934,6 +16139,78 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        sposFetchTerminalQRCodesWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, terminal_phone_no: string, cf_terminal_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('sposFetchTerminalQRCodes', 'x_api_version', x_api_version)
+            // verify required parameter 'terminal_phone_no' is not null or undefined
+            assertParamExists('sposFetchTerminalQRCodes', 'terminal_phone_no', terminal_phone_no)
+            // verify required parameter 'cf_terminal_id' is not null or undefined
+            assertParamExists('sposFetchTerminalQRCodes', 'cf_terminal_id', cf_terminal_id)
+            const localVarPath = `/terminal/qrcodes`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+            if (terminal_phone_no !== undefined) {
+                localVarQueryParameter['terminal_phone_no'] = terminal_phone_no;
+            }
+
+            if (cf_terminal_id !== undefined) {
+                localVarQueryParameter['cf_terminal_id'] = cf_terminal_id;
+            }
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to get  terminal transaction.
          * @summary Get Terminal Transaction
@@ -12992,7 +16269,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13013,6 +16290,75 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        sposFetchTerminalTransactionWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, utr: string, cf_terminal_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('sposFetchTerminalTransaction', 'x_api_version', x_api_version)
+            // verify required parameter 'utr' is not null or undefined
+            assertParamExists('sposFetchTerminalTransaction', 'utr', utr)
+            // verify required parameter 'cf_terminal_id' is not null or undefined
+            assertParamExists('sposFetchTerminalTransaction', 'cf_terminal_id', cf_terminal_id)
+            const localVarPath = `/terminal/{cf_terminal_id}/payments`
+                .replace(`{${"cf_terminal_id"}}`, encodeURIComponent(String(cf_terminal_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+            if (utr !== undefined) {
+                localVarQueryParameter['utr'] = utr;
+            }
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to update the terminal details. Email, Phone Number, and Terminal Meta are updatable for \"Storefront\". Only account status change is possible in case of \"Agent\".
          * @summary Update Terminal
@@ -13069,7 +16415,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13091,6 +16437,74 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        sposUpdateTerminalWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, cf_terminal_id: string, UpdateTerminalRequest: UpdateTerminalRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('sposUpdateTerminal', 'x_api_version', x_api_version)
+            // verify required parameter 'cf_terminal_id' is not null or undefined
+            assertParamExists('sposUpdateTerminal', 'cf_terminal_id', cf_terminal_id)
+            // verify required parameter 'UpdateTerminalRequest' is not null or undefined
+            assertParamExists('sposUpdateTerminal', 'UpdateTerminalRequest', UpdateTerminalRequest)
+            const localVarPath = `/terminal/{cf_terminal_id}`
+                .replace(`{${"cf_terminal_id"}}`, encodeURIComponent(String(cf_terminal_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(UpdateTerminalRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to update the terminal status.
          * @summary Update Terminal Status
@@ -13147,7 +16561,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13169,6 +16583,74 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        sposUpdateTerminalStatusWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, cf_terminal_id: string, UpdateTerminalStatusRequest: UpdateTerminalStatusRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('sposUpdateTerminalStatus', 'x_api_version', x_api_version)
+            // verify required parameter 'cf_terminal_id' is not null or undefined
+            assertParamExists('sposUpdateTerminalStatus', 'cf_terminal_id', cf_terminal_id)
+            // verify required parameter 'UpdateTerminalStatusRequest' is not null or undefined
+            assertParamExists('sposUpdateTerminalStatus', 'UpdateTerminalStatusRequest', UpdateTerminalStatusRequest)
+            const localVarPath = `/terminal/{cf_terminal_id}/status`
+                .replace(`{${"cf_terminal_id"}}`, encodeURIComponent(String(cf_terminal_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(UpdateTerminalStatusRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to upload the terminal documents.
          * @summary Upload Terminal Docs
@@ -13225,7 +16707,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13247,6 +16729,74 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        sposUploadTerminalDocsWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, cf_terminal_id: string, UploadTerminalDocs: UploadTerminalDocs,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('sposUploadTerminalDocs', 'x_api_version', x_api_version)
+            // verify required parameter 'cf_terminal_id' is not null or undefined
+            assertParamExists('sposUploadTerminalDocs', 'cf_terminal_id', cf_terminal_id)
+            // verify required parameter 'UploadTerminalDocs' is not null or undefined
+            assertParamExists('sposUploadTerminalDocs', 'UploadTerminalDocs', UploadTerminalDocs)
+            const localVarPath = `/terminal/{cf_terminal_id}/docs`
+                .replace(`{${"cf_terminal_id"}}`, encodeURIComponent(String(cf_terminal_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(UploadTerminalDocs, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
     }
 };
 
@@ -13275,6 +16825,15 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async sposCreateTerminalWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateTerminalRequest: CreateTerminalRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TerminalEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.sposCreateTerminalWithConfiguration(cashfreeConfiguration, x_api_version, CreateTerminalRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to create a new terminal transaction. To use this API you should first create an order using the Create Order API. Also, you need to enter the terminal details while creating the order and pass the same terminal information while creating a transaction using the below mentioned API.
          * @summary Create Terminal Transaction
@@ -13293,6 +16852,15 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async sposCreateTerminalTransactionWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateTerminalTransactionRequest: CreateTerminalTransactionRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TerminalTransactionEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.sposCreateTerminalTransactionWithConfiguration(cashfreeConfiguration, x_api_version, CreateTerminalTransactionRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to view all details of a terminal.
          * @summary Get Terminal Status using Phone Number
@@ -13305,6 +16873,15 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
          */
         async sposFetchTerminal(x_api_version: string, terminal_phone_no: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TerminalEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.sposFetchTerminal(x_api_version, terminal_phone_no, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async sposFetchTerminalWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, terminal_phone_no: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TerminalEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.sposFetchTerminalWithConfiguration(cashfreeConfiguration, x_api_version, terminal_phone_no, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -13330,6 +16907,15 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async sposFetchTerminalQRCodesWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, terminal_phone_no: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FetchTerminalQRCodesEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.sposFetchTerminalQRCodesWithConfiguration(cashfreeConfiguration, x_api_version, terminal_phone_no, cf_terminal_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to get  terminal transaction.
          * @summary Get Terminal Transaction
@@ -13343,6 +16929,15 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
          */
         async sposFetchTerminalTransaction(x_api_version: string, utr: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TerminalPaymentEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.sposFetchTerminalTransaction(x_api_version, utr, cf_terminal_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async sposFetchTerminalTransactionWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, utr: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TerminalPaymentEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.sposFetchTerminalTransactionWithConfiguration(cashfreeConfiguration, x_api_version, utr, cf_terminal_id, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -13368,6 +16963,15 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async sposUpdateTerminalWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, cf_terminal_id: string, UpdateTerminalRequest: UpdateTerminalRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UpdateTerminalEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.sposUpdateTerminalWithConfiguration(cashfreeConfiguration, x_api_version, cf_terminal_id, UpdateTerminalRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to update the terminal status.
          * @summary Update Terminal Status
@@ -13387,6 +16991,15 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async sposUpdateTerminalStatusWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, cf_terminal_id: string, UpdateTerminalStatusRequest: UpdateTerminalStatusRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UpdateTerminalEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.sposUpdateTerminalStatusWithConfiguration(cashfreeConfiguration, x_api_version, cf_terminal_id, UpdateTerminalStatusRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to upload the terminal documents.
          * @summary Upload Terminal Docs
@@ -13400,6 +17013,15 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
          */
         async sposUploadTerminalDocs(x_api_version: string, cf_terminal_id: string, UploadTerminalDocs: UploadTerminalDocs, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UploadTerminalDocsEntity>>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.sposUploadTerminalDocs(x_api_version, cf_terminal_id, UploadTerminalDocs, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async sposUploadTerminalDocsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, cf_terminal_id: string, UploadTerminalDocs: UploadTerminalDocs, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UploadTerminalDocsEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.sposUploadTerminalDocsWithConfiguration(cashfreeConfiguration, x_api_version, cf_terminal_id, UploadTerminalDocs, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -13476,7 +17098,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13498,6 +17120,71 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        subsCreatePaymentWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateSubscriptionPaymentRequest: CreateSubscriptionPaymentRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsCreatePayment', 'x_api_version', x_api_version)
+            // verify required parameter 'CreateSubscriptionPaymentRequest' is not null or undefined
+            assertParamExists('subsCreatePayment', 'CreateSubscriptionPaymentRequest', CreateSubscriptionPaymentRequest)
+            const localVarPath = `/subscriptions/pay`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(CreateSubscriptionPaymentRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * A plan allows your customer to identify the features you offer along with your pricing. You can create plans as per the pricing you support for your services. For each plan, you can set a pre-decided frequency and amount with which they’ll be charged. Example: Netflix Plans - Premium, Basic, Standard, Mobile. Each plan differs and caters for a particular set of audiences.
          * @summary Create a plan.
@@ -13550,7 +17237,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13572,6 +17259,71 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        subsCreatePlanWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreatePlanRequest: CreatePlanRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsCreatePlan', 'x_api_version', x_api_version)
+            // verify required parameter 'CreatePlanRequest' is not null or undefined
+            assertParamExists('subsCreatePlan', 'CreatePlanRequest', CreatePlanRequest)
+            const localVarPath = `/plans`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(CreatePlanRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * This API allows you to create refund on a successful payment. Refund amount can be partial or the full amount of the payment.
          * @summary Create a refund.
@@ -13628,7 +17380,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13650,6 +17402,74 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        subsCreateRefundWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string, CreateSubscriptionRefundRequest: CreateSubscriptionRefundRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsCreateRefund', 'x_api_version', x_api_version)
+            // verify required parameter 'subscription_id' is not null or undefined
+            assertParamExists('subsCreateRefund', 'subscription_id', subscription_id)
+            // verify required parameter 'CreateSubscriptionRefundRequest' is not null or undefined
+            assertParamExists('subsCreateRefund', 'CreateSubscriptionRefundRequest', CreateSubscriptionRefundRequest)
+            const localVarPath = `/subscriptions/{subscription_id}/refunds`
+                .replace(`{${"subscription_id"}}`, encodeURIComponent(String(subscription_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(CreateSubscriptionRefundRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to create a new subscription.
          * @summary Create Subscription
@@ -13702,7 +17522,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13724,6 +17544,71 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        subsCreateSubscriptionWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateSubscriptionRequest: CreateSubscriptionRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsCreateSubscription', 'x_api_version', x_api_version)
+            // verify required parameter 'CreateSubscriptionRequest' is not null or undefined
+            assertParamExists('subsCreateSubscription', 'CreateSubscriptionRequest', CreateSubscriptionRequest)
+            const localVarPath = `/subscriptions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(CreateSubscriptionRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to fetch plan details.
          * @summary Fetch Plan
@@ -13775,7 +17660,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13796,6 +17681,69 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        subsFetchPlanWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, plan_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsFetchPlan', 'x_api_version', x_api_version)
+            // verify required parameter 'plan_id' is not null or undefined
+            assertParamExists('subsFetchPlan', 'plan_id', plan_id)
+            const localVarPath = `/plans/{plan_id}`
+                .replace(`{${"plan_id"}}`, encodeURIComponent(String(plan_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to fetch subscription details.
          * @summary Fetch Subscription
@@ -13847,7 +17795,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13868,6 +17816,69 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        subsFetchSubscriptionWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsFetchSubscription', 'x_api_version', x_api_version)
+            // verify required parameter 'subscription_id' is not null or undefined
+            assertParamExists('subsFetchSubscription', 'subscription_id', subscription_id)
+            const localVarPath = `/subscriptions/{subscription_id}`
+                .replace(`{${"subscription_id"}}`, encodeURIComponent(String(subscription_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to fetch details of a single payment of a subscription.
          * @summary Fetch details of a single payment.
@@ -13923,7 +17934,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13944,6 +17955,72 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        subsFetchSubscriptionPaymentWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string, payment_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsFetchSubscriptionPayment', 'x_api_version', x_api_version)
+            // verify required parameter 'subscription_id' is not null or undefined
+            assertParamExists('subsFetchSubscriptionPayment', 'subscription_id', subscription_id)
+            // verify required parameter 'payment_id' is not null or undefined
+            assertParamExists('subsFetchSubscriptionPayment', 'payment_id', payment_id)
+            const localVarPath = `/subscriptions/{subscription_id}/payments/{payment_id}`
+                .replace(`{${"subscription_id"}}`, encodeURIComponent(String(subscription_id)))
+                .replace(`{${"payment_id"}}`, encodeURIComponent(String(payment_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to fetch all payments of a subscription.
          * @summary Fetch details of all payments of a subscription.
@@ -13995,7 +18072,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14016,6 +18093,69 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        subsFetchSubscriptionPaymentsWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsFetchSubscriptionPayments', 'x_api_version', x_api_version)
+            // verify required parameter 'subscription_id' is not null or undefined
+            assertParamExists('subsFetchSubscriptionPayments', 'subscription_id', subscription_id)
+            const localVarPath = `/subscriptions/{subscription_id}/payments`
+                .replace(`{${"subscription_id"}}`, encodeURIComponent(String(subscription_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to fetch details of a refund of a subscription payment.
          * @summary Fetch details of a refund.
@@ -14071,7 +18211,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14092,6 +18232,72 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        subsFetchSubscriptionRefundWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string, refund_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsFetchSubscriptionRefund', 'x_api_version', x_api_version)
+            // verify required parameter 'subscription_id' is not null or undefined
+            assertParamExists('subsFetchSubscriptionRefund', 'subscription_id', subscription_id)
+            // verify required parameter 'refund_id' is not null or undefined
+            assertParamExists('subsFetchSubscriptionRefund', 'refund_id', refund_id)
+            const localVarPath = `/subscriptions/{subscription_id}/refunds/{refund_id}`
+                .replace(`{${"subscription_id"}}`, encodeURIComponent(String(subscription_id)))
+                .replace(`{${"refund_id"}}`, encodeURIComponent(String(refund_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to manage a subscription. You can cancel, pause, activate or change the plan of a subscription.
          * @summary Manage a subscription.
@@ -14148,7 +18354,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14170,6 +18376,74 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        subsManageSubscriptionWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string, ManageSubscriptionRequest: ManageSubscriptionRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsManageSubscription', 'x_api_version', x_api_version)
+            // verify required parameter 'subscription_id' is not null or undefined
+            assertParamExists('subsManageSubscription', 'subscription_id', subscription_id)
+            // verify required parameter 'ManageSubscriptionRequest' is not null or undefined
+            assertParamExists('subsManageSubscription', 'ManageSubscriptionRequest', ManageSubscriptionRequest)
+            const localVarPath = `/subscriptions/{subscription_id}/manage`
+                .replace(`{${"subscription_id"}}`, encodeURIComponent(String(subscription_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(ManageSubscriptionRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to manage a payment of a subscription. A payment can be cancelled or retried with this API.
          * @summary Manage a single payment.
@@ -14230,7 +18504,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14252,6 +18526,77 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        subsManageSubscriptionPaymentWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string, payment_id: string, ManageSubscriptionPaymentRequest: ManageSubscriptionPaymentRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subsManageSubscriptionPayment', 'x_api_version', x_api_version)
+            // verify required parameter 'subscription_id' is not null or undefined
+            assertParamExists('subsManageSubscriptionPayment', 'subscription_id', subscription_id)
+            // verify required parameter 'payment_id' is not null or undefined
+            assertParamExists('subsManageSubscriptionPayment', 'payment_id', payment_id)
+            // verify required parameter 'ManageSubscriptionPaymentRequest' is not null or undefined
+            assertParamExists('subsManageSubscriptionPayment', 'ManageSubscriptionPaymentRequest', ManageSubscriptionPaymentRequest)
+            const localVarPath = `/subscriptions/{subscription_id}/payments/{payment_id}/manage`
+                .replace(`{${"subscription_id"}}`, encodeURIComponent(String(subscription_id)))
+                .replace(`{${"payment_id"}}`, encodeURIComponent(String(payment_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(ManageSubscriptionPaymentRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to upload Physical Nach for Physical Nach Authorization.
          * @summary API to upload Physical Nach for Physical Nach Authorization.
@@ -14327,7 +18672,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14349,6 +18694,91 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        subscriptionDocumentUploadWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, payment_id: string, file: File, payment_id2: string, action: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subscriptionDocumentUpload', 'x_api_version', x_api_version)
+            // verify required parameter 'payment_id' is not null or undefined
+            assertParamExists('subscriptionDocumentUpload', 'payment_id', payment_id)
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('subscriptionDocumentUpload', 'file', file)
+            // verify required parameter 'payment_id2' is not null or undefined
+            assertParamExists('subscriptionDocumentUpload', 'payment_id2', payment_id2)
+            // verify required parameter 'action' is not null or undefined
+            assertParamExists('subscriptionDocumentUpload', 'action', action)
+            const localVarPath = `/subscriptions/pay/documents/{payment_id}`
+                .replace(`{${"payment_id"}}`, encodeURIComponent(String(payment_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+            if (payment_id2 !== undefined) { 
+                localVarFormParams.append('payment_id', payment_id2 as any);
+            }
+    
+            if (action !== undefined) { 
+                localVarFormParams.append('action', action as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to check if a payment method is enabled for your account.
          * @summary API to get all the payment method details available for subscription payments.
@@ -14401,7 +18831,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14423,6 +18853,71 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        subscriptionEligibilityWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, SubscriptionEligibilityRequest: SubscriptionEligibilityRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('subscriptionEligibility', 'x_api_version', x_api_version)
+            // verify required parameter 'SubscriptionEligibilityRequest' is not null or undefined
+            assertParamExists('subscriptionEligibility', 'SubscriptionEligibilityRequest', SubscriptionEligibilityRequest)
+            const localVarPath = `/subscriptions/eligibility/payment_methods`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(SubscriptionEligibilityRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
     }
 };
 
@@ -14451,6 +18946,15 @@ const SubscriptionApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async subsCreatePaymentWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateSubscriptionPaymentRequest: CreateSubscriptionPaymentRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateSubscriptionPaymentResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsCreatePaymentWithConfiguration(cashfreeConfiguration, x_api_version, CreateSubscriptionPaymentRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * A plan allows your customer to identify the features you offer along with your pricing. You can create plans as per the pricing you support for your services. For each plan, you can set a pre-decided frequency and amount with which they’ll be charged. Example: Netflix Plans - Premium, Basic, Standard, Mobile. Each plan differs and caters for a particular set of audiences.
          * @summary Create a plan.
@@ -14463,6 +18967,15 @@ const SubscriptionApiFp = function(configuration?: Configuration) {
          */
         async subsCreatePlan(x_api_version: string, CreatePlanRequest: CreatePlanRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlanEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.subsCreatePlan(x_api_version, CreatePlanRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async subsCreatePlanWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreatePlanRequest: CreatePlanRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlanEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsCreatePlanWithConfiguration(cashfreeConfiguration, x_api_version, CreatePlanRequest, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -14488,6 +19001,15 @@ const SubscriptionApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async subsCreateRefundWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string, CreateSubscriptionRefundRequest: CreateSubscriptionRefundRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionPaymentRefundEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsCreateRefundWithConfiguration(cashfreeConfiguration, x_api_version, subscription_id, CreateSubscriptionRefundRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to create a new subscription.
          * @summary Create Subscription
@@ -14500,6 +19022,15 @@ const SubscriptionApiFp = function(configuration?: Configuration) {
          */
         async subsCreateSubscription(x_api_version: string, CreateSubscriptionRequest: CreateSubscriptionRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.subsCreateSubscription(x_api_version, CreateSubscriptionRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async subsCreateSubscriptionWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateSubscriptionRequest: CreateSubscriptionRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsCreateSubscriptionWithConfiguration(cashfreeConfiguration, x_api_version, CreateSubscriptionRequest, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -14524,6 +19055,15 @@ const SubscriptionApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async subsFetchPlanWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, plan_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlanEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsFetchPlanWithConfiguration(cashfreeConfiguration, x_api_version, plan_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to fetch subscription details.
          * @summary Fetch Subscription
@@ -14536,6 +19076,15 @@ const SubscriptionApiFp = function(configuration?: Configuration) {
          */
         async subsFetchSubscription(x_api_version: string, subscription_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.subsFetchSubscription(x_api_version, subscription_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async subsFetchSubscriptionWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsFetchSubscriptionWithConfiguration(cashfreeConfiguration, x_api_version, subscription_id, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -14561,6 +19110,15 @@ const SubscriptionApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async subsFetchSubscriptionPaymentWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string, payment_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionPaymentEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsFetchSubscriptionPaymentWithConfiguration(cashfreeConfiguration, x_api_version, subscription_id, payment_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to fetch all payments of a subscription.
          * @summary Fetch details of all payments of a subscription.
@@ -14573,6 +19131,15 @@ const SubscriptionApiFp = function(configuration?: Configuration) {
          */
         async subsFetchSubscriptionPayments(x_api_version: string, subscription_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SubscriptionPaymentEntity>>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.subsFetchSubscriptionPayments(x_api_version, subscription_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async subsFetchSubscriptionPaymentsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SubscriptionPaymentEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsFetchSubscriptionPaymentsWithConfiguration(cashfreeConfiguration, x_api_version, subscription_id, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -14598,6 +19165,15 @@ const SubscriptionApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async subsFetchSubscriptionRefundWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string, refund_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionPaymentRefundEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsFetchSubscriptionRefundWithConfiguration(cashfreeConfiguration, x_api_version, subscription_id, refund_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to manage a subscription. You can cancel, pause, activate or change the plan of a subscription.
          * @summary Manage a subscription.
@@ -14611,6 +19187,15 @@ const SubscriptionApiFp = function(configuration?: Configuration) {
          */
         async subsManageSubscription(x_api_version: string, subscription_id: string, ManageSubscriptionRequest: ManageSubscriptionRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.subsManageSubscription(x_api_version, subscription_id, ManageSubscriptionRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async subsManageSubscriptionWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string, ManageSubscriptionRequest: ManageSubscriptionRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsManageSubscriptionWithConfiguration(cashfreeConfiguration, x_api_version, subscription_id, ManageSubscriptionRequest, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -14631,6 +19216,15 @@ const SubscriptionApiFp = function(configuration?: Configuration) {
          */
         async subsManageSubscriptionPayment(x_api_version: string, subscription_id: string, payment_id: string, ManageSubscriptionPaymentRequest: ManageSubscriptionPaymentRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionPaymentEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.subsManageSubscriptionPayment(x_api_version, subscription_id, payment_id, ManageSubscriptionPaymentRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async subsManageSubscriptionPaymentWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string, payment_id: string, ManageSubscriptionPaymentRequest: ManageSubscriptionPaymentRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionPaymentEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subsManageSubscriptionPaymentWithConfiguration(cashfreeConfiguration, x_api_version, subscription_id, payment_id, ManageSubscriptionPaymentRequest, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -14658,6 +19252,15 @@ const SubscriptionApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async subscriptionDocumentUploadWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, payment_id: string, file: File, payment_id2: string, action: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadPnachImageResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subscriptionDocumentUploadWithConfiguration(cashfreeConfiguration, x_api_version, payment_id, file, payment_id2, action, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to check if a payment method is enabled for your account.
          * @summary API to get all the payment method details available for subscription payments.
@@ -14670,6 +19273,15 @@ const SubscriptionApiFp = function(configuration?: Configuration) {
          */
         async subscriptionEligibility(x_api_version: string, SubscriptionEligibilityRequest: SubscriptionEligibilityRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionEligibilityResponse>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.subscriptionEligibility(x_api_version, SubscriptionEligibilityRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async subscriptionEligibilityWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, SubscriptionEligibilityRequest: SubscriptionEligibilityRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionEligibilityResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.subscriptionEligibilityWithConfiguration(cashfreeConfiguration, x_api_version, SubscriptionEligibilityRequest, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -14749,7 +19361,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14770,6 +19382,72 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGCustomerDeleteInstrumentWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, customer_id: string, instrument_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGCustomerDeleteInstrument', 'x_api_version', x_api_version)
+            // verify required parameter 'customer_id' is not null or undefined
+            assertParamExists('pGCustomerDeleteInstrument', 'customer_id', customer_id)
+            // verify required parameter 'instrument_id' is not null or undefined
+            assertParamExists('pGCustomerDeleteInstrument', 'instrument_id', instrument_id)
+            const localVarPath = `/customers/{customer_id}/instruments/{instrument_id}`
+                .replace(`{${"customer_id"}}`, encodeURIComponent(String(customer_id)))
+                .replace(`{${"instrument_id"}}`, encodeURIComponent(String(instrument_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to fetch a single specific saved card for a customer_id by it\'s instrument_id
          * @summary Fetch Specific Saved Card Instrument
@@ -14825,7 +19503,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14846,6 +19524,72 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGCustomerFetchInstrumentWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, customer_id: string, instrument_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGCustomerFetchInstrument', 'x_api_version', x_api_version)
+            // verify required parameter 'customer_id' is not null or undefined
+            assertParamExists('pGCustomerFetchInstrument', 'customer_id', customer_id)
+            // verify required parameter 'instrument_id' is not null or undefined
+            assertParamExists('pGCustomerFetchInstrument', 'instrument_id', instrument_id)
+            const localVarPath = `/customers/{customer_id}/instruments/{instrument_id}`
+                .replace(`{${"customer_id"}}`, encodeURIComponent(String(customer_id)))
+                .replace(`{${"instrument_id"}}`, encodeURIComponent(String(instrument_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API to fetch saved cards for a customer_id 
          * @summary Fetch All Saved Card Instrument
@@ -14904,7 +19648,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14925,6 +19669,75 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGCustomerFetchInstrumentsWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, customer_id: string, instrument_type: PGCustomerFetchInstrumentsInstrumentTypeEnum,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGCustomerFetchInstruments', 'x_api_version', x_api_version)
+            // verify required parameter 'customer_id' is not null or undefined
+            assertParamExists('pGCustomerFetchInstruments', 'customer_id', customer_id)
+            // verify required parameter 'instrument_type' is not null or undefined
+            assertParamExists('pGCustomerFetchInstruments', 'instrument_type', instrument_type)
+            const localVarPath = `/customers/{customer_id}/instruments`
+                .replace(`{${"customer_id"}}`, encodeURIComponent(String(customer_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+            if (instrument_type !== undefined) {
+                localVarQueryParameter['instrument_type'] = instrument_type;
+            }
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * Use this API To get the card network token, token expiry and cryptogram for a saved card instrument using instrument id
          * @summary Fetch cryptogram for a saved card instrument
@@ -14980,7 +19793,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.2.3';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15001,6 +19814,72 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
                 options: localVarRequestOptions,
             };
         },
+
+        // With Configuration
+        pGCustomerInstrumentsFetchCryptogramWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, customer_id: string, instrument_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGCustomerInstrumentsFetchCryptogram', 'x_api_version', x_api_version)
+            // verify required parameter 'customer_id' is not null or undefined
+            assertParamExists('pGCustomerInstrumentsFetchCryptogram', 'customer_id', customer_id)
+            // verify required parameter 'instrument_id' is not null or undefined
+            assertParamExists('pGCustomerInstrumentsFetchCryptogram', 'instrument_id', instrument_id)
+            const localVarPath = `/customers/{customer_id}/instruments/{instrument_id}/cryptogram`
+                .replace(`{${"customer_id"}}`, encodeURIComponent(String(customer_id)))
+                .replace(`{${"instrument_id"}}`, encodeURIComponent(String(instrument_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.0';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
     }
 };
 
@@ -15030,6 +19909,15 @@ const TokenVaultApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGCustomerDeleteInstrumentWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, customer_id: string, instrument_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InstrumentEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGCustomerDeleteInstrumentWithConfiguration(cashfreeConfiguration, x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API to fetch a single specific saved card for a customer_id by it\'s instrument_id
          * @summary Fetch Specific Saved Card Instrument
@@ -15043,6 +19931,15 @@ const TokenVaultApiFp = function(configuration?: Configuration) {
          */
         async pGCustomerFetchInstrument(x_api_version: string, customer_id: string, instrument_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InstrumentEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGCustomerFetchInstrument(x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGCustomerFetchInstrumentWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, customer_id: string, instrument_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InstrumentEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGCustomerFetchInstrumentWithConfiguration(cashfreeConfiguration, x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -15068,6 +19965,15 @@ const TokenVaultApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+
+        async pGCustomerFetchInstrumentsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, customer_id: string, instrument_type: PGCustomerFetchInstrumentsInstrumentTypeEnum, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InstrumentEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGCustomerFetchInstrumentsWithConfiguration(cashfreeConfiguration, x_api_version, customer_id, instrument_type, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * Use this API To get the card network token, token expiry and cryptogram for a saved card instrument using instrument id
          * @summary Fetch cryptogram for a saved card instrument
@@ -15081,6 +19987,15 @@ const TokenVaultApiFp = function(configuration?: Configuration) {
          */
         async pGCustomerInstrumentsFetchCryptogram(x_api_version: string, customer_id: string, instrument_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CryptogramEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGCustomerInstrumentsFetchCryptogram(x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGCustomerInstrumentsFetchCryptogramWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, customer_id: string, instrument_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CryptogramEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGCustomerInstrumentsFetchCryptogramWithConfiguration(cashfreeConfiguration, x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -15123,6 +20038,32 @@ export class PGWebhookEvent {
         this.type = type;
         this.raw = rawBody
         this.object = object;
+    }
+}
+
+export class CashfreeConfiguration {
+    XClientId?: string;
+    XClientSecret?: string;
+    XPartnerKey?: string;
+    XClientSignature?: string;
+    XPartnerMerchantId?: string;
+
+    constructor(XClientId: string, XClientSecret: string, XPartnerKey: string, XClientSignature: string, XPartnerMerchantId: string) {
+        if(XClientId !== "") {
+            this.XClientId = XClientId;
+        }
+        if(XClientSecret !== "") {
+            this.XClientSecret = XClientSecret
+        }
+        if(XPartnerKey !== "") {
+            this.XPartnerKey = XPartnerKey;
+        }
+        if(XClientSignature !== "") {
+            this.XClientSignature = XClientSignature;
+        }
+        if(XPartnerMerchantId !== "") {
+            this.XPartnerMerchantId = XPartnerMerchantId;
+        }
     }
 }
 
@@ -15208,11 +20149,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return CustomersApiFp().pGCreateCustomer(x_api_version, CreateCustomerRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGCreateCustomerWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateCustomerRequest: CreateCustomerRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return CustomersApiFp().pGCreateCustomerWithConfiguration(cashfreeConfiguration, x_api_version, CreateCustomerRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -15269,11 +20260,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return EasySplitApiFp().pGESCreateOnDemandTransfer(x_api_version, vendor_id, x_request_id, x_idempotency_key, AdjustVendorBalanceRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGESCreateOnDemandTransferWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, AdjustVendorBalanceRequest?: AdjustVendorBalanceRequest, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESCreateOnDemandTransferWithConfiguration(cashfreeConfiguration, x_api_version, vendor_id, x_request_id, x_idempotency_key, AdjustVendorBalanceRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -15329,11 +20370,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return EasySplitApiFp().pGESCreateVendors(x_api_version, x_request_id, x_idempotency_key, CreateVendorRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGESCreateVendorsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, x_request_id?: string, x_idempotency_key?: string, CreateVendorRequest?: CreateVendorRequest, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESCreateVendorsWithConfiguration(cashfreeConfiguration, x_api_version, x_request_id, x_idempotency_key, CreateVendorRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -15390,11 +20481,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return EasySplitApiFp().pGESDownloadVendorsDocs(x_api_version, doc_type, vendor_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGESDownloadVendorsDocsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, doc_type: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESDownloadVendorsDocsWithConfiguration(cashfreeConfiguration, x_api_version, doc_type, vendor_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -15450,11 +20591,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return EasySplitApiFp().pGESFetchVendors(x_api_version, vendor_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGESFetchVendorsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESFetchVendorsWithConfiguration(cashfreeConfiguration, x_api_version, vendor_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -15510,11 +20701,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return EasySplitApiFp().pGESGetVendorBalance(x_api_version, vendor_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGESGetVendorBalanceWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESGetVendorBalanceWithConfiguration(cashfreeConfiguration, x_api_version, vendor_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -15571,11 +20812,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return EasySplitApiFp().pGESGetVendorBalanceTransferCharges(x_api_version, amount, rate_type, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGESGetVendorBalanceTransferChargesWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, amount: number, rate_type: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESGetVendorBalanceTransferChargesWithConfiguration(cashfreeConfiguration, x_api_version, amount, rate_type, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -15631,11 +20922,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return EasySplitApiFp().pGESGetVendorsDocs(x_api_version, vendor_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGESGetVendorsDocsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESGetVendorsDocsWithConfiguration(cashfreeConfiguration, x_api_version, vendor_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -15691,11 +21032,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return EasySplitApiFp().pGESOrderRecon(x_api_version, x_request_id, x_idempotency_key, ESOrderReconRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGESOrderReconWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, x_request_id?: string, x_idempotency_key?: string, ESOrderReconRequest?: ESOrderReconRequest, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESOrderReconWithConfiguration(cashfreeConfiguration, x_api_version, x_request_id, x_idempotency_key, ESOrderReconRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -15752,11 +21143,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return EasySplitApiFp().pGESUpdateVendors(x_api_version, vendor_id, x_request_id, x_idempotency_key, UpdateVendorRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGESUpdateVendorsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, UpdateVendorRequest?: UpdateVendorRequest, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESUpdateVendorsWithConfiguration(cashfreeConfiguration, x_api_version, vendor_id, x_request_id, x_idempotency_key, UpdateVendorRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -15815,11 +21256,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return EasySplitApiFp().pGESUploadVendorsDocs(x_api_version, vendor_id, x_request_id, x_idempotency_key, doc_type, doc_value, file, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGESUploadVendorsDocsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, doc_type?: string, doc_value?: string, file?: File, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESUploadVendorsDocsWithConfiguration(cashfreeConfiguration, x_api_version, vendor_id, x_request_id, x_idempotency_key, doc_type, doc_value, file, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -15876,11 +21367,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return EasySplitApiFp().pGOrderSplitAfterPayment(x_api_version, order_id, x_request_id, x_idempotency_key, SplitAfterPaymentRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGOrderSplitAfterPaymentWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, SplitAfterPaymentRequest?: SplitAfterPaymentRequest, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGOrderSplitAfterPaymentWithConfiguration(cashfreeConfiguration, x_api_version, order_id, x_request_id, x_idempotency_key, SplitAfterPaymentRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -15936,11 +21477,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return EasySplitApiFp().pGOrderStaticSplit(x_api_version, x_request_id, x_idempotency_key, StaticSplitRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGOrderStaticSplitWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, x_request_id?: string, x_idempotency_key?: string, StaticSplitRequest?: StaticSplitRequest, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGOrderStaticSplitWithConfiguration(cashfreeConfiguration, x_api_version, x_request_id, x_idempotency_key, StaticSplitRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -15996,11 +21587,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return EligibilityApiFp().pGEligibilityFetchCardlessEMI(x_api_version, EligibilityFetchCardlessEMIRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGEligibilityFetchCardlessEMIWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, EligibilityFetchCardlessEMIRequest: EligibilityFetchCardlessEMIRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return EligibilityApiFp().pGEligibilityFetchCardlessEMIWithConfiguration(cashfreeConfiguration, x_api_version, EligibilityFetchCardlessEMIRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -16056,11 +21697,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return EligibilityApiFp().pGEligibilityFetchOffers(x_api_version, EligibilityFetchOffersRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGEligibilityFetchOffersWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, EligibilityFetchOffersRequest: EligibilityFetchOffersRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return EligibilityApiFp().pGEligibilityFetchOffersWithConfiguration(cashfreeConfiguration, x_api_version, EligibilityFetchOffersRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -16116,11 +21807,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return EligibilityApiFp().pGEligibilityFetchPaylater(x_api_version, EligibilityFetchPaylaterRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGEligibilityFetchPaylaterWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, EligibilityFetchPaylaterRequest: EligibilityFetchPaylaterRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return EligibilityApiFp().pGEligibilityFetchPaylaterWithConfiguration(cashfreeConfiguration, x_api_version, EligibilityFetchPaylaterRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -16176,11 +21917,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return EligibilityApiFp().pGEligibilityFetchPaymentMethods(x_api_version, EligibilityFetchPaymentMethodsRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGEligibilityFetchPaymentMethodsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, EligibilityFetchPaymentMethodsRequest: EligibilityFetchPaymentMethodsRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return EligibilityApiFp().pGEligibilityFetchPaymentMethodsWithConfiguration(cashfreeConfiguration, x_api_version, EligibilityFetchPaymentMethodsRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -16236,11 +22027,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return OffersApiFp().pGCreateOffer(x_api_version, CreateOfferRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGCreateOfferWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateOfferRequest: CreateOfferRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return OffersApiFp().pGCreateOfferWithConfiguration(cashfreeConfiguration, x_api_version, CreateOfferRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -16296,11 +22137,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return OffersApiFp().pGFetchOffer(x_api_version, offer_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGFetchOfferWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, offer_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return OffersApiFp().pGFetchOfferWithConfiguration(cashfreeConfiguration, x_api_version, offer_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -16356,11 +22247,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return OrdersApiFp().pGCreateOrder(x_api_version, CreateOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGCreateOrderWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateOrderRequest: CreateOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return OrdersApiFp().pGCreateOrderWithConfiguration(cashfreeConfiguration, x_api_version, CreateOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -16416,11 +22357,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return OrdersApiFp().pGFetchOrder(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGFetchOrderWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return OrdersApiFp().pGFetchOrderWithConfiguration(cashfreeConfiguration, x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -16477,11 +22468,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return OrdersApiFp().pGTerminateOrder(x_api_version, order_id, TerminateOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGTerminateOrderWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, TerminateOrderRequest: TerminateOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return OrdersApiFp().pGTerminateOrderWithConfiguration(cashfreeConfiguration, x_api_version, order_id, TerminateOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -16539,11 +22580,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return PGReconciliationApiFp().pGFetchRecon(x_api_version, FetchReconRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGFetchReconWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, FetchReconRequest: FetchReconRequest, Content_Type?: string, x_request_id?: string, x_idempotency_key?: string, Accept?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return PGReconciliationApiFp().pGFetchReconWithConfiguration(cashfreeConfiguration, x_api_version, FetchReconRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -16599,11 +22690,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return PaymentLinksApiFp().pGCancelLink(x_api_version, link_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGCancelLinkWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, link_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return PaymentLinksApiFp().pGCancelLinkWithConfiguration(cashfreeConfiguration, x_api_version, link_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -16659,11 +22800,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return PaymentLinksApiFp().pGCreateLink(x_api_version, CreateLinkRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGCreateLinkWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateLinkRequest: CreateLinkRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return PaymentLinksApiFp().pGCreateLinkWithConfiguration(cashfreeConfiguration, x_api_version, CreateLinkRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -16719,11 +22910,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return PaymentLinksApiFp().pGFetchLink(x_api_version, link_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGFetchLinkWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, link_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return PaymentLinksApiFp().pGFetchLinkWithConfiguration(cashfreeConfiguration, x_api_version, link_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -16780,11 +23021,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return PaymentLinksApiFp().pGLinkFetchOrders(x_api_version, link_id, x_request_id, x_idempotency_key, status, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGLinkFetchOrdersWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, link_id: string, x_request_id?: string, x_idempotency_key?: string, status?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return PaymentLinksApiFp().pGLinkFetchOrdersWithConfiguration(cashfreeConfiguration, x_api_version, link_id, x_request_id, x_idempotency_key, status, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -16841,11 +23132,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return PaymentsApiFp().pGAuthorizeOrder(x_api_version, order_id, AuthorizeOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGAuthorizeOrderWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, AuthorizeOrderRequest: AuthorizeOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return PaymentsApiFp().pGAuthorizeOrderWithConfiguration(cashfreeConfiguration, x_api_version, order_id, AuthorizeOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -16902,11 +23243,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return PaymentsApiFp().pGOrderAuthenticatePayment(x_api_version, cf_payment_id, OrderAuthenticatePaymentRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGOrderAuthenticatePaymentWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, cf_payment_id: string, OrderAuthenticatePaymentRequest: OrderAuthenticatePaymentRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return PaymentsApiFp().pGOrderAuthenticatePaymentWithConfiguration(cashfreeConfiguration, x_api_version, cf_payment_id, OrderAuthenticatePaymentRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -16963,11 +23354,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return PaymentsApiFp().pGOrderFetchPayment(x_api_version, order_id, cf_payment_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGOrderFetchPaymentWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, cf_payment_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return PaymentsApiFp().pGOrderFetchPaymentWithConfiguration(cashfreeConfiguration, x_api_version, order_id, cf_payment_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -17023,11 +23464,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return PaymentsApiFp().pGOrderFetchPayments(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGOrderFetchPaymentsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return PaymentsApiFp().pGOrderFetchPaymentsWithConfiguration(cashfreeConfiguration, x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -17083,11 +23574,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return PaymentsApiFp().pGPayOrder(x_api_version, PayOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGPayOrderWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, PayOrderRequest: PayOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return PaymentsApiFp().pGPayOrderWithConfiguration(cashfreeConfiguration, x_api_version, PayOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -17144,11 +23685,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return RefundsApiFp().pGOrderCreateRefund(x_api_version, order_id, OrderCreateRefundRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGOrderCreateRefundWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, OrderCreateRefundRequest: OrderCreateRefundRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return RefundsApiFp().pGOrderCreateRefundWithConfiguration(cashfreeConfiguration, x_api_version, order_id, OrderCreateRefundRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -17205,11 +23796,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return RefundsApiFp().pGOrderFetchRefund(x_api_version, order_id, refund_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGOrderFetchRefundWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, refund_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return RefundsApiFp().pGOrderFetchRefundWithConfiguration(cashfreeConfiguration, x_api_version, order_id, refund_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -17265,11 +23906,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return RefundsApiFp().pGOrderFetchRefunds(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGOrderFetchRefundsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return RefundsApiFp().pGOrderFetchRefundsWithConfiguration(cashfreeConfiguration, x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -17327,11 +24018,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SettlementReconciliationApiFp().pGFetchSettlements(x_api_version, FetchSettlementsRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGFetchSettlementsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, FetchSettlementsRequest: FetchSettlementsRequest, Content_Type?: string, x_request_id?: string, x_idempotency_key?: string, Accept?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SettlementReconciliationApiFp().pGFetchSettlementsWithConfiguration(cashfreeConfiguration, x_api_version, FetchSettlementsRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -17389,11 +24130,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SettlementReconciliationApiFp().pGSettlementFetchRecon(x_api_version, SettlementFetchReconRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGSettlementFetchReconWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, SettlementFetchReconRequest: SettlementFetchReconRequest, Content_Type?: string, x_request_id?: string, x_idempotency_key?: string, Accept?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SettlementReconciliationApiFp().pGSettlementFetchReconWithConfiguration(cashfreeConfiguration, x_api_version, SettlementFetchReconRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -17449,11 +24240,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SettlementsApiFp().markForSettlement(x_api_version, x_request_id, x_idempotency_key, CreateOrderSettlementRequestBody, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static MarkForSettlementWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, x_request_id?: string, x_idempotency_key?: string, CreateOrderSettlementRequestBody?: CreateOrderSettlementRequestBody, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SettlementsApiFp().markForSettlementWithConfiguration(cashfreeConfiguration, x_api_version, x_request_id, x_idempotency_key, CreateOrderSettlementRequestBody, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -17509,11 +24350,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SettlementsApiFp().pGOrderFetchSettlement(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGOrderFetchSettlementWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SettlementsApiFp().pGOrderFetchSettlementWithConfiguration(cashfreeConfiguration, x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -17569,11 +24460,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SimulationApiFp().pGFetchSimulation(x_api_version, simulation_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGFetchSimulationWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, simulation_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SimulationApiFp().pGFetchSimulationWithConfiguration(cashfreeConfiguration, x_api_version, simulation_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -17629,11 +24570,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SimulationApiFp().pGSimulatePayment(x_api_version, SimulateRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGSimulatePaymentWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, SimulateRequest: SimulateRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SimulationApiFp().pGSimulatePaymentWithConfiguration(cashfreeConfiguration, x_api_version, SimulateRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -17689,11 +24680,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SoftPOSApiFp().sposCreateTerminal(x_api_version, CreateTerminalRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SposCreateTerminalWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateTerminalRequest: CreateTerminalRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SoftPOSApiFp().sposCreateTerminalWithConfiguration(cashfreeConfiguration, x_api_version, CreateTerminalRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -17749,11 +24790,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SoftPOSApiFp().sposCreateTerminalTransaction(x_api_version, CreateTerminalTransactionRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SposCreateTerminalTransactionWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateTerminalTransactionRequest: CreateTerminalTransactionRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SoftPOSApiFp().sposCreateTerminalTransactionWithConfiguration(cashfreeConfiguration, x_api_version, CreateTerminalTransactionRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -17809,11 +24900,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SoftPOSApiFp().sposFetchTerminal(x_api_version, terminal_phone_no, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SposFetchTerminalWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, terminal_phone_no: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SoftPOSApiFp().sposFetchTerminalWithConfiguration(cashfreeConfiguration, x_api_version, terminal_phone_no, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -17870,11 +25011,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SoftPOSApiFp().sposFetchTerminalQRCodes(x_api_version, terminal_phone_no, cf_terminal_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SposFetchTerminalQRCodesWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, terminal_phone_no: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SoftPOSApiFp().sposFetchTerminalQRCodesWithConfiguration(cashfreeConfiguration, x_api_version, terminal_phone_no, cf_terminal_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -17931,11 +25122,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SoftPOSApiFp().sposFetchTerminalTransaction(x_api_version, utr, cf_terminal_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SposFetchTerminalTransactionWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, utr: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SoftPOSApiFp().sposFetchTerminalTransactionWithConfiguration(cashfreeConfiguration, x_api_version, utr, cf_terminal_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -17992,11 +25233,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SoftPOSApiFp().sposUpdateTerminal(x_api_version, cf_terminal_id, UpdateTerminalRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SposUpdateTerminalWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, cf_terminal_id: string, UpdateTerminalRequest: UpdateTerminalRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SoftPOSApiFp().sposUpdateTerminalWithConfiguration(cashfreeConfiguration, x_api_version, cf_terminal_id, UpdateTerminalRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -18053,11 +25344,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SoftPOSApiFp().sposUpdateTerminalStatus(x_api_version, cf_terminal_id, UpdateTerminalStatusRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SposUpdateTerminalStatusWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, cf_terminal_id: string, UpdateTerminalStatusRequest: UpdateTerminalStatusRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SoftPOSApiFp().sposUpdateTerminalStatusWithConfiguration(cashfreeConfiguration, x_api_version, cf_terminal_id, UpdateTerminalStatusRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -18114,11 +25455,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SoftPOSApiFp().sposUploadTerminalDocs(x_api_version, cf_terminal_id, UploadTerminalDocs, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SposUploadTerminalDocsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, cf_terminal_id: string, UploadTerminalDocs: UploadTerminalDocs, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SoftPOSApiFp().sposUploadTerminalDocsWithConfiguration(cashfreeConfiguration, x_api_version, cf_terminal_id, UploadTerminalDocs, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -18174,11 +25565,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SubscriptionApiFp().subsCreatePayment(x_api_version, CreateSubscriptionPaymentRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SubsCreatePaymentWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateSubscriptionPaymentRequest: CreateSubscriptionPaymentRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsCreatePaymentWithConfiguration(cashfreeConfiguration, x_api_version, CreateSubscriptionPaymentRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -18234,11 +25675,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SubscriptionApiFp().subsCreatePlan(x_api_version, CreatePlanRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SubsCreatePlanWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreatePlanRequest: CreatePlanRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsCreatePlanWithConfiguration(cashfreeConfiguration, x_api_version, CreatePlanRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -18295,11 +25786,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SubscriptionApiFp().subsCreateRefund(x_api_version, subscription_id, CreateSubscriptionRefundRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SubsCreateRefundWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string, CreateSubscriptionRefundRequest: CreateSubscriptionRefundRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsCreateRefundWithConfiguration(cashfreeConfiguration, x_api_version, subscription_id, CreateSubscriptionRefundRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -18355,11 +25896,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SubscriptionApiFp().subsCreateSubscription(x_api_version, CreateSubscriptionRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SubsCreateSubscriptionWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, CreateSubscriptionRequest: CreateSubscriptionRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsCreateSubscriptionWithConfiguration(cashfreeConfiguration, x_api_version, CreateSubscriptionRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -18415,11 +26006,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SubscriptionApiFp().subsFetchPlan(x_api_version, plan_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SubsFetchPlanWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, plan_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsFetchPlanWithConfiguration(cashfreeConfiguration, x_api_version, plan_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -18475,11 +26116,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SubscriptionApiFp().subsFetchSubscription(x_api_version, subscription_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SubsFetchSubscriptionWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsFetchSubscriptionWithConfiguration(cashfreeConfiguration, x_api_version, subscription_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -18536,11 +26227,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SubscriptionApiFp().subsFetchSubscriptionPayment(x_api_version, subscription_id, payment_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SubsFetchSubscriptionPaymentWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string, payment_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsFetchSubscriptionPaymentWithConfiguration(cashfreeConfiguration, x_api_version, subscription_id, payment_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -18596,11 +26337,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SubscriptionApiFp().subsFetchSubscriptionPayments(x_api_version, subscription_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SubsFetchSubscriptionPaymentsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsFetchSubscriptionPaymentsWithConfiguration(cashfreeConfiguration, x_api_version, subscription_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -18657,11 +26448,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SubscriptionApiFp().subsFetchSubscriptionRefund(x_api_version, subscription_id, refund_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SubsFetchSubscriptionRefundWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string, refund_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsFetchSubscriptionRefundWithConfiguration(cashfreeConfiguration, x_api_version, subscription_id, refund_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -18718,11 +26559,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SubscriptionApiFp().subsManageSubscription(x_api_version, subscription_id, ManageSubscriptionRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SubsManageSubscriptionWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string, ManageSubscriptionRequest: ManageSubscriptionRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsManageSubscriptionWithConfiguration(cashfreeConfiguration, x_api_version, subscription_id, ManageSubscriptionRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -18780,11 +26671,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SubscriptionApiFp().subsManageSubscriptionPayment(x_api_version, subscription_id, payment_id, ManageSubscriptionPaymentRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SubsManageSubscriptionPaymentWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, subscription_id: string, payment_id: string, ManageSubscriptionPaymentRequest: ManageSubscriptionPaymentRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subsManageSubscriptionPaymentWithConfiguration(cashfreeConfiguration, x_api_version, subscription_id, payment_id, ManageSubscriptionPaymentRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -18843,11 +26784,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SubscriptionApiFp().subscriptionDocumentUpload(x_api_version, payment_id, file, payment_id2, action, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SubscriptionDocumentUploadWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, payment_id: string, file: File, payment_id2: string, action: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subscriptionDocumentUploadWithConfiguration(cashfreeConfiguration, x_api_version, payment_id, file, payment_id2, action, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -18903,11 +26894,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return SubscriptionApiFp().subscriptionEligibility(x_api_version, SubscriptionEligibilityRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SubscriptionEligibilityWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, SubscriptionEligibilityRequest: SubscriptionEligibilityRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return SubscriptionApiFp().subscriptionEligibilityWithConfiguration(cashfreeConfiguration, x_api_version, SubscriptionEligibilityRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -18964,11 +27005,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return TokenVaultApiFp().pGCustomerDeleteInstrument(x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGCustomerDeleteInstrumentWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, customer_id: string, instrument_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return TokenVaultApiFp().pGCustomerDeleteInstrumentWithConfiguration(cashfreeConfiguration, x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -19025,11 +27116,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return TokenVaultApiFp().pGCustomerFetchInstrument(x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGCustomerFetchInstrumentWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, customer_id: string, instrument_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return TokenVaultApiFp().pGCustomerFetchInstrumentWithConfiguration(cashfreeConfiguration, x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -19086,11 +27227,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return TokenVaultApiFp().pGCustomerFetchInstruments(x_api_version, customer_id, instrument_type, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGCustomerFetchInstrumentsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, customer_id: string, instrument_type: PGCustomerFetchInstrumentsInstrumentTypeEnum, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return TokenVaultApiFp().pGCustomerFetchInstrumentsWithConfiguration(cashfreeConfiguration, x_api_version, customer_id, instrument_type, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -19147,11 +27338,61 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.2.3");
+                scope.setExtra('release', "4.3.0");
             });
         }
         try {
             return TokenVaultApiFp().pGCustomerInstrumentsFetchCryptogram(x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGCustomerInstrumentsFetchCryptogramWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, customer_id: string, instrument_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.0");
+            });
+        }
+        try {
+            return TokenVaultApiFp().pGCustomerInstrumentsFetchCryptogramWithConfiguration(cashfreeConfiguration, x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
