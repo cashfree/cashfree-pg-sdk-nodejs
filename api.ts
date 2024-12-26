@@ -27,6 +27,79 @@ import * as Sentry from "@sentry/node";
 import * as crypto from "crypto";
 
 /**
+ * Address associated with the customer.
+ * @export
+ * @interface AddressDetails
+ */
+export interface AddressDetails {
+    /**
+     * Full Name of the customer associated with the address.
+     * @type {string}
+     * @memberof AddressDetails
+     */
+    'name'?: string;
+    /**
+     * First line of the address.
+     * @type {string}
+     * @memberof AddressDetails
+     */
+    'address_line_one'?: string;
+    /**
+     * Second line of the address.
+     * @type {string}
+     * @memberof AddressDetails
+     */
+    'address_line_two'?: string;
+    /**
+     * Country Name.
+     * @type {string}
+     * @memberof AddressDetails
+     */
+    'country'?: string;
+    /**
+     * Country Code.
+     * @type {string}
+     * @memberof AddressDetails
+     */
+    'country_code'?: string;
+    /**
+     * State Name.
+     * @type {string}
+     * @memberof AddressDetails
+     */
+    'state'?: string;
+    /**
+     * State Code.
+     * @type {string}
+     * @memberof AddressDetails
+     */
+    'state_code'?: string;
+    /**
+     * City Name.
+     * @type {string}
+     * @memberof AddressDetails
+     */
+    'city'?: string;
+    /**
+     * Pin Code/Zip Code.
+     * @type {string}
+     * @memberof AddressDetails
+     */
+    'pin_code'?: string;
+    /**
+     * Customer Phone Number.
+     * @type {string}
+     * @memberof AddressDetails
+     */
+    'phone'?: string;
+    /**
+     * Cutomer Email Address.
+     * @type {string}
+     * @memberof AddressDetails
+     */
+    'email'?: string;
+}
+/**
  * Adjust Vendor Balance Request
  * @export
  * @interface AdjustVendorBalanceRequest
@@ -930,6 +1003,111 @@ export interface CardlessEMIQueries {
     'customer_details'?: CustomerDetailsCardlessEMI;
 }
 /**
+ * The cart details that are necessary like shipping address, billing address and more.
+ * @export
+ * @interface CartDetails
+ */
+export interface CartDetails {
+    /**
+     * 
+     * @type {number}
+     * @memberof CartDetails
+     */
+    'shipping_charge'?: number;
+    /**
+     * Name of the cart.
+     * @type {string}
+     * @memberof CartDetails
+     */
+    'cart_name'?: string;
+    /**
+     * 
+     * @type {Array<CartItem>}
+     * @memberof CartDetails
+     */
+    'cart_items'?: Array<CartItem>;
+}
+/**
+ * Cart Details in the Order Entity Response
+ * @export
+ * @interface CartDetailsEntity
+ */
+export interface CartDetailsEntity {
+    /**
+     * ID of the cart that was created
+     * @type {string}
+     * @memberof CartDetailsEntity
+     */
+    'cart_id'?: string;
+}
+/**
+ * Each item in the cart.
+ * @export
+ * @interface CartItem
+ */
+export interface CartItem {
+    /**
+     * Unique identifier of the item
+     * @type {string}
+     * @memberof CartItem
+     */
+    'item_id'?: string;
+    /**
+     * Name of the item
+     * @type {string}
+     * @memberof CartItem
+     */
+    'item_name'?: string;
+    /**
+     * Description of the item
+     * @type {string}
+     * @memberof CartItem
+     */
+    'item_description'?: string;
+    /**
+     * Tags attached to that item
+     * @type {Array<string>}
+     * @memberof CartItem
+     */
+    'item_tags'?: Array<string>;
+    /**
+     * Item details url
+     * @type {string}
+     * @memberof CartItem
+     */
+    'item_details_url'?: string;
+    /**
+     * Item image url
+     * @type {string}
+     * @memberof CartItem
+     */
+    'item_image_url'?: string;
+    /**
+     * Original price
+     * @type {number}
+     * @memberof CartItem
+     */
+    'item_original_unit_price'?: number;
+    /**
+     * Discounted Price
+     * @type {number}
+     * @memberof CartItem
+     */
+    'item_discounted_unit_price'?: number;
+    /**
+     * Currency of the item.
+     * @type {string}
+     * @memberof CartItem
+     */
+    'item_currency'?: string;
+    /**
+     * Quantity if that item
+     * @type {number}
+     * @memberof CartItem
+     */
+    'item_quantity'?: number;
+}
+/**
  * Cashback detail boject
  * @export
  * @interface CashbackDetails
@@ -999,6 +1177,25 @@ export interface ChargesDetails {
      * @memberof ChargesDetails
      */
     'is_postpaid'?: boolean;
+}
+/**
+ * Charges accociated with the order
+ * @export
+ * @interface ChargesEntity
+ */
+export interface ChargesEntity {
+    /**
+     * Shipping charge of the order
+     * @type {number}
+     * @memberof ChargesEntity
+     */
+    'shipping_charges'?: number;
+    /**
+     * COD handling fee for order
+     * @type {number}
+     * @memberof ChargesEntity
+     */
+    'cod_handling_charges'?: number;
 }
 /**
  * Request body to create a customer at cashfree
@@ -1167,6 +1364,12 @@ export interface CreateOrderRequest {
     'order_currency': string;
     /**
      * 
+     * @type {CartDetails}
+     * @memberof CreateOrderRequest
+     */
+    'cart_details'?: CartDetails;
+    /**
+     * 
      * @type {CustomerDetails}
      * @memberof CreateOrderRequest
      */
@@ -1245,6 +1448,19 @@ export interface CreateOrderSettlementRequestBodyMetaData {
      * @memberof CreateOrderSettlementRequestBodyMetaData
      */
     'settlement_date'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CreatePartnerVpaRequest
+ */
+export interface CreatePartnerVpaRequest {
+    /**
+     * count of vpa , to create in bulk, max limit:50
+     * @type {number}
+     * @memberof CreatePartnerVpaRequest
+     */
+    'vpa_count': number;
 }
 /**
  * Request body to create a plan.
@@ -1735,6 +1951,12 @@ export interface CreateSubscriptionRequestAuthorizationDetails {
      * @memberof CreateSubscriptionRequestAuthorizationDetails
      */
     'authorization_amount_refund'?: boolean;
+    /**
+     * Payment methods for the subscription. enach, pnach, upi, card are possible values.
+     * @type {Array<string>}
+     * @memberof CreateSubscriptionRequestAuthorizationDetails
+     */
+    'payment_methods'?: Array<string>;
 }
 /**
  * 
@@ -2210,6 +2432,31 @@ export interface CustomerDetailsCardlessEMI {
     'customer_phone': string;
 }
 /**
+ * 
+ * @export
+ * @interface CustomerDetailsInDisputesEntity
+ */
+export interface CustomerDetailsInDisputesEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof CustomerDetailsInDisputesEntity
+     */
+    'customer_name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CustomerDetailsInDisputesEntity
+     */
+    'customer_phone'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CustomerDetailsInDisputesEntity
+     */
+    'customer_email'?: string;
+}
+/**
  * The customer details that are necessary. Note that you can pass dummy details if your use case does not require the customer details.
  * @export
  * @interface CustomerDetailsResponse
@@ -2296,6 +2543,25 @@ export interface CustomerEntity {
     'customer_name'?: string;
 }
 /**
+ * Request body to demap soundbox vpa
+ * @export
+ * @interface DemapSoundboxVpaRequest
+ */
+export interface DemapSoundboxVpaRequest {
+    /**
+     * cashfree terminal id.
+     * @type {string}
+     * @memberof DemapSoundboxVpaRequest
+     */
+    'cf_terminal_id': string;
+    /**
+     * Device Serial No of soundbox that need to demap.
+     * @type {string}
+     * @memberof DemapSoundboxVpaRequest
+     */
+    'device_serial_no': string;
+}
+/**
  * detils of the discount object of offer
  * @export
  * @interface DiscountDetails
@@ -2328,6 +2594,311 @@ export const DiscountDetailsDiscountTypeEnum = {
 } as const;
 
 export type DiscountDetailsDiscountTypeEnum = typeof DiscountDetailsDiscountTypeEnum[keyof typeof DiscountDetailsDiscountTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface DisputeEvidence
+ */
+export interface DisputeEvidence extends Array<Evidence> {
+}
+/**
+ * 
+ * @export
+ * @interface DisputesEntity
+ */
+export interface DisputesEntity {
+    /**
+     * 
+     * @type {number}
+     * @memberof DisputesEntity
+     */
+    'dispute_id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof DisputesEntity
+     */
+    'dispute_type'?: DisputesEntityDisputeTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof DisputesEntity
+     */
+    'reason_code'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DisputesEntity
+     */
+    'reason_description'?: string;
+    /**
+     * Dispute amount may differ from transaction amount for partial cases.
+     * @type {number}
+     * @memberof DisputesEntity
+     */
+    'dispute_amount'?: number;
+    /**
+     * This is the time when the dispute was created.
+     * @type {string}
+     * @memberof DisputesEntity
+     */
+    'created_at'?: string;
+    /**
+     * This is the time by which evidence should be submitted to contest the dispute.
+     * @type {string}
+     * @memberof DisputesEntity
+     */
+    'respond_by'?: string;
+    /**
+     * This is the time when the dispute case was updated.
+     * @type {string}
+     * @memberof DisputesEntity
+     */
+    'updated_at'?: string;
+    /**
+     * This is the time when the dispute case was closed.
+     * @type {string}
+     * @memberof DisputesEntity
+     */
+    'resolved_at'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DisputesEntity
+     */
+    'dispute_status'?: DisputesEntityDisputeStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof DisputesEntity
+     */
+    'cf_dispute_remarks'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof DisputesEntity
+     */
+    'preferred_evidence'?: object;
+    /**
+     * 
+     * @type {Array<Evidence>}
+     * @memberof DisputesEntity
+     */
+    'dispute_evidence'?: Array<Evidence>;
+    /**
+     * 
+     * @type {OrderDetailsInDisputesEntity}
+     * @memberof DisputesEntity
+     */
+    'order_details'?: OrderDetailsInDisputesEntity;
+    /**
+     * 
+     * @type {CustomerDetailsInDisputesEntity}
+     * @memberof DisputesEntity
+     */
+    'customer_details'?: CustomerDetailsInDisputesEntity;
+}
+
+export const DisputesEntityDisputeTypeEnum = {
+    DISPUTE: 'DISPUTE',
+    CHARGEBACK: 'CHARGEBACK',
+    RETRIEVAL: 'RETRIEVAL',
+    PRE_ARBITRATION: 'PRE_ARBITRATION',
+    ARBITRATION: 'ARBITRATION',
+    UNKNOWN_DEFAULT_OPEN_API: '11184809'
+} as const;
+
+export type DisputesEntityDisputeTypeEnum = typeof DisputesEntityDisputeTypeEnum[keyof typeof DisputesEntityDisputeTypeEnum];
+export const DisputesEntityDisputeStatusEnum = {
+    DISPUTE_CREATED: 'DISPUTE_CREATED',
+    DISPUTE_DOCS_RECEIVED: 'DISPUTE_DOCS_RECEIVED',
+    DISPUTE_UNDER_REVIEW: 'DISPUTE_UNDER_REVIEW',
+    DISPUTE_MERCHANT_WON: 'DISPUTE_MERCHANT_WON',
+    DISPUTE_MERCHANT_LOST: 'DISPUTE_MERCHANT_LOST',
+    DISPUTE_MERCHANT_ACCEPTED: 'DISPUTE_MERCHANT_ACCEPTED',
+    DISPUTE_INSUFFICIENT_EVIDENCE: 'DISPUTE_INSUFFICIENT_EVIDENCE',
+    CHARGEBACK_CREATED: 'CHARGEBACK_CREATED',
+    CHARGEBACK_DOCS_RECEIVED: 'CHARGEBACK_DOCS_RECEIVED',
+    CHARGEBACK_UNDER_REVIEW: 'CHARGEBACK_UNDER_REVIEW',
+    CHARGEBACK_MERCHANT_WON: 'CHARGEBACK_MERCHANT_WON',
+    CHARGEBACK_MERCHANT_LOST: 'CHARGEBACK_MERCHANT_LOST',
+    CHARGEBACK_MERCHANT_ACCEPTED: 'CHARGEBACK_MERCHANT_ACCEPTED',
+    CHARGEBACK_INSUFFICIENT_EVIDENCE: 'CHARGEBACK_INSUFFICIENT_EVIDENCE',
+    RETRIEVAL_CREATED: 'RETRIEVAL_CREATED',
+    RETRIEVAL_DOCS_RECEIVED: 'RETRIEVAL_DOCS_RECEIVED',
+    RETRIEVAL_UNDER_REVIEW: 'RETRIEVAL_UNDER_REVIEW',
+    RETRIEVAL_MERCHANT_WON: 'RETRIEVAL_MERCHANT_WON',
+    RETRIEVAL_MERCHANT_LOST: 'RETRIEVAL_MERCHANT_LOST',
+    RETRIEVAL_MERCHANT_ACCEPTED: 'RETRIEVAL_MERCHANT_ACCEPTED',
+    RETRIEVAL_INSUFFICIENT_EVIDENCE: 'RETRIEVAL_INSUFFICIENT_EVIDENCE',
+    PRE_ARBITRATION_CREATED: 'PRE_ARBITRATION_CREATED',
+    PRE_ARBITRATION_DOCS_RECEIVED: 'PRE_ARBITRATION_DOCS_RECEIVED',
+    PRE_ARBITRATION_UNDER_REVIEW: 'PRE_ARBITRATION_UNDER_REVIEW',
+    PRE_ARBITRATION_MERCHANT_WON: 'PRE_ARBITRATION_MERCHANT_WON',
+    PRE_ARBITRATION_MERCHANT_LOST: 'PRE_ARBITRATION_MERCHANT_LOST',
+    PRE_ARBITRATION_MERCHANT_ACCEPTED: 'PRE_ARBITRATION_MERCHANT_ACCEPTED',
+    PRE_ARBITRATION_INSUFFICIENT_EVIDENCE: 'PRE_ARBITRATION_INSUFFICIENT_EVIDENCE',
+    ARBITRATION_CREATED: 'ARBITRATION_CREATED',
+    ARBITRATION_DOCS_RECEIVED: 'ARBITRATION_DOCS_RECEIVED',
+    ARBITRATION_UNDER_REVIEW: 'ARBITRATION_UNDER_REVIEW',
+    ARBITRATION_MERCHANT_WON: 'ARBITRATION_MERCHANT_WON',
+    ARBITRATION_MERCHANT_LOST: 'ARBITRATION_MERCHANT_LOST',
+    ARBITRATION_MERCHANT_ACCEPTED: 'ARBITRATION_MERCHANT_ACCEPTED',
+    ARBITRATION_INSUFFICIENT_EVIDENCE: 'ARBITRATION_INSUFFICIENT_EVIDENCE',
+    UNKNOWN_DEFAULT_OPEN_API: '11184809'
+} as const;
+
+export type DisputesEntityDisputeStatusEnum = typeof DisputesEntityDisputeStatusEnum[keyof typeof DisputesEntityDisputeStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface DisputesEntityMerchantAccepted
+ */
+export interface DisputesEntityMerchantAccepted {
+    /**
+     * 
+     * @type {number}
+     * @memberof DisputesEntityMerchantAccepted
+     */
+    'dispute_id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof DisputesEntityMerchantAccepted
+     */
+    'dispute_type'?: DisputesEntityMerchantAcceptedDisputeTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof DisputesEntityMerchantAccepted
+     */
+    'reason_code'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DisputesEntityMerchantAccepted
+     */
+    'reason_description'?: string;
+    /**
+     * Dispute amount may differ from transaction amount for partial cases.
+     * @type {number}
+     * @memberof DisputesEntityMerchantAccepted
+     */
+    'dispute_amount'?: number;
+    /**
+     * This is the time when the dispute was created.
+     * @type {string}
+     * @memberof DisputesEntityMerchantAccepted
+     */
+    'created_at'?: string;
+    /**
+     * This is the time by which evidence should be submitted to contest the dispute.
+     * @type {string}
+     * @memberof DisputesEntityMerchantAccepted
+     */
+    'respond_by'?: string;
+    /**
+     * This is the time when the dispute case was updated.
+     * @type {string}
+     * @memberof DisputesEntityMerchantAccepted
+     */
+    'updated_at'?: string;
+    /**
+     * This is the time when the dispute case was closed.
+     * @type {string}
+     * @memberof DisputesEntityMerchantAccepted
+     */
+    'resolved_at'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DisputesEntityMerchantAccepted
+     */
+    'dispute_status'?: DisputesEntityMerchantAcceptedDisputeStatusEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof DisputesEntityMerchantAccepted
+     */
+    'cf_dispute_remarks'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof DisputesEntityMerchantAccepted
+     */
+    'preferred_evidence'?: object;
+    /**
+     * 
+     * @type {Array<Evidence>}
+     * @memberof DisputesEntityMerchantAccepted
+     */
+    'dispute_evidence'?: Array<Evidence>;
+    /**
+     * 
+     * @type {OrderDetailsInDisputesEntity}
+     * @memberof DisputesEntityMerchantAccepted
+     */
+    'order_details'?: OrderDetailsInDisputesEntity;
+    /**
+     * 
+     * @type {CustomerDetailsInDisputesEntity}
+     * @memberof DisputesEntityMerchantAccepted
+     */
+    'customer_details'?: CustomerDetailsInDisputesEntity;
+}
+
+export const DisputesEntityMerchantAcceptedDisputeTypeEnum = {
+    DISPUTE: 'DISPUTE',
+    CHARGEBACK: 'CHARGEBACK',
+    RETRIEVAL: 'RETRIEVAL',
+    PRE_ARBITRATION: 'PRE_ARBITRATION',
+    ARBITRATION: 'ARBITRATION',
+    UNKNOWN_DEFAULT_OPEN_API: '11184809'
+} as const;
+
+export type DisputesEntityMerchantAcceptedDisputeTypeEnum = typeof DisputesEntityMerchantAcceptedDisputeTypeEnum[keyof typeof DisputesEntityMerchantAcceptedDisputeTypeEnum];
+export const DisputesEntityMerchantAcceptedDisputeStatusEnum = {
+    DISPUTE_CREATED: 'DISPUTE_CREATED',
+    DISPUTE_DOCS_RECEIVED: 'DISPUTE_DOCS_RECEIVED',
+    DISPUTE_UNDER_REVIEW: 'DISPUTE_UNDER_REVIEW',
+    DISPUTE_MERCHANT_WON: 'DISPUTE_MERCHANT_WON',
+    DISPUTE_MERCHANT_LOST: 'DISPUTE_MERCHANT_LOST',
+    DISPUTE_MERCHANT_ACCEPTED: 'DISPUTE_MERCHANT_ACCEPTED',
+    DISPUTE_INSUFFICIENT_EVIDENCE: 'DISPUTE_INSUFFICIENT_EVIDENCE',
+    CHARGEBACK_CREATED: 'CHARGEBACK_CREATED',
+    CHARGEBACK_DOCS_RECEIVED: 'CHARGEBACK_DOCS_RECEIVED',
+    CHARGEBACK_UNDER_REVIEW: 'CHARGEBACK_UNDER_REVIEW',
+    CHARGEBACK_MERCHANT_WON: 'CHARGEBACK_MERCHANT_WON',
+    CHARGEBACK_MERCHANT_LOST: 'CHARGEBACK_MERCHANT_LOST',
+    CHARGEBACK_MERCHANT_ACCEPTED: 'CHARGEBACK_MERCHANT_ACCEPTED',
+    CHARGEBACK_INSUFFICIENT_EVIDENCE: 'CHARGEBACK_INSUFFICIENT_EVIDENCE',
+    RETRIEVAL_CREATED: 'RETRIEVAL_CREATED',
+    RETRIEVAL_DOCS_RECEIVED: 'RETRIEVAL_DOCS_RECEIVED',
+    RETRIEVAL_UNDER_REVIEW: 'RETRIEVAL_UNDER_REVIEW',
+    RETRIEVAL_MERCHANT_WON: 'RETRIEVAL_MERCHANT_WON',
+    RETRIEVAL_MERCHANT_LOST: 'RETRIEVAL_MERCHANT_LOST',
+    RETRIEVAL_MERCHANT_ACCEPTED: 'RETRIEVAL_MERCHANT_ACCEPTED',
+    RETRIEVAL_INSUFFICIENT_EVIDENCE: 'RETRIEVAL_INSUFFICIENT_EVIDENCE',
+    PRE_ARBITRATION_CREATED: 'PRE_ARBITRATION_CREATED',
+    PRE_ARBITRATION_DOCS_RECEIVED: 'PRE_ARBITRATION_DOCS_RECEIVED',
+    PRE_ARBITRATION_UNDER_REVIEW: 'PRE_ARBITRATION_UNDER_REVIEW',
+    PRE_ARBITRATION_MERCHANT_WON: 'PRE_ARBITRATION_MERCHANT_WON',
+    PRE_ARBITRATION_MERCHANT_LOST: 'PRE_ARBITRATION_MERCHANT_LOST',
+    PRE_ARBITRATION_MERCHANT_ACCEPTED: 'PRE_ARBITRATION_MERCHANT_ACCEPTED',
+    PRE_ARBITRATION_INSUFFICIENT_EVIDENCE: 'PRE_ARBITRATION_INSUFFICIENT_EVIDENCE',
+    ARBITRATION_CREATED: 'ARBITRATION_CREATED',
+    ARBITRATION_DOCS_RECEIVED: 'ARBITRATION_DOCS_RECEIVED',
+    ARBITRATION_UNDER_REVIEW: 'ARBITRATION_UNDER_REVIEW',
+    ARBITRATION_MERCHANT_WON: 'ARBITRATION_MERCHANT_WON',
+    ARBITRATION_MERCHANT_LOST: 'ARBITRATION_MERCHANT_LOST',
+    ARBITRATION_MERCHANT_ACCEPTED: 'ARBITRATION_MERCHANT_ACCEPTED',
+    ARBITRATION_INSUFFICIENT_EVIDENCE: 'ARBITRATION_INSUFFICIENT_EVIDENCE',
+    UNKNOWN_DEFAULT_OPEN_API: '11184809'
+} as const;
+
+export type DisputesEntityMerchantAcceptedDisputeStatusEnum = typeof DisputesEntityMerchantAcceptedDisputeStatusEnum[keyof typeof DisputesEntityMerchantAcceptedDisputeStatusEnum];
 
 /**
  * 
@@ -3079,6 +3650,137 @@ export interface ErrorDetailsInPaymentsEntity {
     'error_subcode_raw'?: string;
 }
 /**
+ * 
+ * @export
+ * @interface Evidence
+ */
+export interface Evidence {
+    /**
+     * 
+     * @type {number}
+     * @memberof Evidence
+     */
+    'document_id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Evidence
+     */
+    'document_name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Evidence
+     */
+    'document_type'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface EvidenceSubmittedToContestDispute
+ */
+export interface EvidenceSubmittedToContestDispute {
+    /**
+     * 
+     * @type {number}
+     * @memberof EvidenceSubmittedToContestDispute
+     */
+    'documentId'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof EvidenceSubmittedToContestDispute
+     */
+    'documentName'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EvidenceSubmittedToContestDispute
+     */
+    'documentType'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EvidenceSubmittedToContestDispute
+     */
+    'downloadUrl'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface EvidencesToContestDispute
+ */
+export interface EvidencesToContestDispute {
+    /**
+     * 
+     * @type {string}
+     * @memberof EvidencesToContestDispute
+     */
+    'document_type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof EvidencesToContestDispute
+     */
+    'document_description'?: string;
+}
+/**
+ * The cart details that are necessary like shipping address, billing address and more.
+ * @export
+ * @interface ExtendedCartDetails
+ */
+export interface ExtendedCartDetails {
+    /**
+     * Name of the cart.
+     * @type {string}
+     * @memberof ExtendedCartDetails
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {Array<CartItem>}
+     * @memberof ExtendedCartDetails
+     */
+    'items'?: Array<CartItem>;
+}
+/**
+ * Recent Customer details associated with the order.
+ * @export
+ * @interface ExtendedCustomerDetails
+ */
+export interface ExtendedCustomerDetails {
+    /**
+     * A unique identifier for the customer. Use alphanumeric values only.
+     * @type {string}
+     * @memberof ExtendedCustomerDetails
+     */
+    'customer_id'?: string;
+    /**
+     * Customer email address.
+     * @type {string}
+     * @memberof ExtendedCustomerDetails
+     */
+    'customer_email'?: string;
+    /**
+     * Customer phone number.
+     * @type {string}
+     * @memberof ExtendedCustomerDetails
+     */
+    'customer_phone'?: string;
+    /**
+     * Name of the customer.
+     * @type {string}
+     * @memberof ExtendedCustomerDetails
+     */
+    'customer_name'?: string;
+    /**
+     * Customer identifier at Cashfree. You will get this when you create/get customer      
+     * @type {string}
+     * @memberof ExtendedCustomerDetails
+     */
+    'customer_uid'?: string;
+}
+/**
  * Recon object
  * @export
  * @interface FetchReconRequest
@@ -3680,10 +4382,10 @@ export interface LinkMetaResponseEntity {
     'notify_url'?: string;
     /**
      * If \"true\", link will directly open UPI Intent flow on mobile, and normal link flow elsewhere
-     * @type {boolean}
+     * @type {string}
      * @memberof LinkMetaResponseEntity
      */
-    'upi_intent'?: boolean;
+    'upi_intent'?: string;
     /**
      * The URL to which user will be redirected to after the payment is done on the link. Maximum length: 250.
      * @type {string}
@@ -3961,6 +4663,49 @@ export interface OfferEntity {
     'offer_validations'?: OfferValidations;
 }
 /**
+ * Details of the offer which got applied to the paid order.
+ * @export
+ * @interface OfferExtendedDetails
+ */
+export interface OfferExtendedDetails {
+    /**
+     * 
+     * @type {string}
+     * @memberof OfferExtendedDetails
+     */
+    'offer_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OfferExtendedDetails
+     */
+    'offer_status'?: string;
+    /**
+     * 
+     * @type {OfferMeta}
+     * @memberof OfferExtendedDetails
+     */
+    'offer_meta'?: OfferMeta;
+    /**
+     * 
+     * @type {OfferTnc}
+     * @memberof OfferExtendedDetails
+     */
+    'offer_tnc'?: OfferTnc;
+    /**
+     * 
+     * @type {OfferDetails}
+     * @memberof OfferExtendedDetails
+     */
+    'offer_details'?: OfferDetails;
+    /**
+     * 
+     * @type {OfferValidations}
+     * @memberof OfferExtendedDetails
+     */
+    'offer_validations'?: OfferValidations;
+}
+/**
  * Filter for offers
  * @export
  * @interface OfferFilters
@@ -4171,6 +4916,43 @@ export interface OfferWallet {
     'app': WalletOffer;
 }
 /**
+ * Request body to onboard soundbox vpa
+ * @export
+ * @interface OnboardSoundboxVpaRequest
+ */
+export interface OnboardSoundboxVpaRequest {
+    /**
+     * Terminal Vpa ,that need to onboard on soundbox
+     * @type {string}
+     * @memberof OnboardSoundboxVpaRequest
+     */
+    'vpa': string;
+    /**
+     * cashfree terminal id.
+     * @type {string}
+     * @memberof OnboardSoundboxVpaRequest
+     */
+    'cf_terminal_id': string;
+    /**
+     * Device Serial No of soundbox
+     * @type {string}
+     * @memberof OnboardSoundboxVpaRequest
+     */
+    'device_serial_no': string;
+    /**
+     * Merchant Name that need to onboard on soundbox
+     * @type {string}
+     * @memberof OnboardSoundboxVpaRequest
+     */
+    'merchant_name'?: string;
+    /**
+     * language of soundbox,currently English, Hindi, Tamil
+     * @type {string}
+     * @memberof OnboardSoundboxVpaRequest
+     */
+    'language'?: string;
+}
+/**
  * This is the response shared when merchant inovkes the OTP submit or resend API
  * @export
  * @interface OrderAuthenticateEntity
@@ -4292,6 +5074,95 @@ export const OrderCreateRefundRequestRefundSpeedEnum = {
 export type OrderCreateRefundRequestRefundSpeedEnum = typeof OrderCreateRefundRequestRefundSpeedEnum[keyof typeof OrderCreateRefundRequestRefundSpeedEnum];
 
 /**
+ * Order delivery Status associated with order.
+ * @export
+ * @interface OrderDeliveryStatus
+ */
+export interface OrderDeliveryStatus {
+    /**
+     * Delivery status of order
+     * @type {string}
+     * @memberof OrderDeliveryStatus
+     */
+    'status': OrderDeliveryStatusStatusEnum;
+    /**
+     * Reason of provided order delivery status. This is optional field.
+     * @type {string}
+     * @memberof OrderDeliveryStatus
+     */
+    'reason'?: string;
+}
+
+export const OrderDeliveryStatusStatusEnum = {
+    AWAITING_PICKUP: 'AWAITING_PICKUP',
+    CANCELLED: 'CANCELLED',
+    SELF_FULFILLED: 'SELF_FULFILLED',
+    PICKED_UP: 'PICKED_UP',
+    SHIPPED: 'SHIPPED',
+    IN_TRANSIT: 'IN_TRANSIT',
+    DELAY_COURIER_COMPANY_ISSUES: 'DELAY_COURIER_COMPANY_ISSUES',
+    DELAY_INCORRECT_ADDRESS: 'DELAY_INCORRECT_ADDRESS',
+    DELAY_SELLER_ISSUES: 'DELAY_SELLER_ISSUES',
+    REACHED_DESTINATION_HUB: 'REACHED_DESTINATION_HUB',
+    OUT_FOR_DELIVERY: 'OUT_FOR_DELIVERY',
+    DELIVERED: 'DELIVERED',
+    POTENTIAL_RTO_DELIVERY_ATTEMPTED: 'POTENTIAL_RTO_DELIVERY_ATTEMPTED',
+    RTO: 'RTO',
+    LOST: 'LOST',
+    DAMAGED: 'DAMAGED',
+    UNTRACKABLE_404: 'UNTRACKABLE_404',
+    MANUAL_INTERVENTION_BROKEN_URL: 'MANUAL_INTERVENTION_BROKEN_URL',
+    ASSOCIATED_WITH_RETURN_PICKUP: 'ASSOCIATED_WITH_RETURN_PICKUP',
+    UNSERVICEABLE: 'UNSERVICEABLE',
+    UNKNOWN_DEFAULT_OPEN_API: '11184809'
+} as const;
+
+export type OrderDeliveryStatusStatusEnum = typeof OrderDeliveryStatusStatusEnum[keyof typeof OrderDeliveryStatusStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface OrderDetailsInDisputesEntity
+ */
+export interface OrderDetailsInDisputesEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof OrderDetailsInDisputesEntity
+     */
+    'order_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OrderDetailsInDisputesEntity
+     */
+    'order_currency'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof OrderDetailsInDisputesEntity
+     */
+    'order_amount'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof OrderDetailsInDisputesEntity
+     */
+    'cf_payment_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof OrderDetailsInDisputesEntity
+     */
+    'payment_currency'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof OrderDetailsInDisputesEntity
+     */
+    'payment_amount'?: number;
+}
+/**
  * The complete order entity
  * @export
  * @interface OrderEntity
@@ -4381,6 +5252,85 @@ export interface OrderEntity {
      * @memberof OrderEntity
      */
     'order_tags'?: { [key: string]: string; };
+    /**
+     * 
+     * @type {CartDetailsEntity}
+     * @memberof OrderEntity
+     */
+    'cart_details'?: CartDetailsEntity;
+}
+/**
+ * The complete order extended data entity
+ * @export
+ * @interface OrderExtendedDataEntity
+ */
+export interface OrderExtendedDataEntity {
+    /**
+     * unique id generated by cashfree for your order
+     * @type {string}
+     * @memberof OrderExtendedDataEntity
+     */
+    'cf_order_id'?: string;
+    /**
+     * order_id sent during the api request
+     * @type {string}
+     * @memberof OrderExtendedDataEntity
+     */
+    'order_id'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof OrderExtendedDataEntity
+     */
+    'order_amount'?: number;
+    /**
+     * Currency of the order. Example INR
+     * @type {string}
+     * @memberof OrderExtendedDataEntity
+     */
+    'order_currency'?: string;
+    /**
+     * When the order was created at cashfree\'s server
+     * @type {string}
+     * @memberof OrderExtendedDataEntity
+     */
+    'created_at'?: string;
+    /**
+     * 
+     * @type {ChargesEntity}
+     * @memberof OrderExtendedDataEntity
+     */
+    'charges'?: ChargesEntity;
+    /**
+     * 
+     * @type {ExtendedCustomerDetails}
+     * @memberof OrderExtendedDataEntity
+     */
+    'customer_details'?: ExtendedCustomerDetails;
+    /**
+     * 
+     * @type {AddressDetails}
+     * @memberof OrderExtendedDataEntity
+     */
+    'shipping_address'?: AddressDetails;
+    /**
+     * 
+     * @type {AddressDetails}
+     * @memberof OrderExtendedDataEntity
+     */
+    'billing_address'?: AddressDetails;
+    /**
+     * 
+     * @type {ExtendedCartDetails}
+     * @memberof OrderExtendedDataEntity
+     */
+    'cart'?: ExtendedCartDetails;
+    /**
+     * 
+     * @type {OfferExtendedDetails}
+     * @memberof OrderExtendedDataEntity
+     */
+    'offer'?: OfferExtendedDetails;
 }
 /**
  * Optional meta details to control how the customer pays and how payment journey completes
@@ -6048,7 +6998,7 @@ export interface RefundEntity {
      * @type {string}
      * @memberof RefundEntity
      */
-    'refund_mode'?: RefundEntityRefundModeEnum;
+    'refund_mode'?: string;
     /**
      * Time of refund creation
      * @type {string}
@@ -6092,13 +7042,6 @@ export const RefundEntityRefundTypeEnum = {
 } as const;
 
 export type RefundEntityRefundTypeEnum = typeof RefundEntityRefundTypeEnum[keyof typeof RefundEntityRefundTypeEnum];
-export const RefundEntityRefundModeEnum = {
-    STANDARD: 'STANDARD',
-    INSTANT: 'INSTANT',
-    UNKNOWN_DEFAULT_OPEN_API: '11184809'
-} as const;
-
-export type RefundEntityRefundModeEnum = typeof RefundEntityRefundModeEnum[keyof typeof RefundEntityRefundModeEnum];
 
 /**
  * How fast refund has to be proecessed
@@ -6622,19 +7565,44 @@ export interface SettlementWebhookDataEntity {
     'settlement'?: SettlementEntity;
 }
 /**
+ * Shipment details associated with shipping of order like tracking company, tracking number,tracking urls etc.
+ * @export
+ * @interface ShipmentDetails
+ */
+export interface ShipmentDetails {
+    /**
+     * Tracking company name associated with order.
+     * @type {string}
+     * @memberof ShipmentDetails
+     */
+    'tracking_company': string;
+    /**
+     * Tracking Urls associated with order.
+     * @type {Array<string>}
+     * @memberof ShipmentDetails
+     */
+    'tracking_urls': Array<string>;
+    /**
+     * Tracking Numbers associated with order.
+     * @type {Array<string>}
+     * @memberof ShipmentDetails
+     */
+    'tracking_numbers': Array<string>;
+}
+/**
  * simulate payment request object
  * @export
  * @interface SimulateRequest
  */
 export interface SimulateRequest {
     /**
-     * Entity type should be PAYMENTS only.
+     * Entity type should be PAYMENTS or SUBS_PAYMENTS only.
      * @type {string}
      * @memberof SimulateRequest
      */
     'entity': SimulateRequestEntityEnum;
     /**
-     * In case of Entity type is PAYMENTS, entity_id will be transactionId
+     * If the entity type is PAYMENTS, the entity_id will be the transactionId. If the entity type is SUBS_PAYMENTS, the entity_id will be the merchantTxnId
      * @type {string}
      * @memberof SimulateRequest
      */
@@ -6649,6 +7617,7 @@ export interface SimulateRequest {
 
 export const SimulateRequestEntityEnum = {
     PAYMENTS: 'PAYMENTS',
+    SUBS_PAYMENTS: 'SUBS_PAYMENTS',
     UNKNOWN_DEFAULT_OPEN_API: '11184809'
 } as const;
 
@@ -6684,6 +7653,43 @@ export interface SimulationResponse {
      * @memberof SimulationResponse
      */
     'entity_simulation'?: EntitySimulationResponse;
+}
+/**
+ * soundbox response object
+ * @export
+ * @interface SoundboxVpaEntity
+ */
+export interface SoundboxVpaEntity {
+    /**
+     * 
+     * @type {string}
+     * @memberof SoundboxVpaEntity
+     */
+    'vpa'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SoundboxVpaEntity
+     */
+    'cf_terminal_id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SoundboxVpaEntity
+     */
+    'device_serial_no'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SoundboxVpaEntity
+     */
+    'merchant_name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SoundboxVpaEntity
+     */
+    'language'?: string;
 }
 /**
  * Split After Payment Request
@@ -6753,6 +7759,184 @@ export interface SplitAfterPaymentResponse {
      * @memberof SplitAfterPaymentResponse
      */
     'message'?: string;
+}
+/**
+ * Split Order Reconciliation Request Body
+ * @export
+ * @interface SplitOrderReconSuccessResponse
+ */
+export interface SplitOrderReconSuccessResponse {
+    /**
+     * 
+     * @type {SplitOrderReconSuccessResponseSettlement}
+     * @memberof SplitOrderReconSuccessResponse
+     */
+    'settlement'?: SplitOrderReconSuccessResponseSettlement;
+    /**
+     * List of refunds associated with the order, if any.
+     * @type {Array<object>}
+     * @memberof SplitOrderReconSuccessResponse
+     */
+    'refunds'?: Array<object>;
+    /**
+     * List of vendor settlements associated with the split settlement.
+     * @type {Array<SplitOrderReconSuccessResponseVendorsInner>}
+     * @memberof SplitOrderReconSuccessResponse
+     */
+    'vendors'?: Array<SplitOrderReconSuccessResponseVendorsInner>;
+}
+/**
+ * Details of the settlement information.
+ * @export
+ * @interface SplitOrderReconSuccessResponseSettlement
+ */
+export interface SplitOrderReconSuccessResponseSettlement {
+    /**
+     * Type of entity. Example: \"settlement\".
+     * @type {string}
+     * @memberof SplitOrderReconSuccessResponseSettlement
+     */
+    'entity'?: string;
+    /**
+     * Unique Cashfree settlement ID.
+     * @type {number}
+     * @memberof SplitOrderReconSuccessResponseSettlement
+     */
+    'cf_settlement_id'?: number;
+    /**
+     * Unique Cashfree payment ID associated with the order.
+     * @type {number}
+     * @memberof SplitOrderReconSuccessResponseSettlement
+     */
+    'cf_payment_id'?: number;
+    /**
+     * Unique identifier for the order.
+     * @type {string}
+     * @memberof SplitOrderReconSuccessResponseSettlement
+     */
+    'order_id'?: string;
+    /**
+     * Currency of the order. Example: \"INR\".
+     * @type {string}
+     * @memberof SplitOrderReconSuccessResponseSettlement
+     */
+    'order_currency'?: string;
+    /**
+     * Unique transfer ID if available, otherwise null.
+     * @type {string}
+     * @memberof SplitOrderReconSuccessResponseSettlement
+     */
+    'transfer_id'?: string | null;
+    /**
+     * Total amount of the order.
+     * @type {number}
+     * @memberof SplitOrderReconSuccessResponseSettlement
+     */
+    'order_amount'?: number;
+    /**
+     * Service charge for the order.
+     * @type {number}
+     * @memberof SplitOrderReconSuccessResponseSettlement
+     */
+    'service_charge'?: number;
+    /**
+     * Service tax for the order.
+     * @type {number}
+     * @memberof SplitOrderReconSuccessResponseSettlement
+     */
+    'service_tax'?: number;
+    /**
+     * Amount to be settled after charges and tax.
+     * @type {number}
+     * @memberof SplitOrderReconSuccessResponseSettlement
+     */
+    'settlement_amount'?: number;
+    /**
+     * Currency of the settlement. Example: \"INR\".
+     * @type {string}
+     * @memberof SplitOrderReconSuccessResponseSettlement
+     */
+    'settlement_currency'?: string;
+    /**
+     * UTR (Unique Transaction Reference) for the transfer if available, otherwise null.
+     * @type {string}
+     * @memberof SplitOrderReconSuccessResponseSettlement
+     */
+    'transfer_utr'?: string | null;
+    /**
+     * Time of transfer if available, otherwise null.
+     * @type {string}
+     * @memberof SplitOrderReconSuccessResponseSettlement
+     */
+    'transfer_time'?: string | null;
+    /**
+     * Timestamp when payment was made.
+     * @type {string}
+     * @memberof SplitOrderReconSuccessResponseSettlement
+     */
+    'payment_time'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface SplitOrderReconSuccessResponseVendorsInner
+ */
+export interface SplitOrderReconSuccessResponseVendorsInner {
+    /**
+     * Unique identifier for the vendor.
+     * @type {string}
+     * @memberof SplitOrderReconSuccessResponseVendorsInner
+     */
+    'vendor_id'?: string;
+    /**
+     * Settlement ID associated with the vendor.
+     * @type {number}
+     * @memberof SplitOrderReconSuccessResponseVendorsInner
+     */
+    'settlement_id'?: number;
+    /**
+     * Settlement amount allocated to the vendor.
+     * @type {number}
+     * @memberof SplitOrderReconSuccessResponseVendorsInner
+     */
+    'settlement_amount'?: number;
+    /**
+     * Date and time when the vendor is eligible for the settlement.
+     * @type {string}
+     * @memberof SplitOrderReconSuccessResponseVendorsInner
+     */
+    'settlement_eligibility_date'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface StaticQrResponseEntity
+ */
+export interface StaticQrResponseEntity {
+    /**
+     * cashfree terminal id
+     * @type {number}
+     * @memberof StaticQrResponseEntity
+     */
+    'cf_terminal_id'?: number;
+    /**
+     * Virtual Address
+     * @type {string}
+     * @memberof StaticQrResponseEntity
+     */
+    'vpa'?: string;
+    /**
+     * Status of vpa
+     * @type {string}
+     * @memberof StaticQrResponseEntity
+     */
+    'status'?: string;
+    /**
+     * qrcode
+     * @type {string}
+     * @memberof StaticQrResponseEntity
+     */
+    'qrCode'?: string;
 }
 /**
  * Static Split Request
@@ -6940,7 +8124,7 @@ export interface SubscriptionCustomerDetails {
      */
     'customer_bank_ifsc'?: string;
     /**
-     * Bank code of the customer.
+     * Bank code of the customer. Refer to https://www.npci.org.in/PDF/nach/live-members-e-mandates/Live-Banks-in-API-E-Mandate.pdf
      * @type {string}
      * @memberof SubscriptionCustomerDetails
      */
@@ -7070,6 +8254,12 @@ export interface SubscriptionEntity {
      * @memberof SubscriptionEntity
      */
     'subscription_note'?: string;
+    /**
+     * Subscription Session Id.
+     * @type {string}
+     * @memberof SubscriptionEntity
+     */
+    'subscription_session_id'?: string;
     /**
      * Payment splits for the subscription.
      * @type {Array<SubscriptionPaymentSplitItem>}
@@ -7335,7 +8525,7 @@ export interface TerminalDetails {
      */
     'terminal_note'?: string;
     /**
-     * mobile num of the terminal/agent/storefront
+     * mobile num of the terminal/agent/storefront,This is a required parameter when you do not provide the cf_terminal_id.
      * @type {string}
      * @memberof TerminalDetails
      */
@@ -7716,6 +8906,87 @@ export interface UPIPaymentMethod {
      * @memberof UPIPaymentMethod
      */
     'upi': Upi;
+}
+/**
+ * The complete update order extended data entity
+ * @export
+ * @interface UpdateOrderExtendedDataEntity
+ */
+export interface UpdateOrderExtendedDataEntity {
+    /**
+     * unique id generated by cashfree for your order
+     * @type {string}
+     * @memberof UpdateOrderExtendedDataEntity
+     */
+    'cf_order_id'?: string;
+    /**
+     * order_id sent during the api request
+     * @type {string}
+     * @memberof UpdateOrderExtendedDataEntity
+     */
+    'order_id'?: string;
+    /**
+     * 
+     * @type {Array<ShipmentDetails>}
+     * @memberof UpdateOrderExtendedDataEntity
+     */
+    'shipment_details'?: Array<ShipmentDetails>;
+    /**
+     * 
+     * @type {OrderDeliveryStatus}
+     * @memberof UpdateOrderExtendedDataEntity
+     */
+    'order_delivery_status'?: OrderDeliveryStatus;
+}
+/**
+ * Request Body to Update extended data related to order
+ * @export
+ * @interface UpdateOrderExtendedRequest
+ */
+export interface UpdateOrderExtendedRequest {
+    /**
+     * Shipment details, such as the tracking company, tracking number, and tracking URLs, associated with the shipping of an order. Either `shipment_details` or `order_delivery_status` is required.
+     * @type {Array<ShipmentDetails>}
+     * @memberof UpdateOrderExtendedRequest
+     */
+    'shipment_details': Array<ShipmentDetails>;
+    /**
+     * 
+     * @type {OrderDeliveryStatus}
+     * @memberof UpdateOrderExtendedRequest
+     */
+    'order_delivery_status'?: OrderDeliveryStatus;
+}
+/**
+ * Request body to update soundbox vpa
+ * @export
+ * @interface UpdateSoundboxVpaRequest
+ */
+export interface UpdateSoundboxVpaRequest {
+    /**
+     * Terminal Vpa,for which we need to update details.
+     * @type {string}
+     * @memberof UpdateSoundboxVpaRequest
+     */
+    'vpa': string;
+    /**
+     * cashfree terminal id.
+     * @type {string}
+     * @memberof UpdateSoundboxVpaRequest
+     */
+    'cf_terminal_id': string;
+    /**
+     * Merchant Name that need to updated on soundbox
+     * @type {string}
+     * @memberof UpdateSoundboxVpaRequest
+     */
+    'merchant_name'?: string;
+    /**
+     * language of soundbox,currently English, Hindi, Tamil
+     * @type {string}
+     * @memberof UpdateSoundboxVpaRequest
+     */
+    'language'?: string;
 }
 /**
  * Update terminal response
@@ -8226,6 +9497,62 @@ export interface UploadVendorDocumentsResponse {
     'remarks'?: string;
 }
 /**
+ * Vendor Adjustment Request Body
+ * @export
+ * @interface VendorAdjustmentRequest
+ */
+export interface VendorAdjustmentRequest {
+    /**
+     * The unique identifier of the vendor to whom the adjustment is applied
+     * @type {string}
+     * @memberof VendorAdjustmentRequest
+     */
+    'vendor_id': string;
+    /**
+     * The unique identifier for the adjustment transaction.
+     * @type {number}
+     * @memberof VendorAdjustmentRequest
+     */
+    'adjustment_id': number;
+    /**
+     * The adjustment amount to be applied.
+     * @type {number}
+     * @memberof VendorAdjustmentRequest
+     */
+    'amount': number;
+    /**
+     * The type of adjustment. Possible values: CREDIT, DEBIT.
+     * @type {string}
+     * @memberof VendorAdjustmentRequest
+     */
+    'type': string;
+    /**
+     * Remarks for the adjustment transaction, if any.
+     * @type {string}
+     * @memberof VendorAdjustmentRequest
+     */
+    'remarks'?: string;
+}
+/**
+ * Vendor Adjustment Success Response
+ * @export
+ * @interface VendorAdjustmentSuccessResponse
+ */
+export interface VendorAdjustmentSuccessResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorAdjustmentSuccessResponse
+     */
+    'message'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof VendorAdjustmentSuccessResponse
+     */
+    'status'?: string;
+}
+/**
  * Vendor Balance entity object
  * @export
  * @interface VendorBalance
@@ -8556,7 +9883,7 @@ const CustomersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8620,7 +9947,7 @@ const CustomersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8693,11 +10020,1349 @@ const CustomersApiFp = function(configuration?: Configuration) {
 
 
 /**
+ * DefaultApi - axios parameter creator
+ * @export
+ */
+const DefaultApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Use this API to create a pre-activated vpa for partner.
+         * @summary Create Pre-Activated Vpas for partner
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {CreatePartnerVpaRequest} [CreatePartnerVpaRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * CreatePartnerVpaRequest?: CreatePartnerVpaRequest, 
+         */
+        terminalCreateQRCodes: async (x_api_version: string,  x_request_id?: string, x_idempotency_key?: string, CreatePartnerVpaRequest?: CreatePartnerVpaRequest,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('terminalCreateQRCodes', 'x_api_version', x_api_version)
+            const localVarPath = `/partners/merchant/qrcodes`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(CreatePartnerVpaRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        // With Configuration
+        terminalCreateQRCodesWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string,  x_request_id?: string, x_idempotency_key?: string, CreatePartnerVpaRequest?: CreatePartnerVpaRequest,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('terminalCreateQRCodes', 'x_api_version', x_api_version)
+            const localVarPath = `/partners/merchant/qrcodes`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(CreatePartnerVpaRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        /**
+         * Use this API to get a pre-activated vpa for partner.
+         * @summary Get Pre-Activated Vpas for partner
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} status Status of pre-created Qr.
+         * @param {string} cf_terminal_id Cashfree terminal id for which you want to get pre-generated staticQRs.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_request_id?: string, 
+         */
+        terminalGetQRCodes: async (x_api_version: string, status: string, cf_terminal_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('terminalGetQRCodes', 'x_api_version', x_api_version)
+            // verify required parameter 'status' is not null or undefined
+            assertParamExists('terminalGetQRCodes', 'status', status)
+            // verify required parameter 'cf_terminal_id' is not null or undefined
+            assertParamExists('terminalGetQRCodes', 'cf_terminal_id', cf_terminal_id)
+            const localVarPath = `/partners/merchant/qrcodes`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+
+            if (cf_terminal_id !== undefined) {
+                localVarQueryParameter['cf_terminal_id'] = cf_terminal_id;
+            }
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        // With Configuration
+        terminalGetQRCodesWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, status: string, cf_terminal_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('terminalGetQRCodes', 'x_api_version', x_api_version)
+            // verify required parameter 'status' is not null or undefined
+            assertParamExists('terminalGetQRCodes', 'status', status)
+            // verify required parameter 'cf_terminal_id' is not null or undefined
+            assertParamExists('terminalGetQRCodes', 'cf_terminal_id', cf_terminal_id)
+            const localVarPath = `/partners/merchant/qrcodes`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+
+            if (cf_terminal_id !== undefined) {
+                localVarQueryParameter['cf_terminal_id'] = cf_terminal_id;
+            }
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+    }
+};
+
+/**
+ * DefaultApi - functional programming interface
+ * @export
+ */
+const DefaultApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = DefaultApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Use this API to create a pre-activated vpa for partner.
+         * @summary Create Pre-Activated Vpas for partner
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {CreatePartnerVpaRequest} [CreatePartnerVpaRequest] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async terminalCreateQRCodes(x_api_version: string, x_request_id?: string, x_idempotency_key?: string, CreatePartnerVpaRequest?: CreatePartnerVpaRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<StaticQrResponseEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.terminalCreateQRCodes(x_api_version, x_request_id, x_idempotency_key, CreatePartnerVpaRequest, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async terminalCreateQRCodesWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, x_request_id?: string, x_idempotency_key?: string, CreatePartnerVpaRequest?: CreatePartnerVpaRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<StaticQrResponseEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.terminalCreateQRCodesWithConfiguration(cashfreeConfiguration, x_api_version, x_request_id, x_idempotency_key, CreatePartnerVpaRequest, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to get a pre-activated vpa for partner.
+         * @summary Get Pre-Activated Vpas for partner
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} status Status of pre-created Qr.
+         * @param {string} cf_terminal_id Cashfree terminal id for which you want to get pre-generated staticQRs.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async terminalGetQRCodes(x_api_version: string, status: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<StaticQrResponseEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.terminalGetQRCodes(x_api_version, status, cf_terminal_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async terminalGetQRCodesWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, status: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<StaticQrResponseEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.terminalGetQRCodesWithConfiguration(cashfreeConfiguration, x_api_version, status, cf_terminal_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+    }
+};
+
+/**
+ * DefaultApi - object-oriented interface
+ * @export
+ * @class DefaultApi
+ * @extends {BaseAPI}
+ */
+
+
+
+/**
+ * DisputesApi - axios parameter creator
+ * @export
+ */
+const DisputesApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Use this API to get accept the Dispute by specifying the Dispute ID.
+         * @summary Accept Dispute by Dispute ID
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {number} dispute_id 
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        pGAcceptDisputeByID: async (x_api_version: string, dispute_id: number,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGAcceptDisputeByID', 'x_api_version', x_api_version)
+            // verify required parameter 'dispute_id' is not null or undefined
+            assertParamExists('pGAcceptDisputeByID', 'dispute_id', dispute_id)
+            const localVarPath = `/disputes/{dispute_id}/accept`
+                .replace(`{${"dispute_id"}}`, encodeURIComponent(String(dispute_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        // With Configuration
+        pGAcceptDisputeByIDWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, dispute_id: number,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGAcceptDisputeByID', 'x_api_version', x_api_version)
+            // verify required parameter 'dispute_id' is not null or undefined
+            assertParamExists('pGAcceptDisputeByID', 'dispute_id', dispute_id)
+            const localVarPath = `/disputes/{dispute_id}/accept`
+                .replace(`{${"dispute_id"}}`, encodeURIComponent(String(dispute_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        /**
+         * Use this API to get Dispute details by specifying the Dispute ID.
+         * @summary Get Disputes by Dispute ID
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {number} dispute_id 
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        pGFetchDisputeByID: async (x_api_version: string, dispute_id: number,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGFetchDisputeByID', 'x_api_version', x_api_version)
+            // verify required parameter 'dispute_id' is not null or undefined
+            assertParamExists('pGFetchDisputeByID', 'dispute_id', dispute_id)
+            const localVarPath = `/disputes/{dispute_id}`
+                .replace(`{${"dispute_id"}}`, encodeURIComponent(String(dispute_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        // With Configuration
+        pGFetchDisputeByIDWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, dispute_id: number,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGFetchDisputeByID', 'x_api_version', x_api_version)
+            // verify required parameter 'dispute_id' is not null or undefined
+            assertParamExists('pGFetchDisputeByID', 'dispute_id', dispute_id)
+            const localVarPath = `/disputes/{dispute_id}`
+                .replace(`{${"dispute_id"}}`, encodeURIComponent(String(dispute_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        /**
+         * Use this API to get all Dispute details by specifying the Order ID.
+         * @summary Get Disputes by Order Id
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} order_id 
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        pGFetchOrderDisputes: async (x_api_version: string, order_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGFetchOrderDisputes', 'x_api_version', x_api_version)
+            // verify required parameter 'order_id' is not null or undefined
+            assertParamExists('pGFetchOrderDisputes', 'order_id', order_id)
+            const localVarPath = `/orders/{order_id}/disputes`
+                .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        // With Configuration
+        pGFetchOrderDisputesWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGFetchOrderDisputes', 'x_api_version', x_api_version)
+            // verify required parameter 'order_id' is not null or undefined
+            assertParamExists('pGFetchOrderDisputes', 'order_id', order_id)
+            const localVarPath = `/orders/{order_id}/disputes`
+                .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        /**
+         * Use this API to get all Dispute details by specifying the Payment ID.
+         * @summary Get Disputes by Payment ID
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {number} cf_payment_id 
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        pGFetchPaymentDisputes: async (x_api_version: string, cf_payment_id: number,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGFetchPaymentDisputes', 'x_api_version', x_api_version)
+            // verify required parameter 'cf_payment_id' is not null or undefined
+            assertParamExists('pGFetchPaymentDisputes', 'cf_payment_id', cf_payment_id)
+            const localVarPath = `/payments/{cf_payment_id}/disputes`
+                .replace(`{${"cf_payment_id"}}`, encodeURIComponent(String(cf_payment_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        // With Configuration
+        pGFetchPaymentDisputesWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, cf_payment_id: number,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGFetchPaymentDisputes', 'x_api_version', x_api_version)
+            // verify required parameter 'cf_payment_id' is not null or undefined
+            assertParamExists('pGFetchPaymentDisputes', 'cf_payment_id', cf_payment_id)
+            const localVarPath = `/payments/{cf_payment_id}/disputes`
+                .replace(`{${"cf_payment_id"}}`, encodeURIComponent(String(cf_payment_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        /**
+         * Use this API to Submit the Evidences to contest the Dispute by specifying the Dispute ID.
+         * @summary Submit Evidence to contest the Dispute by Dispute ID
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {number} dispute_id 
+         * @param {string} file File types supported are jpeg, jpg, png, pdf and maximum file size allowed is 20 MB.
+         * @param {string} doc_type Mention the type of the document you are uploading. Possible values :- Delivery/Service Proof, Shipping Proof, Statement of Service, Proof of Service Used, Cancellation of Service Proof, Refund Proof, Business model explanation, Extra Charges Declaration, Terms &amp; Conditions, Customer Withdrawal Letter, Certificate of Authenticity, Reseller Agreement. You can use get evidences to contest dispute API to fetch set of documents required to contest particular dispute.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {string} [note] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * doc_type: string, 
+         */
+        pGUploadDisputesDocuments: async (x_api_version: string, dispute_id: number, file: string, doc_type: string,  x_request_id?: string, x_idempotency_key?: string, note?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGUploadDisputesDocuments', 'x_api_version', x_api_version)
+            // verify required parameter 'dispute_id' is not null or undefined
+            assertParamExists('pGUploadDisputesDocuments', 'dispute_id', dispute_id)
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('pGUploadDisputesDocuments', 'file', file)
+            // verify required parameter 'doc_type' is not null or undefined
+            assertParamExists('pGUploadDisputesDocuments', 'doc_type', doc_type)
+            const localVarPath = `/disputes/{dispute_id}/documents`
+                .replace(`{${"dispute_id"}}`, encodeURIComponent(String(dispute_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+            if (doc_type !== undefined) { 
+                localVarFormParams.append('doc_type', doc_type as any);
+            }
+    
+            if (note !== undefined) { 
+                localVarFormParams.append('note', note as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        // With Configuration
+        pGUploadDisputesDocumentsWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, dispute_id: number, file: string, doc_type: string,  x_request_id?: string, x_idempotency_key?: string, note?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGUploadDisputesDocuments', 'x_api_version', x_api_version)
+            // verify required parameter 'dispute_id' is not null or undefined
+            assertParamExists('pGUploadDisputesDocuments', 'dispute_id', dispute_id)
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('pGUploadDisputesDocuments', 'file', file)
+            // verify required parameter 'doc_type' is not null or undefined
+            assertParamExists('pGUploadDisputesDocuments', 'doc_type', doc_type)
+            const localVarPath = `/disputes/{dispute_id}/documents`
+                .replace(`{${"dispute_id"}}`, encodeURIComponent(String(dispute_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+            if (doc_type !== undefined) { 
+                localVarFormParams.append('doc_type', doc_type as any);
+            }
+    
+            if (note !== undefined) { 
+                localVarFormParams.append('note', note as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+    }
+};
+
+/**
+ * DisputesApi - functional programming interface
+ * @export
+ */
+const DisputesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = DisputesApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Use this API to get accept the Dispute by specifying the Dispute ID.
+         * @summary Accept Dispute by Dispute ID
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {number} dispute_id 
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGAcceptDisputeByID(x_api_version: string, dispute_id: number, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DisputesEntityMerchantAccepted>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGAcceptDisputeByID(x_api_version, dispute_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGAcceptDisputeByIDWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, dispute_id: number, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DisputesEntityMerchantAccepted>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGAcceptDisputeByIDWithConfiguration(cashfreeConfiguration, x_api_version, dispute_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to get Dispute details by specifying the Dispute ID.
+         * @summary Get Disputes by Dispute ID
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {number} dispute_id 
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGFetchDisputeByID(x_api_version: string, dispute_id: number, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DisputesEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGFetchDisputeByID(x_api_version, dispute_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGFetchDisputeByIDWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, dispute_id: number, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DisputesEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGFetchDisputeByIDWithConfiguration(cashfreeConfiguration, x_api_version, dispute_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to get all Dispute details by specifying the Order ID.
+         * @summary Get Disputes by Order Id
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} order_id 
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGFetchOrderDisputes(x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<DisputesEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGFetchOrderDisputes(x_api_version, order_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGFetchOrderDisputesWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<DisputesEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGFetchOrderDisputesWithConfiguration(cashfreeConfiguration, x_api_version, order_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to get all Dispute details by specifying the Payment ID.
+         * @summary Get Disputes by Payment ID
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {number} cf_payment_id 
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGFetchPaymentDisputes(x_api_version: string, cf_payment_id: number, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<DisputesEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGFetchPaymentDisputes(x_api_version, cf_payment_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGFetchPaymentDisputesWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, cf_payment_id: number, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<DisputesEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGFetchPaymentDisputesWithConfiguration(cashfreeConfiguration, x_api_version, cf_payment_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to Submit the Evidences to contest the Dispute by specifying the Dispute ID.
+         * @summary Submit Evidence to contest the Dispute by Dispute ID
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {number} dispute_id 
+         * @param {string} file File types supported are jpeg, jpg, png, pdf and maximum file size allowed is 20 MB.
+         * @param {string} doc_type Mention the type of the document you are uploading. Possible values :- Delivery/Service Proof, Shipping Proof, Statement of Service, Proof of Service Used, Cancellation of Service Proof, Refund Proof, Business model explanation, Extra Charges Declaration, Terms &amp; Conditions, Customer Withdrawal Letter, Certificate of Authenticity, Reseller Agreement. You can use get evidences to contest dispute API to fetch set of documents required to contest particular dispute.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {string} [note] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGUploadDisputesDocuments(x_api_version: string, dispute_id: number, file: string, doc_type: string, x_request_id?: string, x_idempotency_key?: string, note?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<DisputesEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGUploadDisputesDocuments(x_api_version, dispute_id, file, doc_type, x_request_id, x_idempotency_key, note, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGUploadDisputesDocumentsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, dispute_id: number, file: string, doc_type: string, x_request_id?: string, x_idempotency_key?: string, note?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<DisputesEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGUploadDisputesDocumentsWithConfiguration(cashfreeConfiguration, x_api_version, dispute_id, file, doc_type, x_request_id, x_idempotency_key, note, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+    }
+};
+
+/**
+ * DisputesApi - object-oriented interface
+ * @export
+ * @class DisputesApi
+ * @extends {BaseAPI}
+ */
+
+
+
+/**
  * EasySplitApi - axios parameter creator
  * @export
  */
 const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * The Create Adjustment API will create a adjustment request either from vendor to the merchant or from merchant to the vendor.
+         * @summary Create Adjustment
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} vendor_id The id which uniquely identifies your vendor.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {VendorAdjustmentRequest} [VendorAdjustmentRequest] Vendor Adjustment Request Body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        pGESCreateAdjustment: async (x_api_version: string, vendor_id: string,  x_request_id?: string, x_idempotency_key?: string, VendorAdjustmentRequest?: VendorAdjustmentRequest,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESCreateAdjustment', 'x_api_version', x_api_version)
+            // verify required parameter 'vendor_id' is not null or undefined
+            assertParamExists('pGESCreateAdjustment', 'vendor_id', vendor_id)
+            const localVarPath = `/easy-split/vendors/{vendor_id}/adjustment`
+                .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(VendorAdjustmentRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        // With Configuration
+        pGESCreateAdjustmentWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string,  x_request_id?: string, x_idempotency_key?: string, VendorAdjustmentRequest?: VendorAdjustmentRequest,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGESCreateAdjustment', 'x_api_version', x_api_version)
+            // verify required parameter 'vendor_id' is not null or undefined
+            assertParamExists('pGESCreateAdjustment', 'vendor_id', vendor_id)
+            const localVarPath = `/easy-split/vendors/{vendor_id}/adjustment`
+                .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(VendorAdjustmentRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
         /**
          * The Create On Demand Transfer API will create a new on-demand request either from to the merchant or from to the vendor.
          * @summary Create On Demand Transfer
@@ -8752,7 +11417,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8817,7 +11482,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8890,7 +11555,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -8952,7 +11617,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9030,7 +11695,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9095,7 +11760,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9168,7 +11833,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9230,7 +11895,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9303,7 +11968,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9365,7 +12030,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9445,7 +12110,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9513,7 +12178,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9586,7 +12251,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9648,7 +12313,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9720,7 +12385,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9782,7 +12447,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9859,7 +12524,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -9924,7 +12589,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10016,7 +12681,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10094,7 +12759,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10171,7 +12836,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10236,7 +12901,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10309,7 +12974,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10371,7 +13036,7 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10394,6 +13059,141 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
             };
         },
 
+        /**
+         * Use this API to get all the split details, settled and unsettled transactions details of each vendor who were part of a particular order by providing order Id or start date and end date.
+         * @summary Get Split and Settlement Details by OrderID
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} order_id The id which uniquely identifies your order
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        pGSplitOrderRecon: async (x_api_version: string, order_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGSplitOrderRecon', 'x_api_version', x_api_version)
+            // verify required parameter 'order_id' is not null or undefined
+            assertParamExists('pGSplitOrderRecon', 'order_id', order_id)
+            const localVarPath = `/easy-split/orders/{order_id}`
+                .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        // With Configuration
+        pGSplitOrderReconWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGSplitOrderRecon', 'x_api_version', x_api_version)
+            // verify required parameter 'order_id' is not null or undefined
+            assertParamExists('pGSplitOrderRecon', 'order_id', order_id)
+            const localVarPath = `/easy-split/orders/{order_id}`
+                .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
     }
 };
 
@@ -10404,6 +13204,34 @@ const EasySplitApiAxiosParamCreator = function (configuration?: Configuration) {
 const EasySplitApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = EasySplitApiAxiosParamCreator(configuration)
     return {
+        /**
+         * The Create Adjustment API will create a adjustment request either from vendor to the merchant or from merchant to the vendor.
+         * @summary Create Adjustment
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} vendor_id The id which uniquely identifies your vendor.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {VendorAdjustmentRequest} [VendorAdjustmentRequest] Vendor Adjustment Request Body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGESCreateAdjustment(x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, VendorAdjustmentRequest?: VendorAdjustmentRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VendorAdjustmentSuccessResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESCreateAdjustment(x_api_version, vendor_id, x_request_id, x_idempotency_key, VendorAdjustmentRequest, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGESCreateAdjustmentWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, VendorAdjustmentRequest?: VendorAdjustmentRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<VendorAdjustmentSuccessResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGESCreateAdjustmentWithConfiguration(cashfreeConfiguration, x_api_version, vendor_id, x_request_id, x_idempotency_key, VendorAdjustmentRequest, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
         /**
          * The Create On Demand Transfer API will create a new on-demand request either from to the merchant or from to the vendor.
          * @summary Create On Demand Transfer
@@ -10736,6 +13564,33 @@ const EasySplitApiFp = function(configuration?: Configuration) {
                 }
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
+        /**
+         * Use this API to get all the split details, settled and unsettled transactions details of each vendor who were part of a particular order by providing order Id or start date and end date.
+         * @summary Get Split and Settlement Details by OrderID
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} order_id The id which uniquely identifies your order
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGSplitOrderRecon(x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SplitOrderReconSuccessResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGSplitOrderRecon(x_api_version, order_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGSplitOrderReconWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SplitOrderReconSuccessResponse>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGSplitOrderReconWithConfiguration(cashfreeConfiguration, x_api_version, order_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
     }
 };
 
@@ -10806,7 +13661,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10870,7 +13725,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10945,7 +13800,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11009,7 +13864,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11084,7 +13939,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11148,7 +14003,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11223,7 +14078,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11287,7 +14142,7 @@ const EligibilityApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11498,7 +14353,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11562,7 +14417,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11636,7 +14491,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11698,7 +14553,7 @@ const OffersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11854,7 +14709,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11918,7 +14773,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11992,7 +14847,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12054,7 +14909,142 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        /**
+         * Use this API to fetch the order related data like address,cart,offers,customer details etc using the Cashfree\'s `order_id`. ## When to use this API - To get the extended data associated with order. - Once the order is PAID - Once your customer returns to `return_url` 
+         * @summary Get Order Extended
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} order_id The id which uniquely identifies your order
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        pGFetchOrderExtendedData: async (x_api_version: string, order_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGFetchOrderExtendedData', 'x_api_version', x_api_version)
+            // verify required parameter 'order_id' is not null or undefined
+            assertParamExists('pGFetchOrderExtendedData', 'order_id', order_id)
+            const localVarPath = `/orders/{order_id}/extended`
+                .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        // With Configuration
+        pGFetchOrderExtendedDataWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGFetchOrderExtendedData', 'x_api_version', x_api_version)
+            // verify required parameter 'order_id' is not null or undefined
+            assertParamExists('pGFetchOrderExtendedData', 'order_id', order_id)
+            const localVarPath = `/orders/{order_id}/extended`
+                .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12132,7 +15122,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12199,7 +15189,7 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12215,6 +15205,152 @@ const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(TerminateOrderRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        /**
+         * Use this api to update the order related data like shipment details,order delivery status etc. ## When to use this API - To provide/update the shipment details or order delivery status. - Once the order is PAID. 
+         * @summary Update Order Extended
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} order_id The id which uniquely identifies your order
+         * @param {UpdateOrderExtendedRequest} UpdateOrderExtendedRequest Request Body to Update extended data related to order
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_request_id?: string, 
+         */
+        pGUpdateOrderExtendedData: async (x_api_version: string, order_id: string, UpdateOrderExtendedRequest: UpdateOrderExtendedRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGUpdateOrderExtendedData', 'x_api_version', x_api_version)
+            // verify required parameter 'order_id' is not null or undefined
+            assertParamExists('pGUpdateOrderExtendedData', 'order_id', order_id)
+            // verify required parameter 'UpdateOrderExtendedRequest' is not null or undefined
+            assertParamExists('pGUpdateOrderExtendedData', 'UpdateOrderExtendedRequest', UpdateOrderExtendedRequest)
+            const localVarPath = `/orders/{order_id}/extended`
+                .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(UpdateOrderExtendedRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        // With Configuration
+        pGUpdateOrderExtendedDataWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, UpdateOrderExtendedRequest: UpdateOrderExtendedRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('pGUpdateOrderExtendedData', 'x_api_version', x_api_version)
+            // verify required parameter 'order_id' is not null or undefined
+            assertParamExists('pGUpdateOrderExtendedData', 'order_id', order_id)
+            // verify required parameter 'UpdateOrderExtendedRequest' is not null or undefined
+            assertParamExists('pGUpdateOrderExtendedData', 'UpdateOrderExtendedRequest', UpdateOrderExtendedRequest)
+            const localVarPath = `/orders/{order_id}/extended`
+                .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(UpdateOrderExtendedRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -12287,6 +15423,33 @@ const OrdersApiFp = function(configuration?: Configuration) {
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
         /**
+         * Use this API to fetch the order related data like address,cart,offers,customer details etc using the Cashfree\'s `order_id`. ## When to use this API - To get the extended data associated with order. - Once the order is PAID - Once your customer returns to `return_url` 
+         * @summary Get Order Extended
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} order_id The id which uniquely identifies your order
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGFetchOrderExtendedData(x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderExtendedDataEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGFetchOrderExtendedData(x_api_version, order_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGFetchOrderExtendedDataWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderExtendedDataEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGFetchOrderExtendedDataWithConfiguration(cashfreeConfiguration, x_api_version, order_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
          * Use this API to terminate the order that was created at Cashfree\'s using the `order_id`.
          * @summary Terminate Order
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
@@ -12308,6 +15471,34 @@ const OrdersApiFp = function(configuration?: Configuration) {
 
         async pGTerminateOrderWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, TerminateOrderRequest: TerminateOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGTerminateOrderWithConfiguration(cashfreeConfiguration, x_api_version, order_id, TerminateOrderRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this api to update the order related data like shipment details,order delivery status etc. ## When to use this API - To provide/update the shipment details or order delivery status. - Once the order is PAID. 
+         * @summary Update Order Extended
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} order_id The id which uniquely identifies your order
+         * @param {UpdateOrderExtendedRequest} UpdateOrderExtendedRequest Request Body to Update extended data related to order
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async pGUpdateOrderExtendedData(x_api_version: string, order_id: string, UpdateOrderExtendedRequest: UpdateOrderExtendedRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateOrderExtendedDataEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGUpdateOrderExtendedData(x_api_version, order_id, UpdateOrderExtendedRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async pGUpdateOrderExtendedDataWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, UpdateOrderExtendedRequest: UpdateOrderExtendedRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UpdateOrderExtendedDataEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.pGUpdateOrderExtendedDataWithConfiguration(cashfreeConfiguration, x_api_version, order_id, UpdateOrderExtendedRequest, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -12386,7 +15577,7 @@ const PGReconciliationApiAxiosParamCreator = function (configuration?: Configura
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12450,7 +15641,7 @@ const PGReconciliationApiAxiosParamCreator = function (configuration?: Configura
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12581,7 +15772,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12643,7 +15834,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12717,7 +15908,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12781,7 +15972,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12855,7 +16046,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12917,7 +16108,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12995,7 +16186,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13061,7 +16252,7 @@ const PaymentLinksApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13276,7 +16467,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13343,7 +16534,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13407,7 +16598,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13459,7 +16650,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13537,7 +16728,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13602,7 +16793,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13675,7 +16866,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13737,7 +16928,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13796,7 +16987,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13845,7 +17036,7 @@ const PaymentsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14090,7 +17281,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14157,7 +17348,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14235,7 +17426,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14300,7 +17491,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14373,7 +17564,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14435,7 +17626,7 @@ const RefundsApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14622,7 +17813,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14686,7 +17877,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14763,7 +17954,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14827,7 +18018,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (configuration?: C
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14986,7 +18177,7 @@ const SettlementsApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15048,7 +18239,7 @@ const SettlementsApiAxiosParamCreator = function (configuration?: Configuration)
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15122,7 +18313,7 @@ const SettlementsApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15184,7 +18375,7 @@ const SettlementsApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15339,7 +18530,7 @@ const SimulationApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15401,7 +18592,7 @@ const SimulationApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15475,7 +18666,7 @@ const SimulationApiAxiosParamCreator = function (configuration?: Configuration) 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15539,7 +18730,7 @@ const SimulationApiAxiosParamCreator = function (configuration?: Configuration) 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15696,7 +18887,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15760,7 +18951,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15835,7 +19026,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15899,7 +19090,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15915,6 +19106,145 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(CreateTerminalTransactionRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        /**
+         * Use this API to demap a device from soundbox.
+         * @summary Demap Soundbox Vpa
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {DemapSoundboxVpaRequest} DemapSoundboxVpaRequest Request body to demap soundbox vpa
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        sposDemapSoundboxVpa: async (x_api_version: string, DemapSoundboxVpaRequest: DemapSoundboxVpaRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('sposDemapSoundboxVpa', 'x_api_version', x_api_version)
+            // verify required parameter 'DemapSoundboxVpaRequest' is not null or undefined
+            assertParamExists('sposDemapSoundboxVpa', 'DemapSoundboxVpaRequest', DemapSoundboxVpaRequest)
+            const localVarPath = `/terminal/demap/soundbox`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(DemapSoundboxVpaRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        // With Configuration
+        sposDemapSoundboxVpaWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, DemapSoundboxVpaRequest: DemapSoundboxVpaRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('sposDemapSoundboxVpa', 'x_api_version', x_api_version)
+            // verify required parameter 'DemapSoundboxVpaRequest' is not null or undefined
+            assertParamExists('sposDemapSoundboxVpa', 'DemapSoundboxVpaRequest', DemapSoundboxVpaRequest)
+            const localVarPath = `/terminal/demap/soundbox`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(DemapSoundboxVpaRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -15973,7 +19303,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16035,7 +19365,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16118,7 +19448,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16189,7 +19519,161 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        /**
+         * You can fetch all the active and mapped SoundboxVpa corresponding to given terminal id or deviceSerialNo. Provide either the device_serial_no or cf_terminal_id in the request.
+         * @summary Fetch Terminal Soundbox vpa
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} device_serial_no Device Serial No assinged. Required if you are not providing the cf_terminal_id in the request.
+         * @param {string} cf_terminal_id Cashfree terminal id for which you want to get Soundbox Vpa. Required if you are not providing the device_serial_no in the request.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_request_id?: string, 
+         */
+        sposFetchTerminalSoundboxVpa: async (x_api_version: string, device_serial_no: string, cf_terminal_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('sposFetchTerminalSoundboxVpa', 'x_api_version', x_api_version)
+            // verify required parameter 'device_serial_no' is not null or undefined
+            assertParamExists('sposFetchTerminalSoundboxVpa', 'device_serial_no', device_serial_no)
+            // verify required parameter 'cf_terminal_id' is not null or undefined
+            assertParamExists('sposFetchTerminalSoundboxVpa', 'cf_terminal_id', cf_terminal_id)
+            const localVarPath = `/terminal/soundbox/qrcodes`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+            if (device_serial_no !== undefined) {
+                localVarQueryParameter['device_serial_no'] = device_serial_no;
+            }
+
+            if (cf_terminal_id !== undefined) {
+                localVarQueryParameter['cf_terminal_id'] = cf_terminal_id;
+            }
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        // With Configuration
+        sposFetchTerminalSoundboxVpaWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, device_serial_no: string, cf_terminal_id: string,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('sposFetchTerminalSoundboxVpa', 'x_api_version', x_api_version)
+            // verify required parameter 'device_serial_no' is not null or undefined
+            assertParamExists('sposFetchTerminalSoundboxVpa', 'device_serial_no', device_serial_no)
+            // verify required parameter 'cf_terminal_id' is not null or undefined
+            assertParamExists('sposFetchTerminalSoundboxVpa', 'cf_terminal_id', cf_terminal_id)
+            const localVarPath = `/terminal/soundbox/qrcodes`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+            if (device_serial_no !== undefined) {
+                localVarQueryParameter['device_serial_no'] = device_serial_no;
+            }
+
+            if (cf_terminal_id !== undefined) {
+                localVarQueryParameter['cf_terminal_id'] = cf_terminal_id;
+            }
+
+
+    
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16269,7 +19753,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16337,7 +19821,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16352,6 +19836,291 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        /**
+         * Use this API to onboard a terminal Vpa to soundbox.
+         * @summary Onboard Soundbox Vpa
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {OnboardSoundboxVpaRequest} OnboardSoundboxVpaRequest Request body to onboard soundbox vpa
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_idempotency_key?: string, 
+         */
+        sposOnboardSoundboxVpa: async (x_api_version: string, OnboardSoundboxVpaRequest: OnboardSoundboxVpaRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('sposOnboardSoundboxVpa', 'x_api_version', x_api_version)
+            // verify required parameter 'OnboardSoundboxVpaRequest' is not null or undefined
+            assertParamExists('sposOnboardSoundboxVpa', 'OnboardSoundboxVpaRequest', OnboardSoundboxVpaRequest)
+            const localVarPath = `/terminal/soundbox`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(OnboardSoundboxVpaRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        // With Configuration
+        sposOnboardSoundboxVpaWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, OnboardSoundboxVpaRequest: OnboardSoundboxVpaRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('sposOnboardSoundboxVpa', 'x_api_version', x_api_version)
+            // verify required parameter 'OnboardSoundboxVpaRequest' is not null or undefined
+            assertParamExists('sposOnboardSoundboxVpa', 'OnboardSoundboxVpaRequest', OnboardSoundboxVpaRequest)
+            const localVarPath = `/terminal/soundbox`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(OnboardSoundboxVpaRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        /**
+         * Use this API to update a terminal Vpa to soundbox.
+         * @summary Update Soundbox Vpa
+         
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} cf_terminal_id Provide the Cashfree terminal ID for which the details have to be updated.
+         * @param {UpdateSoundboxVpaRequest} UpdateSoundboxVpaRequest Request body to update soundbox vpa
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * x_request_id?: string, 
+         */
+        sposUpdateSoundboxVpa: async (x_api_version: string, cf_terminal_id: string, UpdateSoundboxVpaRequest: UpdateSoundboxVpaRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('sposUpdateSoundboxVpa', 'x_api_version', x_api_version)
+            // verify required parameter 'cf_terminal_id' is not null or undefined
+            assertParamExists('sposUpdateSoundboxVpa', 'cf_terminal_id', cf_terminal_id)
+            // verify required parameter 'UpdateSoundboxVpaRequest' is not null or undefined
+            assertParamExists('sposUpdateSoundboxVpa', 'UpdateSoundboxVpaRequest', UpdateSoundboxVpaRequest)
+            const localVarPath = `/terminal/{cf_terminal_id}/soundbox`
+                .replace(`{${"cf_terminal_id"}}`, encodeURIComponent(String(cf_terminal_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-apikey")
+
+            // authentication XClientSecret required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-secret")
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-partner-merchantid")
+
+            // authentication XClientID required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-id")
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "x-client-signature")
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(UpdateSoundboxVpaRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+
+        // With Configuration
+        sposUpdateSoundboxVpaWithConfiguration: async (cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, cf_terminal_id: string, UpdateSoundboxVpaRequest: UpdateSoundboxVpaRequest,  x_request_id?: string, x_idempotency_key?: string,  options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_api_version' is not null or undefined
+            assertParamExists('sposUpdateSoundboxVpa', 'x_api_version', x_api_version)
+            // verify required parameter 'cf_terminal_id' is not null or undefined
+            assertParamExists('sposUpdateSoundboxVpa', 'cf_terminal_id', cf_terminal_id)
+            // verify required parameter 'UpdateSoundboxVpaRequest' is not null or undefined
+            assertParamExists('sposUpdateSoundboxVpa', 'UpdateSoundboxVpaRequest', UpdateSoundboxVpaRequest)
+            const localVarPath = `/terminal/{cf_terminal_id}/soundbox`
+                .replace(`{${"cf_terminal_id"}}`, encodeURIComponent(String(cf_terminal_id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            var url = "https://sandbox.cashfree.com/pg";
+            if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                url = "https://api.cashfree.com/pg"
+            }
+            const localVarUrlObj = new URL(localVarPath, url);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication XPartnerAPIKey required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-apikey", cashfreeConfiguration)
+
+            // authentication XClientSecret required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-secret", cashfreeConfiguration)
+
+            // authentication XPartnerMerchantID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-partner-merchantid", cashfreeConfiguration)
+
+            // authentication XClientID required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-id", cashfreeConfiguration)
+
+            // authentication XClientSignatureHeader required
+            await setApiKeyToObjectWithConfiguration(localVarHeaderParameter, "x-client-signature", cashfreeConfiguration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
+            if (x_api_version != null && x_api_version != undefined) {
+                localVarHeaderParameter['x-api-version'] = x_api_version;
+            }
+
+            if (x_request_id != null && x_request_id != undefined) {
+                localVarHeaderParameter['x-request-id'] = x_request_id;
+            }
+
+            if (x_idempotency_key != null && x_idempotency_key != undefined) {
+                localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(UpdateSoundboxVpaRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -16415,7 +20184,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16482,7 +20251,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16561,7 +20330,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16628,7 +20397,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16707,7 +20476,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16774,7 +20543,7 @@ const SoftPOSApiAxiosParamCreator = function (configuration?: Configuration) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16862,6 +20631,33 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
         /**
+         * Use this API to demap a device from soundbox.
+         * @summary Demap Soundbox Vpa
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {DemapSoundboxVpaRequest} DemapSoundboxVpaRequest Request body to demap soundbox vpa
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async sposDemapSoundboxVpa(x_api_version: string, DemapSoundboxVpaRequest: DemapSoundboxVpaRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SoundboxVpaEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.sposDemapSoundboxVpa(x_api_version, DemapSoundboxVpaRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async sposDemapSoundboxVpaWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, DemapSoundboxVpaRequest: DemapSoundboxVpaRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SoundboxVpaEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.sposDemapSoundboxVpaWithConfiguration(cashfreeConfiguration, x_api_version, DemapSoundboxVpaRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
          * Use this API to view all details of a terminal.
          * @summary Get Terminal Status using Phone Number
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
@@ -16917,6 +20713,34 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
         /**
+         * You can fetch all the active and mapped SoundboxVpa corresponding to given terminal id or deviceSerialNo. Provide either the device_serial_no or cf_terminal_id in the request.
+         * @summary Fetch Terminal Soundbox vpa
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} device_serial_no Device Serial No assinged. Required if you are not providing the cf_terminal_id in the request.
+         * @param {string} cf_terminal_id Cashfree terminal id for which you want to get Soundbox Vpa. Required if you are not providing the device_serial_no in the request.
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async sposFetchTerminalSoundboxVpa(x_api_version: string, device_serial_no: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SoundboxVpaEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.sposFetchTerminalSoundboxVpa(x_api_version, device_serial_no, cf_terminal_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async sposFetchTerminalSoundboxVpaWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, device_serial_no: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<SoundboxVpaEntity>>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.sposFetchTerminalSoundboxVpaWithConfiguration(cashfreeConfiguration, x_api_version, device_serial_no, cf_terminal_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
          * Use this API to get  terminal transaction.
          * @summary Get Terminal Transaction
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
@@ -16938,6 +20762,61 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
 
         async sposFetchTerminalTransactionWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, utr: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TerminalPaymentEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.sposFetchTerminalTransactionWithConfiguration(cashfreeConfiguration, x_api_version, utr, cf_terminal_id, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to onboard a terminal Vpa to soundbox.
+         * @summary Onboard Soundbox Vpa
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {OnboardSoundboxVpaRequest} OnboardSoundboxVpaRequest Request body to onboard soundbox vpa
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async sposOnboardSoundboxVpa(x_api_version: string, OnboardSoundboxVpaRequest: OnboardSoundboxVpaRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SoundboxVpaEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.sposOnboardSoundboxVpa(x_api_version, OnboardSoundboxVpaRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async sposOnboardSoundboxVpaWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, OnboardSoundboxVpaRequest: OnboardSoundboxVpaRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SoundboxVpaEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.sposOnboardSoundboxVpaWithConfiguration(cashfreeConfiguration, x_api_version, OnboardSoundboxVpaRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+        /**
+         * Use this API to update a terminal Vpa to soundbox.
+         * @summary Update Soundbox Vpa
+         * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+         * @param {string} cf_terminal_id Provide the Cashfree terminal ID for which the details have to be updated.
+         * @param {UpdateSoundboxVpaRequest} UpdateSoundboxVpaRequest Request body to update soundbox vpa
+         * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+         * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async sposUpdateSoundboxVpa(x_api_version: string, cf_terminal_id: string, UpdateSoundboxVpaRequest: UpdateSoundboxVpaRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SoundboxVpaEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.sposUpdateSoundboxVpa(x_api_version, cf_terminal_id, UpdateSoundboxVpaRequest, x_request_id, x_idempotency_key, options);
+                var url = "https://sandbox.cashfree.com/pg";
+                if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
+                    url = "https://api.cashfree.com/pg"
+                }
+                return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
+        },
+
+        async sposUpdateSoundboxVpaWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, cf_terminal_id: string, UpdateSoundboxVpaRequest: UpdateSoundboxVpaRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SoundboxVpaEntity>> {
+                const localVarAxiosArgs = await localVarAxiosParamCreator.sposUpdateSoundboxVpaWithConfiguration(cashfreeConfiguration, x_api_version, cf_terminal_id, UpdateSoundboxVpaRequest, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(Cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                     url = "https://api.cashfree.com/pg"
@@ -17047,7 +20926,7 @@ const SoftPOSApiFp = function(configuration?: Configuration) {
 const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Use this API to create an auth or to raise a charge .
+         * Use this API to create an auth or to raise a charge.
          * @summary Raise a charge or create an auth.
          
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
@@ -17098,7 +20977,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17162,7 +21041,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17237,7 +21116,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17301,7 +21180,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17380,7 +21259,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17447,7 +21326,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17522,7 +21401,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17586,7 +21465,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17660,7 +21539,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17722,7 +21601,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17795,7 +21674,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17857,7 +21736,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17934,7 +21813,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17999,7 +21878,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18072,7 +21951,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18134,7 +22013,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18211,7 +22090,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18276,7 +22155,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18354,7 +22233,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18421,7 +22300,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18504,7 +22383,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18574,7 +22453,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18598,8 +22477,8 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
         },
 
         /**
-         * Use this API to upload Physical Nach for Physical Nach Authorization.
-         * @summary API to upload Physical Nach for Physical Nach Authorization.
+         * Use this API to upload file for Physical Nach Authorization.
+         * @summary API to upload file for Physical Nach Authorization.
          
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} payment_id Provide the PaymentId using which the payment was created.
@@ -18672,7 +22551,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18756,7 +22635,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18831,7 +22710,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18895,7 +22774,7 @@ const SubscriptionApiAxiosParamCreator = function (configuration?: Configuration
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18929,7 +22808,7 @@ const SubscriptionApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = SubscriptionApiAxiosParamCreator(configuration)
     return {
         /**
-         * Use this API to create an auth or to raise a charge .
+         * Use this API to create an auth or to raise a charge.
          * @summary Raise a charge or create an auth.
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {CreateSubscriptionPaymentRequest} CreateSubscriptionPaymentRequest Request body to create a subscription payment.
@@ -19232,8 +23111,8 @@ const SubscriptionApiFp = function(configuration?: Configuration) {
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url, configuration);
         },
         /**
-         * Use this API to upload Physical Nach for Physical Nach Authorization.
-         * @summary API to upload Physical Nach for Physical Nach Authorization.
+         * Use this API to upload file for Physical Nach Authorization.
+         * @summary API to upload file for Physical Nach Authorization.
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
          * @param {string} payment_id Provide the PaymentId using which the payment was created.
          * @param {File} file Select the .jpg file that should be uploaded or provide the path of that file. You cannot upload a file that is more than 1MB in size.
@@ -19361,7 +23240,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19426,7 +23305,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19503,7 +23382,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19568,7 +23447,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19648,7 +23527,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19716,7 +23595,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19793,7 +23672,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19858,7 +23737,7 @@ const TokenVaultApiAxiosParamCreator = function (configuration?: Configuration) 
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-4.3.5';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20149,7 +24028,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -20199,7 +24078,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -20212,6 +24091,891 @@ export class Cashfree {
         }
     }
     
+    /**
+     * Use this API to create a pre-activated vpa for partner.
+     * @summary Create Pre-Activated Vpas for partner
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {CreatePartnerVpaRequest} [CreatePartnerVpaRequest] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public static TerminalCreateQRCodes(x_api_version: string, x_request_id?: string, x_idempotency_key?: string, CreatePartnerVpaRequest?: CreatePartnerVpaRequest, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return DefaultApiFp().terminalCreateQRCodes(x_api_version, x_request_id, x_idempotency_key, CreatePartnerVpaRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static TerminalCreateQRCodesWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, x_request_id?: string, x_idempotency_key?: string, CreatePartnerVpaRequest?: CreatePartnerVpaRequest, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return DefaultApiFp().terminalCreateQRCodesWithConfiguration(cashfreeConfiguration, x_api_version, x_request_id, x_idempotency_key, CreatePartnerVpaRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to get a pre-activated vpa for partner.
+     * @summary Get Pre-Activated Vpas for partner
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} status Status of pre-created Qr.
+     * @param {string} cf_terminal_id Cashfree terminal id for which you want to get pre-generated staticQRs.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public static TerminalGetQRCodes(x_api_version: string, status: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return DefaultApiFp().terminalGetQRCodes(x_api_version, status, cf_terminal_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static TerminalGetQRCodesWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, status: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return DefaultApiFp().terminalGetQRCodesWithConfiguration(cashfreeConfiguration, x_api_version, status, cf_terminal_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+    
+    /**
+     * Use this API to get accept the Dispute by specifying the Dispute ID.
+     * @summary Accept Dispute by Dispute ID
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {number} dispute_id 
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DisputesApi
+     */
+    public static PGAcceptDisputeByID(x_api_version: string, dispute_id: number, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return DisputesApiFp().pGAcceptDisputeByID(x_api_version, dispute_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGAcceptDisputeByIDWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, dispute_id: number, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return DisputesApiFp().pGAcceptDisputeByIDWithConfiguration(cashfreeConfiguration, x_api_version, dispute_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to get Dispute details by specifying the Dispute ID.
+     * @summary Get Disputes by Dispute ID
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {number} dispute_id 
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DisputesApi
+     */
+    public static PGFetchDisputeByID(x_api_version: string, dispute_id: number, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return DisputesApiFp().pGFetchDisputeByID(x_api_version, dispute_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGFetchDisputeByIDWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, dispute_id: number, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return DisputesApiFp().pGFetchDisputeByIDWithConfiguration(cashfreeConfiguration, x_api_version, dispute_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to get all Dispute details by specifying the Order ID.
+     * @summary Get Disputes by Order Id
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} order_id 
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DisputesApi
+     */
+    public static PGFetchOrderDisputes(x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return DisputesApiFp().pGFetchOrderDisputes(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGFetchOrderDisputesWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return DisputesApiFp().pGFetchOrderDisputesWithConfiguration(cashfreeConfiguration, x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to get all Dispute details by specifying the Payment ID.
+     * @summary Get Disputes by Payment ID
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {number} cf_payment_id 
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DisputesApi
+     */
+    public static PGFetchPaymentDisputes(x_api_version: string, cf_payment_id: number, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return DisputesApiFp().pGFetchPaymentDisputes(x_api_version, cf_payment_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGFetchPaymentDisputesWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, cf_payment_id: number, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return DisputesApiFp().pGFetchPaymentDisputesWithConfiguration(cashfreeConfiguration, x_api_version, cf_payment_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to Submit the Evidences to contest the Dispute by specifying the Dispute ID.
+     * @summary Submit Evidence to contest the Dispute by Dispute ID
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {number} dispute_id 
+     * @param {string} file File types supported are jpeg, jpg, png, pdf and maximum file size allowed is 20 MB.
+     * @param {string} doc_type Mention the type of the document you are uploading. Possible values :- Delivery/Service Proof, Shipping Proof, Statement of Service, Proof of Service Used, Cancellation of Service Proof, Refund Proof, Business model explanation, Extra Charges Declaration, Terms &amp; Conditions, Customer Withdrawal Letter, Certificate of Authenticity, Reseller Agreement. You can use get evidences to contest dispute API to fetch set of documents required to contest particular dispute.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {string} [note] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DisputesApi
+     */
+    public static PGUploadDisputesDocuments(x_api_version: string, dispute_id: number, file: string, doc_type: string, x_request_id?: string, x_idempotency_key?: string, note?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return DisputesApiFp().pGUploadDisputesDocuments(x_api_version, dispute_id, file, doc_type, x_request_id, x_idempotency_key, note, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGUploadDisputesDocumentsWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, dispute_id: number, file: string, doc_type: string, x_request_id?: string, x_idempotency_key?: string, note?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return DisputesApiFp().pGUploadDisputesDocumentsWithConfiguration(cashfreeConfiguration, x_api_version, dispute_id, file, doc_type, x_request_id, x_idempotency_key, note, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+    
+    /**
+     * The Create Adjustment API will create a adjustment request either from vendor to the merchant or from merchant to the vendor.
+     * @summary Create Adjustment
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} vendor_id The id which uniquely identifies your vendor.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {VendorAdjustmentRequest} [VendorAdjustmentRequest] Vendor Adjustment Request Body.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EasySplitApi
+     */
+    public static PGESCreateAdjustment(x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, VendorAdjustmentRequest?: VendorAdjustmentRequest, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESCreateAdjustment(x_api_version, vendor_id, x_request_id, x_idempotency_key, VendorAdjustmentRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGESCreateAdjustmentWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, VendorAdjustmentRequest?: VendorAdjustmentRequest, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGESCreateAdjustmentWithConfiguration(cashfreeConfiguration, x_api_version, vendor_id, x_request_id, x_idempotency_key, VendorAdjustmentRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
     /**
      * The Create On Demand Transfer API will create a new on-demand request either from to the merchant or from to the vendor.
      * @summary Create On Demand Transfer
@@ -20260,7 +25024,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -20310,7 +25074,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -20370,7 +25134,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -20420,7 +25184,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -20481,7 +25245,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -20531,7 +25295,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -20591,7 +25355,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -20641,7 +25405,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -20701,7 +25465,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -20751,7 +25515,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -20812,7 +25576,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -20862,7 +25626,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -20922,7 +25686,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -20972,7 +25736,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -21032,7 +25796,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -21082,7 +25846,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -21143,7 +25907,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -21193,7 +25957,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -21256,7 +26020,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -21306,7 +26070,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -21367,7 +26131,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -21417,7 +26181,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -21477,7 +26241,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -21527,11 +26291,121 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
             return EasySplitApiFp().pGOrderStaticSplitWithConfiguration(cashfreeConfiguration, x_api_version, x_request_id, x_idempotency_key, StaticSplitRequest, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to get all the split details, settled and unsettled transactions details of each vendor who were part of a particular order by providing order Id or start date and end date.
+     * @summary Get Split and Settlement Details by OrderID
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} order_id The id which uniquely identifies your order
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof EasySplitApi
+     */
+    public static PGSplitOrderRecon(x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGSplitOrderRecon(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGSplitOrderReconWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return EasySplitApiFp().pGSplitOrderReconWithConfiguration(cashfreeConfiguration, x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -21587,7 +26461,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -21637,7 +26511,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -21697,7 +26571,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -21747,7 +26621,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -21807,7 +26681,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -21857,7 +26731,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -21917,7 +26791,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -21967,7 +26841,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -22027,7 +26901,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -22077,7 +26951,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -22137,7 +27011,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -22187,7 +27061,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -22247,7 +27121,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -22297,7 +27171,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -22357,7 +27231,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -22407,11 +27281,121 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
             return OrdersApiFp().pGFetchOrderWithConfiguration(cashfreeConfiguration, x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to fetch the order related data like address,cart,offers,customer details etc using the Cashfree\'s `order_id`. ## When to use this API - To get the extended data associated with order. - Once the order is PAID - Once your customer returns to `return_url` 
+     * @summary Get Order Extended
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} order_id The id which uniquely identifies your order
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OrdersApi
+     */
+    public static PGFetchOrderExtendedData(x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return OrdersApiFp().pGFetchOrderExtendedData(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGFetchOrderExtendedDataWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return OrdersApiFp().pGFetchOrderExtendedDataWithConfiguration(cashfreeConfiguration, x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -22468,7 +27452,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -22518,11 +27502,122 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
             return OrdersApiFp().pGTerminateOrderWithConfiguration(cashfreeConfiguration, x_api_version, order_id, TerminateOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this api to update the order related data like shipment details,order delivery status etc. ## When to use this API - To provide/update the shipment details or order delivery status. - Once the order is PAID. 
+     * @summary Update Order Extended
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} order_id The id which uniquely identifies your order
+     * @param {UpdateOrderExtendedRequest} UpdateOrderExtendedRequest Request Body to Update extended data related to order
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OrdersApi
+     */
+    public static PGUpdateOrderExtendedData(x_api_version: string, order_id: string, UpdateOrderExtendedRequest: UpdateOrderExtendedRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return OrdersApiFp().pGUpdateOrderExtendedData(x_api_version, order_id, UpdateOrderExtendedRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static PGUpdateOrderExtendedDataWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, order_id: string, UpdateOrderExtendedRequest: UpdateOrderExtendedRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return OrdersApiFp().pGUpdateOrderExtendedDataWithConfiguration(cashfreeConfiguration, x_api_version, order_id, UpdateOrderExtendedRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -22580,7 +27675,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -22630,7 +27725,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -22690,7 +27785,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -22740,7 +27835,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -22800,7 +27895,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -22850,7 +27945,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -22910,7 +28005,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -22960,7 +28055,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -23021,7 +28116,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -23071,7 +28166,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -23132,7 +28227,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -23182,7 +28277,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -23243,7 +28338,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -23293,7 +28388,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -23354,7 +28449,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -23404,7 +28499,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -23464,7 +28559,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -23514,7 +28609,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -23574,7 +28669,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -23624,7 +28719,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -23685,7 +28780,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -23735,7 +28830,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -23796,7 +28891,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -23846,7 +28941,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -23906,7 +29001,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -23956,7 +29051,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -24018,7 +29113,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -24068,7 +29163,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -24130,7 +29225,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -24180,7 +29275,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -24240,7 +29335,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -24290,7 +29385,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -24350,7 +29445,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -24400,7 +29495,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -24460,7 +29555,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -24510,7 +29605,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -24570,7 +29665,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -24620,7 +29715,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -24680,7 +29775,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -24730,7 +29825,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -24790,7 +29885,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -24840,11 +29935,121 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
             return SoftPOSApiFp().sposCreateTerminalTransactionWithConfiguration(cashfreeConfiguration, x_api_version, CreateTerminalTransactionRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to demap a device from soundbox.
+     * @summary Demap Soundbox Vpa
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {DemapSoundboxVpaRequest} DemapSoundboxVpaRequest Request body to demap soundbox vpa
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SoftPOSApi
+     */
+    public static SposDemapSoundboxVpa(x_api_version: string, DemapSoundboxVpaRequest: DemapSoundboxVpaRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return SoftPOSApiFp().sposDemapSoundboxVpa(x_api_version, DemapSoundboxVpaRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SposDemapSoundboxVpaWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, DemapSoundboxVpaRequest: DemapSoundboxVpaRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return SoftPOSApiFp().sposDemapSoundboxVpaWithConfiguration(cashfreeConfiguration, x_api_version, DemapSoundboxVpaRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -24900,7 +30105,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -24950,7 +30155,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -25011,7 +30216,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -25061,11 +30266,122 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
             return SoftPOSApiFp().sposFetchTerminalQRCodesWithConfiguration(cashfreeConfiguration, x_api_version, terminal_phone_no, cf_terminal_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * You can fetch all the active and mapped SoundboxVpa corresponding to given terminal id or deviceSerialNo. Provide either the device_serial_no or cf_terminal_id in the request.
+     * @summary Fetch Terminal Soundbox vpa
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} device_serial_no Device Serial No assinged. Required if you are not providing the cf_terminal_id in the request.
+     * @param {string} cf_terminal_id Cashfree terminal id for which you want to get Soundbox Vpa. Required if you are not providing the device_serial_no in the request.
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SoftPOSApi
+     */
+    public static SposFetchTerminalSoundboxVpa(x_api_version: string, device_serial_no: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return SoftPOSApiFp().sposFetchTerminalSoundboxVpa(x_api_version, device_serial_no, cf_terminal_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SposFetchTerminalSoundboxVpaWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, device_serial_no: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return SoftPOSApiFp().sposFetchTerminalSoundboxVpaWithConfiguration(cashfreeConfiguration, x_api_version, device_serial_no, cf_terminal_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -25122,7 +30438,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -25172,11 +30488,232 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
             return SoftPOSApiFp().sposFetchTerminalTransactionWithConfiguration(cashfreeConfiguration, x_api_version, utr, cf_terminal_id, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to onboard a terminal Vpa to soundbox.
+     * @summary Onboard Soundbox Vpa
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {OnboardSoundboxVpaRequest} OnboardSoundboxVpaRequest Request body to onboard soundbox vpa
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SoftPOSApi
+     */
+    public static SposOnboardSoundboxVpa(x_api_version: string, OnboardSoundboxVpaRequest: OnboardSoundboxVpaRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return SoftPOSApiFp().sposOnboardSoundboxVpa(x_api_version, OnboardSoundboxVpaRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SposOnboardSoundboxVpaWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, OnboardSoundboxVpaRequest: OnboardSoundboxVpaRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return SoftPOSApiFp().sposOnboardSoundboxVpaWithConfiguration(cashfreeConfiguration, x_api_version, OnboardSoundboxVpaRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    /**
+     * Use this API to update a terminal Vpa to soundbox.
+     * @summary Update Soundbox Vpa
+     * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
+     * @param {string} cf_terminal_id Provide the Cashfree terminal ID for which the details have to be updated.
+     * @param {UpdateSoundboxVpaRequest} UpdateSoundboxVpaRequest Request body to update soundbox vpa
+     * @param {string} [x_request_id] Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+     * @param {string} [x_idempotency_key] An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SoftPOSApi
+     */
+    public static SposUpdateSoundboxVpa(x_api_version: string, cf_terminal_id: string, UpdateSoundboxVpaRequest: UpdateSoundboxVpaRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return SoftPOSApiFp().sposUpdateSoundboxVpa(x_api_version, cf_terminal_id, UpdateSoundboxVpaRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
+        } catch (error) {
+            if(Cashfree.XEnableErrorAnalytics) {
+                Sentry.captureException(error);
+            }
+            throw error;
+        }
+    }
+
+    // With Configuration
+    public static SposUpdateSoundboxVpaWithConfiguration(cashfreeConfiguration: CashfreeConfiguration, x_api_version: string, cf_terminal_id: string, UpdateSoundboxVpaRequest: UpdateSoundboxVpaRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
+        if(Cashfree.XEnableErrorAnalytics) {
+        Sentry.init({
+            dsn: 'https://748d9dcfc4286488867c59651cb6121a@o330525.ingest.sentry.io/4506692796350464',
+            // Performance Monitoring
+            tracesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
+            // Set sampling rate for profiling - this is relative to tracesSampleRate
+            profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!,
+            attachStacktrace: true,
+            enableTracing: true,
+            beforeSend: (event) => {
+                delete event.contexts.os;
+                delete event.contexts.device;
+                delete event.server_name;
+                if (event.exception && event.exception.values && event.exception.values.length && event.exception.values[0].stacktrace) {
+                            const stackTrace = event.exception.values[0].stacktrace;
+                            if (stackTrace && stackTrace.frames) {
+                                
+								const filteredDomains = stackTrace.frames.filter((x) => x.filename.includes("cashfree-pg")).map((x) => x.filename);
+                                if (filteredDomains && filteredDomains.length > 0 && filteredDomains[0].includes("cashfree-pg")) {
+                                    if(Cashfree.XEnableErrorAnalytics) {
+                                        return event;
+                                    }
+                                    return null;
+                                } 
+                            }
+                        }
+						return null;
+            },
+            });
+            Sentry.configureScope((scope) => {
+                if(Cashfree.XEnvironment == CFEnvironment.SANDBOX) {
+                    scope.setExtra('environment', 'sandbox');
+                } else {
+                    scope.setExtra('environment', 'production');
+                }
+                scope.setExtra('release', "4.3.5");
+            });
+        }
+        try {
+            return SoftPOSApiFp().sposUpdateSoundboxVpaWithConfiguration(cashfreeConfiguration, x_api_version, cf_terminal_id, UpdateSoundboxVpaRequest, x_request_id, x_idempotency_key, options).then((request) => request(Cashfree.axios, Cashfree.basePath));
         } catch (error) {
             if(Cashfree.XEnableErrorAnalytics) {
                 Sentry.captureException(error);
@@ -25233,7 +30770,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -25283,7 +30820,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -25344,7 +30881,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -25394,7 +30931,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -25455,7 +30992,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -25505,7 +31042,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -25519,7 +31056,7 @@ export class Cashfree {
     }
     
     /**
-     * Use this API to create an auth or to raise a charge .
+     * Use this API to create an auth or to raise a charge.
      * @summary Raise a charge or create an auth.
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {CreateSubscriptionPaymentRequest} CreateSubscriptionPaymentRequest Request body to create a subscription payment.
@@ -25565,7 +31102,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -25615,7 +31152,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -25675,7 +31212,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -25725,7 +31262,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -25786,7 +31323,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -25836,7 +31373,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -25896,7 +31433,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -25946,7 +31483,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -26006,7 +31543,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -26056,7 +31593,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -26116,7 +31653,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -26166,7 +31703,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -26227,7 +31764,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -26277,7 +31814,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -26337,7 +31874,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -26387,7 +31924,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -26448,7 +31985,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -26498,7 +32035,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -26559,7 +32096,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -26609,7 +32146,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -26671,7 +32208,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -26721,7 +32258,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -26735,8 +32272,8 @@ export class Cashfree {
     }
 
     /**
-     * Use this API to upload Physical Nach for Physical Nach Authorization.
-     * @summary API to upload Physical Nach for Physical Nach Authorization.
+     * Use this API to upload file for Physical Nach Authorization.
+     * @summary API to upload file for Physical Nach Authorization.
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD
      * @param {string} payment_id Provide the PaymentId using which the payment was created.
      * @param {File} file Select the .jpg file that should be uploaded or provide the path of that file. You cannot upload a file that is more than 1MB in size.
@@ -26784,7 +32321,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -26834,7 +32371,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -26894,7 +32431,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -26944,7 +32481,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -27005,7 +32542,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -27055,7 +32592,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -27116,7 +32653,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -27166,7 +32703,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -27227,7 +32764,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -27277,7 +32814,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -27338,7 +32875,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
@@ -27388,7 +32925,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "4.3.1");
+                scope.setExtra('release', "4.3.5");
             });
         }
         try {
