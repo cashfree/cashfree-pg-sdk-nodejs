@@ -55,7 +55,7 @@ Cashfree.PGCreateOrder("2023-08-01", request).then((response) => {
 
 Get Order
 ```javascript
-Cashfree.PGFetchOrder("2022-09-01", "<order_id>").then((response) => {
+Cashfree.PGFetchOrder("2023-08-01", "<order_id>").then((response) => {
     console.log('Order fetched successfully:', response.data);
 }).catch((error) => {
     console.error('Error:', error.response.data.message);
