@@ -21,6 +21,49 @@ npm i cashfree-pg
 ```
 ### Configuration
 
+## Version >=5
+
+```javascript 
+import { Cashfree } from "cashfree-pg"; 
+
+var cashfree = new Cashfree(Cashfree.SANDBOX, "<x-client-id>", "<x-client-secret>")
+```
+
+Generate your API keys (x-client-id , x-client-secret) from [Cashfree Merchant Dashboard](https://merchant.cashfree.com/merchants/login)
+
+### Basic Usage
+Create Order
+```javascript
+var request = {
+    "order_amount": 1,
+    "order_currency": "INR",
+    "order_id": "order_34692745",
+    "customer_details": {
+        "customer_id": "walterwNrcMi",
+        "customer_phone": "9999999999"
+    },
+    "order_meta": {
+        "return_url": "https://www.cashfree.com/devstudio/preview/pg/web/checkout?order_id={order_id}"
+    }
+};
+Cashfree.PGCreateOrder(request).then((response) => {
+    console.log('Order Created successfully:',response.data)
+}).catch((error) => {
+    console.error('Error:', error.response.data.message);
+});
+```
+
+Get Order
+```javascript
+Cashfree.PGFetchOrder("<order_id>").then((response) => {
+    console.log('Order fetched successfully:', response.data);
+}).catch((error) => {
+    console.error('Error:', error.response.data.message);
+});
+```
+
+## Version <5
+
 ```javascript 
 import { Cashfree } from "cashfree-pg"; 
 
