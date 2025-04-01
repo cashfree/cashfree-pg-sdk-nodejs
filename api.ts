@@ -10915,7 +10915,7 @@ const CustomersApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/customers`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -10943,7 +10943,7 @@ const CustomersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11032,7 +11032,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"dispute_id"}}`, encodeURIComponent(String(dispute_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -11058,7 +11058,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11100,7 +11100,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"dispute_id"}}`, encodeURIComponent(String(dispute_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -11126,7 +11126,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11168,7 +11168,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -11194,7 +11194,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11236,7 +11236,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"cf_payment_id"}}`, encodeURIComponent(String(cf_payment_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -11262,7 +11262,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11311,7 +11311,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"dispute_id"}}`, encodeURIComponent(String(dispute_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -11352,7 +11352,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11517,7 +11517,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -11545,7 +11545,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11589,7 +11589,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -11617,7 +11617,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11657,7 +11657,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/easy-split/vendors`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -11685,7 +11685,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11732,7 +11732,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -11758,7 +11758,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11800,7 +11800,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -11826,7 +11826,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11868,7 +11868,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -11894,7 +11894,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11939,7 +11939,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"amount"}}`, encodeURIComponent(String(amount)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -11969,7 +11969,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12011,7 +12011,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -12037,7 +12037,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12076,7 +12076,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/split/order/vendor/recon`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -12104,7 +12104,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12148,7 +12148,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -12176,7 +12176,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12222,7 +12222,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"vendor_id"}}`, encodeURIComponent(String(vendor_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -12263,7 +12263,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12307,7 +12307,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -12335,7 +12335,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12375,7 +12375,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/easy-split/static-split`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -12403,7 +12403,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12446,7 +12446,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -12472,7 +12472,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12802,7 +12802,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/eligibility/cardlessemi`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -12830,7 +12830,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12872,7 +12872,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/eligibility/offers`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -12900,7 +12900,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12942,7 +12942,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/eligibility/paylater`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -12970,7 +12970,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13012,7 +13012,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/eligibility/payment_methods`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -13040,7 +13040,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13182,7 +13182,7 @@ const OffersApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/offers`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -13210,7 +13210,7 @@ const OffersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13253,7 +13253,7 @@ const OffersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"offer_id"}}`, encodeURIComponent(String(offer_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -13279,7 +13279,7 @@ const OffersApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13384,7 +13384,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/orders`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -13412,7 +13412,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13455,7 +13455,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -13481,7 +13481,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13523,7 +13523,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -13549,7 +13549,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13594,7 +13594,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -13622,7 +13622,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13668,7 +13668,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -13696,7 +13696,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13860,7 +13860,7 @@ const PGReconciliationApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/recon`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -13888,7 +13888,7 @@ const PGReconciliationApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13979,7 +13979,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"link_id"}}`, encodeURIComponent(String(link_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -14005,7 +14005,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14046,7 +14046,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/links`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -14074,7 +14074,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14117,7 +14117,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"link_id"}}`, encodeURIComponent(String(link_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -14143,7 +14143,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14186,7 +14186,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"link_id"}}`, encodeURIComponent(String(link_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -14216,7 +14216,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14362,7 +14362,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -14390,7 +14390,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14436,7 +14436,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"cf_payment_id"}}`, encodeURIComponent(String(cf_payment_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -14449,7 +14449,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14496,7 +14496,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"cf_payment_id"}}`, encodeURIComponent(String(cf_payment_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -14522,7 +14522,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14564,7 +14564,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -14590,7 +14590,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14631,7 +14631,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/orders/sessions`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -14644,7 +14644,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14811,7 +14811,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -14839,7 +14839,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14886,7 +14886,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"refund_id"}}`, encodeURIComponent(String(refund_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -14912,7 +14912,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14954,7 +14954,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -14980,7 +14980,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15107,7 +15107,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (cashfree: Cashfre
             const localVarPath = `/settlements`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -15135,7 +15135,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (cashfree: Cashfre
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15179,7 +15179,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (cashfree: Cashfre
             const localVarPath = `/settlement/recon`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -15207,7 +15207,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (cashfree: Cashfre
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15315,7 +15315,7 @@ const SettlementsApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/orders/settlements`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -15343,7 +15343,7 @@ const SettlementsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15386,7 +15386,7 @@ const SettlementsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"order_id"}}`, encodeURIComponent(String(order_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -15412,7 +15412,7 @@ const SettlementsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15518,7 +15518,7 @@ const SimulationApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"simulation_id"}}`, encodeURIComponent(String(simulation_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -15544,7 +15544,7 @@ const SimulationApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15585,7 +15585,7 @@ const SimulationApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/simulate`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -15613,7 +15613,7 @@ const SimulationApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15719,7 +15719,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/terminal`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -15747,7 +15747,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15789,7 +15789,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/terminal/transactions`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -15817,7 +15817,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15859,7 +15859,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/terminal/demap/soundbox`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -15887,7 +15887,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15930,7 +15930,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"terminal_phone_no"}}`, encodeURIComponent(String(terminal_phone_no)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -15956,7 +15956,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16000,7 +16000,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/terminal/qrcodes`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -16034,7 +16034,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16078,7 +16078,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/terminal/soundbox/qrcodes`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -16112,7 +16112,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16157,7 +16157,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"cf_terminal_id"}}`, encodeURIComponent(String(cf_terminal_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -16187,7 +16187,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16228,7 +16228,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/terminal/soundbox`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -16256,7 +16256,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16302,7 +16302,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"cf_terminal_id"}}`, encodeURIComponent(String(cf_terminal_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -16330,7 +16330,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16376,7 +16376,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"cf_terminal_id"}}`, encodeURIComponent(String(cf_terminal_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -16404,7 +16404,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16450,7 +16450,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"cf_terminal_id"}}`, encodeURIComponent(String(cf_terminal_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -16478,7 +16478,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16524,7 +16524,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"cf_terminal_id"}}`, encodeURIComponent(String(cf_terminal_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -16552,7 +16552,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16845,7 +16845,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/subscriptions/pay`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -16873,7 +16873,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16915,7 +16915,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/plans`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -16943,7 +16943,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16989,7 +16989,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"subscription_id"}}`, encodeURIComponent(String(subscription_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -17017,7 +17017,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17059,7 +17059,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/subscriptions`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -17087,7 +17087,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17130,7 +17130,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"plan_id"}}`, encodeURIComponent(String(plan_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -17156,7 +17156,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17198,7 +17198,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"subscription_id"}}`, encodeURIComponent(String(subscription_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -17224,7 +17224,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17270,7 +17270,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"payment_id"}}`, encodeURIComponent(String(payment_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -17296,7 +17296,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17338,7 +17338,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"subscription_id"}}`, encodeURIComponent(String(subscription_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -17364,7 +17364,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17410,7 +17410,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"refund_id"}}`, encodeURIComponent(String(refund_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -17436,7 +17436,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17481,7 +17481,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"subscription_id"}}`, encodeURIComponent(String(subscription_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -17509,7 +17509,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17559,7 +17559,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"payment_id"}}`, encodeURIComponent(String(payment_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -17587,7 +17587,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17639,7 +17639,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"payment_id"}}`, encodeURIComponent(String(payment_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -17680,7 +17680,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17722,7 +17722,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/subscriptions/eligibility/payment_methods`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -17750,7 +17750,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18068,7 +18068,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"instrument_id"}}`, encodeURIComponent(String(instrument_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -18094,7 +18094,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18140,7 +18140,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"instrument_id"}}`, encodeURIComponent(String(instrument_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -18166,7 +18166,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18211,7 +18211,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"customer_id"}}`, encodeURIComponent(String(customer_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -18241,7 +18241,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18287,7 +18287,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
                 .replace(`{${"instrument_id"}}`, encodeURIComponent(String(instrument_id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -18313,7 +18313,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18466,7 +18466,7 @@ const UtilitiesApiAxiosParamCreator = function (cashfree: Cashfree) {
             const localVarPath = `/pg/utilities/pars`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             var url = "https://sandbox.cashfree.com/pg";
-            if(this.XEnvironment == CFEnvironment.PRODUCTION) {
+            if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
@@ -18494,7 +18494,7 @@ const UtilitiesApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18649,7 +18649,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "5.0.1");
+                scope.setExtra('release', "5.0.2");
             });
         }
         if(axios) {
