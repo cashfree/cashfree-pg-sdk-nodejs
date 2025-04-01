@@ -10943,7 +10943,7 @@ const CustomersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -10956,8 +10956,7 @@ const CustomersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(CreateCustomerRequest, localVarRequestOptions)
 
             return {
@@ -11059,7 +11058,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11072,8 +11071,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -11128,7 +11126,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11141,8 +11139,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -11197,7 +11194,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11210,8 +11207,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -11266,7 +11262,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11279,8 +11275,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -11357,7 +11352,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11370,8 +11365,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = localVarFormParams;
 
             return {
@@ -11551,7 +11545,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11564,8 +11558,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(VendorAdjustmentRequest, localVarRequestOptions)
 
             return {
@@ -11624,7 +11617,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11637,8 +11630,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(AdjustVendorBalanceRequest, localVarRequestOptions)
 
             return {
@@ -11693,7 +11685,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11706,8 +11698,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(CreateVendorRequest, localVarRequestOptions)
 
             return {
@@ -11767,7 +11758,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11780,8 +11771,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -11836,7 +11826,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11849,8 +11839,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -11905,7 +11894,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11918,8 +11907,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -11981,7 +11969,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11994,8 +11982,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -12050,7 +12037,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12063,8 +12050,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -12118,7 +12104,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12131,8 +12117,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(ESOrderReconRequest, localVarRequestOptions)
 
             return {
@@ -12191,7 +12176,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12204,8 +12189,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(UpdateVendorRequest, localVarRequestOptions)
 
             return {
@@ -12279,7 +12263,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12292,8 +12276,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = localVarFormParams;
 
             return {
@@ -12352,7 +12335,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12365,8 +12348,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(SplitAfterPaymentRequest, localVarRequestOptions)
 
             return {
@@ -12421,7 +12403,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12434,8 +12416,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(StaticSplitRequest, localVarRequestOptions)
 
             return {
@@ -12491,7 +12472,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12504,8 +12485,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -12850,7 +12830,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12863,8 +12843,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(EligibilityFetchCardlessEMIRequest, localVarRequestOptions)
 
             return {
@@ -12921,7 +12900,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12934,8 +12913,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(EligibilityFetchOffersRequest, localVarRequestOptions)
 
             return {
@@ -12992,7 +12970,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13005,8 +12983,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(EligibilityFetchPaylaterRequest, localVarRequestOptions)
 
             return {
@@ -13063,7 +13040,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13076,8 +13053,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(EligibilityFetchPaymentMethodsRequest, localVarRequestOptions)
 
             return {
@@ -13234,7 +13210,7 @@ const OffersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13247,8 +13223,7 @@ const OffersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(CreateOfferRequest, localVarRequestOptions)
 
             return {
@@ -13304,7 +13279,7 @@ const OffersApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13317,8 +13292,7 @@ const OffersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -13438,7 +13412,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13451,8 +13425,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(CreateOrderRequest, localVarRequestOptions)
 
             return {
@@ -13508,7 +13481,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13521,8 +13494,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -13577,7 +13549,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13590,8 +13562,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -13651,7 +13622,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13664,8 +13635,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(TerminateOrderRequest, localVarRequestOptions)
 
             return {
@@ -13726,7 +13696,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13739,8 +13709,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(UpdateOrderExtendedRequest, localVarRequestOptions)
 
             return {
@@ -13919,7 +13888,7 @@ const PGReconciliationApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13932,8 +13901,7 @@ const PGReconciliationApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(FetchReconRequest, localVarRequestOptions)
 
             return {
@@ -14037,7 +14005,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14050,8 +14018,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -14107,7 +14074,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14120,8 +14087,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(CreateLinkRequest, localVarRequestOptions)
 
             return {
@@ -14177,7 +14143,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14190,8 +14156,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -14251,7 +14216,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14264,8 +14229,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -14426,7 +14390,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14439,8 +14403,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(AuthorizeOrderRequest, localVarRequestOptions)
 
             return {
@@ -14486,7 +14449,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14499,8 +14462,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(OrderAuthenticatePaymentRequest, localVarRequestOptions)
 
             return {
@@ -14560,7 +14522,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14573,8 +14535,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -14629,7 +14590,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14642,8 +14603,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -14684,7 +14644,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14697,8 +14657,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(PayOrderRequest, localVarRequestOptions)
 
             return {
@@ -14880,7 +14839,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14893,8 +14852,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(OrderCreateRefundRequest, localVarRequestOptions)
 
             return {
@@ -14954,7 +14912,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14967,8 +14925,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -15023,7 +14980,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15036,8 +14993,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -15179,7 +15135,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (cashfree: Cashfre
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15192,8 +15148,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (cashfree: Cashfre
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(FetchSettlementsRequest, localVarRequestOptions)
 
             return {
@@ -15252,7 +15207,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (cashfree: Cashfre
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15265,8 +15220,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (cashfree: Cashfre
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(SettlementFetchReconRequest, localVarRequestOptions)
 
             return {
@@ -15389,7 +15343,7 @@ const SettlementsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15402,8 +15356,7 @@ const SettlementsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(CreateOrderSettlementRequestBody, localVarRequestOptions)
 
             return {
@@ -15459,7 +15412,7 @@ const SettlementsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15472,8 +15425,7 @@ const SettlementsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -15592,7 +15544,7 @@ const SimulationApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15605,8 +15557,7 @@ const SimulationApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -15662,7 +15613,7 @@ const SimulationApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15675,8 +15626,7 @@ const SimulationApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(SimulateRequest, localVarRequestOptions)
 
             return {
@@ -15797,7 +15747,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15810,8 +15760,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(CreateTerminalRequest, localVarRequestOptions)
 
             return {
@@ -15868,7 +15817,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15881,8 +15830,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(CreateTerminalTransactionRequest, localVarRequestOptions)
 
             return {
@@ -15939,7 +15887,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15952,8 +15900,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(DemapSoundboxVpaRequest, localVarRequestOptions)
 
             return {
@@ -16009,7 +15956,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16022,8 +15969,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -16088,7 +16034,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16101,8 +16047,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -16167,7 +16112,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16180,8 +16125,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -16243,7 +16187,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16256,8 +16200,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -16313,7 +16256,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16326,8 +16269,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(OnboardSoundboxVpaRequest, localVarRequestOptions)
 
             return {
@@ -16388,7 +16330,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16401,8 +16343,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(UpdateSoundboxVpaRequest, localVarRequestOptions)
 
             return {
@@ -16463,7 +16404,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16476,8 +16417,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(UpdateTerminalRequest, localVarRequestOptions)
 
             return {
@@ -16538,7 +16478,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16551,8 +16491,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(UpdateTerminalStatusRequest, localVarRequestOptions)
 
             return {
@@ -16613,7 +16552,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16626,8 +16565,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(UploadTerminalDocs, localVarRequestOptions)
 
             return {
@@ -16935,7 +16873,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16948,8 +16886,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(CreateSubscriptionPaymentRequest, localVarRequestOptions)
 
             return {
@@ -17006,7 +16943,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17019,8 +16956,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(CreatePlanRequest, localVarRequestOptions)
 
             return {
@@ -17081,7 +17017,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17094,8 +17030,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(CreateSubscriptionRefundRequest, localVarRequestOptions)
 
             return {
@@ -17152,7 +17087,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17165,8 +17100,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(CreateSubscriptionRequest, localVarRequestOptions)
 
             return {
@@ -17222,7 +17156,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17235,8 +17169,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -17291,7 +17224,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17304,8 +17237,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -17364,7 +17296,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17377,8 +17309,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -17433,7 +17364,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17446,8 +17377,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -17506,7 +17436,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17519,8 +17449,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -17580,7 +17509,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17593,8 +17522,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(ManageSubscriptionRequest, localVarRequestOptions)
 
             return {
@@ -17659,7 +17587,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17672,8 +17600,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(ManageSubscriptionPaymentRequest, localVarRequestOptions)
 
             return {
@@ -17753,7 +17680,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17766,8 +17693,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = localVarFormParams;
 
             return {
@@ -17824,7 +17750,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17837,8 +17763,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(SubscriptionEligibilityRequest, localVarRequestOptions)
 
             return {
@@ -18169,7 +18094,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18182,8 +18107,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -18242,7 +18166,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18255,8 +18179,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -18318,7 +18241,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18331,8 +18254,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -18391,7 +18313,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18404,8 +18326,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -18573,7 +18494,7 @@ const UtilitiesApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.3';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18586,8 +18507,7 @@ const UtilitiesApiAxiosParamCreator = function (cashfree: Cashfree) {
                 localVarHeaderParameter['x-idempotency-key'] = x_idempotency_key;
             }
             setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(PARRequest, localVarRequestOptions)
 
             return {
@@ -18723,7 +18643,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "5.0.2");
+                scope.setExtra('release', "5.0.3");
             });
         }
         if(axios) {
