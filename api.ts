@@ -5746,10 +5746,10 @@ export interface OrderMetaPaymentMethodsFiltersFiltersCardIssuingBank {
     'action'?: string;
     /**
      * List of card issuing bank to be allowed for the order
-     * @type {Array}
+     * @type {Array<string>}
      * @memberof OrderMetaPaymentMethodsFiltersFiltersCardIssuingBank
      */
-    'values'?: Array;
+    'values'?: Array<string>;
 }
 /**
  * Allowed card schemes for the order
@@ -10919,9 +10919,8 @@ const CustomersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -10944,7 +10943,7 @@ const CustomersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11038,9 +11037,8 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PUT', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -11061,7 +11059,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11108,9 +11106,8 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -11131,7 +11128,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11178,9 +11175,8 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -11201,7 +11197,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11248,9 +11244,8 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -11271,7 +11266,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11325,9 +11320,8 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
             const localVarFormParams = new (FormData)();
@@ -11363,7 +11357,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11533,9 +11527,8 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -11558,7 +11551,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11607,9 +11600,8 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -11632,7 +11624,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11677,9 +11669,8 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -11702,7 +11693,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11754,9 +11745,8 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -11777,7 +11767,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11824,9 +11814,8 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -11847,7 +11836,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11894,9 +11883,8 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -11917,7 +11905,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -11967,9 +11955,8 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -11994,7 +11981,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12041,9 +12028,8 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -12064,7 +12050,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12108,9 +12094,8 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -12133,7 +12118,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12182,9 +12167,8 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PATCH', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -12207,7 +12191,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12258,9 +12242,8 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
             const localVarFormParams = new (FormData)();
@@ -12296,7 +12279,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12345,9 +12328,8 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -12370,7 +12352,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12415,9 +12397,8 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -12440,7 +12421,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12488,9 +12469,8 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -12511,7 +12491,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12846,9 +12826,8 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -12871,7 +12850,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12918,9 +12897,8 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -12943,7 +12921,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12990,9 +12968,8 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -13015,7 +12992,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13062,9 +13039,8 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -13087,7 +13063,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13234,9 +13210,8 @@ const OffersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -13259,7 +13234,7 @@ const OffersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13307,9 +13282,8 @@ const OffersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -13330,7 +13304,7 @@ const OffersApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13440,9 +13414,8 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -13465,7 +13438,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13513,9 +13486,8 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -13536,7 +13508,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13583,9 +13555,8 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -13606,7 +13577,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13656,9 +13627,8 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PATCH', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -13681,7 +13651,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13732,9 +13702,8 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PUT', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -13757,7 +13726,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13926,9 +13895,8 @@ const PGReconciliationApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -13951,7 +13919,7 @@ const PGReconciliationApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14047,9 +14015,8 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -14070,7 +14037,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14116,9 +14083,8 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -14141,7 +14107,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14189,9 +14155,8 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -14212,7 +14177,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14260,9 +14225,8 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -14287,7 +14251,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14438,9 +14402,8 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -14463,7 +14426,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14514,9 +14477,8 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -14524,7 +14486,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14576,9 +14538,8 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -14599,7 +14560,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14646,9 +14607,8 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -14669,7 +14629,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14715,9 +14675,8 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -14725,7 +14684,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14897,9 +14856,8 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -14922,7 +14880,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14974,9 +14932,8 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -14997,7 +14954,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15044,9 +15001,8 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -15067,7 +15023,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15199,9 +15155,8 @@ const SettlementReconciliationApiAxiosParamCreator = function (cashfree: Cashfre
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -15224,7 +15179,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (cashfree: Cashfre
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15273,9 +15228,8 @@ const SettlementReconciliationApiAxiosParamCreator = function (cashfree: Cashfre
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -15298,7 +15252,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (cashfree: Cashfre
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15411,9 +15365,8 @@ const SettlementsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -15436,7 +15389,7 @@ const SettlementsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15484,9 +15437,8 @@ const SettlementsApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -15507,7 +15459,7 @@ const SettlementsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15618,9 +15570,8 @@ const SimulationApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -15641,7 +15592,7 @@ const SimulationApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15687,9 +15638,8 @@ const SimulationApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -15712,7 +15662,7 @@ const SimulationApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15823,9 +15773,8 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -15848,7 +15797,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15895,9 +15844,8 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -15920,7 +15868,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15967,9 +15915,8 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -15992,7 +15939,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16040,9 +15987,8 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -16063,7 +16009,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16112,9 +16058,8 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -16143,7 +16088,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16192,9 +16137,8 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -16223,7 +16167,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16273,9 +16217,8 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -16300,7 +16243,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16346,9 +16289,8 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -16371,7 +16313,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16422,9 +16364,8 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PATCH', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -16447,7 +16388,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16498,9 +16439,8 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PATCH', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -16523,7 +16463,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16574,9 +16514,8 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PATCH', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -16599,7 +16538,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16650,9 +16589,8 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -16675,7 +16613,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16973,9 +16911,8 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -16998,7 +16935,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17045,9 +16982,8 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -17070,7 +17006,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17121,9 +17057,8 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -17146,7 +17081,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17193,9 +17128,8 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -17218,7 +17152,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17266,9 +17200,8 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -17289,7 +17222,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17336,9 +17269,8 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -17359,7 +17291,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17410,9 +17342,8 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -17433,7 +17364,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17480,9 +17411,8 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -17503,7 +17433,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17554,9 +17484,8 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -17577,7 +17506,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17627,9 +17556,8 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -17652,7 +17580,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17707,9 +17635,8 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -17732,7 +17659,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17789,9 +17716,8 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
             const localVarFormParams = new (FormData)();
@@ -17827,7 +17753,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17874,9 +17800,8 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -17899,7 +17824,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18222,9 +18147,8 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'DELETE', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -18245,7 +18169,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18296,9 +18220,8 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -18319,7 +18242,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18369,9 +18292,8 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -18396,7 +18318,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18447,9 +18369,8 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -18470,7 +18391,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18628,9 +18549,8 @@ const UtilitiesApiAxiosParamCreator = function (cashfree: Cashfree) {
                 url = "https://api.cashfree.com/pg"
             }
             const localVarUrlObj = new URL(localVarPath, url);
-            let baseOptions;
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -18653,7 +18573,7 @@ const UtilitiesApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.1';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-5.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18803,7 +18723,7 @@ export class Cashfree {
                 } else {
                     scope.setExtra('environment', 'production');
                 }
-                scope.setExtra('release', "5.0.1");
+                scope.setExtra('release', "5.0.2");
             });
         }
         if(axios) {
@@ -18844,7 +18764,7 @@ export class Cashfree {
      */
 
     public PGCreateCustomer(CreateCustomerRequest: CreateCustomerRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return CustomersApiFp(this).pGCreateCustomer(x_api_version, CreateCustomerRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -18868,7 +18788,7 @@ export class Cashfree {
      */
 
     public PGAcceptDisputeByID(dispute_id: number, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return DisputesApiFp(this).pGAcceptDisputeByID(x_api_version, dispute_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -18892,7 +18812,7 @@ export class Cashfree {
      */
 
     public PGFetchDisputeByID(dispute_id: number, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return DisputesApiFp(this).pGFetchDisputeByID(x_api_version, dispute_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -18916,7 +18836,7 @@ export class Cashfree {
      */
 
     public PGFetchOrderDisputes(order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return DisputesApiFp(this).pGFetchOrderDisputes(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -18940,7 +18860,7 @@ export class Cashfree {
      */
 
     public PGFetchPaymentDisputes(cf_payment_id: number, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return DisputesApiFp(this).pGFetchPaymentDisputes(x_api_version, cf_payment_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -18967,7 +18887,7 @@ export class Cashfree {
      */
 
     public PGUploadDisputesDocuments(dispute_id: number, file: string, doc_type: string, x_request_id?: string, x_idempotency_key?: string, note?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return DisputesApiFp(this).pGUploadDisputesDocuments(x_api_version, dispute_id, file, doc_type, x_request_id, x_idempotency_key, note, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -18992,7 +18912,7 @@ export class Cashfree {
      */
 
     public PGESCreateAdjustment(vendor_id: string, x_request_id?: string, x_idempotency_key?: string, VendorAdjustmentRequest?: VendorAdjustmentRequest, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return EasySplitApiFp(this).pGESCreateAdjustment(x_api_version, vendor_id, x_request_id, x_idempotency_key, VendorAdjustmentRequest, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19017,7 +18937,7 @@ export class Cashfree {
      */
 
     public PGESCreateOnDemandTransfer(vendor_id: string, x_request_id?: string, x_idempotency_key?: string, AdjustVendorBalanceRequest?: AdjustVendorBalanceRequest, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return EasySplitApiFp(this).pGESCreateOnDemandTransfer(x_api_version, vendor_id, x_request_id, x_idempotency_key, AdjustVendorBalanceRequest, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19041,7 +18961,7 @@ export class Cashfree {
      */
 
     public PGESCreateVendors(x_request_id?: string, x_idempotency_key?: string, CreateVendorRequest?: CreateVendorRequest, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return EasySplitApiFp(this).pGESCreateVendors(x_api_version, x_request_id, x_idempotency_key, CreateVendorRequest, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19066,7 +18986,7 @@ export class Cashfree {
      */
 
     public PGESDownloadVendorsDocs(doc_type: string, vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return EasySplitApiFp(this).pGESDownloadVendorsDocs(x_api_version, doc_type, vendor_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19090,7 +19010,7 @@ export class Cashfree {
      */
 
     public PGESFetchVendors(vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return EasySplitApiFp(this).pGESFetchVendors(x_api_version, vendor_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19114,7 +19034,7 @@ export class Cashfree {
      */
 
     public PGESGetVendorBalance(vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return EasySplitApiFp(this).pGESGetVendorBalance(x_api_version, vendor_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19139,7 +19059,7 @@ export class Cashfree {
      */
 
     public PGESGetVendorBalanceTransferCharges(amount: number, rate_type: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return EasySplitApiFp(this).pGESGetVendorBalanceTransferCharges(x_api_version, amount, rate_type, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19163,7 +19083,7 @@ export class Cashfree {
      */
 
     public PGESGetVendorsDocs(vendor_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return EasySplitApiFp(this).pGESGetVendorsDocs(x_api_version, vendor_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19187,7 +19107,7 @@ export class Cashfree {
      */
 
     public PGESOrderRecon(x_request_id?: string, x_idempotency_key?: string, ESOrderReconRequest?: ESOrderReconRequest, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return EasySplitApiFp(this).pGESOrderRecon(x_api_version, x_request_id, x_idempotency_key, ESOrderReconRequest, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19212,7 +19132,7 @@ export class Cashfree {
      */
 
     public PGESUpdateVendors(vendor_id: string, x_request_id?: string, x_idempotency_key?: string, UpdateVendorRequest?: UpdateVendorRequest, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return EasySplitApiFp(this).pGESUpdateVendors(x_api_version, vendor_id, x_request_id, x_idempotency_key, UpdateVendorRequest, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19239,7 +19159,7 @@ export class Cashfree {
      */
 
     public PGESUploadVendorsDocs(vendor_id: string, x_request_id?: string, x_idempotency_key?: string, doc_type?: string, doc_value?: string, file?: File, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return EasySplitApiFp(this).pGESUploadVendorsDocs(x_api_version, vendor_id, x_request_id, x_idempotency_key, doc_type, doc_value, file, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19264,7 +19184,7 @@ export class Cashfree {
      */
 
     public PGOrderSplitAfterPayment(order_id: string, x_request_id?: string, x_idempotency_key?: string, SplitAfterPaymentRequest?: SplitAfterPaymentRequest, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return EasySplitApiFp(this).pGOrderSplitAfterPayment(x_api_version, order_id, x_request_id, x_idempotency_key, SplitAfterPaymentRequest, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19288,7 +19208,7 @@ export class Cashfree {
      */
 
     public PGOrderStaticSplit(x_request_id?: string, x_idempotency_key?: string, StaticSplitRequest?: StaticSplitRequest, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return EasySplitApiFp(this).pGOrderStaticSplit(x_api_version, x_request_id, x_idempotency_key, StaticSplitRequest, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19312,7 +19232,7 @@ export class Cashfree {
      */
 
     public PGSplitOrderRecon(order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return EasySplitApiFp(this).pGSplitOrderRecon(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19336,7 +19256,7 @@ export class Cashfree {
      */
 
     public PGEligibilityFetchCardlessEMI(EligibilityFetchCardlessEMIRequest: EligibilityFetchCardlessEMIRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return EligibilityApiFp(this).pGEligibilityFetchCardlessEMI(x_api_version, EligibilityFetchCardlessEMIRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19360,7 +19280,7 @@ export class Cashfree {
      */
 
     public PGEligibilityFetchOffers(EligibilityFetchOffersRequest: EligibilityFetchOffersRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return EligibilityApiFp(this).pGEligibilityFetchOffers(x_api_version, EligibilityFetchOffersRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19384,7 +19304,7 @@ export class Cashfree {
      */
 
     public PGEligibilityFetchPaylater(EligibilityFetchPaylaterRequest: EligibilityFetchPaylaterRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return EligibilityApiFp(this).pGEligibilityFetchPaylater(x_api_version, EligibilityFetchPaylaterRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19408,7 +19328,7 @@ export class Cashfree {
      */
 
     public PGEligibilityFetchPaymentMethods(EligibilityFetchPaymentMethodsRequest: EligibilityFetchPaymentMethodsRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return EligibilityApiFp(this).pGEligibilityFetchPaymentMethods(x_api_version, EligibilityFetchPaymentMethodsRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19432,7 +19352,7 @@ export class Cashfree {
      */
 
     public PGCreateOffer(CreateOfferRequest: CreateOfferRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return OffersApiFp(this).pGCreateOffer(x_api_version, CreateOfferRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19456,7 +19376,7 @@ export class Cashfree {
      */
 
     public PGFetchOffer(offer_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return OffersApiFp(this).pGFetchOffer(x_api_version, offer_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19480,7 +19400,7 @@ export class Cashfree {
      */
 
     public PGCreateOrder(CreateOrderRequest: CreateOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return OrdersApiFp(this).pGCreateOrder(x_api_version, CreateOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19504,7 +19424,7 @@ export class Cashfree {
      */
 
     public PGFetchOrder(order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return OrdersApiFp(this).pGFetchOrder(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19528,7 +19448,7 @@ export class Cashfree {
      */
 
     public PGFetchOrderExtendedData(order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return OrdersApiFp(this).pGFetchOrderExtendedData(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19553,7 +19473,7 @@ export class Cashfree {
      */
 
     public PGTerminateOrder(order_id: string, TerminateOrderRequest: TerminateOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return OrdersApiFp(this).pGTerminateOrder(x_api_version, order_id, TerminateOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19578,7 +19498,7 @@ export class Cashfree {
      */
 
     public PGUpdateOrderExtendedData(order_id: string, UpdateOrderExtendedRequest: UpdateOrderExtendedRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return OrdersApiFp(this).pGUpdateOrderExtendedData(x_api_version, order_id, UpdateOrderExtendedRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19604,7 +19524,7 @@ export class Cashfree {
      */
 
     public PGFetchRecon(FetchReconRequest: FetchReconRequest, Content_Type?: string, x_request_id?: string, x_idempotency_key?: string, Accept?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return PGReconciliationApiFp(this).pGFetchRecon(x_api_version, FetchReconRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19628,7 +19548,7 @@ export class Cashfree {
      */
 
     public PGCancelLink(link_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return PaymentLinksApiFp(this).pGCancelLink(x_api_version, link_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19652,7 +19572,7 @@ export class Cashfree {
      */
 
     public PGCreateLink(CreateLinkRequest: CreateLinkRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return PaymentLinksApiFp(this).pGCreateLink(x_api_version, CreateLinkRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19676,7 +19596,7 @@ export class Cashfree {
      */
 
     public PGFetchLink(link_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return PaymentLinksApiFp(this).pGFetchLink(x_api_version, link_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19701,7 +19621,7 @@ export class Cashfree {
      */
 
     public PGLinkFetchOrders(link_id: string, x_request_id?: string, x_idempotency_key?: string, status?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return PaymentLinksApiFp(this).pGLinkFetchOrders(x_api_version, link_id, x_request_id, x_idempotency_key, status, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19726,7 +19646,7 @@ export class Cashfree {
      */
 
     public PGAuthorizeOrder(order_id: string, AuthorizeOrderRequest: AuthorizeOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return PaymentsApiFp(this).pGAuthorizeOrder(x_api_version, order_id, AuthorizeOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19751,7 +19671,7 @@ export class Cashfree {
      */
 
     public PGOrderAuthenticatePayment(cf_payment_id: string, OrderAuthenticatePaymentRequest: OrderAuthenticatePaymentRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return PaymentsApiFp(this).pGOrderAuthenticatePayment(x_api_version, cf_payment_id, OrderAuthenticatePaymentRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19776,7 +19696,7 @@ export class Cashfree {
      */
 
     public PGOrderFetchPayment(order_id: string, cf_payment_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return PaymentsApiFp(this).pGOrderFetchPayment(x_api_version, order_id, cf_payment_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19800,7 +19720,7 @@ export class Cashfree {
      */
 
     public PGOrderFetchPayments(order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return PaymentsApiFp(this).pGOrderFetchPayments(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19824,7 +19744,7 @@ export class Cashfree {
      */
 
     public PGPayOrder(PayOrderRequest: PayOrderRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return PaymentsApiFp(this).pGPayOrder(x_api_version, PayOrderRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19849,7 +19769,7 @@ export class Cashfree {
      */
 
     public PGOrderCreateRefund(order_id: string, OrderCreateRefundRequest: OrderCreateRefundRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return RefundsApiFp(this).pGOrderCreateRefund(x_api_version, order_id, OrderCreateRefundRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19874,7 +19794,7 @@ export class Cashfree {
      */
 
     public PGOrderFetchRefund(order_id: string, refund_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return RefundsApiFp(this).pGOrderFetchRefund(x_api_version, order_id, refund_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19898,7 +19818,7 @@ export class Cashfree {
      */
 
     public PGOrderFetchRefunds(order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return RefundsApiFp(this).pGOrderFetchRefunds(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19924,7 +19844,7 @@ export class Cashfree {
      */
 
     public PGFetchSettlements(FetchSettlementsRequest: FetchSettlementsRequest, Content_Type?: string, x_request_id?: string, x_idempotency_key?: string, Accept?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SettlementReconciliationApiFp(this).pGFetchSettlements(x_api_version, FetchSettlementsRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19950,7 +19870,7 @@ export class Cashfree {
      */
 
     public PGSettlementFetchRecon(SettlementFetchReconRequest: SettlementFetchReconRequest, Content_Type?: string, x_request_id?: string, x_idempotency_key?: string, Accept?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SettlementReconciliationApiFp(this).pGSettlementFetchRecon(x_api_version, SettlementFetchReconRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19974,7 +19894,7 @@ export class Cashfree {
      */
 
     public MarkForSettlement(x_request_id?: string, x_idempotency_key?: string, CreateOrderSettlementRequestBody?: CreateOrderSettlementRequestBody, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SettlementsApiFp(this).markForSettlement(x_api_version, x_request_id, x_idempotency_key, CreateOrderSettlementRequestBody, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -19998,7 +19918,7 @@ export class Cashfree {
      */
 
     public PGOrderFetchSettlement(order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SettlementsApiFp(this).pGOrderFetchSettlement(x_api_version, order_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20022,7 +19942,7 @@ export class Cashfree {
      */
 
     public PGFetchSimulation(simulation_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SimulationApiFp(this).pGFetchSimulation(x_api_version, simulation_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20046,7 +19966,7 @@ export class Cashfree {
      */
 
     public PGSimulatePayment(SimulateRequest: SimulateRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SimulationApiFp(this).pGSimulatePayment(x_api_version, SimulateRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20070,7 +19990,7 @@ export class Cashfree {
      */
 
     public SposCreateTerminal(CreateTerminalRequest: CreateTerminalRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SoftPOSApiFp(this).sposCreateTerminal(x_api_version, CreateTerminalRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20094,7 +20014,7 @@ export class Cashfree {
      */
 
     public SposCreateTerminalTransaction(CreateTerminalTransactionRequest: CreateTerminalTransactionRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SoftPOSApiFp(this).sposCreateTerminalTransaction(x_api_version, CreateTerminalTransactionRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20118,7 +20038,7 @@ export class Cashfree {
      */
 
     public SposDemapSoundboxVpa(DemapSoundboxVpaRequest: DemapSoundboxVpaRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SoftPOSApiFp(this).sposDemapSoundboxVpa(x_api_version, DemapSoundboxVpaRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20142,7 +20062,7 @@ export class Cashfree {
      */
 
     public SposFetchTerminal(terminal_phone_no: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SoftPOSApiFp(this).sposFetchTerminal(x_api_version, terminal_phone_no, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20167,7 +20087,7 @@ export class Cashfree {
      */
 
     public SposFetchTerminalQRCodes(terminal_phone_no: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SoftPOSApiFp(this).sposFetchTerminalQRCodes(x_api_version, terminal_phone_no, cf_terminal_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20192,7 +20112,7 @@ export class Cashfree {
      */
 
     public SposFetchTerminalSoundboxVpa(device_serial_no: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SoftPOSApiFp(this).sposFetchTerminalSoundboxVpa(x_api_version, device_serial_no, cf_terminal_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20217,7 +20137,7 @@ export class Cashfree {
      */
 
     public SposFetchTerminalTransaction(utr: string, cf_terminal_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SoftPOSApiFp(this).sposFetchTerminalTransaction(x_api_version, utr, cf_terminal_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20241,7 +20161,7 @@ export class Cashfree {
      */
 
     public SposOnboardSoundboxVpa(OnboardSoundboxVpaRequest: OnboardSoundboxVpaRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SoftPOSApiFp(this).sposOnboardSoundboxVpa(x_api_version, OnboardSoundboxVpaRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20266,7 +20186,7 @@ export class Cashfree {
      */
 
     public SposUpdateSoundboxVpa(cf_terminal_id: string, UpdateSoundboxVpaRequest: UpdateSoundboxVpaRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SoftPOSApiFp(this).sposUpdateSoundboxVpa(x_api_version, cf_terminal_id, UpdateSoundboxVpaRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20291,7 +20211,7 @@ export class Cashfree {
      */
 
     public SposUpdateTerminal(cf_terminal_id: string, UpdateTerminalRequest: UpdateTerminalRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SoftPOSApiFp(this).sposUpdateTerminal(x_api_version, cf_terminal_id, UpdateTerminalRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20316,7 +20236,7 @@ export class Cashfree {
      */
 
     public SposUpdateTerminalStatus(cf_terminal_id: string, UpdateTerminalStatusRequest: UpdateTerminalStatusRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SoftPOSApiFp(this).sposUpdateTerminalStatus(x_api_version, cf_terminal_id, UpdateTerminalStatusRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20341,7 +20261,7 @@ export class Cashfree {
      */
 
     public SposUploadTerminalDocs(cf_terminal_id: string, UploadTerminalDocs: UploadTerminalDocs, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SoftPOSApiFp(this).sposUploadTerminalDocs(x_api_version, cf_terminal_id, UploadTerminalDocs, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20365,7 +20285,7 @@ export class Cashfree {
      */
 
     public SubsCreatePayment(CreateSubscriptionPaymentRequest: CreateSubscriptionPaymentRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SubscriptionApiFp(this).subsCreatePayment(x_api_version, CreateSubscriptionPaymentRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20389,7 +20309,7 @@ export class Cashfree {
      */
 
     public SubsCreatePlan(CreatePlanRequest: CreatePlanRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SubscriptionApiFp(this).subsCreatePlan(x_api_version, CreatePlanRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20414,7 +20334,7 @@ export class Cashfree {
      */
 
     public SubsCreateRefund(subscription_id: string, CreateSubscriptionRefundRequest: CreateSubscriptionRefundRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SubscriptionApiFp(this).subsCreateRefund(x_api_version, subscription_id, CreateSubscriptionRefundRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20438,7 +20358,7 @@ export class Cashfree {
      */
 
     public SubsCreateSubscription(CreateSubscriptionRequest: CreateSubscriptionRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SubscriptionApiFp(this).subsCreateSubscription(x_api_version, CreateSubscriptionRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20462,7 +20382,7 @@ export class Cashfree {
      */
 
     public SubsFetchPlan(plan_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SubscriptionApiFp(this).subsFetchPlan(x_api_version, plan_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20486,7 +20406,7 @@ export class Cashfree {
      */
 
     public SubsFetchSubscription(subscription_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SubscriptionApiFp(this).subsFetchSubscription(x_api_version, subscription_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20511,7 +20431,7 @@ export class Cashfree {
      */
 
     public SubsFetchSubscriptionPayment(subscription_id: string, payment_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SubscriptionApiFp(this).subsFetchSubscriptionPayment(x_api_version, subscription_id, payment_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20535,7 +20455,7 @@ export class Cashfree {
      */
 
     public SubsFetchSubscriptionPayments(subscription_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SubscriptionApiFp(this).subsFetchSubscriptionPayments(x_api_version, subscription_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20560,7 +20480,7 @@ export class Cashfree {
      */
 
     public SubsFetchSubscriptionRefund(subscription_id: string, refund_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SubscriptionApiFp(this).subsFetchSubscriptionRefund(x_api_version, subscription_id, refund_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20585,7 +20505,7 @@ export class Cashfree {
      */
 
     public SubsManageSubscription(subscription_id: string, ManageSubscriptionRequest: ManageSubscriptionRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SubscriptionApiFp(this).subsManageSubscription(x_api_version, subscription_id, ManageSubscriptionRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20611,7 +20531,7 @@ export class Cashfree {
      */
 
     public SubsManageSubscriptionPayment(subscription_id: string, payment_id: string, ManageSubscriptionPaymentRequest: ManageSubscriptionPaymentRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SubscriptionApiFp(this).subsManageSubscriptionPayment(x_api_version, subscription_id, payment_id, ManageSubscriptionPaymentRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20638,7 +20558,7 @@ export class Cashfree {
      */
 
     public SubscriptionDocumentUpload(payment_id: string, file: File, payment_id2: string, action: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SubscriptionApiFp(this).subscriptionDocumentUpload(x_api_version, payment_id, file, payment_id2, action, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20662,7 +20582,7 @@ export class Cashfree {
      */
 
     public SubscriptionEligibility(SubscriptionEligibilityRequest: SubscriptionEligibilityRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return SubscriptionApiFp(this).subscriptionEligibility(x_api_version, SubscriptionEligibilityRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20687,7 +20607,7 @@ export class Cashfree {
      */
 
     public PGCustomerDeleteInstrument(customer_id: string, instrument_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return TokenVaultApiFp(this).pGCustomerDeleteInstrument(x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20712,7 +20632,7 @@ export class Cashfree {
      */
 
     public PGCustomerFetchInstrument(customer_id: string, instrument_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return TokenVaultApiFp(this).pGCustomerFetchInstrument(x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20737,7 +20657,7 @@ export class Cashfree {
      */
 
     public PGCustomerFetchInstruments(customer_id: string, instrument_type: PGCustomerFetchInstrumentsInstrumentTypeEnum, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return TokenVaultApiFp(this).pGCustomerFetchInstruments(x_api_version, customer_id, instrument_type, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20762,7 +20682,7 @@ export class Cashfree {
      */
 
     public PGCustomerInstrumentsFetchCryptogram(customer_id: string, instrument_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return TokenVaultApiFp(this).pGCustomerInstrumentsFetchCryptogram(x_api_version, customer_id, instrument_id, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
@@ -20786,7 +20706,7 @@ export class Cashfree {
      */
 
     public PGCreatePAR(PARRequest: PARRequest, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig) {
-        const xApiVersion = this.XApiVersion;
+        const x_api_version = this.XApiVersion;
         try {
             return UtilitiesApiFp(this).pGCreatePAR(x_api_version, PARRequest, x_request_id, x_idempotency_key, options).then((request) => request(this.axios, this.basePath));
         } catch (error) {
