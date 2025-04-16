@@ -10,8 +10,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      XCLIENTIDSANDBOX: ${{ secrets.XCLIENTIDSANDBOX }}
-      XCLIENTSECRETSANDBOX: ${{ secrets.XCLIENTSECRETSANDBOX }}
+      X_CLIENTID_SANDBOX: ${{ secrets.X_CLIENTID_SANDBOX }}
+      X_CLIENT_SECRET_SANDBOX: ${{ secrets.X_CLIENT_SECRET_SANDBOX }}
       COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
 
     steps:
@@ -24,14 +24,14 @@ jobs:
 
       - name: Check if secrets are set (masked output)
         run: |
-          echo "XCLIENTIDSANDBOX is ${XCLIENTIDSANDBOX:0:4}**** (partially masked)"
-          echo "XCLIENTSECRETSANDBOX is ${XCLIENTSECRETSANDBOX:0:4}**** (partially masked)"
+          echo "X_CLIENTID_SANDBOX is ${X_CLIENTID_SANDBOX:0:4}**** (partially masked)"
+          echo "X_CLIENT_SECRET_SANDBOX is ${X_CLIENT_SECRET_SANDBOX:0:4}**** (partially masked)"
           echo "COVERALLS_REPO_TOKEN is ${COVERALLS_REPO_TOKEN:0:4}**** (partially masked)"
 
       - name: Check if secrets are non-empty
         run: |
-          [ -z "$XCLIENTIDSANDBOX" ] && echo "XCLIENTIDSANDBOX is empty" || echo "XCLIENTIDSANDBOX is set"
-          [ -z "$XCLIENTSECRETSANDBOX" ] && echo "XCLIENTSECRETSANDBOX is empty" || echo "XCLIENTSECRETSANDBOX is set"
+          [ -z "$X_CLIENTID_SANDBOX" ] && echo "X_CLIENTID_SANDBOX is empty" || echo "X_CLIENTID_SANDBOX is set"
+          [ -z "$X_CLIENT_SECRET_SANDBOX" ] && echo "X_CLIENT_SECRET_SANDBOX is empty" || echo "X_CLIENT_SECRET_SANDBOX is set"
           [ -z "$COVERALLS_REPO_TOKEN" ] && echo "COVERALLS_REPO_TOKEN is empty" || echo "COVERALLS_REPO_TOKEN is set"
 
       - name: Install dependencies
