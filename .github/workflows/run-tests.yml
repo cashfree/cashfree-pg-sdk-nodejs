@@ -10,6 +10,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      XCLIENTIDSANDBOX: ${{ secrets.XCLIENTIDSANDBOX }}
+      XCLIENTSECRETSANDBOX: ${{ secrets.XCLIENTSECRETSANDBOX }}
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4
@@ -20,8 +24,8 @@ jobs:
       - name: Install dependencies
         run: npm install && npm install coveralls --save-dev
       - name: Run Tests
-        run: CLIENT_ID=$PG_CLIENT_ID SECRET_KEY=$PG_CLIENT_SECRET npm test && cd coverage && ls && cd .. && cat coverage/lcov.info | npx coveralls
         env:
-          PG_CLIENT_ID: ${{ secrets.XCLIENTIDSANDBOX }}
-          PG_CLIENT_SECRET: ${{ secrets.XCLIENTSECRETSANDBOX }}
+          XCLIENTIDSANDBOX: ${{ secrets.XCLIENTIDSANDBOX }}
+          XCLIENTSECRETSANDBOX: ${{ secrets.XCLIENTSECRETSANDBOX }}
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        run: XCLIENTIDSANDBOX=${{ secrets.XCLIENTIDSANDBOX }} XCLIENTSECRETSANDBOX=${{ secrets.XCLIENTSECRETSANDBOX }} npm test && cd coverage && ls && cd .. && cat coverage/lcov.info | npx coveralls

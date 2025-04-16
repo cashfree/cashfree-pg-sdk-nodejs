@@ -1,11 +1,15 @@
-const { Cashfree, CardChannelEnum, AppProviderEnum } = require("cashfree-pg");
+require('dotenv').config();
+const { Cashfree, CardChannelEnum, AppProviderEnum, CFEnvironment } = require("cashfree-pg");
 const { test, expect } = require("@jest/globals");
 
+console.log("HIIII",process.env.XCLIENTIDSANDBOX);
 const cashfree = new Cashfree(
-  Cashfree.SANDBOX,
-  process.env.CLIENT_ID,
-  process.env.SECRET_KEY
+  CFEnvironment.SANDBOX,
+  process.env.XCLIENTIDSANDBOX,
+  process.env.XCLIENTSECRETSANDBOX
 );
+
+console.log(cashfree);
 
 const orderAmount = 1;
 const xApiVersion = "2025-01-01";
@@ -202,7 +206,6 @@ test("Order Pay Net Banking Test", async () => {
   };
 
   const response = await cashfree.PGPayOrder(request, xApiVersion);
-  console.log("Response:", response.data);
   expect(response.data.channel).toBe("link");
   expect(response.data.payment_method).toBe("netbanking");
   expect(Number(response.data.payment_amount)).toBeGreaterThanOrEqual(orderAmount);
