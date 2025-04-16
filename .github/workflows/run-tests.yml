@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     env:
       XCLIENTIDSANDBOX: ${{ secrets.XCLIENTIDSANDBOX }}
@@ -24,8 +23,14 @@ jobs:
       - name: Install dependencies
         run: npm install && npm install coveralls --save-dev
       - name: Run Tests
+        run: |
+          echo "Running tests with secrets"
+          npm test
+          cd coverage
+          ls
+          cd ..
+          cat coverage/lcov.info | npx coveralls
         env:
           XCLIENTIDSANDBOX: ${{ secrets.XCLIENTIDSANDBOX }}
           XCLIENTSECRETSANDBOX: ${{ secrets.XCLIENTSECRETSANDBOX }}
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-        run: XCLIENTIDSANDBOX=${{ secrets.XCLIENTIDSANDBOX }} XCLIENTSECRETSANDBOX=${{ secrets.XCLIENTSECRETSANDBOX }} npm test && cd coverage && ls && cd .. && cat coverage/lcov.info | npx coveralls
