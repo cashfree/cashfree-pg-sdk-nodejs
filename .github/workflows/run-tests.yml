@@ -8,20 +8,21 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    env:
+      XCLIENTIDSANDBOX: ${{ secrets.XCLIENTIDSANDBOX }}
+      XCLIENTSECRETSANDBOX: ${{ secrets.XCLIENTSECRETSANDBOX }}
 
     steps:
       - uses: actions/checkout@v4
+
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '21.x'
+
       - name: Install dependencies
-        run: npm install && npm install coveralls --save-dev
+        run: npm install
+
       - name: Run Tests
-        run: CLIENT_ID=$PG_CLIENT_ID SECRET_KEY=$PG_CLIENT_SECRET npm test && cd coverage && ls && cd .. && cat coverage/lcov.info | npx coveralls
-        env:
-          PG_CLIENT_ID: ${{ secrets.XCLIENTIDSANDBOX }}
-          PG_CLIENT_SECRET: ${{ secrets.XCLIENTSECRETSANDBOX }}
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        run: npm test
