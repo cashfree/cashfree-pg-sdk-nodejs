@@ -2,17 +2,13 @@ require('dotenv').config();
 const { Cashfree, CardChannelEnum, AppProviderEnum, CFEnvironment } = require("cashfree-pg");
 const { test, expect } = require("@jest/globals");
 
-console.log("HIIII",process.env.XCLIENTIDSANDBOX);
 const cashfree = new Cashfree(
   CFEnvironment.SANDBOX,
   process.env.XCLIENTIDSANDBOX,
   process.env.XCLIENTSECRETSANDBOX
 );
 
-console.log(cashfree);
-
 const orderAmount = 1;
-const xApiVersion = "2025-01-01";
 async function createOrderAndReturnSessionId() {
   const orderId = "order_" + Math.floor(Math.random() * 100000000);
   const request = {
@@ -30,7 +26,7 @@ async function createOrderAndReturnSessionId() {
     }
   };
 
-  const response = await cashfree.PGCreateOrder(request, xApiVersion);
+  const response = await cashfree.PGCreateOrder(request);
   expect(response.data.payment_session_id).toBeDefined();
   return { sessionId: response.data.payment_session_id, orderId: orderId };
 }
@@ -52,7 +48,7 @@ test("Pay Netbanking", async () => {
     }
   };
 
-  const response = await cashfree.PGPayOrder(request, xApiVersion);
+  const response = await cashfree.PGPayOrder(request);
   expect(response.data.channel).toBe("link");
   expect(response.data.payment_method).toBe("netbanking");
   expect(Number(response.data.payment_amount)).toBeGreaterThanOrEqual(orderAmount);
@@ -74,7 +70,7 @@ test("Pay Card", async () => {
     }
   };
 
-  const response = await cashfree.PGPayOrder(request, xApiVersion);
+  const response = await cashfree.PGPayOrder(request);
   expect(response.data.channel).toBe("link");
   expect(response.data.payment_method).toBe("card");
   expect(Number(response.data.payment_amount)).toBeGreaterThanOrEqual(orderAmount);
@@ -96,7 +92,7 @@ test("Pay Card with Empty CVV", async () => {
     }
   };
 
-  await expect(cashfree.PGPayOrder(request, xApiVersion)).rejects.toMatchObject({
+  await expect(cashfree.PGPayOrder(request)).rejects.toMatchObject({
     response: {
       data: {
         code: "card_cvv_missing",
@@ -120,7 +116,7 @@ test("Pay Wallet - PhonePe", async () => {
     }
   };
 
-  const response = await cashfree.PGPayOrder(request, xApiVersion);
+  const response = await cashfree.PGPayOrder(request);
   expect(response.status).toBe(200);
 });
 
@@ -136,7 +132,7 @@ test("Invalid Currency", async () => {
     }
   };
 
-  await expect(cashfree.PGCreateOrder(request, xApiVersion)).rejects.toMatchObject({
+  await expect(cashfree.PGCreateOrder(request)).rejects.toMatchObject({
     response: {
       data: {
         code: "order_currency_invalid",
@@ -159,7 +155,7 @@ test("Invalid Amount", async () => {
     }
   };
 
-  await expect(cashfree.PGCreateOrder(request, xApiVersion)).rejects.toMatchObject({
+  await expect(cashfree.PGCreateOrder(request)).rejects.toMatchObject({
     response: {
       data: {
         code: "order_amount_invalid",
@@ -182,7 +178,7 @@ test("Empty Customer Phone", async () => {
     }
   };
 
-  await expect(cashfree.PGCreateOrder(request, xApiVersion)).rejects.toMatchObject({
+  await expect(cashfree.PGCreateOrder(request)).rejects.toMatchObject({
     response: {
       data: {
         code: "customer_details.customer_phone_missing",
@@ -205,7 +201,7 @@ test("Order Pay Net Banking Test", async () => {
     },
   };
 
-  const response = await cashfree.PGPayOrder(request, xApiVersion);
+  const response = await cashfree.PGPayOrder(request);
   expect(response.data.channel).toBe("link");
   expect(response.data.payment_method).toBe("netbanking");
   expect(Number(response.data.payment_amount)).toBeGreaterThanOrEqual(orderAmount);
@@ -227,7 +223,7 @@ test("Order Pay Card Payment Test", async () => {
     },
   };
 
-const response = await cashfree.PGPayOrder(request, xApiVersion);
+const response = await cashfree.PGPayOrder(request);
   expect(response.data.channel).toBe("link");
   expect(response.data.payment_method).toBe("card");
   expect(Number(response.data.payment_amount)).toBeGreaterThanOrEqual(orderAmount);
@@ -250,7 +246,7 @@ test("Order Pay Card Payment with Empty CVV Test", async () => {
   };
 
   try {
-    await cashfree.PGPayOrder(request, xApiVersion);
+    await cashfree.PGPayOrder(request);
     throw new Error("Expected error but request passed");
   } catch (error) {
     expect(error.response.data.message).toBe("card_cvv : is missing in the request. Value received: ");
@@ -272,18 +268,18 @@ test("Order Pay Wallet Test", async () => {
     },
   };
 
-  const response = await cashfree.PGPayOrder(request, xApiVersion);
+  const response = await cashfree.PGPayOrder(request);
   expect(response.status).toBe(200);
 });
 
 test("Get Order Test", async () => {
   const { orderId } = await createOrderAndReturnSessionId();
-  const response = await cashfree.PGFetchOrder(orderId, xApiVersion);
+  const response = await cashfree.PGFetchOrder(orderId);
   expect(response.data.order_currency).toBe("INR");
 });
 
 test("Get Payments For an Order Test", async () => {
   const { orderId } = await createOrderAndReturnSessionId();
-  const response = await cashfree.PGOrderFetchPayments(orderId, xApiVersion);
+  const response = await cashfree.PGOrderFetchPayments(orderId);
   expect(response.status).toBe(200);
 });

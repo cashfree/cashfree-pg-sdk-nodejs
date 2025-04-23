@@ -12,7 +12,6 @@ jobs:
     env:
       XCLIENTIDSANDBOX: ${{ secrets.XCLIENTIDSANDBOX }}
       XCLIENTSECRETSANDBOX: ${{ secrets.XCLIENTSECRETSANDBOX }}
-      COVERALLSREPOTOKEN: ${{ secrets.COVERALLSREPOTOKEN }}
 
     steps:
       - uses: actions/checkout@v4
@@ -22,20 +21,8 @@ jobs:
         with:
           node-version: '21.x'
 
-      - name: Check if secrets are set (masked output)
-        run: |
-          echo "XCLIENTIDSANDBOX is ${XCLIENTIDSANDBOX:0:4}**** (partially masked)"
-          echo "XCLIENTSECRETSANDBOX is ${XCLIENTSECRETSANDBOX:0:4}**** (partially masked)"
-          echo "COVERALLSREPOTOKEN is ${COVERALLSREPOTOKEN:0:4}**** (partially masked)"
-
-      - name: Check if secrets are non-empty
-        run: |
-          [ -z "$XCLIENTIDSANDBOX" ] && echo "XCLIENTIDSANDBOX is empty" || echo "XCLIENTIDSANDBOX is set"
-          [ -z "$XCLIENTSECRETSANDBOX" ] && echo "XCLIENTSECRETSANDBOX is empty" || echo "XCLIENTSECRETSANDBOX is set"
-          [ -z "$COVERALLSREPOTOKEN" ] && echo "COVERALLSREPOTOKEN is empty" || echo "COVERALLSREPOTOKEN is set"
-
       - name: Install dependencies
-        run: npm install && npm install coveralls --save-dev
+        run: npm install
 
       - name: Run Tests
-        run: npm test && cd coverage && ls && cd .. && cat coverage/lcov.info | npx coveralls
+        run: npm test
