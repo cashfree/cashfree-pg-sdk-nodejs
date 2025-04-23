@@ -5,5 +5,3 @@ dist
 coverage
 package-lock.json
 test-results
-.env
-.env/
