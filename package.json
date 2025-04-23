@@ -1,6 +1,6 @@
 {
   "name": "cashfree-pg",
-  "version": "5.0.7",
+  "version": "5.0.8",
   "description": "Cashfree client for cashfree-pg",
   "author": "Cashfree Payments",
   "repository": {
@@ -22,11 +22,11 @@
   "scripts": {
     "build": "tsc && tsc -p tsconfig.esm.json",
     "prepare": "npm run build",
-    "test": "jest"
+    "test": "jest --coverage && coveralls < coverage/lcov.info"
   },
   "dependencies": {
-    "@sentry/node": "^7.73.0",
-    "axios": "1.7.7"
+    "axios": "1.8.4",
+    "@sentry/node": "^7.73.0"
   },
   "devDependencies": {
     "@types/chai": "^4.3.10",
@@ -39,7 +39,6 @@
     "mocha-junit-reporter": "^2.2.1",
     "sinon": "^17.0.1",
     "ts-jest": "^29.1.1",
-    "typescript": "^4.9.5",
-    "dotenv": "^16.5.0"
+    "typescript": "^4.9.5"
   }
 }
