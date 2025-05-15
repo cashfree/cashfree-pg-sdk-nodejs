@@ -12,7 +12,7 @@ Verify Webhook Signatures ([Docs](https://docs.cashfree.com/reference/pg-webhook
 ```javascript
 app.post('/webhook', function (req, res) {
     try {
-        const response = Cashfree.PGVerifyWebhookSignature(req.headers["x-webhook-signature"], req.rawBody, req.headers["x-webhook-timestamp"]))
+        const response = Cashfree.PGVerifyWebhookSignature(req.headers["x-webhook-signature"], req.rawBody, req.headers["x-webhook-timestamp"])
         console.log(response.object)
     } catch (err) {
         console.log(err.message)
