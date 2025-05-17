@@ -23,10 +23,14 @@ npm i cashfree-pg
 
 ## Version >=5
 
-```javascript 
-import { Cashfree } from "cashfree-pg"; 
+```js 
+import { Cashfree, CFEnvironment } from "cashfree-pg";
 
-var cashfree = new Cashfree(Cashfree.SANDBOX, "<x-client-id>", "<x-client-secret>")
+const cashfree = new Cashfree(
+  CFEnvironment.SANDBOX,
+  "<x-client-id>",
+  "<x-client-secret>"
+);
 ```
 
 Generate your API keys (x-client-id , x-client-secret) from [Cashfree Merchant Dashboard](https://merchant.cashfree.com/merchants/login)
