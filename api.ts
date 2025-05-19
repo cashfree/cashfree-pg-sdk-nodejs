@@ -18701,6 +18701,10 @@ export class Cashfree {
         }
     }
 
+    // Added for backward compatibility
+    static SANDBOX = CFEnvironment.SANDBOX;
+    static PRODUCTION = CFEnvironment.PRODUCTION;
+
     /**
      * Use this API to verify your webhook signature once you receive from Cashfree's server.
      * @summary Verify Webhook Signatures
