@@ -109,7 +109,7 @@ Validate Webhook
 ```javascript
 app.post('/webhook', function (req, res) {
     try {
-        Cashfree.PGVerifyWebhookSignature(req.headers["x-webhook-signature"], req.rawBody, req.headers["x-webhook-timestamp"]))
+        Cashfree.PGVerifyWebhookSignature(req.headers["x-webhook-signature"], req.rawBody, req.headers["x-webhook-timestamp"]);
     } catch (err) {
         console.log(err.message)
     }
