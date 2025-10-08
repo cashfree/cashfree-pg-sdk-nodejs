@@ -64,7 +64,7 @@ test("Pay Card", async () => {
         card_number: "4838305610460100",
         card_holder_name: "Tushar Gupta",
         card_expiry_mm: "06",
-        card_expiry_yy: "25",
+        card_expiry_yy: "30",
         card_cvv: "123"
       }
     }
@@ -86,7 +86,7 @@ test("Pay Card with Empty CVV", async () => {
         card_number: "4838305610460100",
         card_holder_name: "Tushar Gupta",
         card_expiry_mm: "06",
-        card_expiry_yy: "25",
+        card_expiry_yy: "30",
         card_cvv: ""
       }
     }
@@ -217,7 +217,7 @@ test("Order Pay Card Payment Test", async () => {
         card_number: "4838305610460100",
         card_holder_name: "Tushar Gupta",
         card_expiry_mm: "06",
-        card_expiry_yy: "25",
+        card_expiry_yy: "30",
         card_cvv: "123",
       },
     },
@@ -239,7 +239,7 @@ test("Order Pay Card Payment with Empty CVV Test", async () => {
         card_number: "4838305610460100",
         card_holder_name: "Tushar Gupta",
         card_expiry_mm: "06",
-        card_expiry_yy: "25",
+        card_expiry_yy: "30",
         card_cvv: "",
       },
     },
