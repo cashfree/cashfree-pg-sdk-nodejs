@@ -26,7 +26,7 @@ npm i cashfree-pg
 ```javascript 
 import { Cashfree } from "cashfree-pg"; 
 
-var cashfree = new Cashfree(CFEnvironment.SANDBOX, "<x-client-id>", "<x-client-secret>")
+var cashfree = new Cashfree(Cashfree.SANDBOX, "<x-client-id>", "<x-client-secret>")
 ```
 
 Generate your API keys (x-client-id , x-client-secret) from [Cashfree Merchant Dashboard](https://merchant.cashfree.com/merchants/login)
