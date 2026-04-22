@@ -42,7 +42,12 @@ jobs:
       - name: Install dependencies
         run: npm cache clean --force && npm install
 
-      - name: Dry-run publish (verify credentials and package)
+      - name: Verify npm credentials
+        run: npm whoami
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Dry-run publish (verify package)
         run: npm publish --access public --dry-run
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
