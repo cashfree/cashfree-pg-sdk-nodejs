@@ -18,6 +18,12 @@ jobs:
           node-version: '20.*'
           registry-url: 'https://registry.npmjs.org'
       - run: npm cache clean --force && npm install
+
+      - name: Verify npm credentials
+        run: npm whoami
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
