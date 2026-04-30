@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**card** | [**Card**](Card.md) |  | [default to undefined]
+**card** | [**Card**](Card.md) |  | [optional] [default to undefined]
 **upi** | [**Upi**](Upi.md) |  | [default to undefined]
 **netbanking** | [**Netbanking**](Netbanking.md) |  | [default to undefined]
 **app** | [**App**](App.md) |  | [default to undefined]

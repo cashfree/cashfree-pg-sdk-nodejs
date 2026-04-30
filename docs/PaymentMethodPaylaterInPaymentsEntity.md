@@ -1,6 +1,6 @@
 # PaymentMethodPaylaterInPaymentsEntity
 
-paylater payment method object for pay api
+Paylater payment method object for pay API.
 
 ## Properties
 

@@ -1,6 +1,6 @@
 # OfferEntity
 
-Offer entity object
+Offer entity object.
 
 ## Properties
 
@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **offer_tnc** | [**OfferTncResponse**](OfferTncResponse.md) |  | [optional] [default to undefined]
 **offer_details** | [**OfferDetailsResponse**](OfferDetailsResponse.md) |  | [optional] [default to undefined]
 **offer_validations** | [**OfferValidationsResponse**](OfferValidationsResponse.md) |  | [optional] [default to undefined]
+**redemption_amount** | **number** |  | [optional] [default to undefined]
+**platform** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -29,6 +31,8 @@ const instance: OfferEntity = {
     offer_tnc,
     offer_details,
     offer_validations,
+    redemption_amount,
+    platform,
 };
 ```
 

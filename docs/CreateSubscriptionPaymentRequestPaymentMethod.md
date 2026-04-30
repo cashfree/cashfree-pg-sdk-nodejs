@@ -1,28 +1,15 @@
 # CreateSubscriptionPaymentRequestPaymentMethod
 
-Payment method. Can be one of [\"upi\", \"enach\", \"pnach\", \"card\"]
+Payment method. Can be one of [\"upi\", \"enach\", \"pnach\", \"card\"]. This field is not required when raising a charge. It is only mandatory when raising an authorisation. In the case of a charge, this field is ignored, and the charge will be created using the same payment method that was used for the original authorisation.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**channel** | **string** | Channel. can be link | [optional] [default to undefined]
-**upi_id** | **string** |  | [optional] [default to undefined]
-**account_bank_code** | **string** | Account bank code | [optional] [default to undefined]
-**account_holder_name** | **string** | Account holder name | [optional] [default to undefined]
-**account_ifsc** | **string** | Account IFSC | [optional] [default to undefined]
-**account_number** | **string** | Account number | [optional] [default to undefined]
-**account_type** | **string** | Account type | [optional] [default to undefined]
-**auth_mode** | **string** | Authentication mode. can be debit_card, aadhaar, or net_banking | [optional] [default to undefined]
-**mandate_creation_date** | **string** | Mandate creation date | [optional] [default to undefined]
-**mandate_start_date** | **string** | Mandate start date | [optional] [default to undefined]
-**card_cvv** | **string** | Card CVV | [optional] [default to undefined]
-**card_expiry_mm** | **string** | Card expiry month | [optional] [default to undefined]
-**card_expiry_yy** | **string** | Card expiry year | [optional] [default to undefined]
-**card_holder_name** | **string** | Card holder name | [optional] [default to undefined]
-**card_network** | **string** | Card network | [optional] [default to undefined]
-**card_number** | **string** | Card number | [optional] [default to undefined]
-**card_type** | **string** | Card type | [optional] [default to undefined]
+**upi** | [**CreateSubscriptionPaymentRequestUpiUpi**](CreateSubscriptionPaymentRequestUpiUpi.md) |  | [optional] [default to undefined]
+**enach** | [**CreateSubscriptionPaymentRequestEnachEnach**](CreateSubscriptionPaymentRequestEnachEnach.md) |  | [optional] [default to undefined]
+**pnach** | [**CreateSubscriptionPaymentRequestPnachPnach**](CreateSubscriptionPaymentRequestPnachPnach.md) |  | [optional] [default to undefined]
+**card** | [**CreateSubscriptionPaymentRequestCardCard**](CreateSubscriptionPaymentRequestCardCard.md) |  | [optional] [default to undefined]
 
 ## Example
 
@@ -30,23 +17,10 @@ Name | Type | Description | Notes
 import { CreateSubscriptionPaymentRequestPaymentMethod } from 'cashfree-pg';
 
 const instance: CreateSubscriptionPaymentRequestPaymentMethod = {
-    channel,
-    upi_id,
-    account_bank_code,
-    account_holder_name,
-    account_ifsc,
-    account_number,
-    account_type,
-    auth_mode,
-    mandate_creation_date,
-    mandate_start_date,
-    card_cvv,
-    card_expiry_mm,
-    card_expiry_yy,
-    card_holder_name,
-    card_network,
-    card_number,
-    card_type,
+    upi,
+    enach,
+    pnach,
+    card,
 };
 ```
 

@@ -5,13 +5,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**all** | **object** | All offers applicable | [default to undefined]
+**all** | **object** | All offers applicable. | [default to undefined]
 **card** | [**CardOffer**](CardOffer.md) |  | [default to undefined]
 **netbanking** | [**OfferNBNetbanking**](OfferNBNetbanking.md) |  | [default to undefined]
 **app** | [**WalletOffer**](WalletOffer.md) |  | [default to undefined]
 **upi** | **object** |  | [default to undefined]
 **paylater** | [**PaylaterOffer**](PaylaterOffer.md) |  | [default to undefined]
-**emi** | [**EMIOffer**](EMIOffer.md) |  | [default to undefined]
+**emi** | [**EMIOffer**](EMIOffer.md) |  | [optional] [default to undefined]
 
 ## Example
 

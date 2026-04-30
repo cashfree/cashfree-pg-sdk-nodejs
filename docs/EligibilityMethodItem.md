@@ -1,6 +1,6 @@
 # EligibilityMethodItem
 
-Eligibile payment method object
+Eligibile payment method object.
 
 ## Properties
 

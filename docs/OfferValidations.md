@@ -1,13 +1,13 @@
 # OfferValidations
 
-Offer validation object
+Offer validation object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**min_amount** | **number** | Minimum Amount for Offer to be Applicable | [optional] [default to undefined]
-**max_allowed** | **number** | Maximum Amount for Offer to be Applicable | [default to undefined]
+**min_amount** | **number** | Minimum Amount for Offer to be Applicable. | [optional] [default to undefined]
+**max_allowed** | **number** | Maximum Amount for Offer to be Applicable. | [default to undefined]
 **payment_method** | [**OfferValidationsResponsePaymentMethod**](OfferValidationsResponsePaymentMethod.md) |  | [default to undefined]
 
 ## Example

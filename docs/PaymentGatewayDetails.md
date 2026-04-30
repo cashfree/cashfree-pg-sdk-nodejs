@@ -1,6 +1,6 @@
 # PaymentGatewayDetails
 
-payment gateway details present in the webhook response
+payment gateway details present in the webhook response.
 
 ## Properties
 

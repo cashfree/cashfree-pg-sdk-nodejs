@@ -1,15 +1,17 @@
 # OrderMeta
 
-Optional meta details to control how the customer pays and how payment journey completes
+Optional meta details to control how the customer pays and how payment journey completes.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**return_url** | **string** | The URL to which user will be redirected to after the payment on bank OTP page. Maximum length: 250. We suggest to keep context of order_id in your return_url so that you can identify the order when customer lands on your page. Example of return_url format could be https://www.cashfree.com/devstudio/thankyou | [optional] [default to undefined]
+**return_url** | **string** | This is the [URL](https://www.cashfree.com/devstudio/thankyou?order_id&#x3D;devstudio_734905336776434862) to which the customer will be redirected after the payment reaches a terminal state (success, failed or cancelled). We recommend keeping context of &#x60;order_id&#x60; in your &#x60;return_url&#x60; so that you can identify the order when customer lands on your page. Cashfree triggers a **GET request** to this URL. Maximum URL length: 250 characters. | [optional] [default to undefined]
 **notify_url** | **string** | Notification URL for server-server communication. Useful when user\&#39;s connection drops while re-directing. NotifyUrl should be an https URL. Maximum length: 250. | [optional] [default to undefined]
-**payment_methods** | **any** | Allowed payment modes for this order. Pass comma-separated values among following options - \&quot;cc\&quot;, \&quot;dc\&quot;, \&quot;ccc\&quot;, \&quot;ppc\&quot;,\&quot;nb\&quot;,\&quot;upi\&quot;,\&quot;paypal\&quot;,\&quot;app\&quot;,\&quot;paylater\&quot;,\&quot;cardlessemi\&quot;,\&quot;dcemi\&quot;,\&quot;ccemi\&quot;,\&quot;banktransfer\&quot;. Leave it blank to show all available payment methods | [optional] [default to undefined]
+**payment_methods** | **any** | Specifies the allowed payment modes for this order. To restrict payment options,  provide a comma-separated list of values from the following options: &#x60;cc&#x60;, &#x60;dc&#x60;, &#x60;ccc&#x60;,  &#x60;ppc&#x60;, &#x60;nb&#x60;, &#x60;upi&#x60;, &#x60;paypal&#x60;, &#x60;app&#x60;, &#x60;paylater&#x60;, &#x60;cardlessemi&#x60;, &#x60;dcemi&#x60;, &#x60;ccemi&#x60;,  &#x60;banktransfer&#x60;, &#x60;applepay&#x60;. Leave this field blank to display all available payment methods. | [optional] [default to undefined]
 **payment_methods_filters** | [**OrderMetaPaymentMethodsFilters**](OrderMetaPaymentMethodsFilters.md) |  | [optional] [default to undefined]
+**offer_filters** | [**OrderMetaOfferFilters**](OrderMetaOfferFilters.md) |  | [optional] [default to undefined]
+**upi_app_priority** | **any** | Set the priority of UPI apps that you want to show for this order. Pass values in list among following options - \&quot;gpay\&quot;,\&quot;phonepe\&quot;,\&quot;paytm\&quot;,\&quot;navi\&quot;,\&quot;cred\&quot;,\&quot;supermoney\&quot;,\&quot;amazonpay\&quot;,\&quot;bhim\&quot;,\&quot;mobikwik\&quot;,\&quot;airtel\&quot;,\&quot;popclub\&quot;,\&quot;kiwi\&quot;. | [optional] [default to undefined]
 
 ## Example
 
@@ -21,6 +23,8 @@ const instance: OrderMeta = {
     notify_url,
     payment_methods,
     payment_methods_filters,
+    offer_filters,
+    upi_app_priority,
 };
 ```
 

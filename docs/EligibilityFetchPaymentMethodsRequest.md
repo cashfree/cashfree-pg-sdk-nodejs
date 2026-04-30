@@ -1,6 +1,6 @@
 # EligibilityFetchPaymentMethodsRequest
 
-eligibilty request to find eligible payment method
+eligibilty request to find eligible payment method.
 
 ## Properties
 

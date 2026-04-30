@@ -1,12 +1,12 @@
 # CardPaymentMethod
 
-The card payment object is used to make payment using either plain card number, saved card instrument id or using cryptogram 
+Payload for different payment methods is given below.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**card** | [**Card**](Card.md) |  | [default to undefined]
+**card** | [**Card**](Card.md) |  | [optional] [default to undefined]
 
 ## Example
 

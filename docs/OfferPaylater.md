@@ -1,6 +1,6 @@
 # OfferPaylater
 
-Offer object for paylater
+Offer object for paylater.
 
 ## Properties
 

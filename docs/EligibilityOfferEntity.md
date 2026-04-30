@@ -1,6 +1,6 @@
 # EligibilityOfferEntity
 
-Eligible offer object
+Eligible offer object.
 
 ## Properties
 

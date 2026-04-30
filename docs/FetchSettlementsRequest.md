@@ -1,13 +1,13 @@
 # FetchSettlementsRequest
 
-Request to fetch settlement
+Request to fetch settlement.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **pagination** | [**FetchSettlementsRequestPagination**](FetchSettlementsRequestPagination.md) |  | [default to undefined]
-**filters** | [**FetchSettlementsRequestFilters**](FetchSettlementsRequestFilters.md) |  | [default to undefined]
+**filters** | [**FetchSettlementsRequestFilters**](FetchSettlementsRequestFilters.md) |  | [optional] [default to undefined]
 
 ## Example
 

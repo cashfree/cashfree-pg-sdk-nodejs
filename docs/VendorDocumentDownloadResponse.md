@@ -1,6 +1,6 @@
 # VendorDocumentDownloadResponse
 
-Download Vendor Document
+Download Vendor Document.
 
 ## Properties
 

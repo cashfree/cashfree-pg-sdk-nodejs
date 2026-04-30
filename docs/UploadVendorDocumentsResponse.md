@@ -1,6 +1,6 @@
 # UploadVendorDocumentsResponse
 
-Upload Vendor Document
+Upload Vendor Document.
 
 ## Properties
 

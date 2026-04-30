@@ -1,6 +1,6 @@
 # CreatePlanRequest
 
-Request body to create a plan.
+Request parameters to create a new plan.
 
 ## Properties
 
@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **plan_id** | **string** | Unique ID to identify the plan. Only alpha-numerics, dot, hyphen and underscore allowed. | [default to undefined]
 **plan_name** | **string** | Name of the plan. | [default to undefined]
 **plan_type** | **string** | Type of the plan. Possible values - PERIODIC, ON_DEMAND. | [default to undefined]
-**plan_currency** | **string** | Currency of the plan. | [optional] [default to undefined]
+**plan_currency** | **string** | Currency of the plan. For plans in non-INR currency, please refer to [supported currencies](https://www.cashfree.com/docs/payments/international-payments/ipg/currencies-supported#full-currency-list). | [optional] [default to undefined]
 **plan_recurring_amount** | **number** | Recurring amount for the plan. Required for PERIODIC plan_type. | [optional] [default to undefined]
 **plan_max_amount** | **number** | Maximum amount for the plan. | [default to undefined]
 **plan_max_cycles** | **number** | Maximum number of payment cycles for the plan. | [optional] [default to undefined]

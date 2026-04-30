@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**account_types** | **Array&lt;string&gt;** | List of account types associated with the payment method. (e.g. SAVINGS or CURRENT) | [optional] [default to undefined]
+**account_types** | **Array&lt;string&gt;** | List of account types associated with the payment method. (e.g. SAVINGS or CURRENT). | [optional] [default to undefined]
 **frequent_bank_details** | [**Array&lt;SubscriptionBankDetails&gt;**](SubscriptionBankDetails.md) | List of the most frequently used banks. | [optional] [default to undefined]
 **all_bank_details** | [**Array&lt;SubscriptionBankDetails&gt;**](SubscriptionBankDetails.md) | Details about all banks associated with the payment method. | [optional] [default to undefined]
 **available_handles** | [**Array&lt;EligibilityMethodItemEntityDetailsAvailableHandlesInner&gt;**](EligibilityMethodItemEntityDetailsAvailableHandlesInner.md) | List of supported VPA handles. | [optional] [default to undefined]
-**allowed_card_types** | **Array&lt;string&gt;** | List of allowed card types. (e.g. DEBIT_CARD, CREDIT_CARD) | [optional] [default to undefined]
+**allowed_card_types** | **Array&lt;string&gt;** | List of allowed card types. (e.g. DEBIT_CARD, CREDIT_CARD). | [optional] [default to undefined]
 
 ## Example
 

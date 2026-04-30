@@ -1,12 +1,12 @@
 # SplitAfterPaymentRequest
 
-Split After Payment Request
+Split After Payment Request.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**split** | [**Array&lt;SplitAfterPaymentRequestSplitInner&gt;**](SplitAfterPaymentRequestSplitInner.md) | Specify the vendors order split details. | [default to undefined]
+**split** | [**Array&lt;SplitAfterPaymentRequestSplitInner&gt;**](SplitAfterPaymentRequestSplitInner.md) | Specify the vendors order split details. | [optional] [default to undefined]
 **disable_split** | **boolean** | Specify if you want to end the split or continue creating further splits in future. | [optional] [default to undefined]
 
 ## Example

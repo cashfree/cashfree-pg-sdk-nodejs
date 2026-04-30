@@ -1,6 +1,6 @@
 # SplitOrderReconSuccessResponse
 
-Split Order Reconciliation Request Body
+Split Order Reconciliation Request Body.
 
 ## Properties
 

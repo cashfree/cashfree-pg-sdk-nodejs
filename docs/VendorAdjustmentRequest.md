@@ -1,12 +1,12 @@
 # VendorAdjustmentRequest
 
-Vendor Adjustment Request Body
+Vendor Adjustment Request Body.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**vendor_id** | **string** | The unique identifier of the vendor to whom the adjustment is applied | [default to undefined]
+**vendor_id** | **string** | The unique identifier of the vendor to whom the adjustment is applied. | [default to undefined]
 **adjustment_id** | **number** | The unique identifier for the adjustment transaction. | [default to undefined]
 **amount** | **number** | The adjustment amount to be applied. | [default to undefined]
 **type** | **string** | The type of adjustment. Possible values: CREDIT, DEBIT. | [default to undefined]

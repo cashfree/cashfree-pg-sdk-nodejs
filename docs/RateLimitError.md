@@ -1,6 +1,6 @@
 # RateLimitError
 
-Error when rate limit is breached for your api
+Error when rate limit is breached for your api.
 
 ## Properties
 
@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **message** | **string** |  | [optional] [default to undefined]
 **code** | **string** |  | [optional] [default to undefined]
-**type** | **string** | rate_limit_error | [optional] [default to undefined]
+**type** | **string** | rate_limit_error. | [optional] [default to undefined]
 
 ## Example
 

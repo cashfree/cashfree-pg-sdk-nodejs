@@ -6,16 +6,16 @@ The response returned is Create Subscription Auth or Charge APIs.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cf_payment_id** | **string** | Cashfree subscription payment reference number | [optional] [default to undefined]
+**cf_payment_id** | **string** | Cashfree subscription payment reference number. | [optional] [default to undefined]
 **failure_details** | [**SubscriptionPaymentEntityFailureDetails**](SubscriptionPaymentEntityFailureDetails.md) |  | [optional] [default to undefined]
 **payment_amount** | **number** | The charge amount of the payment. | [optional] [default to undefined]
 **payment_id** | **string** | A unique ID passed by merchant for identifying the transaction. | [optional] [default to undefined]
-**payment_initiated_date** | **string** | The date on which the payment was initiated. | [optional] [default to undefined]
+**payment_initiated_date** | **string** | The date on which the payment was initiated. We store timestamps in IST. | [optional] [default to undefined]
 **payment_status** | **string** | Status of the payment. | [optional] [default to undefined]
 **payment_type** | **string** | Payment type. Can be AUTH or CHARGE. | [optional] [default to undefined]
 **subscription_id** | **string** | A unique ID passed by merchant for identifying the subscription. | [optional] [default to undefined]
 **data** | **object** | Contains a payload for auth app links in case of AUTH. For charge, the payload is empty. | [optional] [default to undefined]
-**payment_method** | **string** | Payment method used for the authorization. | [optional] [default to undefined]
+**payment_method** | **string** | Payment method used for the authorisation. | [optional] [default to undefined]
 
 ## Example
 
