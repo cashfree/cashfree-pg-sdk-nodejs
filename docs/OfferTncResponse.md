@@ -1,12 +1,12 @@
 # OfferTncResponse
 
-Offer terms and condition object
+Offer terms and condition object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**offer_tnc_type** | **string** | TnC Type for the Offer. It can be either &#x60;text&#x60; or &#x60;link&#x60; | [optional] [default to undefined]
+**offer_tnc_type** | **string** | TnC Type for the Offer. It can be either &#x60;text&#x60; or &#x60;link&#x60;. | [optional] [default to undefined]
 **offer_tnc_value** | **string** | TnC for the Offer. | [optional] [default to undefined]
 
 ## Example

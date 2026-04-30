@@ -1,6 +1,6 @@
 # VendorDocumentsResponse
 
-Get Vendor Documents
+Get Vendor Documents.
 
 ## Properties
 

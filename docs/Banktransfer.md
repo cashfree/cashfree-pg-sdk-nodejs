@@ -1,12 +1,12 @@
 # Banktransfer
 
-Banktransfer payment method
+Bank transfer payment method.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**channel** | **string** | The channel for cardless EMI is always &#x60;link&#x60; | [optional] [default to undefined]
+**channel** | **string** | The channel for bank transfer is always &#x60;link&#x60;. | [optional] [default to undefined]
 
 ## Example
 

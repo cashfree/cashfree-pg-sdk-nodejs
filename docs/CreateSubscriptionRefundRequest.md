@@ -8,10 +8,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **cf_payment_id** | **number** | Cashfree subscription payment reference number. | [optional] [default to undefined]
 **subscription_id** | **string** | A unique ID passed by merchant for identifying the subscription. | [default to undefined]
-**payment_id** | **string** | A unique ID passed by merchant for identifying the transaction. | [optional] [default to undefined]
+**payment_id** | **string** | A unique ID passed by merchant for identifying the transaction. | [default to undefined]
 **refund_id** | **string** | A unique ID passed by merchant for identifying the refund. | [default to undefined]
 **refund_amount** | **number** | The amount to be refunded. Can be partial or full amount of the payment. | [default to undefined]
-**refund_note** | **string** | Refund note. | [optional] [default to undefined]
+**refund_note** | **string** | Refund note for merchant reference. To simulate refund status in Sandbox, pass SUCCESS, FAILED, PENDING, or ACTIVE in the refund_note field. This is a case-sensitive parameter. | [optional] [default to undefined]
 **refund_speed** | **string** | Refund speed. Can be INSTANT or STANDARD. UPI supports only STANDARD refunds, Enach and Pnach supports only INSTANT refunds. | [optional] [default to undefined]
 
 ## Example

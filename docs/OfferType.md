@@ -1,6 +1,6 @@
 # OfferType
 
-Offer Type Object
+Offer Type Object.
 
 ## Enum
 

@@ -1,6 +1,6 @@
 # UpdateTerminalEntity
 
-Update terminal response
+Update terminal response.
 
 ## Properties
 

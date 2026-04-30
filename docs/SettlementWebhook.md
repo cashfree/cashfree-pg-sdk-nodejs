@@ -1,6 +1,6 @@
 # SettlementWebhook
 
-Settlement webhook object
+Settlement webhook object.
 
 ## Properties
 

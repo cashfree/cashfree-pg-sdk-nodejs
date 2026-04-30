@@ -1,14 +1,13 @@
 # PayOrderRequest
 
-Complete object for the pay api that uses payment method objects
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**payment_session_id** | **string** |  | [default to undefined]
+**payment_session_id** | **string** | Unique identifier for the payment session, returned in the response of the Create Order API. | [default to undefined]
 **payment_method** | [**PayOrderRequestPaymentMethod**](PayOrderRequestPaymentMethod.md) |  | [default to undefined]
-**save_instrument** | **boolean** |  | [optional] [default to undefined]
+**save_instrument** | **boolean** | Send as **true** if the customer has given consent to save or tokenise the card; otherwise, send as false. | [optional] [default to undefined]
 **offer_id** | **string** | This is required if any offers needs to be applied to the order. | [optional] [default to undefined]
 
 ## Example

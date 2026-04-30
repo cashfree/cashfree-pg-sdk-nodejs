@@ -1,13 +1,13 @@
 # FetchReconRequest
 
-Recon object
+Recon object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **pagination** | [**FetchReconRequestPagination**](FetchReconRequestPagination.md) |  | [default to undefined]
-**filters** | [**FetchReconRequestFilters**](FetchReconRequestFilters.md) |  | [default to undefined]
+**filters** | [**FetchReconRequestFilters**](FetchReconRequestFilters.md) |  | [optional] [default to undefined]
 
 ## Example
 

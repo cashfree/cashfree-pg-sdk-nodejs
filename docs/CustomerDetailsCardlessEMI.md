@@ -6,7 +6,7 @@ Details of the customer for whom eligibility is being checked.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**customer_phone** | **string** | Phone Number of the customer | [default to undefined]
+**customer_phone** | **string** | Phone Number of the customer. | [default to undefined]
 
 ## Example
 

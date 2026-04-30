@@ -1,16 +1,16 @@
 # OrderCreateRefundRequest
 
-create refund request object
+create refund request object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**refund_amount** | **number** | Amount to be refunded. Should be lesser than or equal to the transaction amount. (Decimals allowed) | [default to undefined]
-**refund_id** | **string** | An unique ID to associate the refund with. Provie alphanumeric values | [default to undefined]
-**refund_note** | **string** | A refund note for your reference. | [optional] [default to undefined]
-**refund_speed** | **string** | Speed at which the refund is processed. It\&#39;s an optional field with default being STANDARD | [optional] [default to undefined]
-**refund_splits** | [**Array&lt;VendorSplit&gt;**](VendorSplit.md) |  | [optional] [default to undefined]
+**refund_amount** | **number** | Amount to be refunded. Should be lesser than or equal to the transaction amount. (Decimals allowed). | [default to undefined]
+**refund_id** | **string** | An unique ID to associate the refund with. Provie alphanumeric values. | [optional] [default to undefined]
+**refund_note** | **string** | A refund note for your reference. To simulate refund status in Sandbox, pass SUCCESS, FAILED, PENDING, or ACTIVE in the refund_note field. This is a case-sensitive parameter. | [optional] [default to undefined]
+**refund_speed** | **string** | Speed at which the refund is processed. It\&#39;s an optional field with default being STANDARD. | [optional] [default to undefined]
+**refund_splits** | [**Array&lt;OrderCreateRefundRequestRefundSplitsInner&gt;**](OrderCreateRefundRequestRefundSplitsInner.md) |  | [optional] [default to undefined]
 
 ## Example
 

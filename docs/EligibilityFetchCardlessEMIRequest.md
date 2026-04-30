@@ -1,6 +1,6 @@
 # EligibilityFetchCardlessEMIRequest
 
-eligibilty request for cardless
+eligibilty request for cardless.
 
 ## Properties
 

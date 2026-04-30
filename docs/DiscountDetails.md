@@ -1,12 +1,12 @@
 # DiscountDetails
 
-detils of the discount object of offer
+detils of the discount object of offer.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**discount_type** | **string** | Type of discount | [default to undefined]
+**discount_type** | **string** | Type of discount. | [default to undefined]
 **discount_value** | **number** | Value of Discount. | [default to undefined]
 **max_discount_amount** | **number** | Maximum Value of Discount allowed. | [default to undefined]
 

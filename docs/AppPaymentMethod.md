@@ -1,6 +1,6 @@
 # AppPaymentMethod
 
-App payment method
+App payment method.
 
 ## Properties
 

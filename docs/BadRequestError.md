@@ -1,6 +1,6 @@
 # BadRequestError
 
-Invalid request received from client
+Invalid request received from client.
 
 ## Properties
 

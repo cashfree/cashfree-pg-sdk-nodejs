@@ -6,7 +6,7 @@ Order delivery Status associated with order.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **string** | Delivery status of order | [default to undefined]
+**status** | **string** | Delivery status of order. | [optional] [default to undefined]
 **reason** | **string** | Reason of provided order delivery status. This is optional field. | [optional] [default to undefined]
 
 ## Example

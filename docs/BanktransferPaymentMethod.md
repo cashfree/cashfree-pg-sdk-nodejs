@@ -1,6 +1,6 @@
 # BanktransferPaymentMethod
 
-banktransfer payment method
+banktransfer payment method.
 
 ## Properties
 

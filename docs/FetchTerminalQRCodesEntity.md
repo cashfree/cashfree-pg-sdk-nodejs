@@ -1,13 +1,13 @@
 # FetchTerminalQRCodesEntity
 
-Fetch Static QR Codes using terminal ID or phone number
+Fetch Static QR Codes using terminal ID or phone number.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **bank** | **string** | Name of the bank that is linked to the Static QR. | [optional] [default to undefined]
-**qrCode** | **string** | Base-64 Encoded QR Code URL | [optional] [default to undefined]
+**qrCode** | **string** | Base-64 Encoded QR Code URL. | [optional] [default to undefined]
 **qrCodeUrl** | **string** | URL of the qr Code. | [optional] [default to undefined]
 **status** | **string** | Status of the static QR. | [optional] [default to undefined]
 
