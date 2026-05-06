@@ -1,6 +1,6 @@
 # EligibilityPaylaterEntity
 
-Eligible paylater payment method
+Eligible paylater payment method.
 
 ## Properties
 

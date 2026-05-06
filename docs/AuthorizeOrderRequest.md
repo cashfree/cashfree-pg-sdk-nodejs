@@ -1,13 +1,13 @@
 # AuthorizeOrderRequest
 
-Request to capture or void transaction
+Request to capture or void transaction.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**action** | **string** | Type of authorization to run. Can be one of \&#39;CAPTURE\&#39; , \&#39;VOID\&#39; | [optional] [default to undefined]
-**amount** | **number** | The amount if you are running a \&#39;CAPTURE\&#39; | [optional] [default to undefined]
+**action** | **string** | Type of authorisation to run. Available options are &#x60;CAPTURE&#x60;, &#x60;VOID&#x60;. | [default to undefined]
+**amount** | **number** | The amount you want to capture. This is required only when action is &#x60;CAPTURE&#x60;. | [optional] [default to undefined]
 
 ## Example
 

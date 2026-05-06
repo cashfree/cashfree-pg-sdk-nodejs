@@ -1,6 +1,6 @@
 # TerminalData
 
-Terminal Data in the create order response
+Terminal Data in the create order response.
 
 ## Properties
 

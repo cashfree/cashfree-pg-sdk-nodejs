@@ -1,13 +1,13 @@
 # DemapSoundboxVpaRequest
 
-Request body to demap soundbox vpa
+Request body to demap soundbox vpa.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cf_terminal_id** | **string** | cashfree terminal id. | [default to undefined]
-**device_serial_no** | **string** | Device Serial No of soundbox that need to demap. | [default to undefined]
+**cf_terminal_id** | **number** | Cashfree terminal ID. | [default to undefined]
+**device_serial_no** | **string** | Device Serial No of soundbox that need to demap. | [optional] [default to undefined]
 
 ## Example
 

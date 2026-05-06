@@ -1,12 +1,12 @@
 # OfferAll
 
-returns all offers
+returns all offers.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**all** | **object** | All offers applicable | [default to undefined]
+**all** | **object** | All offers applicable. | [default to undefined]
 
 ## Example
 

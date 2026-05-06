@@ -1,6 +1,6 @@
 # ApiError404
 
-Error when resource requested is not found
+Error when resource requested is not found.
 
 ## Properties
 
@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **message** | **string** |  | [optional] [default to undefined]
 **code** | **string** |  | [optional] [default to undefined]
 **help** | **string** |  | [optional] [default to undefined]
-**type** | **string** | invalid_request_error | [optional] [default to undefined]
+**type** | **string** | invalid_request_error. | [optional] [default to undefined]
 
 ## Example
 

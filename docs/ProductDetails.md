@@ -1,12 +1,12 @@
 # ProductDetails
 
-Specify the required configurations for this feature
+Specify the required configurations for this feature.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**enabled** | **boolean** | Option to enable or disable the feature | [optional] [default to undefined]
+**enabled** | **boolean** | Option to enable or disable the feature. | [optional] [default to undefined]
 **conditions** | [**Array&lt;ProductConditions&gt;**](ProductConditions.md) | The conditions array allows to configure rules by adding condition objects with specific parameters for feature configurations. | [optional] [default to undefined]
 
 ## Example

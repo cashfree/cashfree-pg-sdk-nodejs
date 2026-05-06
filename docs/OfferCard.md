@@ -1,6 +1,6 @@
 # OfferCard
 
-Offers related to cards
+Offers related to cards.
 
 ## Properties
 

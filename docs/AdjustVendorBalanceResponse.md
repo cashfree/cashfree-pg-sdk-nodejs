@@ -1,6 +1,6 @@
 # AdjustVendorBalanceResponse
 
-Adjust Vendor Balance Response
+Adjust Vendor Balance Response.
 
 ## Properties
 

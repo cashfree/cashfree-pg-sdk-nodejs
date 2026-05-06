@@ -1,6 +1,6 @@
 # PaylaterPaymentMethod
 
-paylater payment method
+Paylater payment method.
 
 ## Properties
 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **tracking_company** | **string** | Tracking company name associated with order. | [default to undefined]
 **tracking_urls** | **Array&lt;string&gt;** | Tracking Urls associated with order. | [default to undefined]
-**tracking_numbers** | **Array&lt;string&gt;** | Tracking Numbers associated wih order. | [default to undefined]
+**tracking_numbers** | **Array&lt;string&gt;** | Tracking Numbers associated wih order. | [optional] [default to undefined]
 
 ## Example
 

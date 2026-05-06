@@ -1,6 +1,6 @@
 # EMIPlansArray
 
-Single EMI object
+Single EMI object.
 
 ## Properties
 

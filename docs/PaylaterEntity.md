@@ -1,6 +1,6 @@
 # PaylaterEntity
 
-Paylater Entity
+Paylater Entity.
 
 ## Properties
 

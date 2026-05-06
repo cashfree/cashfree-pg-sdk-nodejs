@@ -1,6 +1,6 @@
 # IdempotencyError
 
-Error when idempotency fails. Different request body with the same idempotent key
+Error when idempotency fails. Different request body with the same idempotent key.
 
 ## Properties
 
@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **message** | **string** |  | [optional] [default to undefined]
 **help** | **string** |  | [optional] [default to undefined]
 **code** | **string** |  | [optional] [default to undefined]
-**type** | **string** | idempotency_error | [optional] [default to undefined]
+**type** | **string** | idempotency_error. | [optional] [default to undefined]
 
 ## Example
 

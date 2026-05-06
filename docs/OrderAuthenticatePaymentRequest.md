@@ -1,13 +1,13 @@
 # OrderAuthenticatePaymentRequest
 
-OTP to be submitted for headless/native OTP
+To use this API, Native OTP needs to be enabled for your account.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**otp** | **string** | OTP to be submitted | [default to undefined]
-**action** | **string** | The action for this workflow. Could be either SUBMIT_OTP or RESEND_OTP | [default to undefined]
+**otp** | **string** | OTP collected from the customer. Mandatory only when action is SUBMIT_OTP. | [optional] [default to undefined]
+**action** | **string** | Action intended for this request - can be SUBMIT_OTP or RESEND_OTP. | [default to undefined]
 
 ## Example
 

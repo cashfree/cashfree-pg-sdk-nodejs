@@ -1,6 +1,6 @@
 # SimulationResponse
 
-Simulation response object
+Payment simulation response.
 
 ## Properties
 

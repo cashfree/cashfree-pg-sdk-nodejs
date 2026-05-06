@@ -1,14 +1,14 @@
 # Netbanking
 
-Netbanking payment method request body
+Netbanking payment method request body.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**channel** | **string** | The channel for netbanking will always be &#x60;link&#x60; | [default to undefined]
-**netbanking_bank_code** | **number** | Bank code | [optional] [default to undefined]
-**netbanking_bank_name** | **string** | String code for bank | [optional] [default to undefined]
+**channel** | **string** | The channel for netbanking will always be &#x60;link&#x60;. | [default to undefined]
+**netbanking_bank_code** | **number** | Bank code. | [optional] [default to undefined]
+**netbanking_bank_name** | **string** | String code for bank. | [optional] [default to undefined]
 
 ## Example
 

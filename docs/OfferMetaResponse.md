@@ -1,6 +1,6 @@
 # OfferMetaResponse
 
-Offer meta response details object
+Offer meta response details object.
 
 ## Properties
 
@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **offer_code** | **string** | Unique identifier for the Offer. | [optional] [default to undefined]
 **offer_description** | **string** | Description for the Offer. | [optional] [default to undefined]
-**offer_end_time** | **string** | Expiry Time for the Offer | [optional] [default to undefined]
-**offer_start_time** | **string** | Start Time for the Offer | [optional] [default to undefined]
+**offer_end_time** | **string** | Expiry Time for the Offer. | [optional] [default to undefined]
+**offer_start_time** | **string** | Start Time for the Offer. | [optional] [default to undefined]
 **offer_title** | **string** | Title for the Offer. | [optional] [default to undefined]
 
 ## Example

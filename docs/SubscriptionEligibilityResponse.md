@@ -1,6 +1,6 @@
 # SubscriptionEligibilityResponse
 
-Subscrition eligibility API response
+Subscrition eligibility API response.
 
 ## Properties
 

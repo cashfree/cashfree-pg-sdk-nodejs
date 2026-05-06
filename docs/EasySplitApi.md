@@ -36,10 +36,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new EasySplitApi(configuration);
 
-let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD (default to '2025-01-01')
+let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD. (default to '2026-01-01')
 let vendor_id: string; //The id which uniquely identifies your vendor. (default to undefined)
-let x_request_id: string; //Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree (optional) (default to undefined)
-let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   (optional) (default to undefined)
+let x_request_id: string; //Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. (optional) (default to undefined)
+let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  (optional) (default to undefined)
 let VendorAdjustmentRequest: VendorAdjustmentRequest; //Vendor Adjustment Request Body. (optional)
 
 const { status, data } = await apiInstance.pGESCreateAdjustment(
@@ -56,10 +56,10 @@ const { status, data } = await apiInstance.pGESCreateAdjustment(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **VendorAdjustmentRequest** | **VendorAdjustmentRequest**| Vendor Adjustment Request Body. | |
-| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD | defaults to '2025-01-01'|
+| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD. | defaults to '2026-01-01'|
 | **vendor_id** | [**string**] | The id which uniquely identifies your vendor. | defaults to undefined|
-| **x_request_id** | [**string**] | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | (optional) defaults to undefined|
-| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | (optional) defaults to undefined|
+| **x_request_id** | [**string**] | Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. | (optional) defaults to undefined|
+| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  | (optional) defaults to undefined|
 
 
 ### Return type
@@ -101,10 +101,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new EasySplitApi(configuration);
 
-let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD (default to '2025-01-01')
+let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD. (default to '2026-01-01')
 let vendor_id: string; //The id which uniquely identifies your vendor. (default to undefined)
-let x_request_id: string; //Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree (optional) (default to undefined)
-let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   (optional) (default to undefined)
+let x_request_id: string; //Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. (optional) (default to undefined)
+let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  (optional) (default to undefined)
 let AdjustVendorBalanceRequest: AdjustVendorBalanceRequest; //Adjust Vendor Balance Request Body. (optional)
 
 const { status, data } = await apiInstance.pGESCreateOnDemandTransfer(
@@ -121,10 +121,10 @@ const { status, data } = await apiInstance.pGESCreateOnDemandTransfer(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **AdjustVendorBalanceRequest** | **AdjustVendorBalanceRequest**| Adjust Vendor Balance Request Body. | |
-| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD | defaults to '2025-01-01'|
+| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD. | defaults to '2026-01-01'|
 | **vendor_id** | [**string**] | The id which uniquely identifies your vendor. | defaults to undefined|
-| **x_request_id** | [**string**] | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | (optional) defaults to undefined|
-| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | (optional) defaults to undefined|
+| **x_request_id** | [**string**] | Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. | (optional) defaults to undefined|
+| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  | (optional) defaults to undefined|
 
 
 ### Return type
@@ -166,9 +166,9 @@ import {
 const configuration = new Configuration();
 const apiInstance = new EasySplitApi(configuration);
 
-let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD (default to '2025-01-01')
-let x_request_id: string; //Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree (optional) (default to undefined)
-let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   (optional) (default to undefined)
+let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD. (default to '2026-01-01')
+let x_request_id: string; //Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. (optional) (default to undefined)
+let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  (optional) (default to undefined)
 let CreateVendorRequest: CreateVendorRequest; //Create Vendor Request Body. (optional)
 
 const { status, data } = await apiInstance.pGESCreateVendors(
@@ -184,9 +184,9 @@ const { status, data } = await apiInstance.pGESCreateVendors(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **CreateVendorRequest** | **CreateVendorRequest**| Create Vendor Request Body. | |
-| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD | defaults to '2025-01-01'|
-| **x_request_id** | [**string**] | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | (optional) defaults to undefined|
-| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | (optional) defaults to undefined|
+| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD. | defaults to '2026-01-01'|
+| **x_request_id** | [**string**] | Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. | (optional) defaults to undefined|
+| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  | (optional) defaults to undefined|
 
 
 ### Return type
@@ -227,11 +227,11 @@ import {
 const configuration = new Configuration();
 const apiInstance = new EasySplitApi(configuration);
 
-let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD (default to '2025-01-01')
+let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD. (default to '2026-01-01')
 let doc_type: string; //Mention the document type that has to be downloaded. Only an uploaded document can be downloaded. (default to undefined)
 let vendor_id: string; //The id which uniquely identifies your vendor. (default to undefined)
-let x_request_id: string; //Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree (optional) (default to undefined)
-let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   (optional) (default to undefined)
+let x_request_id: string; //Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. (optional) (default to undefined)
+let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  (optional) (default to undefined)
 
 const { status, data } = await apiInstance.pGESDownloadVendorsDocs(
     x_api_version,
@@ -246,11 +246,11 @@ const { status, data } = await apiInstance.pGESDownloadVendorsDocs(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD | defaults to '2025-01-01'|
+| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD. | defaults to '2026-01-01'|
 | **doc_type** | [**string**] | Mention the document type that has to be downloaded. Only an uploaded document can be downloaded. | defaults to undefined|
 | **vendor_id** | [**string**] | The id which uniquely identifies your vendor. | defaults to undefined|
-| **x_request_id** | [**string**] | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | (optional) defaults to undefined|
-| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | (optional) defaults to undefined|
+| **x_request_id** | [**string**] | Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. | (optional) defaults to undefined|
+| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  | (optional) defaults to undefined|
 
 
 ### Return type
@@ -290,10 +290,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new EasySplitApi(configuration);
 
-let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD (default to '2025-01-01')
+let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD. (default to '2026-01-01')
 let vendor_id: string; //The id which uniquely identifies your vendor. (default to undefined)
-let x_request_id: string; //Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree (optional) (default to undefined)
-let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   (optional) (default to undefined)
+let x_request_id: string; //Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. (optional) (default to undefined)
+let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  (optional) (default to undefined)
 
 const { status, data } = await apiInstance.pGESFetchVendors(
     x_api_version,
@@ -307,10 +307,10 @@ const { status, data } = await apiInstance.pGESFetchVendors(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD | defaults to '2025-01-01'|
+| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD. | defaults to '2026-01-01'|
 | **vendor_id** | [**string**] | The id which uniquely identifies your vendor. | defaults to undefined|
-| **x_request_id** | [**string**] | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | (optional) defaults to undefined|
-| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | (optional) defaults to undefined|
+| **x_request_id** | [**string**] | Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. | (optional) defaults to undefined|
+| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  | (optional) defaults to undefined|
 
 
 ### Return type
@@ -351,10 +351,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new EasySplitApi(configuration);
 
-let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD (default to '2025-01-01')
+let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD. (default to '2026-01-01')
 let vendor_id: string; //The id which uniquely identifies your vendor. (default to undefined)
-let x_request_id: string; //Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree (optional) (default to undefined)
-let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   (optional) (default to undefined)
+let x_request_id: string; //Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. (optional) (default to undefined)
+let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  (optional) (default to undefined)
 
 const { status, data } = await apiInstance.pGESGetVendorBalance(
     x_api_version,
@@ -368,10 +368,10 @@ const { status, data } = await apiInstance.pGESGetVendorBalance(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD | defaults to '2025-01-01'|
+| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD. | defaults to '2026-01-01'|
 | **vendor_id** | [**string**] | The id which uniquely identifies your vendor. | defaults to undefined|
-| **x_request_id** | [**string**] | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | (optional) defaults to undefined|
-| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | (optional) defaults to undefined|
+| **x_request_id** | [**string**] | Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. | (optional) defaults to undefined|
+| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  | (optional) defaults to undefined|
 
 
 ### Return type
@@ -412,11 +412,11 @@ import {
 const configuration = new Configuration();
 const apiInstance = new EasySplitApi(configuration);
 
-let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD (default to '2025-01-01')
+let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD. (default to '2026-01-01')
 let amount: number; //Specify the amount for which you want to view the service charges and service taxes in the response. (default to undefined)
-let rate_type: string; //Mention the type of rate for which you want to check the charges. Possible value: VENDOR_ON_DEMAND (default to undefined)
-let x_request_id: string; //Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree (optional) (default to undefined)
-let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   (optional) (default to undefined)
+let rate_type: string; //Mention the type of rate for which you want to check the charges. Possible value: VENDOR_ON_DEMAND. (default to undefined)
+let x_request_id: string; //Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. (optional) (default to undefined)
+let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  (optional) (default to undefined)
 
 const { status, data } = await apiInstance.pGESGetVendorBalanceTransferCharges(
     x_api_version,
@@ -431,11 +431,11 @@ const { status, data } = await apiInstance.pGESGetVendorBalanceTransferCharges(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD | defaults to '2025-01-01'|
+| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD. | defaults to '2026-01-01'|
 | **amount** | [**number**] | Specify the amount for which you want to view the service charges and service taxes in the response. | defaults to undefined|
-| **rate_type** | [**string**] | Mention the type of rate for which you want to check the charges. Possible value: VENDOR_ON_DEMAND | defaults to undefined|
-| **x_request_id** | [**string**] | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | (optional) defaults to undefined|
-| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | (optional) defaults to undefined|
+| **rate_type** | [**string**] | Mention the type of rate for which you want to check the charges. Possible value: VENDOR_ON_DEMAND. | defaults to undefined|
+| **x_request_id** | [**string**] | Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. | (optional) defaults to undefined|
+| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  | (optional) defaults to undefined|
 
 
 ### Return type
@@ -476,10 +476,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new EasySplitApi(configuration);
 
-let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD (default to '2025-01-01')
+let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD. (default to '2026-01-01')
 let vendor_id: string; //The id which uniquely identifies your vendor. (default to undefined)
-let x_request_id: string; //Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree (optional) (default to undefined)
-let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   (optional) (default to undefined)
+let x_request_id: string; //Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. (optional) (default to undefined)
+let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  (optional) (default to undefined)
 
 const { status, data } = await apiInstance.pGESGetVendorsDocs(
     x_api_version,
@@ -493,10 +493,10 @@ const { status, data } = await apiInstance.pGESGetVendorsDocs(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD | defaults to '2025-01-01'|
+| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD. | defaults to '2026-01-01'|
 | **vendor_id** | [**string**] | The id which uniquely identifies your vendor. | defaults to undefined|
-| **x_request_id** | [**string**] | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | (optional) defaults to undefined|
-| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | (optional) defaults to undefined|
+| **x_request_id** | [**string**] | Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. | (optional) defaults to undefined|
+| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  | (optional) defaults to undefined|
 
 
 ### Return type
@@ -538,10 +538,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new EasySplitApi(configuration);
 
-let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD (default to '2025-01-01')
-let x_request_id: string; //Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree (optional) (default to undefined)
-let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   (optional) (default to undefined)
-let ESOrderReconRequest: ESOrderReconRequest; //Get Split and Settlement Details by OrderID v2.0 (optional)
+let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD. (default to '2026-01-01')
+let x_request_id: string; //Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. (optional) (default to undefined)
+let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  (optional) (default to undefined)
+let ESOrderReconRequest: ESOrderReconRequest; //Get Split and Settlement Details by OrderID v2.0. (optional)
 
 const { status, data } = await apiInstance.pGESOrderRecon(
     x_api_version,
@@ -555,10 +555,10 @@ const { status, data } = await apiInstance.pGESOrderRecon(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **ESOrderReconRequest** | **ESOrderReconRequest**| Get Split and Settlement Details by OrderID v2.0 | |
-| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD | defaults to '2025-01-01'|
-| **x_request_id** | [**string**] | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | (optional) defaults to undefined|
-| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | (optional) defaults to undefined|
+| **ESOrderReconRequest** | **ESOrderReconRequest**| Get Split and Settlement Details by OrderID v2.0. | |
+| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD. | defaults to '2026-01-01'|
+| **x_request_id** | [**string**] | Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. | (optional) defaults to undefined|
+| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  | (optional) defaults to undefined|
 
 
 ### Return type
@@ -602,10 +602,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new EasySplitApi(configuration);
 
-let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD (default to '2025-01-01')
+let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD. (default to '2026-01-01')
 let vendor_id: string; //The id which uniquely identifies your vendor. (default to undefined)
-let x_request_id: string; //Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree (optional) (default to undefined)
-let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   (optional) (default to undefined)
+let x_request_id: string; //Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. (optional) (default to undefined)
+let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  (optional) (default to undefined)
 let UpdateVendorRequest: UpdateVendorRequest; //Create Vendor Request Body. (optional)
 
 const { status, data } = await apiInstance.pGESUpdateVendors(
@@ -622,10 +622,10 @@ const { status, data } = await apiInstance.pGESUpdateVendors(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **UpdateVendorRequest** | **UpdateVendorRequest**| Create Vendor Request Body. | |
-| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD | defaults to '2025-01-01'|
+| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD. | defaults to '2026-01-01'|
 | **vendor_id** | [**string**] | The id which uniquely identifies your vendor. | defaults to undefined|
-| **x_request_id** | [**string**] | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | (optional) defaults to undefined|
-| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | (optional) defaults to undefined|
+| **x_request_id** | [**string**] | Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. | (optional) defaults to undefined|
+| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  | (optional) defaults to undefined|
 
 
 ### Return type
@@ -666,10 +666,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new EasySplitApi(configuration);
 
-let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD (default to '2025-01-01')
+let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD. (default to '2026-01-01')
 let vendor_id: string; //The id which uniquely identifies your vendor. (default to undefined)
-let x_request_id: string; //Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree (optional) (default to undefined)
-let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   (optional) (default to undefined)
+let x_request_id: string; //Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. (optional) (default to undefined)
+let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  (optional) (default to undefined)
 let doc_type: string; //Mention the type of the document you are uploading. Possible values: UIDAI_FRONT, UIDAI_BACK, UIDAI_NUMBER, DL, DL_NUMBER, PASSPORT_FRONT, PASSPORT_BACK, PASSPORT_NUMBER, VOTER_ID, VOTER_ID_NUMBER, PAN, PAN_NUMBER, GST, GSTIN_NUMBER, CIN, CIN_NUMBER, NBFC_CERTIFICATE. If the doc type ends with a number you should add the doc value else upload the doc file. (optional) (default to undefined)
 let doc_value: string; //Enter the display name of the uploaded file. (optional) (default to undefined)
 let file: File; //Select the document that should be uploaded or provide the path of that file. You cannot upload a file that is more than 2MB in size. (optional) (default to undefined)
@@ -689,10 +689,10 @@ const { status, data } = await apiInstance.pGESUploadVendorsDocs(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD | defaults to '2025-01-01'|
+| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD. | defaults to '2026-01-01'|
 | **vendor_id** | [**string**] | The id which uniquely identifies your vendor. | defaults to undefined|
-| **x_request_id** | [**string**] | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | (optional) defaults to undefined|
-| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | (optional) defaults to undefined|
+| **x_request_id** | [**string**] | Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. | (optional) defaults to undefined|
+| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  | (optional) defaults to undefined|
 | **doc_type** | [**string**] | Mention the type of the document you are uploading. Possible values: UIDAI_FRONT, UIDAI_BACK, UIDAI_NUMBER, DL, DL_NUMBER, PASSPORT_FRONT, PASSPORT_BACK, PASSPORT_NUMBER, VOTER_ID, VOTER_ID_NUMBER, PAN, PAN_NUMBER, GST, GSTIN_NUMBER, CIN, CIN_NUMBER, NBFC_CERTIFICATE. If the doc type ends with a number you should add the doc value else upload the doc file. | (optional) defaults to undefined|
 | **doc_value** | [**string**] | Enter the display name of the uploaded file. | (optional) defaults to undefined|
 | **file** | [**File**] | Select the document that should be uploaded or provide the path of that file. You cannot upload a file that is more than 2MB in size. | (optional) defaults to undefined|
@@ -723,7 +723,7 @@ const { status, data } = await apiInstance.pGESUploadVendorsDocs(
 # **pGOrderSplitAfterPayment**
 > SplitAfterPaymentResponse pGOrderSplitAfterPayment()
 
-Split After Payment API splits the payments to vendors after successful payment from the customers.
+The Split After Payment API splits payments to vendors after customers successfully complete a payment. After you receive a successful payment confirmation, wait 2 minutes before you call this API endpoint.
 
 ### Example
 
@@ -737,10 +737,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new EasySplitApi(configuration);
 
-let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD (default to '2025-01-01')
-let order_id: string; //The id which uniquely identifies your order (default to undefined)
-let x_request_id: string; //Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree (optional) (default to undefined)
-let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   (optional) (default to undefined)
+let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD. (default to '2026-01-01')
+let order_id: string; //The ID which uniquely identifies your order. (default to undefined)
+let x_request_id: string; //Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. (optional) (default to undefined)
+let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  (optional) (default to undefined)
 let SplitAfterPaymentRequest: SplitAfterPaymentRequest; //Request Body to Create Split for an order. (optional)
 
 const { status, data } = await apiInstance.pGOrderSplitAfterPayment(
@@ -757,10 +757,10 @@ const { status, data } = await apiInstance.pGOrderSplitAfterPayment(
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **SplitAfterPaymentRequest** | **SplitAfterPaymentRequest**| Request Body to Create Split for an order. | |
-| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD | defaults to '2025-01-01'|
-| **order_id** | [**string**] | The id which uniquely identifies your order | defaults to undefined|
-| **x_request_id** | [**string**] | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | (optional) defaults to undefined|
-| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | (optional) defaults to undefined|
+| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD. | defaults to '2026-01-01'|
+| **order_id** | [**string**] | The ID which uniquely identifies your order. | defaults to undefined|
+| **x_request_id** | [**string**] | Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. | (optional) defaults to undefined|
+| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  | (optional) defaults to undefined|
 
 
 ### Return type
@@ -804,10 +804,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new EasySplitApi(configuration);
 
-let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD (default to '2025-01-01')
-let x_request_id: string; //Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree (optional) (default to undefined)
-let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   (optional) (default to undefined)
-let StaticSplitRequest: StaticSplitRequest; //Static Split (optional)
+let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD. (default to '2026-01-01')
+let x_request_id: string; //Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. (optional) (default to undefined)
+let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  (optional) (default to undefined)
+let StaticSplitRequest: StaticSplitRequest; //Static Split. (optional)
 
 const { status, data } = await apiInstance.pGOrderStaticSplit(
     x_api_version,
@@ -821,10 +821,10 @@ const { status, data } = await apiInstance.pGOrderStaticSplit(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **StaticSplitRequest** | **StaticSplitRequest**| Static Split | |
-| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD | defaults to '2025-01-01'|
-| **x_request_id** | [**string**] | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | (optional) defaults to undefined|
-| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | (optional) defaults to undefined|
+| **StaticSplitRequest** | **StaticSplitRequest**| Static Split. | |
+| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD. | defaults to '2026-01-01'|
+| **x_request_id** | [**string**] | Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. | (optional) defaults to undefined|
+| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  | (optional) defaults to undefined|
 
 
 ### Return type
@@ -865,10 +865,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new EasySplitApi(configuration);
 
-let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD (default to '2025-01-01')
-let order_id: string; //The id which uniquely identifies your order (default to undefined)
-let x_request_id: string; //Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree (optional) (default to undefined)
-let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   (optional) (default to undefined)
+let x_api_version: string; //API version to be used. Format is in YYYY-MM-DD. (default to '2026-01-01')
+let order_id: string; //The ID which uniquely identifies your order. (default to undefined)
+let x_request_id: string; //Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. (optional) (default to undefined)
+let x_idempotency_key: string; //An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  (optional) (default to undefined)
 
 const { status, data } = await apiInstance.pGSplitOrderRecon(
     x_api_version,
@@ -882,10 +882,10 @@ const { status, data } = await apiInstance.pGSplitOrderRecon(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD | defaults to '2025-01-01'|
-| **order_id** | [**string**] | The id which uniquely identifies your order | defaults to undefined|
-| **x_request_id** | [**string**] | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | (optional) defaults to undefined|
-| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | (optional) defaults to undefined|
+| **x_api_version** | [**string**] | API version to be used. Format is in YYYY-MM-DD. | defaults to '2026-01-01'|
+| **order_id** | [**string**] | The ID which uniquely identifies your order. | defaults to undefined|
+| **x_request_id** | [**string**] | Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree. | (optional) defaults to undefined|
+| **x_idempotency_key** | [**string**] | An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  | (optional) defaults to undefined|
 
 
 ### Return type
@@ -905,7 +905,7 @@ const { status, data } = await apiInstance.pGSplitOrderRecon(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Get Split and Settlement Details by OrderID |  -  |
+|**200** | Get Split and Settlement Details by OrderID. |  -  |
 |**404** | Split Order Recon Failure Response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

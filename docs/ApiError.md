@@ -1,6 +1,6 @@
 # ApiError
 
-Error at cashfree\'s server
+Error at Cashfree\'s server.
 
 ## Properties
 
@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **message** | **string** |  | [optional] [default to undefined]
 **code** | **string** |  | [optional] [default to undefined]
 **help** | **string** |  | [optional] [default to undefined]
-**type** | **string** | api_error | [optional] [default to undefined]
+**type** | **string** | api_error. | [optional] [default to undefined]
 
 ## Example
 

@@ -1,6 +1,6 @@
 # StaticSplitResponse
 
-Static Split Response
+Static Split Response.
 
 ## Properties
 

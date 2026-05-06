@@ -16,8 +16,8 @@ Name | Type | Description | Notes
 **resolved_at** | **string** | This is the time when the dispute case was closed. | [optional] [default to undefined]
 **dispute_status** | **string** |  | [optional] [default to undefined]
 **cf_dispute_remarks** | **string** |  | [optional] [default to undefined]
-**preferred_evidence** | [**Array&lt;PreferredEvidenceInner&gt;**](PreferredEvidenceInner.md) |  | [optional] [default to undefined]
-**dispute_evidence** | [**Array&lt;DisputeEvidenceInner&gt;**](DisputeEvidenceInner.md) |  | [optional] [default to undefined]
+**preferred_evidence** | [**Array&lt;EvidencesToContestDispute&gt;**](EvidencesToContestDispute.md) |  | [optional] [default to undefined]
+**dispute_evidence** | [**Array&lt;Evidence&gt;**](Evidence.md) |  | [optional] [default to undefined]
 **order_details** | [**OrderDetailsInDisputesEntity**](OrderDetailsInDisputesEntity.md) |  | [optional] [default to undefined]
 **customer_details** | [**CustomerDetailsInDisputesEntity**](CustomerDetailsInDisputesEntity.md) |  | [optional] [default to undefined]
 

@@ -1,6 +1,6 @@
 # SettlementReconEntity
 
-Recon object for settlement
+Recon object for settlement.
 
 ## Properties
 

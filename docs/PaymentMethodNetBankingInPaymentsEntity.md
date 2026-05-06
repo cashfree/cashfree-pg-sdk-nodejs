@@ -1,6 +1,6 @@
 # PaymentMethodNetBankingInPaymentsEntity
 
-netbanking payment method object for pay
+Netbanking payment method object for pay.
 
 ## Properties
 

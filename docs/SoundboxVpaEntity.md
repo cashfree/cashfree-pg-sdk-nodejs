@@ -1,13 +1,13 @@
 # SoundboxVpaEntity
 
-soundbox response object
+soundbox response object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **vpa** | **string** |  | [optional] [default to undefined]
-**cf_terminal_id** | **string** |  | [optional] [default to undefined]
+**cf_terminal_id** | **number** |  | [optional] [default to undefined]
 **device_serial_no** | **string** |  | [optional] [default to undefined]
 **merchant_name** | **string** |  | [optional] [default to undefined]
 **language** | **string** |  | [optional] [default to undefined]
