@@ -1,6 +1,6 @@
 # OrderEntityProducts
 
-Configurations for the products like One Click Checkout, Verify and Pay, if they are enabled for your account
+Configurations for the products like One Click Checkout, Verify and Pay, if they are enabled for your account.
 
 ## Properties
 

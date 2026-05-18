@@ -1,6 +1,6 @@
 # RefundSpeed
 
-How fast refund has to be proecessed
+How fast refund has to be proecessed.
 
 ## Properties
 
@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **requested** | **string** | Requested speed of refund. | [optional] [default to undefined]
 **accepted** | **string** | Accepted speed of refund. | [optional] [default to undefined]
 **processed** | **string** | Processed speed of refund. | [optional] [default to undefined]
-**message** | **string** | Error message, if any for refund_speed request | [optional] [default to undefined]
+**message** | **string** | Error message, if any for refund_speed request. | [optional] [default to undefined]
 
 ## Example
 

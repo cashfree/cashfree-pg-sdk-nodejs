@@ -1,6 +1,6 @@
 # SettlementEntity
 
-Settlement entity object
+Settlement entity object.
 
 ## Properties
 
@@ -20,10 +20,10 @@ Name | Type | Description | Notes
 **transfer_id** | **number** |  | [optional] [default to undefined]
 **transfer_time** | **string** |  | [optional] [default to undefined]
 **transfer_utr** | **string** |  | [optional] [default to undefined]
-**forex_conversion_handling_charge** | **number** | Cashfree forex conversion charges for refund processing | [optional] [default to undefined]
-**forex_conversion_handling_tax** | **number** | Cashfree forex conversion tax for refund processing | [optional] [default to undefined]
-**forex_conversion_rate** | **number** | Cashfree forex conversion rate for refund processing | [optional] [default to undefined]
-**charges_currency** | **string** | Cashfree refund charges currency for a refund | [optional] [default to undefined]
+**forex_conversion_handling_charge** | **number** | Cashfree forex conversion charges for refund processing. | [optional] [default to undefined]
+**forex_conversion_handling_tax** | **number** | Cashfree forex conversion tax for refund processing. | [optional] [default to undefined]
+**forex_conversion_rate** | **number** | Cashfree forex conversion rate for refund processing. | [optional] [default to undefined]
+**charges_currency** | **string** | Cashfree refund charges currency for a refund. | [optional] [default to undefined]
 
 ## Example
 

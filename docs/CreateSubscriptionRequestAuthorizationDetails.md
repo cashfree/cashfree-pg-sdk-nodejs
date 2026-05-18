@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**authorization_amount** | **number** | Authorization amount for the auth payment. | [optional] [default to undefined]
+**authorization_amount** | **number** | Authorization amount for the auth payment. Please note that authorization_amount will always be 0 for ENACH. | [optional] [default to undefined]
 **authorization_amount_refund** | **boolean** | Indicates whether the authorization amount should be refunded to the customer automatically. Merchants can use this field to specify if the authorized funds should be returned to the customer after authorization of the subscription. | [optional] [default to undefined]
 **payment_methods** | **Array&lt;string&gt;** | Payment methods for the subscription. enach, pnach, upi, card are possible values. | [optional] [default to undefined]
 

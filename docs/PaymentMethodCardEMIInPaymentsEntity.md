@@ -1,6 +1,6 @@
 # PaymentMethodCardEMIInPaymentsEntity
 
-payment method card emi object in payment entity
+payment method card emi object in payment entity.
 
 ## Properties
 

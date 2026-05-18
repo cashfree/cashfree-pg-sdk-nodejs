@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **customer_email** | **string** | Customer email address. | [optional] [default to undefined]
 **customer_phone** | **string** | Customer phone number. | [optional] [default to undefined]
 **customer_name** | **string** | Name of the customer. | [optional] [default to undefined]
-**customer_uid** | **string** | Customer identifier at Cashfree. You will get this when you create/get customer | [optional] [default to undefined]
+**customer_uid** | **string** | Customer identifier at Cashfree. You will get this when you create/get customer. | [optional] [default to undefined]
 
 ## Example
 

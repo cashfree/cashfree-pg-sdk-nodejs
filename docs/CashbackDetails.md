@@ -1,12 +1,12 @@
 # CashbackDetails
 
-Cashback detail boject
+Cashback detail boject.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cashback_type** | **string** | Type of discount | [default to undefined]
+**cashback_type** | **string** | Type of discount. | [default to undefined]
 **cashback_value** | **number** | Value of Discount. | [default to undefined]
 **max_cashback_amount** | **number** | Maximum Value of Cashback allowed. | [default to undefined]
 

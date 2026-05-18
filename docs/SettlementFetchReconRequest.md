@@ -1,13 +1,13 @@
 # SettlementFetchReconRequest
 
-Recon Request Object
+Recon Request Object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **pagination** | [**FetchSettlementsRequestPagination**](FetchSettlementsRequestPagination.md) |  | [default to undefined]
-**filters** | [**FetchSettlementsRequestFilters**](FetchSettlementsRequestFilters.md) |  | [default to undefined]
+**filters** | [**SettlementFetchReconRequestFilters**](SettlementFetchReconRequestFilters.md) |  | [optional] [default to undefined]
 
 ## Example
 

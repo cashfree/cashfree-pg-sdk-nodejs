@@ -1,6 +1,6 @@
 # OfferFilters
 
-Filter for offers
+Filter for offers.
 
 ## Properties
 

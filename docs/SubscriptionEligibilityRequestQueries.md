@@ -6,7 +6,7 @@ Necessary parameters to fetch eligible payment methods.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**subscription_id** | **string** | A unique ID passed by merchant for identifying the subscription | [default to undefined]
+**subscription_id** | **string** | A unique ID passed by merchant for identifying the subscription. | [default to undefined]
 
 ## Example
 

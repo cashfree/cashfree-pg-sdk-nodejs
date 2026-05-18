@@ -1,13 +1,13 @@
 # SubscriptionPaymentSplitItem
 
-Subscription Payment Split Item
+Subscription Payment Split Item.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**vendor_id** | **string** | Vendor ID | [optional] [default to undefined]
-**percentage** | **number** | Percentage of the payment to be split to vendor | [optional] [default to undefined]
+**vendor_id** | **string** | Vendor ID. | [optional] [default to undefined]
+**percentage** | **number** | Percentage of the payment to be split to vendor. | [optional] [default to undefined]
 
 ## Example
 

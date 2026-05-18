@@ -1,6 +1,6 @@
 # TerminalEntity
 
-Create terminal response object
+Create terminal response object.
 
 ## Properties
 
@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **terminal_phone_no** | **string** |  | [optional] [default to undefined]
 **terminal_status** | **string** |  | [optional] [default to undefined]
 **terminal_meta** | [**TerminalEntityTerminalMeta**](TerminalEntityTerminalMeta.md) |  | [optional] [default to undefined]
+**terminal_vpas** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -37,6 +38,7 @@ const instance: TerminalEntity = {
     terminal_phone_no,
     terminal_status,
     terminal_meta,
+    terminal_vpas,
 };
 ```
 

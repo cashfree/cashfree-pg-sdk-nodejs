@@ -1,13 +1,13 @@
 # EntitySimulationResponse
 
-Entity Simulation it contains payment_status and payment_error_code
+Entity simulation contains payment_status and payment_error_code.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**payment_status** | **string** | Payment Status | [default to undefined]
-**payment_error_code** | **string** | Payment Error Code | [optional] [default to undefined]
+**payment_status** | **string** | Payment status. | [default to undefined]
+**payment_error_code** | **string** | Payment error code. | [optional] [default to undefined]
 
 ## Example
 

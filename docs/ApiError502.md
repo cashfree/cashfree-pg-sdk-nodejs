@@ -1,6 +1,6 @@
 # ApiError502
 
-Error when there is error at partner bank
+Error when there is error at partner bank.
 
 ## Properties
 
@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **message** | **string** |  | [optional] [default to undefined]
 **help** | **string** |  | [optional] [default to undefined]
 **code** | **string** | &#x60;bank_processing_failure&#x60; will be returned here to denote failure at bank.  | [optional] [default to undefined]
-**type** | **string** | api_error | [optional] [default to undefined]
+**type** | **string** | api_error. | [optional] [default to undefined]
 
 ## Example
 

@@ -1,12 +1,12 @@
 # TerminalTransactionEntity
 
-Create terminal response object
+Create terminal response object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cf_payment_id** | **string** |  | [optional] [default to undefined]
+**cf_payment_id** | **number** |  | [optional] [default to undefined]
 **payment_amount** | **number** |  | [optional] [default to undefined]
 **payment_method** | **string** |  | [optional] [default to undefined]
 **payment_url** | **string** |  | [optional] [default to undefined]

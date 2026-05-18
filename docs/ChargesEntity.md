@@ -1,13 +1,13 @@
 # ChargesEntity
 
-Charges accociated with the order
+Charges accociated with the order.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**shipping_charges** | **number** | Shipping charge of the order | [optional] [default to undefined]
-**cod_handling_charges** | **number** | COD handling fee for order | [optional] [default to undefined]
+**shipping_charges** | **number** | Shipping charge of the order. | [optional] [default to undefined]
+**cod_handling_charges** | **number** | COD handling fee for order. | [optional] [default to undefined]
 
 ## Example
 

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**par** | **string** |  | [optional] [default to undefined]
+**par** | **string** | PAR for plain card sent in request. | [optional] [default to undefined]
 
 ## Example
 

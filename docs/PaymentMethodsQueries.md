@@ -1,6 +1,6 @@
 # PaymentMethodsQueries
 
-Payment Method Query Object
+Payment Method Query Object.
 
 ## Properties
 

@@ -1,13 +1,13 @@
 # UPIAuthorizeDetails
 
-object when you are using preauth in UPI in order pay
+Object when you are using preauth in UPI in order pay.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **approve_by** | **string** | Time by which this authorization should be approved by the customer. | [optional] [default to undefined]
-**start_time** | **string** | This is the time when the UPI one time mandate will start | [optional] [default to undefined]
+**start_time** | **string** | This is the time when the UPI one time mandate will start. | [optional] [default to undefined]
 **end_time** | **string** | This is the time when the UPI mandate will be over. If the mandate has not been executed by this time, the funds will be returned back to the customer after this time. | [optional] [default to undefined]
 
 ## Example

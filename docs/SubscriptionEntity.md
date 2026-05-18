@@ -1,24 +1,24 @@
 # SubscriptionEntity
 
-The response returned for Get, Create or Manage Subscription APIs.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **authorisation_details** | [**AuthorizationDetails**](AuthorizationDetails.md) |  | [optional] [default to undefined]
-**cf_subscription_id** | **string** | Cashfree subscription reference number | [optional] [default to undefined]
+**cf_subscription_id** | **string** | Cashfree subscription reference number. | [optional] [default to undefined]
 **customer_details** | [**SubscriptionCustomerDetails**](SubscriptionCustomerDetails.md) |  | [optional] [default to undefined]
 **plan_details** | [**PlanEntity**](PlanEntity.md) |  | [optional] [default to undefined]
-**subscription_expiry_time** | **string** | Time at which the subscription will expire. | [optional] [default to undefined]
-**subscription_first_charge_time** | **string** | Time at which the first charge will be made for the subscription. Applicable only for PERIODIC plans. | [optional] [default to undefined]
+**subscription_expiry_time** | **string** | Time at which the subscription will expire. We store timestamps in IST. | [optional] [default to undefined]
+**subscription_first_charge_time** | **string** | Time at which the first charge will be made for the subscription. Applicable only for PERIODIC plans. Cashfree stores timestamps in IST. | [optional] [default to undefined]
 **subscription_id** | **string** | A unique ID passed by merchant for identifying the subscription. | [optional] [default to undefined]
 **subscription_meta** | [**SubscriptionEntitySubscriptionMeta**](SubscriptionEntitySubscriptionMeta.md) |  | [optional] [default to undefined]
 **subscription_note** | **string** | Note for the subscription. | [optional] [default to undefined]
 **subscription_session_id** | **string** | Subscription Session Id. | [optional] [default to undefined]
 **subscription_payment_splits** | [**Array&lt;SubscriptionPaymentSplitItem&gt;**](SubscriptionPaymentSplitItem.md) | Payment splits for the subscription. | [optional] [default to undefined]
-**subscription_status** | **string** | Status of the subscription. | [optional] [default to undefined]
+**subscription_status** | **string** | Status of the subscription. For more details, see [Subscription Lifecycle](https://www.cashfree.com/docs/payments/subscription/create#subscription-lifecycle). | [optional] [default to undefined]
 **subscription_tags** | **object** | Tags for the subscription. | [optional] [default to undefined]
+**next_schedule_date** | **string** | The date on which the next payment is scheduled to be processed. Cashfree stores timestamps in IST. For ON_DEMAND plans this will be null . | [optional] [default to undefined]
 
 ## Example
 
@@ -39,6 +39,7 @@ const instance: SubscriptionEntity = {
     subscription_payment_splits,
     subscription_status,
     subscription_tags,
+    next_schedule_date,
 };
 ```
 

@@ -1,6 +1,6 @@
 # AuthenticationError
 
-Error if api keys are wrong
+Error if api keys are wrong.
 
 ## Properties
 
@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **message** | **string** |  | [optional] [default to undefined]
 **code** | **string** |  | [optional] [default to undefined]
-**type** | **string** | authentication_error | [optional] [default to undefined]
+**type** | **string** | authentication_error. | [optional] [default to undefined]
 
 ## Example
 
