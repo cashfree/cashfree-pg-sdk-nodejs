@@ -1103,26 +1103,49 @@ export interface CardDowntimeCard {
     'card_issuer'?: Array<string>;
     /**
      * 
-     * @type {Array<string>}
+     * @type {Array<CardDowntimeCardTypeEnum>}
      * @memberof CardDowntimeCard
      */
-    'card_type'?: CardDowntimeCardCardTypeEnum;
+    'card_type'?: Array<CardDowntimeCardTypeEnum>;
     /**
      * 
-     * @type {Array<string>}
+     * @type {Array<CardDowntimeCardNetworkEnum>}
      * @memberof CardDowntimeCard
      */
-    'card_network'?: CardDowntimeCardCardNetworkEnum;
+    'card_network'?: Array<CardDowntimeCardNetworkEnum>;
 }
+/**
+ * Card network affected by a downtime incident.
+ * @export
+ * @enum {string}
+ */
 
-export const CardDowntimeCardCardTypeEnum = {
+export const CardDowntimeCardNetworkEnum = {
+    VISA: 'VISA',
+    MASTERCARD: 'MASTERCARD',
+    RUPAY: 'RUPAY',
+    MAESTRO: 'MAESTRO',
+    AMEX: 'AMEX',
+    ALL_NETWORKS: 'ALL_NETWORKS',
+    UNKNOWN_DEFAULT_OPEN_API: '11184809'
 } as const;
 
-export type CardDowntimeCardCardTypeEnum = typeof CardDowntimeCardCardTypeEnum[keyof typeof CardDowntimeCardCardTypeEnum];
-export const CardDowntimeCardCardNetworkEnum = {
+export type CardDowntimeCardNetworkEnum = typeof CardDowntimeCardNetworkEnum[keyof typeof CardDowntimeCardNetworkEnum];
+
+/**
+ * Card type affected by a downtime incident.
+ * @export
+ * @enum {string}
+ */
+
+export const CardDowntimeCardTypeEnum = {
+    CREDIT_CARD: 'CREDIT_CARD',
+    DEBIT_CARD: 'DEBIT_CARD',
+    ALL_CARDS: 'ALL_CARDS',
+    UNKNOWN_DEFAULT_OPEN_API: '11184809'
 } as const;
 
-export type CardDowntimeCardCardNetworkEnum = typeof CardDowntimeCardCardNetworkEnum[keyof typeof CardDowntimeCardCardNetworkEnum];
+export type CardDowntimeCardTypeEnum = typeof CardDowntimeCardTypeEnum[keyof typeof CardDowntimeCardTypeEnum];
 
 /**
  * Payment method for card EMI.
@@ -4407,7 +4430,7 @@ export interface ExtendedCustomerDetails {
     'customer_uid'?: string;
 }
 /**
- * 
+ * Success response for Fetch All Downtimes.
  * @export
  * @interface FetchActiveEcosystemDowntimes200Response
  */
@@ -4499,10 +4522,10 @@ export interface FetchSettlementsRequest {
      * @type {FetchSettlementsRequestFilters}
      * @memberof FetchSettlementsRequest
      */
-    'filters'?: FetchSettlementsRequestFilters;
+    'filters': FetchSettlementsRequestFilters;
 }
 /**
- * Specify either the Settlement ID, Settlement UTR, or start date and end date to fetch the settlement details.
+ * Specify either the Settlement ID, Settlement UTR, settlement status, or start date and end date to fetch the settlement details.
  * @export
  * @interface FetchSettlementsRequestFilters
  */
@@ -4520,6 +4543,12 @@ export interface FetchSettlementsRequestFilters {
      */
     'settlement_utrs'?: Array<string>;
     /**
+     * List of settlement statuses to filter by. Possible values are SUCCESS, PENDING, PENDING_WITH_CASHFREE, PENDING_WITH_BANK, FAILED.
+     * @type {Array<string>}
+     * @memberof FetchSettlementsRequestFilters
+     */
+    'settlement_status'?: Array<FetchSettlementsRequestFiltersSettlementStatusEnum>;
+    /**
      * Specify the start date from when you want the settlement reconciliation details.
      * @type {string}
      * @memberof FetchSettlementsRequestFilters
@@ -4532,6 +4561,18 @@ export interface FetchSettlementsRequestFilters {
      */
     'end_date'?: string;
 }
+
+export const FetchSettlementsRequestFiltersSettlementStatusEnum = {
+    SUCCESS: 'SUCCESS',
+    PENDING: 'PENDING',
+    PENDING_WITH_CASHFREE: 'PENDING_WITH_CASHFREE',
+    PENDING_WITH_BANK: 'PENDING_WITH_BANK',
+    FAILED: 'FAILED',
+    UNKNOWN_DEFAULT_OPEN_API: '11184809'
+} as const;
+
+export type FetchSettlementsRequestFiltersSettlementStatusEnum = typeof FetchSettlementsRequestFiltersSettlementStatusEnum[keyof typeof FetchSettlementsRequestFiltersSettlementStatusEnum];
+
 /**
  * To fetch the next set of settlements, pass the cursor received in the response to the next API call.   To receive the data for the first time, pass the cursor as null.   Limit would be number of settlements that you want to receive.
  * @export
@@ -4582,6 +4623,180 @@ export interface FetchTerminalQRCodesEntity {
      */
     'status'?: string;
 }
+/**
+ * Paginated response for Get All Settlements API.
+ * @export
+ * @interface GetAllSettlementsResponse
+ */
+export interface GetAllSettlementsResponse {
+    /**
+     * Cursor for the next set of settlements. Pass this value in the next API call to fetch the next page. Null if there are no more settlements.
+     * @type {string}
+     * @memberof GetAllSettlementsResponse
+     */
+    'cursor'?: string | null;
+    /**
+     * 
+     * @type {Array<GetAllSettlementsResponseDataInner>}
+     * @memberof GetAllSettlementsResponse
+     */
+    'data'?: Array<GetAllSettlementsResponseDataInner>;
+    /**
+     * Number of settlement records returned in this response.
+     * @type {number}
+     * @memberof GetAllSettlementsResponse
+     */
+    'limit'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface GetAllSettlementsResponseDataInner
+ */
+export interface GetAllSettlementsResponseDataInner {
+    /**
+     * Unique ID to identify the settlement.
+     * @type {string}
+     * @memberof GetAllSettlementsResponseDataInner
+     */
+    'cf_settlement_id'?: string;
+    /**
+     * Status of the settlement.
+     * @type {string}
+     * @memberof GetAllSettlementsResponseDataInner
+     */
+    'status'?: GetAllSettlementsResponseDataInnerStatusEnum;
+    /**
+     * Human-readable description of the settlement status.
+     * @type {string}
+     * @memberof GetAllSettlementsResponseDataInner
+     */
+    'status_description'?: string;
+    /**
+     * Unique transaction reference number of the settlement.
+     * @type {string}
+     * @memberof GetAllSettlementsResponseDataInner
+     */
+    'settlement_utr'?: string;
+    /**
+     * Start of the payment period included in this settlement.
+     * @type {string}
+     * @memberof GetAllSettlementsResponseDataInner
+     */
+    'payment_from'?: string;
+    /**
+     * End of the payment period included in this settlement.
+     * @type {string}
+     * @memberof GetAllSettlementsResponseDataInner
+     */
+    'payment_till'?: string;
+    /**
+     * Date and time when the settlement was initiated.
+     * @type {string}
+     * @memberof GetAllSettlementsResponseDataInner
+     */
+    'settlement_initiated_on'?: string;
+    /**
+     * Date and time when the settlement was processed.
+     * @type {string}
+     * @memberof GetAllSettlementsResponseDataInner
+     */
+    'settlement_processed_on'?: string;
+    /**
+     * Net amount of transactions that was a part of this settlement.
+     * @type {number}
+     * @memberof GetAllSettlementsResponseDataInner
+     */
+    'payment_amount'?: number;
+    /**
+     * PG service charges that were deducted in this settlement.
+     * @type {number}
+     * @memberof GetAllSettlementsResponseDataInner
+     */
+    'pg_service_charge'?: number;
+    /**
+     * PG service taxes that were deducted in this settlement.
+     * @type {number}
+     * @memberof GetAllSettlementsResponseDataInner
+     */
+    'pg_service_tax'?: number;
+    /**
+     * Adjustments that were a part of this settlement.
+     * @type {number}
+     * @memberof GetAllSettlementsResponseDataInner
+     */
+    'adjustment'?: number;
+    /**
+     * Settlement charges that were deducted in this settlement.
+     * @type {number}
+     * @memberof GetAllSettlementsResponseDataInner
+     */
+    'settlement_charge'?: number;
+    /**
+     * Settlement taxes that were deducted in this settlement.
+     * @type {number}
+     * @memberof GetAllSettlementsResponseDataInner
+     */
+    'settlement_tax'?: number;
+    /**
+     * Split service charges that were deducted in this settlement.
+     * @type {number}
+     * @memberof GetAllSettlementsResponseDataInner
+     */
+    'split_service_charge'?: number;
+    /**
+     * Split service taxes that were deducted in this settlement.
+     * @type {number}
+     * @memberof GetAllSettlementsResponseDataInner
+     */
+    'split_service_tax'?: number;
+    /**
+     * Vendor commission/split that was deducted in this settlement.
+     * @type {number}
+     * @memberof GetAllSettlementsResponseDataInner
+     */
+    'vendor_commission'?: number;
+    /**
+     * Amount that was settled to the merchant\'s bank account.
+     * @type {number}
+     * @memberof GetAllSettlementsResponseDataInner
+     */
+    'amount_settled'?: number;
+    /**
+     * Indicates how Cashfree\'s service charges are applied for this settlement.
+     * @type {string}
+     * @memberof GetAllSettlementsResponseDataInner
+     */
+    'charge_type'?: GetAllSettlementsResponseDataInnerChargeTypeEnum;
+    /**
+     * Type of settlement. Example - NORMAL_SETTLEMENT.
+     * @type {string}
+     * @memberof GetAllSettlementsResponseDataInner
+     */
+    'settlement_type'?: string;
+}
+
+export const GetAllSettlementsResponseDataInnerStatusEnum = {
+    SUCCESS: 'SUCCESS',
+    PENDING: 'PENDING',
+    PENDING_WITH_CASHFREE: 'PENDING_WITH_CASHFREE',
+    PENDING_WITH_BANK: 'PENDING_WITH_BANK',
+    FAILED: 'FAILED',
+    UNKNOWN_DEFAULT_OPEN_API: '11184809'
+} as const;
+
+export type GetAllSettlementsResponseDataInnerStatusEnum = typeof GetAllSettlementsResponseDataInnerStatusEnum[keyof typeof GetAllSettlementsResponseDataInnerStatusEnum];
+export const GetAllSettlementsResponseDataInnerChargeTypeEnum = {
+    PREPAID: 'PREPAID',
+    POSTPAID: 'POSTPAID',
+    SURCHARGE: 'SURCHARGE',
+    PREPAID_SURCHARGE: 'PREPAID_SURCHARGE',
+    POSTPAID_SURCHARGE: 'POSTPAID_SURCHARGE',
+    UNKNOWN_DEFAULT_OPEN_API: '11184809'
+} as const;
+
+export type GetAllSettlementsResponseDataInnerChargeTypeEnum = typeof GetAllSettlementsResponseDataInnerChargeTypeEnum[keyof typeof GetAllSettlementsResponseDataInnerChargeTypeEnum];
+
 /**
  * Response object containing detailed information about a terminal payment transaction.
  * @export
@@ -5614,6 +5829,44 @@ export interface ManageSubscriptionRequestActionDetails {
      * @memberof ManageSubscriptionRequestActionDetails
      */
     'plan_id'?: string;
+}
+/**
+ * Response returned after successfully marking an order for settlement.
+ * @export
+ * @interface MarkOrderSettlementResponse
+ */
+export interface MarkOrderSettlementResponse {
+    /**
+     * The order ID that was marked for settlement.
+     * @type {string}
+     * @memberof MarkOrderSettlementResponse
+     */
+    'order_id'?: string;
+    /**
+     * 
+     * @type {MarkOrderSettlementResponseMetaData}
+     * @memberof MarkOrderSettlementResponse
+     */
+    'meta_data'?: MarkOrderSettlementResponseMetaData;
+}
+/**
+ * 
+ * @export
+ * @interface MarkOrderSettlementResponseMetaData
+ */
+export interface MarkOrderSettlementResponseMetaData {
+    /**
+     * CBRIKS ID used for reporting purposes.
+     * @type {string}
+     * @memberof MarkOrderSettlementResponseMetaData
+     */
+    'cbriks_id'?: string;
+    /**
+     * The settlement date recorded in the system.
+     * @type {string}
+     * @memberof MarkOrderSettlementResponseMetaData
+     */
+    'settlement_date'?: string;
 }
 /**
  * The Net Banking incident object will show details about the incident affecting net banking payments.
@@ -6886,6 +7139,302 @@ export interface OrderPaymentMethodFilters {
     'card_issuing_bank'?: Array<string>;
 }
 /**
+ * Settlement details for a specific order.
+ * @export
+ * @interface OrderSettlementEntity
+ */
+export interface OrderSettlementEntity {
+    /**
+     * 
+     * @type {OrderSettlementEntityOrderDetails}
+     * @memberof OrderSettlementEntity
+     */
+    'order_details'?: OrderSettlementEntityOrderDetails;
+    /**
+     * 
+     * @type {OrderSettlementEntityPaymentDetails}
+     * @memberof OrderSettlementEntity
+     */
+    'payment_details'?: OrderSettlementEntityPaymentDetails;
+    /**
+     * 
+     * @type {OrderSettlementEntityCustomerDetails}
+     * @memberof OrderSettlementEntity
+     */
+    'customer_details'?: OrderSettlementEntityCustomerDetails;
+    /**
+     * 
+     * @type {OrderSettlementEntitySettlementDetails}
+     * @memberof OrderSettlementEntity
+     */
+    'settlement_details'?: OrderSettlementEntitySettlementDetails;
+}
+/**
+ * 
+ * @export
+ * @interface OrderSettlementEntityCustomerDetails
+ */
+export interface OrderSettlementEntityCustomerDetails {
+    /**
+     * Unique ID of the customer.
+     * @type {string}
+     * @memberof OrderSettlementEntityCustomerDetails
+     */
+    'customer_id'?: string;
+    /**
+     * Name of the customer.
+     * @type {string}
+     * @memberof OrderSettlementEntityCustomerDetails
+     */
+    'customer_name'?: string;
+    /**
+     * Phone number of the customer.
+     * @type {string}
+     * @memberof OrderSettlementEntityCustomerDetails
+     */
+    'customer_phone'?: string;
+    /**
+     * Email address of the customer.
+     * @type {string}
+     * @memberof OrderSettlementEntityCustomerDetails
+     */
+    'customer_email'?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface OrderSettlementEntityOrderDetails
+ */
+export interface OrderSettlementEntityOrderDetails {
+    /**
+     * Unique order ID.
+     * @type {string}
+     * @memberof OrderSettlementEntityOrderDetails
+     */
+    'order_id'?: string;
+    /**
+     * The amount which was passed at the order creation time.
+     * @type {number}
+     * @memberof OrderSettlementEntityOrderDetails
+     */
+    'order_amount'?: number;
+    /**
+     * Currency of the order.
+     * @type {string}
+     * @memberof OrderSettlementEntityOrderDetails
+     */
+    'order_currency'?: string;
+    /**
+     * The order tags provided during order creation.
+     * @type {object}
+     * @memberof OrderSettlementEntityOrderDetails
+     */
+    'order_tags'?: object;
+}
+/**
+ * 
+ * @export
+ * @interface OrderSettlementEntityPaymentDetails
+ */
+export interface OrderSettlementEntityPaymentDetails {
+    /**
+     * Cashfree Payments unique ID to identify the payment.
+     * @type {string}
+     * @memberof OrderSettlementEntityPaymentDetails
+     */
+    'cf_payment_id'?: string;
+    /**
+     * Date and time when the transaction was completed.
+     * @type {string}
+     * @memberof OrderSettlementEntityPaymentDetails
+     */
+    'payment_time'?: string;
+    /**
+     * Currency of the payment.
+     * @type {string}
+     * @memberof OrderSettlementEntityPaymentDetails
+     */
+    'payment_currency'?: string;
+    /**
+     * Net amount of the transaction that was a part of this settlement.
+     * @type {number}
+     * @memberof OrderSettlementEntityPaymentDetails
+     */
+    'payment_amount'?: number;
+    /**
+     * PG service charges that were deducted in this settlement.
+     * @type {number}
+     * @memberof OrderSettlementEntityPaymentDetails
+     */
+    'pg_service_charge'?: number;
+    /**
+     * PG service taxes that were deducted in this settlement.
+     * @type {number}
+     * @memberof OrderSettlementEntityPaymentDetails
+     */
+    'pg_service_tax'?: number;
+    /**
+     * Split service charges that were deducted in this settlement.
+     * @type {number}
+     * @memberof OrderSettlementEntityPaymentDetails
+     */
+    'split_service_charge'?: number;
+    /**
+     * Split service taxes that were deducted in this settlement.
+     * @type {number}
+     * @memberof OrderSettlementEntityPaymentDetails
+     */
+    'split_service_tax'?: number;
+    /**
+     * Surcharge collected from the customer.
+     * @type {number}
+     * @memberof OrderSettlementEntityPaymentDetails
+     */
+    'surcharge'?: number;
+    /**
+     * Tax on surcharge. Upto 4 decimal points.
+     * @type {number}
+     * @memberof OrderSettlementEntityPaymentDetails
+     */
+    'tax_on_surcharge'?: number;
+    /**
+     * Currency in which service charges are applied.
+     * @type {string}
+     * @memberof OrderSettlementEntityPaymentDetails
+     */
+    'charges_currency'?: string;
+    /**
+     * Forex conversion handling charge.
+     * @type {number}
+     * @memberof OrderSettlementEntityPaymentDetails
+     */
+    'forex_conversion_handling_charge'?: number;
+    /**
+     * Forex conversion handling tax.
+     * @type {number}
+     * @memberof OrderSettlementEntityPaymentDetails
+     */
+    'forex_conversion_handling_tax'?: number;
+    /**
+     * Forex conversion rate applied.
+     * @type {number}
+     * @memberof OrderSettlementEntityPaymentDetails
+     */
+    'forex_conversion_rate'?: number;
+    /**
+     * Vendor commission/split that was deducted in this settlement.
+     * @type {number}
+     * @memberof OrderSettlementEntityPaymentDetails
+     */
+    'vendor_commission'?: number;
+    /**
+     * Amount after deducting all charges.
+     * @type {number}
+     * @memberof OrderSettlementEntityPaymentDetails
+     */
+    'settlement_amount'?: number;
+    /**
+     * Indicates how Cashfree\'s service charges are applied for this payment.
+     * @type {string}
+     * @memberof OrderSettlementEntityPaymentDetails
+     */
+    'charge_type'?: OrderSettlementEntityPaymentDetailsChargeTypeEnum;
+    /**
+     * Indicates who bears Cashfree\'s service charges.
+     * @type {string}
+     * @memberof OrderSettlementEntityPaymentDetails
+     */
+    'charged_to'?: OrderSettlementEntityPaymentDetailsChargedToEnum;
+}
+
+export const OrderSettlementEntityPaymentDetailsChargeTypeEnum = {
+    PREPAID: 'PREPAID',
+    POSTPAID: 'POSTPAID',
+    SURCHARGE: 'SURCHARGE',
+    PREPAID_SURCHARGE: 'PREPAID_SURCHARGE',
+    POSTPAID_SURCHARGE: 'POSTPAID_SURCHARGE',
+    UNKNOWN_DEFAULT_OPEN_API: '11184809'
+} as const;
+
+export type OrderSettlementEntityPaymentDetailsChargeTypeEnum = typeof OrderSettlementEntityPaymentDetailsChargeTypeEnum[keyof typeof OrderSettlementEntityPaymentDetailsChargeTypeEnum];
+export const OrderSettlementEntityPaymentDetailsChargedToEnum = {
+    MERCHANT: 'MERCHANT',
+    CUSTOMER: 'CUSTOMER',
+    MERCHANT_AND_CUSTOMER: 'MERCHANT_AND_CUSTOMER',
+    VENDOR: 'VENDOR',
+    UNKNOWN_DEFAULT_OPEN_API: '11184809'
+} as const;
+
+export type OrderSettlementEntityPaymentDetailsChargedToEnum = typeof OrderSettlementEntityPaymentDetailsChargedToEnum[keyof typeof OrderSettlementEntityPaymentDetailsChargedToEnum];
+
+/**
+ * 
+ * @export
+ * @interface OrderSettlementEntitySettlementDetails
+ */
+export interface OrderSettlementEntitySettlementDetails {
+    /**
+     * Unique ID to identify the settlement.
+     * @type {string}
+     * @memberof OrderSettlementEntitySettlementDetails
+     */
+    'cf_settlement_id'?: string;
+    /**
+     * Status of the linked settlement.
+     * @type {string}
+     * @memberof OrderSettlementEntitySettlementDetails
+     */
+    'status'?: OrderSettlementEntitySettlementDetailsStatusEnum;
+    /**
+     * Human-readable description of the settlement status.
+     * @type {string}
+     * @memberof OrderSettlementEntitySettlementDetails
+     */
+    'status_description'?: string;
+    /**
+     * Unique transaction reference number of the settlement.
+     * @type {string}
+     * @memberof OrderSettlementEntitySettlementDetails
+     */
+    'settlement_utr'?: string;
+    /**
+     * Date and time when the settlement was initiated.
+     * @type {string}
+     * @memberof OrderSettlementEntitySettlementDetails
+     */
+    'settlement_initiated_on'?: string;
+    /**
+     * Date and time when the settlement was processed.
+     * @type {string}
+     * @memberof OrderSettlementEntitySettlementDetails
+     */
+    'settlement_processed_on'?: string;
+    /**
+     * Currency of the settlement.
+     * @type {string}
+     * @memberof OrderSettlementEntitySettlementDetails
+     */
+    'settlement_currency'?: string;
+    /**
+     * Type of settlement. Example - NORMAL_SETTLEMENT.
+     * @type {string}
+     * @memberof OrderSettlementEntitySettlementDetails
+     */
+    'settlement_type'?: string;
+}
+
+export const OrderSettlementEntitySettlementDetailsStatusEnum = {
+    SUCCESS: 'SUCCESS',
+    PENDING: 'PENDING',
+    PENDING_WITH_CASHFREE: 'PENDING_WITH_CASHFREE',
+    PENDING_WITH_BANK: 'PENDING_WITH_BANK',
+    FAILED: 'FAILED',
+    UNKNOWN_DEFAULT_OPEN_API: '11184809'
+} as const;
+
+export type OrderSettlementEntitySettlementDetailsStatusEnum = typeof OrderSettlementEntitySettlementDetailsStatusEnum[keyof typeof OrderSettlementEntitySettlementDetailsStatusEnum];
+
+/**
  * update refund request object.
  * @export
  * @interface OrderUpdateRefundRequest
@@ -6958,7 +7507,7 @@ export const PARRequestCardTypeEnum = {
 export type PARRequestCardTypeEnum = typeof PARRequestCardTypeEnum[keyof typeof PARRequestCardTypeEnum];
 
 /**
- * 
+ * Success response for PAR by providing plain card details.
  * @export
  * @interface PGCreatePAR200Response
  */
@@ -9433,10 +9982,10 @@ export interface SettlementFetchReconRequest {
      * @type {SettlementFetchReconRequestFilters}
      * @memberof SettlementFetchReconRequest
      */
-    'filters'?: SettlementFetchReconRequestFilters;
+    'filters': SettlementFetchReconRequestFilters;
 }
 /**
- * Specify either the Settlement ID, Settlement UTR, or start date and end date to fetch the settlement details.
+ * Specify either the Settlement ID, Settlement UTR, or date range filters to fetch the settlement details.
  * @export
  * @interface SettlementFetchReconRequestFilters
  */
@@ -9454,15 +10003,41 @@ export interface SettlementFetchReconRequestFilters {
      */
     'settlement_utrs'?: Array<string>;
     /**
-     * Specify the start date from when you want the settlement reconciliation details.
+     * Filter events by settlement initiation start date. Use ISO8601 format.
      * @type {string}
      * @memberof SettlementFetchReconRequestFilters
      */
-    'start_date'?: string;
+    'start_date_initiated_on'?: string;
     /**
-     * Specify the end date till when you want the settlement reconciliation details.
+     * Filter events by settlement initiation end date. Use ISO8601 format.
      * @type {string}
      * @memberof SettlementFetchReconRequestFilters
+     */
+    'end_date_initiated_on'?: string;
+    /**
+     * Filter events by settlement processed start date. Use ISO8601 format.
+     * @type {string}
+     * @memberof SettlementFetchReconRequestFilters
+     */
+    'start_date_processed_on'?: string;
+    /**
+     * Filter events by settlement processed end date. Use ISO8601 format.
+     * @type {string}
+     * @memberof SettlementFetchReconRequestFilters
+     */
+    'end_date_processed_on'?: string;
+    /**
+     * Deprecated: Use start_date_initiated_on or start_date_processed_on instead. Specify the start date from when you want the settlement reconciliation details.
+     * @type {string}
+     * @memberof SettlementFetchReconRequestFilters
+     * @deprecated
+     */
+    'start_date'?: string;
+    /**
+     * Deprecated: Use end_date_initiated_on or end_date_processed_on instead. Specify the end date till when you want the settlement reconciliation details.
+     * @type {string}
+     * @memberof SettlementFetchReconRequestFilters
+     * @deprecated
      */
     'end_date'?: string;
 }
@@ -9499,22 +10074,22 @@ export interface SettlementReconEntity {
 export interface SettlementReconEntityDataInner {
     /**
      * 
-     * @type {ReconEntityDataInnerEventDetails}
+     * @type {SettlementReconEntityDataInnerEventDetails}
      * @memberof SettlementReconEntityDataInner
      */
-    'event_details'?: ReconEntityDataInnerEventDetails;
+    'event_details'?: SettlementReconEntityDataInnerEventDetails;
     /**
      * 
-     * @type {ReconEntityDataInnerOrderDetails}
+     * @type {SettlementReconEntityDataInnerOrderDetails}
      * @memberof SettlementReconEntityDataInner
      */
-    'order_details'?: ReconEntityDataInnerOrderDetails;
+    'order_details'?: SettlementReconEntityDataInnerOrderDetails;
     /**
      * 
-     * @type {ReconEntityDataInnerCustomerDetails}
+     * @type {SettlementReconEntityDataInnerCustomerDetails}
      * @memberof SettlementReconEntityDataInner
      */
-    'customer_details'?: ReconEntityDataInnerCustomerDetails;
+    'customer_details'?: SettlementReconEntityDataInnerCustomerDetails;
     /**
      * 
      * @type {SettlementReconEntityDataInnerPaymentDetails}
@@ -9523,22 +10098,218 @@ export interface SettlementReconEntityDataInner {
     'payment_details'?: SettlementReconEntityDataInnerPaymentDetails;
     /**
      * 
-     * @type {ReconEntityDataInnerSettlementDetails}
+     * @type {SettlementReconEntityDataInnerSettlementDetails}
      * @memberof SettlementReconEntityDataInner
      */
-    'settlement_details'?: ReconEntityDataInnerSettlementDetails;
+    'settlement_details'?: SettlementReconEntityDataInnerSettlementDetails;
     /**
-     * 
-     * @type {ReconEntityDataInnerDisputeDetails}
+     * List of disputes linked to this event.
+     * @type {Array<SettlementReconEntityDataInnerDisputeDetailsInner>}
      * @memberof SettlementReconEntityDataInner
      */
-    'dispute_details'?: ReconEntityDataInnerDisputeDetails;
+    'dispute_details'?: Array<SettlementReconEntityDataInnerDisputeDetailsInner>;
     /**
-     * 
-     * @type {ReconEntityDataInnerRefundDetails}
+     * List of refunds linked to this event.
+     * @type {Array<ReconEntityDataInnerRefundDetails>}
      * @memberof SettlementReconEntityDataInner
      */
-    'refund_details'?: ReconEntityDataInnerRefundDetails;
+    'refund_details'?: Array<ReconEntityDataInnerRefundDetails>;
+}
+/**
+ * 
+ * @export
+ * @interface SettlementReconEntityDataInnerCustomerDetails
+ */
+export interface SettlementReconEntityDataInnerCustomerDetails {
+    /**
+     * Customer phone number.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerCustomerDetails
+     */
+    'customer_phone'?: string;
+    /**
+     * Customer email.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerCustomerDetails
+     */
+    'customer_email'?: string;
+    /**
+     * Customer name.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerCustomerDetails
+     */
+    'customer_name'?: string;
+    /**
+     * Customer\'s id.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerCustomerDetails
+     */
+    'customer_id'?: string;
+    /**
+     * Customer bank account number.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerCustomerDetails
+     */
+    'customer_bank_account_number'?: string;
+    /**
+     * Customer bank code.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerCustomerDetails
+     */
+    'customer_bank_code'?: string;
+    /**
+     * Customer bank IFSC.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerCustomerDetails
+     */
+    'customer_bank_ifsc'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface SettlementReconEntityDataInnerDisputeDetailsInner
+ */
+export interface SettlementReconEntityDataInnerDisputeDetailsInner {
+    /**
+     * Specifies whether the dispute was closed in favor of the merchant or customer. Possible values - Merchant, Customer.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerDisputeDetailsInner
+     */
+    'closed_in_favor_of'?: string;
+    /**
+     * Date and time when the dispute was resolved.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerDisputeDetailsInner
+     */
+    'dispute_resolved_on'?: string;
+    /**
+     * Category of the dispute - Dispute code and the reason for dispute is shown.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerDisputeDetailsInner
+     */
+    'dispute_category'?: string;
+    /**
+     * Note regarding the dispute.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerDisputeDetailsInner
+     */
+    'dispute_note'?: string;
+    /**
+     * Date and time when the dispute case was resolved.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerDisputeDetailsInner
+     */
+    'resolved_on'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface SettlementReconEntityDataInnerEventDetails
+ */
+export interface SettlementReconEntityDataInnerEventDetails {
+    /**
+     * Unique ID associated with the event.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerEventDetails
+     */
+    'event_id'?: string;
+    /**
+     * The event type can be PAYMENT, REFUND, REFUND_REVERSAL, DISPUTE, DISPUTE_REVERSAL, CHARGEBACK, CHARGEBACK_REVERSAL, OTHER_ADJUSTMENT.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerEventDetails
+     */
+    'event_type'?: string;
+    /**
+     * Amount that is part of the settlement corresponding to the event.
+     * @type {number}
+     * @memberof SettlementReconEntityDataInnerEventDetails
+     */
+    'event_settlement_amount'?: number;
+    /**
+     * Amount corresponding to the event. Example, refund amount, dispute amount, payment amount, etc.
+     * @type {number}
+     * @memberof SettlementReconEntityDataInnerEventDetails
+     */
+    'event_amount'?: number;
+    /**
+     * Indicates if it is CREDIT/DEBIT sale.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerEventDetails
+     */
+    'sale_type'?: string;
+    /**
+     * Status of the event. Example - SUCCESS, FAILED, PENDING, CANCELLED.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerEventDetails
+     */
+    'event_status'?: string;
+    /**
+     * Recon.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerEventDetails
+     */
+    'entity'?: string;
+    /**
+     * Time associated with the event. Example, transaction time, dispute initiation time.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerEventDetails
+     */
+    'event_time'?: string;
+    /**
+     * Currency type - INR.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerEventDetails
+     */
+    'event_currency'?: string;
+    /**
+     * Service charge for above event_type.
+     * @type {number}
+     * @memberof SettlementReconEntityDataInnerEventDetails
+     */
+    'event_service_charge'?: number;
+    /**
+     * Service tax for above event_type.
+     * @type {number}
+     * @memberof SettlementReconEntityDataInnerEventDetails
+     */
+    'event_service_tax'?: number;
+    /**
+     * Remarks for above event_type.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerEventDetails
+     */
+    'event_remarks'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface SettlementReconEntityDataInnerOrderDetails
+ */
+export interface SettlementReconEntityDataInnerOrderDetails {
+    /**
+     * Unique order ID. Alphanumeric and only \'-\' and \'_\' allowed.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerOrderDetails
+     */
+    'order_id'?: string;
+    /**
+     * The amount which was passed at the order creation time.
+     * @type {number}
+     * @memberof SettlementReconEntityDataInnerOrderDetails
+     */
+    'order_amount'?: number;
+    /**
+     * Order Currency type - INR.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerOrderDetails
+     */
+    'order_currency'?: string;
+    /**
+     * The order tags provided during order creation.
+     * @type {object}
+     * @memberof SettlementReconEntityDataInnerOrderDetails
+     */
+    'order_tags'?: object;
 }
 /**
  * 
@@ -9553,7 +10324,7 @@ export interface SettlementReconEntityDataInnerPaymentDetails {
      */
     'payment_amount'?: number;
     /**
-     * Payment Curreny type - INR.
+     * Payment Currency type - INR.
      * @type {string}
      * @memberof SettlementReconEntityDataInnerPaymentDetails
      */
@@ -9571,11 +10342,11 @@ export interface SettlementReconEntityDataInnerPaymentDetails {
      */
     'payment_time'?: string;
     /**
-     * Mode of the payment.
+     * Payment group/mode of the payment. Example - UPI, CREDIT_CARD.
      * @type {string}
      * @memberof SettlementReconEntityDataInnerPaymentDetails
      */
-    'payment_mode'?: string;
+    'payment_group'?: string;
     /**
      * Service charge applicable for the payment.
      * @type {number}
@@ -9602,22 +10373,125 @@ export interface SettlementReconEntityDataInnerPaymentDetails {
     'status'?: string;
     /**
      * Forex Conversion Service Charge.
-     * @type {string}
+     * @type {number}
      * @memberof SettlementReconEntityDataInnerPaymentDetails
      */
-    'forex_conversion_handling_charge'?: string;
+    'forex_conversion_handling_charge'?: number;
     /**
      * Forex Conversion Service Tax.
-     * @type {string}
+     * @type {number}
      * @memberof SettlementReconEntityDataInnerPaymentDetails
      */
-    'forex_conversion_handling_tax'?: string;
+    'forex_conversion_handling_tax'?: number;
     /**
-     * Forex Charges Curreny type - INR.
+     * Forex Charges Currency type - INR.
      * @type {string}
      * @memberof SettlementReconEntityDataInnerPaymentDetails
      */
     'charges_currency'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface SettlementReconEntityDataInnerSettlementDetails
+ */
+export interface SettlementReconEntityDataInnerSettlementDetails {
+    /**
+     * Unique ID to identify the settlement.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerSettlementDetails
+     */
+    'cf_settlement_id'?: string;
+    /**
+     * Date and time when the settlement was processed.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerSettlementDetails
+     */
+    'settlement_date'?: string;
+    /**
+     * Unique transaction reference number of the settlement.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerSettlementDetails
+     */
+    'settlement_utr'?: string;
+    /**
+     * Service charge that is applicable for splitting the payment.
+     * @type {number}
+     * @memberof SettlementReconEntityDataInnerSettlementDetails
+     */
+    'split_service_charge'?: number;
+    /**
+     * Service tax applicable for splitting the amount to vendors.
+     * @type {number}
+     * @memberof SettlementReconEntityDataInnerSettlementDetails
+     */
+    'split_service_tax'?: number;
+    /**
+     * Vendor commission applicable for this transaction.
+     * @type {number}
+     * @memberof SettlementReconEntityDataInnerSettlementDetails
+     */
+    'vendor_commission'?: number;
+    /**
+     * Date and time from settlement computed.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerSettlementDetails
+     */
+    'payment_from'?: string;
+    /**
+     * Date and time till settlement computed.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerSettlementDetails
+     */
+    'payment_till'?: string;
+    /**
+     * If any reason for settlement failure.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerSettlementDetails
+     */
+    'reason'?: string;
+    /**
+     * Remarks related for settlement.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerSettlementDetails
+     */
+    'remarks'?: string;
+    /**
+     * Service charge for the transactions.
+     * @type {number}
+     * @memberof SettlementReconEntityDataInnerSettlementDetails
+     */
+    'service_charge'?: number;
+    /**
+     * Service tax for the transactions.
+     * @type {number}
+     * @memberof SettlementReconEntityDataInnerSettlementDetails
+     */
+    'service_tax'?: number;
+    /**
+     * Settlement Service Charge.
+     * @type {number}
+     * @memberof SettlementReconEntityDataInnerSettlementDetails
+     */
+    'settlement_charge'?: number;
+    /**
+     * Date and time when Settlement initiated.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerSettlementDetails
+     */
+    'settlement_initiated_on'?: string;
+    /**
+     * Settlement Service Tax.
+     * @type {number}
+     * @memberof SettlementReconEntityDataInnerSettlementDetails
+     */
+    'settlement_tax'?: number;
+    /**
+     * Type of Settlement, Example - Normal Settlement.
+     * @type {string}
+     * @memberof SettlementReconEntityDataInnerSettlementDetails
+     */
+    'settlement_type'?: string;
 }
 /**
  * Object to simulate a settlement request.
@@ -12606,7 +13480,7 @@ const CustomersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12720,7 +13594,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12788,7 +13662,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12856,7 +13730,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -12924,7 +13798,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13014,7 +13888,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13229,7 +14103,7 @@ const DowntimeApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13391,7 +14265,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13463,7 +14337,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13531,7 +14405,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13604,7 +14478,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13672,7 +14546,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13740,7 +14614,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13815,7 +14689,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13883,7 +14757,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13950,7 +14824,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14022,7 +14896,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14109,7 +14983,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14181,7 +15055,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14249,7 +15123,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14318,7 +15192,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14675,7 +15549,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14745,7 +15619,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14815,7 +15689,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14889,7 +15763,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15052,7 +15926,7 @@ const IntellisenseApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15166,7 +16040,7 @@ const OffersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15235,7 +16109,7 @@ const OffersApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15367,7 +16241,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15436,7 +16310,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15504,7 +16378,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15577,7 +16451,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15651,7 +16525,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15842,7 +16716,7 @@ const PGReconciliationApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15958,7 +16832,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16027,7 +16901,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16096,7 +16970,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16169,7 +17043,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16342,7 +17216,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16401,7 +17275,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16474,7 +17348,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16542,7 +17416,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16600,7 +17474,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16655,7 +17529,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16868,7 +17742,7 @@ const ReconciliationApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16988,7 +17862,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17061,7 +17935,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17129,7 +18003,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17206,7 +18080,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17332,7 +18206,7 @@ const RefundsApiFp = function(cashfree: Cashfree) {
 const SettlementReconciliationApiAxiosParamCreator = function (cashfree: Cashfree) {
     return {
         /**
-         * Use this API to get all settlement details by specifying the settlement ID, settlement UTR or date range.
+         * Use this API to get all settlement details by specifying the settlement ID, settlement UTR, settlement status or date range. Returns settlements of all statuses including SUCCESS, PENDING, PENDING_WITH_CASHFREE, PENDING_WITH_BANK and FAILED.
          * @summary Get All Settlements
          
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD.
@@ -17381,7 +18255,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (cashfree: Cashfre
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17453,7 +18327,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (cashfree: Cashfre
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17486,7 +18360,7 @@ const SettlementReconciliationApiFp = function(cashfree: Cashfree) {
     const localVarAxiosParamCreator = SettlementReconciliationApiAxiosParamCreator(cashfree)
     return {
         /**
-         * Use this API to get all settlement details by specifying the settlement ID, settlement UTR or date range.
+         * Use this API to get all settlement details by specifying the settlement ID, settlement UTR, settlement status or date range. Returns settlements of all statuses including SUCCESS, PENDING, PENDING_WITH_CASHFREE, PENDING_WITH_BANK and FAILED.
          * @summary Get All Settlements
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD.
          * @param {FetchSettlementsRequest} FetchSettlementsRequest Request Body to get the settlements.
@@ -17497,7 +18371,7 @@ const SettlementReconciliationApiFp = function(cashfree: Cashfree) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async pGFetchSettlements(x_api_version: string, FetchSettlementsRequest: FetchSettlementsRequest, Content_Type?: string, x_request_id?: string, x_idempotency_key?: string, Accept?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SettlementEntity>> {
+        async pGFetchSettlements(x_api_version: string, FetchSettlementsRequest: FetchSettlementsRequest, Content_Type?: string, x_request_id?: string, x_idempotency_key?: string, Accept?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetAllSettlementsResponse>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGFetchSettlements(x_api_version, FetchSettlementsRequest, Content_Type, x_request_id, x_idempotency_key, Accept, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
@@ -17543,7 +18417,7 @@ const SettlementReconciliationApiFp = function(cashfree: Cashfree) {
 const SettlementsApiAxiosParamCreator = function (cashfree: Cashfree) {
     return {
         /**
-         * Use this API to pass the CBRICS ID to Cashfree and mark an order for settlement.
+         * Use this API to pass the CBRIKS ID to Cashfree and mark an order for settlement.
          * @summary Mark Order For Settlement
          
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD.
@@ -17588,7 +18462,7 @@ const SettlementsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17611,7 +18485,7 @@ const SettlementsApiAxiosParamCreator = function (cashfree: Cashfree) {
         },
 
         /**
-         * Use this API to view all the settlements of a particular order.
+         * Use this API to view the latest linked settlement details for a particular order, including pending and failed settlements.
          * @summary Get Settlements by Order ID
          
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD.
@@ -17657,7 +18531,7 @@ const SettlementsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17689,7 +18563,7 @@ const SettlementsApiFp = function(cashfree: Cashfree) {
     const localVarAxiosParamCreator = SettlementsApiAxiosParamCreator(cashfree)
     return {
         /**
-         * Use this API to pass the CBRICS ID to Cashfree and mark an order for settlement.
+         * Use this API to pass the CBRIKS ID to Cashfree and mark an order for settlement.
          * @summary Mark Order For Settlement
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD.
          * @param {string} [x_request_id] Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree.
@@ -17698,7 +18572,7 @@ const SettlementsApiFp = function(cashfree: Cashfree) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async markForSettlement(x_api_version: string, x_request_id?: string, x_idempotency_key?: string, CreateOrderSettlementRequestBody?: CreateOrderSettlementRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+        async markForSettlement(x_api_version: string, x_request_id?: string, x_idempotency_key?: string, CreateOrderSettlementRequestBody?: CreateOrderSettlementRequestBody, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MarkOrderSettlementResponse>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.markForSettlement(x_api_version, x_request_id, x_idempotency_key, CreateOrderSettlementRequestBody, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
@@ -17707,7 +18581,7 @@ const SettlementsApiFp = function(cashfree: Cashfree) {
                 return createRequestFunction(localVarAxiosArgs, globalAxios, url);
         },
         /**
-         * Use this API to view all the settlements of a particular order.
+         * Use this API to view the latest linked settlement details for a particular order, including pending and failed settlements.
          * @summary Get Settlements by Order ID
          * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD.
          * @param {string} order_id The ID which uniquely identifies your order.
@@ -17716,7 +18590,7 @@ const SettlementsApiFp = function(cashfree: Cashfree) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async pGOrderFetchSettlement(x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SettlementEntity>> {
+        async pGOrderFetchSettlement(x_api_version: string, order_id: string, x_request_id?: string, x_idempotency_key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderSettlementEntity>> {
                 const localVarAxiosArgs = await localVarAxiosParamCreator.pGOrderFetchSettlement(x_api_version, order_id, x_request_id, x_idempotency_key, options);
                 var url = "https://sandbox.cashfree.com/pg";
                 if(cashfree.XEnvironment == CFEnvironment.PRODUCTION) {
@@ -17788,7 +18662,7 @@ const SimulationApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17856,7 +18730,7 @@ const SimulationApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17925,7 +18799,7 @@ const SimulationApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17995,7 +18869,7 @@ const SimulationApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18164,7 +19038,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18234,7 +19108,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18304,7 +19178,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18373,7 +19247,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18451,7 +19325,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18529,7 +19403,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18604,7 +19478,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18671,7 +19545,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18741,7 +19615,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18815,7 +19689,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18889,7 +19763,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18963,7 +19837,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19037,7 +19911,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19375,7 +20249,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19445,7 +20319,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19519,7 +20393,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19589,7 +20463,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19658,7 +20532,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19726,7 +20600,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19798,7 +20672,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19866,7 +20740,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19938,7 +20812,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20006,7 +20880,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20079,7 +20953,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20157,7 +21031,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20250,7 +21124,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20320,7 +21194,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20681,7 +21555,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20753,7 +21627,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20828,7 +21702,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20900,7 +21774,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -21080,7 +21954,7 @@ const UtilitiesApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -21150,7 +22024,7 @@ const UtilitiesApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.4';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.2';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -21321,7 +22195,7 @@ export class Cashfree {
             } else {
                 scope.setExtra('environment', 'production');
             }
-            scope.setExtra('release', "6.0.4");
+            scope.setExtra('release', "6.0.2");
         }
         if(axios) {
             this.axios = axios;
@@ -22564,7 +23438,7 @@ export class Cashfree {
     }
     
     /**
-     * Use this API to get all settlement details by specifying the settlement ID, settlement UTR or date range.
+     * Use this API to get all settlement details by specifying the settlement ID, settlement UTR, settlement status or date range. Returns settlements of all statuses including SUCCESS, PENDING, PENDING_WITH_CASHFREE, PENDING_WITH_BANK and FAILED.
      * @summary Get All Settlements
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD.
      * @param {FetchSettlementsRequest} FetchSettlementsRequest Request Body to get the settlements.
@@ -22616,7 +23490,7 @@ export class Cashfree {
     }
     
     /**
-     * Use this API to pass the CBRICS ID to Cashfree and mark an order for settlement.
+     * Use this API to pass the CBRIKS ID to Cashfree and mark an order for settlement.
      * @summary Mark Order For Settlement
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD.
      * @param {string} [x_request_id] Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree.
@@ -22640,7 +23514,7 @@ export class Cashfree {
     }
 
     /**
-     * Use this API to view all the settlements of a particular order.
+     * Use this API to view the latest linked settlement details for a particular order, including pending and failed settlements.
      * @summary Get Settlements by Order ID
      * @param {string} x_api_version API version to be used. Format is in YYYY-MM-DD.
      * @param {string} order_id The ID which uniquely identifies your order.

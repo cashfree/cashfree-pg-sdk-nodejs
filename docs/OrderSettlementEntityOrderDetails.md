@@ -1,21 +1,21 @@
-# SettlementReconEntityDataInnerOrderDetails
+# OrderSettlementEntityOrderDetails
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**order_id** | **string** | Unique order ID. Alphanumeric and only \&#39;-\&#39; and \&#39;_\&#39; allowed. | [optional] [default to undefined]
+**order_id** | **string** | Unique order ID. | [optional] [default to undefined]
 **order_amount** | **number** | The amount which was passed at the order creation time. | [optional] [default to undefined]
-**order_currency** | **string** | Order Currency type - INR. | [optional] [default to undefined]
+**order_currency** | **string** | Currency of the order. | [optional] [default to undefined]
 **order_tags** | **object** | The order tags provided during order creation. | [optional] [default to undefined]
 
 ## Example
 
 ```typescript
-import { SettlementReconEntityDataInnerOrderDetails } from 'cashfree-pg';
+import { OrderSettlementEntityOrderDetails } from 'cashfree-pg';
 
-const instance: SettlementReconEntityDataInnerOrderDetails = {
+const instance: OrderSettlementEntityOrderDetails = {
     order_id,
     order_amount,
     order_currency,

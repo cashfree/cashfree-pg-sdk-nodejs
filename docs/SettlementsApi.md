@@ -8,9 +8,9 @@ All URIs are relative to *https://sandbox.cashfree.com/pg*
 |[**pGOrderFetchSettlement**](#pgorderfetchsettlement) | **GET** /orders/{order_id}/settlements | Get Settlements by Order ID|
 
 # **markForSettlement**
-> object markForSettlement()
+> MarkOrderSettlementResponse markForSettlement()
 
-Use this API to pass the CBRICS ID to Cashfree and mark an order for settlement.
+Use this API to pass the CBRIKS ID to Cashfree and mark an order for settlement.
 
 ### Example
 
@@ -49,7 +49,7 @@ const { status, data } = await apiInstance.markForSettlement(
 
 ### Return type
 
-**object**
+**MarkOrderSettlementResponse**
 
 ### Authorization
 
@@ -64,7 +64,7 @@ const { status, data } = await apiInstance.markForSettlement(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**202** | OK |  * x-api-version -  <br>  * x-ratelimit-limit -  <br>  * x-ratelimit-remaining -  <br>  * x-ratelimit-retry -  <br>  * x-ratelimit-type -  <br>  * x-request-id -  <br>  * x-idempotency-key -  <br>  * x-idempotency-replayed -  <br>  |
+|**200** | OK |  * x-api-version -  <br>  * x-ratelimit-limit -  <br>  * x-ratelimit-remaining -  <br>  * x-ratelimit-retry -  <br>  * x-ratelimit-type -  <br>  * x-request-id -  <br>  * x-idempotency-key -  <br>  * x-idempotency-replayed -  <br>  |
 |**400** | Create Settlement Failure Response. |  -  |
 |**401** | Authentication Error. |  * x-api-version -  <br>  * x-ratelimit-limit -  <br>  * x-ratelimit-remaining -  <br>  * x-ratelimit-retry -  <br>  * x-ratelimit-type -  <br>  * x-request-id -  <br>  * x-idempotency-key -  <br>  * x-idempotency-replayed -  <br>  |
 |**404** | Create Settlement Failure Response. |  -  |
@@ -73,9 +73,9 @@ const { status, data } = await apiInstance.markForSettlement(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **pGOrderFetchSettlement**
-> SettlementEntity pGOrderFetchSettlement()
+> OrderSettlementEntity pGOrderFetchSettlement()
 
-Use this API to view all the settlements of a particular order.
+Use this API to view the latest linked settlement details for a particular order, including pending and failed settlements.
 
 ### Example
 
@@ -113,7 +113,7 @@ const { status, data } = await apiInstance.pGOrderFetchSettlement(
 
 ### Return type
 
-**SettlementEntity**
+**OrderSettlementEntity**
 
 ### Authorization
 

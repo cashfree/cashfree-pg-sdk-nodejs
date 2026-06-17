@@ -32,6 +32,8 @@ docs/BanktransferPaymentMethod.md
 docs/Card.md
 docs/CardDowntime.md
 docs/CardDowntimeCard.md
+docs/CardDowntimeCardNetworkEnum.md
+docs/CardDowntimeCardTypeEnum.md
 docs/CardEMI.md
 docs/CardEMIPaymentMethod.md
 docs/CardOffer.md
@@ -128,6 +130,8 @@ docs/FetchSettlementsRequest.md
 docs/FetchSettlementsRequestFilters.md
 docs/FetchSettlementsRequestPagination.md
 docs/FetchTerminalQRCodesEntity.md
+docs/GetAllSettlementsResponse.md
+docs/GetAllSettlementsResponseDataInner.md
 docs/GetAllTerminalPaymentEntity.md
 docs/GetAllTerminalTransactionRequest.md
 docs/GetCardBinRequest.md
@@ -154,6 +158,8 @@ docs/ManageSubscriptionPaymentRequest.md
 docs/ManageSubscriptionPaymentRequestActionDetails.md
 docs/ManageSubscriptionRequest.md
 docs/ManageSubscriptionRequestActionDetails.md
+docs/MarkOrderSettlementResponse.md
+docs/MarkOrderSettlementResponseMetaData.md
 docs/NetBankingDowntime.md
 docs/NetBankingDowntimeNetBanking.md
 docs/NetBankingPaymentMethod.md
@@ -197,6 +203,11 @@ docs/OrderMetaPaymentMethodsFilters.md
 docs/OrderMetaPaymentMethodsFiltersMethods.md
 docs/OrderPayData.md
 docs/OrderPaymentMethodFilters.md
+docs/OrderSettlementEntity.md
+docs/OrderSettlementEntityCustomerDetails.md
+docs/OrderSettlementEntityOrderDetails.md
+docs/OrderSettlementEntityPaymentDetails.md
+docs/OrderSettlementEntitySettlementDetails.md
 docs/OrderUpdateRefundRequest.md
 docs/OrdersApi.md
 docs/PARRequest.md
@@ -273,7 +284,12 @@ docs/SettlementFetchReconRequest.md
 docs/SettlementFetchReconRequestFilters.md
 docs/SettlementReconEntity.md
 docs/SettlementReconEntityDataInner.md
+docs/SettlementReconEntityDataInnerCustomerDetails.md
+docs/SettlementReconEntityDataInnerDisputeDetailsInner.md
+docs/SettlementReconEntityDataInnerEventDetails.md
+docs/SettlementReconEntityDataInnerOrderDetails.md
 docs/SettlementReconEntityDataInnerPaymentDetails.md
+docs/SettlementReconEntityDataInnerSettlementDetails.md
 docs/SettlementReconciliationApi.md
 docs/SettlementSimulationResponse.md
 docs/SettlementWebhook.md
