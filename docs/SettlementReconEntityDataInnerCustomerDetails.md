@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **customer_id** | **string** | Customer\&#39;s id. | [optional] [default to undefined]
 **customer_bank_account_number** | **string** | Customer bank account number. | [optional] [default to undefined]
 **customer_bank_code** | **string** | Customer bank code. | [optional] [default to undefined]
-**customer_bank_ifsc** | **string** | Customer bank ifsc\&quot; | [optional] [default to undefined]
+**customer_bank_ifsc** | **string** | Customer bank IFSC. | [optional] [default to undefined]
 
 ## Example
 

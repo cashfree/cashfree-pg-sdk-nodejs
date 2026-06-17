@@ -11,12 +11,12 @@ Name | Type | Description | Notes
 **event_amount** | **number** | Amount corresponding to the event. Example, refund amount, dispute amount, payment amount, etc. | [optional] [default to undefined]
 **sale_type** | **string** | Indicates if it is CREDIT/DEBIT sale. | [optional] [default to undefined]
 **event_status** | **string** | Status of the event. Example - SUCCESS, FAILED, PENDING, CANCELLED. | [optional] [default to undefined]
-**entity** | **string** | Recon | [optional] [default to undefined]
-**event_time** | **string** | Time associated with the event. Example, transaction time, dispute initiation time | [optional] [default to undefined]
-**event_currency** | **string** | Curreny type - INR. | [optional] [default to undefined]
+**entity** | **string** | Recon. | [optional] [default to undefined]
+**event_time** | **string** | Time associated with the event. Example, transaction time, dispute initiation time. | [optional] [default to undefined]
+**event_currency** | **string** | Currency type - INR. | [optional] [default to undefined]
 **event_service_charge** | **number** | Service charge for above event_type. | [optional] [default to undefined]
 **event_service_tax** | **number** | Service tax for above event_type. | [optional] [default to undefined]
-**event_remarks** | **number** | Remarks for above event_type. | [optional] [default to undefined]
+**event_remarks** | **string** | Remarks for above event_type. | [optional] [default to undefined]
 
 ## Example
 

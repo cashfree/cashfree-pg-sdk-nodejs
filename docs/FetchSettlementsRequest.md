@@ -7,7 +7,7 @@ Request to fetch settlement.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **pagination** | [**FetchSettlementsRequestPagination**](FetchSettlementsRequestPagination.md) |  | [default to undefined]
-**filters** | [**FetchSettlementsRequestFilters**](FetchSettlementsRequestFilters.md) |  | [optional] [default to undefined]
+**filters** | [**FetchSettlementsRequestFilters**](FetchSettlementsRequestFilters.md) |  | [default to undefined]
 
 ## Example
 

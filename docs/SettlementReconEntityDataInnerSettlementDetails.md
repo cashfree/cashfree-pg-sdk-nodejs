@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **cf_settlement_id** | **string** | Unique ID to identify the settlement. | [optional] [default to undefined]
 **settlement_date** | **string** | Date and time when the settlement was processed. | [optional] [default to undefined]
-**utr** | **string** | Unique transaction reference number of the settlement. | [optional] [default to undefined]
+**settlement_utr** | **string** | Unique transaction reference number of the settlement. | [optional] [default to undefined]
 **split_service_charge** | **number** | Service charge that is applicable for splitting the payment. | [optional] [default to undefined]
 **split_service_tax** | **number** | Service tax applicable for splitting the amount to vendors. | [optional] [default to undefined]
 **vendor_commission** | **number** | Vendor commission applicable for this transaction. | [optional] [default to undefined]
@@ -30,7 +30,7 @@ import { SettlementReconEntityDataInnerSettlementDetails } from 'cashfree-pg';
 const instance: SettlementReconEntityDataInnerSettlementDetails = {
     cf_settlement_id,
     settlement_date,
-    utr,
+    settlement_utr,
     split_service_charge,
     split_service_tax,
     vendor_commission,
