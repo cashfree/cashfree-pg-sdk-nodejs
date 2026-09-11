@@ -40,6 +40,6 @@
     "mocha-junit-reporter": "^2.2.1",
     "sinon": "^21.0.1",
     "ts-jest": "^29.4.6",
-    "typescript": "^5.9.3"
+    "typescript": "^7.0.2"
   }
 }
