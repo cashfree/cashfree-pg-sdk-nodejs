@@ -6,8 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **card_issuer** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
-**card_type** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
-**card_network** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
+**card_type** | [**Array&lt;CardDowntimeCardTypeEnum&gt;**](CardDowntimeCardTypeEnum.md) |  | [optional] [default to undefined]
+**card_network** | [**Array&lt;CardDowntimeCardNetworkEnum&gt;**](CardDowntimeCardNetworkEnum.md) |  | [optional] [default to undefined]
 
 ## Example
 

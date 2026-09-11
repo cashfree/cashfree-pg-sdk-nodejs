@@ -7,7 +7,7 @@ Recon Request Object.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **pagination** | [**FetchSettlementsRequestPagination**](FetchSettlementsRequestPagination.md) |  | [default to undefined]
-**filters** | [**SettlementFetchReconRequestFilters**](SettlementFetchReconRequestFilters.md) |  | [optional] [default to undefined]
+**filters** | [**SettlementFetchReconRequestFilters**](SettlementFetchReconRequestFilters.md) |  | [default to undefined]
 
 ## Example
 

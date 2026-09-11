@@ -1,5 +1,6 @@
 # FetchActiveEcosystemDowntimes200Response
 
+Success response for Fetch All Downtimes.
 
 ## Properties
 
