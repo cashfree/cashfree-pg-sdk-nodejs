@@ -8,9 +8,9 @@ All URIs are relative to *https://sandbox.cashfree.com/pg*
 |[**pGSettlementFetchRecon**](#pgsettlementfetchrecon) | **POST** /settlement/recon | Settlement Reconciliation|
 
 # **pGFetchSettlements**
-> SettlementEntity pGFetchSettlements(FetchSettlementsRequest)
+> GetAllSettlementsResponse pGFetchSettlements(FetchSettlementsRequest)
 
-Use this API to get all settlement details by specifying the settlement ID, settlement UTR or date range.
+Use this API to get all settlement details by specifying the settlement ID, settlement UTR, settlement status or date range. Returns settlements of all statuses including SUCCESS, PENDING, PENDING_WITH_CASHFREE, PENDING_WITH_BANK and FAILED.
 
 ### Example
 
@@ -55,7 +55,7 @@ const { status, data } = await apiInstance.pGFetchSettlements(
 
 ### Return type
 
-**SettlementEntity**
+**GetAllSettlementsResponse**
 
 ### Authorization
 
