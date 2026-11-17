@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **error_details** | [**ErrorDetailsInPaymentsEntity**](ErrorDetailsInPaymentsEntity.md) |  | [optional] [default to undefined]
 **is_captured** | **boolean** |  | [optional] [default to undefined]
 **order_amount** | **number** | Order amount can be different from payment amount if you collect service fee from the customer. | [optional] [default to undefined]
-**payment_group** | **string** | Type of payment group. One of [\&#39;prepaid_card\&#39;, \&#39;upi_ppi_offline\&#39;, \&#39;cash\&#39;, \&#39;upi_credit_card\&#39;, \&#39;paypal\&#39;, \&#39;net_banking\&#39;, \&#39;cardless_emi\&#39;, \&#39;credit_card\&#39;, \&#39;bank_transfer\&#39;, \&#39;pay_later\&#39;, \&#39;debit_card_emi\&#39;, \&#39;debit_card\&#39;, \&#39;wallet\&#39;, \&#39;upi_ppi\&#39;, \&#39;upi\&#39;, \&#39;credit_card_emi\&#39;]. | [optional] [default to undefined]
+**payment_group** | **string** | Type of payment group. One of [\&#39;prepaid_card\&#39;, \&#39;upi_ppi_offline\&#39;, \&#39;cash\&#39;, \&#39;upi_credit_card\&#39;, \&#39;paypal\&#39;, \&#39;net_banking\&#39;, \&#39;cardless_emi\&#39;, \&#39;credit_card\&#39;, \&#39;bank_transfer\&#39;, \&#39;pay_later\&#39;, \&#39;debit_card_emi\&#39;, \&#39;debit_card\&#39;, \&#39;wallet\&#39;, \&#39;upi_ppi\&#39;, \&#39;upi\&#39;, \&#39;credit_card_emi\&#39;, \&#39;upi_credit_line\&#39;]. | [optional] [default to undefined]
 **payment_currency** | **string** |  | [optional] [default to undefined]
 **payment_amount** | **number** |  | [optional] [default to undefined]
 **payment_time** | **string** | This is the time when the payment was initiated. | [optional] [default to undefined]
