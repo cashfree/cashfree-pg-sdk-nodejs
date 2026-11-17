@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **paylater** | [**PaymentMethodAppInPaymentsEntityApp**](PaymentMethodAppInPaymentsEntityApp.md) |  | [optional] [default to undefined]
 **emi** | [**PaymentMethodCardEMIInPaymentsEntityEmi**](PaymentMethodCardEMIInPaymentsEntityEmi.md) |  | [optional] [default to undefined]
 **banktransfer** | [**PaymentMethodBankTransferInPaymentsEntityBanktransfer**](PaymentMethodBankTransferInPaymentsEntityBanktransfer.md) |  | [optional] [default to undefined]
+**others** | **object** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -28,6 +29,7 @@ const instance: PaymentEntityPaymentMethod = {
     paylater,
     emi,
     banktransfer,
+    others,
 };
 ```
 

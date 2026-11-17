@@ -7844,7 +7844,7 @@ export interface PaymentEntity {
      */
     'order_amount'?: number;
     /**
-     * Type of payment group. One of [\'prepaid_card\', \'upi_ppi_offline\', \'cash\', \'upi_credit_card\', \'paypal\', \'net_banking\', \'cardless_emi\', \'credit_card\', \'bank_transfer\', \'pay_later\', \'debit_card_emi\', \'debit_card\', \'wallet\', \'upi_ppi\', \'upi\', \'credit_card_emi\'].
+     * Type of payment group. One of [\'prepaid_card\', \'upi_ppi_offline\', \'cash\', \'upi_credit_card\', \'paypal\', \'net_banking\', \'cardless_emi\', \'credit_card\', \'bank_transfer\', \'pay_later\', \'debit_card_emi\', \'debit_card\', \'wallet\', \'upi_ppi\', \'upi\', \'credit_card_emi\', \'upi_credit_line\'].
      * @type {string}
      * @memberof PaymentEntity
      */
@@ -7952,7 +7952,7 @@ export type PaymentEntityPaymentStatusEnum = typeof PaymentEntityPaymentStatusEn
  * @type PaymentEntityPaymentMethod
  * @export
  */
-export type PaymentEntityPaymentMethod = PaymentMethodAppInPaymentsEntity | PaymentMethodBankTransferInPaymentsEntity | PaymentMethodCardEMIInPaymentsEntity | PaymentMethodCardInPaymentsEntity | PaymentMethodCardlessEMIInPaymentsEntity | PaymentMethodNetBankingInPaymentsEntity | PaymentMethodPaylaterInPaymentsEntity | PaymentMethodUPIInPaymentsEntity;
+export type PaymentEntityPaymentMethod = PaymentMethodAppInPaymentsEntity | PaymentMethodBankTransferInPaymentsEntity | PaymentMethodCardEMIInPaymentsEntity | PaymentMethodCardInPaymentsEntity | PaymentMethodCardlessEMIInPaymentsEntity | PaymentMethodNetBankingInPaymentsEntity | PaymentMethodOthersInPaymentsEntity | PaymentMethodPaylaterInPaymentsEntity | PaymentMethodUPIInPaymentsEntity;
 
 /**
  * 
@@ -8485,6 +8485,19 @@ export interface PaymentMethodNetBankingInPaymentsEntityNetbanking {
      * @memberof PaymentMethodNetBankingInPaymentsEntityNetbanking
      */
     'netbanking_account_number'?: string;
+}
+/**
+ * payment method others object in payment entity. Returned for payment modes without a dedicated payment_method object, for example UPI_CREDIT_LINE.
+ * @export
+ * @interface PaymentMethodOthersInPaymentsEntity
+ */
+export interface PaymentMethodOthersInPaymentsEntity {
+    /**
+     * 
+     * @type {object}
+     * @memberof PaymentMethodOthersInPaymentsEntity
+     */
+    'others'?: object;
 }
 /**
  * Paylater payment method object for pay API.
@@ -11881,7 +11894,7 @@ export interface TerminalPaymentEntity {
      */
     'order_amount'?: number;
     /**
-     * Type of payment group. One of [\'prepaid_card\', \'upi_ppi_offline\', \'cash\', \'upi_credit_card\', \'paypal\', \'net_banking\', \'cardless_emi\', \'credit_card\', \'bank_transfer\', \'pay_later\', \'debit_card_emi\', \'debit_card\', \'wallet\', \'upi_ppi\', \'upi\', \'credit_card_emi\'].
+     * Type of payment group. One of [\'prepaid_card\', \'upi_ppi_offline\', \'cash\', \'upi_credit_card\', \'paypal\', \'net_banking\', \'cardless_emi\', \'credit_card\', \'bank_transfer\', \'pay_later\', \'debit_card_emi\', \'debit_card\', \'wallet\', \'upi_ppi\', \'upi\', \'credit_card_emi\', \'upi_credit_line\'].
      * @type {string}
      * @memberof TerminalPaymentEntity
      */
@@ -13480,7 +13493,7 @@ const CustomersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13594,7 +13607,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13662,7 +13675,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13730,7 +13743,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13798,7 +13811,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -13888,7 +13901,7 @@ const DisputesApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14103,7 +14116,7 @@ const DowntimeApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14265,7 +14278,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14337,7 +14350,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14405,7 +14418,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14478,7 +14491,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14546,7 +14559,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14614,7 +14627,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14689,7 +14702,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14757,7 +14770,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14824,7 +14837,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14896,7 +14909,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -14983,7 +14996,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15055,7 +15068,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15123,7 +15136,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15192,7 +15205,7 @@ const EasySplitApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15549,7 +15562,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15619,7 +15632,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15689,7 +15702,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15763,7 +15776,7 @@ const EligibilityApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -15926,7 +15939,7 @@ const IntellisenseApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16040,7 +16053,7 @@ const OffersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16109,7 +16122,7 @@ const OffersApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16241,7 +16254,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16310,7 +16323,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16378,7 +16391,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16451,7 +16464,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16525,7 +16538,7 @@ const OrdersApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16716,7 +16729,7 @@ const PGReconciliationApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16832,7 +16845,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16901,7 +16914,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -16970,7 +16983,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17043,7 +17056,7 @@ const PaymentLinksApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17216,7 +17229,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17275,7 +17288,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17348,7 +17361,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17416,7 +17429,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17474,7 +17487,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17529,7 +17542,7 @@ const PaymentsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17742,7 +17755,7 @@ const ReconciliationApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17862,7 +17875,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -17935,7 +17948,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18003,7 +18016,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18080,7 +18093,7 @@ const RefundsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18255,7 +18268,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (cashfree: Cashfre
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18327,7 +18340,7 @@ const SettlementReconciliationApiAxiosParamCreator = function (cashfree: Cashfre
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18462,7 +18475,7 @@ const SettlementsApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18531,7 +18544,7 @@ const SettlementsApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18662,7 +18675,7 @@ const SimulationApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18730,7 +18743,7 @@ const SimulationApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18799,7 +18812,7 @@ const SimulationApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -18869,7 +18882,7 @@ const SimulationApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19038,7 +19051,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19108,7 +19121,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19178,7 +19191,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19247,7 +19260,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19325,7 +19338,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19403,7 +19416,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19478,7 +19491,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19545,7 +19558,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19615,7 +19628,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19689,7 +19702,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19763,7 +19776,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19837,7 +19850,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -19911,7 +19924,7 @@ const SoftPOSApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20249,7 +20262,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20319,7 +20332,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20393,7 +20406,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20463,7 +20476,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20532,7 +20545,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20600,7 +20613,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20672,7 +20685,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20740,7 +20753,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20812,7 +20825,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20880,7 +20893,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -20953,7 +20966,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -21031,7 +21044,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -21124,7 +21137,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -21194,7 +21207,7 @@ const SubscriptionApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -21555,7 +21568,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -21627,7 +21640,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -21702,7 +21715,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -21774,7 +21787,7 @@ const TokenVaultApiAxiosParamCreator = function (cashfree: Cashfree) {
 
 
     
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -21954,7 +21967,7 @@ const UtilitiesApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -22024,7 +22037,7 @@ const UtilitiesApiAxiosParamCreator = function (cashfree: Cashfree) {
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
-            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.6';
+            localVarHeaderParameter['x-sdk-platform'] = 'nodejssdk-6.0.8';
             if (x_api_version != null && x_api_version != undefined) {
                 localVarHeaderParameter['x-api-version'] = x_api_version;
             }
@@ -22195,7 +22208,7 @@ export class Cashfree {
             } else {
                 scope.setExtra('environment', 'production');
             }
-            scope.setExtra('release', "6.0.6");
+            scope.setExtra('release', "6.0.8");
         }
         if(axios) {
             this.axios = axios;
